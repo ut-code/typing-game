@@ -1,4 +1,4 @@
-question=["question","foo","bar","hogehoge","fugafuga","piyopiyo"];// 問題
+question=["foo","bar","hogehoge","fugafuga","piyopiyo"];// 問題
 
 // 配列をシャッフルする。
 function shuffle(array){
@@ -17,6 +17,8 @@ word_num=0;// 何問目か
 correct=0;// 正答文字数
 miss=0;// ミスタイプ数
 cnt=0;// 何文字目か
+isStarted=false;// 始まったか
+time=0;// 時間
 
 document.addEventListener('keydown',(event)=>{// 何かキーが押されたら、実行 https://developer.mozilla.org/ja/docs/Web/API/Element/keydown_event
     if(event.key===question[word_num][cnt]){// 正答時
@@ -30,7 +32,14 @@ document.addEventListener('keydown',(event)=>{// 何かキーが押されたら�
         word_num++;
         answer="";
         cnt=0;
-        if(word_num===question.length)document.write("終了");
+        if(word_num===question.length)document.write("終了! 時間"+time+"秒");
+    }
+    if(event.key===" " && isStarted===false){// スペースが押されたら、時間計測
+        isStarted=true;
+        setInterval(()=>{
+            time++;
+            document.getElementById("time").textContent=time;
+        },1000);
     }
     document.getElementById("question").textContent=question[word_num];
     document.getElementById("answer").textContent=answer;
