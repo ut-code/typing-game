@@ -1,33 +1,25 @@
-keymap={65:"a",66:"b",67:"c",68:"d",69:"e",70:"f",71:"g",72:"h",73:"i",74:"j",75:"k",76:"l",77:"m",78:"n",79:"o",80:"p",81:"q",82:"r",83:"s",84:"t",85:"u",86:"v",87:"w",88:"x",89:"y",90:"z"};
-
-question=["question","foo","bar","hogehoge","fugafuga","piyopiyo"];
-n=0;
-result="";
-correct=0;
-miss=0;
-cnt=0;
-document.getElementById("question").textContent=question[0];
-document.onkeydown=(evt)=>{
-    let kc;
-    if(document.all){
-        kc=event.keyCode;
-    }else{
-        kc=evt.which;
-    }
-    if(keymap[kc]===question[n][cnt] && (65<=kc && kc<=90)){
-        result=result+keymap[kc];
+question=["question","foo","bar","hogehoge","fugafuga","piyopiyo"];// 問題
+answer="";// 現在の到達状況
+word_num=0;// 何問目か
+correct=0;// 正答文字数
+miss=0;// ミスタイプ数
+cnt=0;// 何文字目か
+document.addEventListener('keydown',(event)=>{// 何かキーが押されたら、実行 https://developer.mozilla.org/ja/docs/Web/API/Element/keydown_event
+    if(event.key===question[word_num][cnt]){// 正答時
+        answer=answer+event.key;
         cnt++;
         correct++;
-    }else if(65<=kc && kc<=90){
+    }else if(65<=event.keyCode && event.keyCode<=90){// 不正解の時
         miss++;
     }
-    if(cnt==question[n].length){
-        n++;
-        document.getElementById("question").textContent=question[n];
-        result="";
+    if(cnt==question[word_num].length){// 次の問題へ
+        word_num++;
+        answer="";
         cnt=0;
+        if(word_num===question.length)document.write("終了");
     }
-    document.getElementById("answer").textContent=result;
-    document.getElementById("miss").textContent=miss.toString();
-    document.getElementById("correct").textContent=correct.toString();
-}
+    document.getElementById("question").textContent=question[word_num];
+    document.getElementById("answer").textContent=answer;
+    document.getElementById("miss").textContent=miss;
+    document.getElementById("correct").textContent=correct;
+})
