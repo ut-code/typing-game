@@ -1,9 +1,23 @@
 question=["question","foo","bar","hogehoge","fugafuga","piyopiyo"];// 問題
+
+// 配列をシャッフルする。
+function shuffle(array){
+    for(i=0;i<array.length;i++){
+        j=Math.floor(Math.random()*array.length);
+        tmp=array[i];
+        array[i]=array[j];
+        array[j]=tmp;
+    }
+    return array;
+}
+question=shuffle(question);
+
 answer="";// 現在の到達状況
 word_num=0;// 何問目か
 correct=0;// 正答文字数
 miss=0;// ミスタイプ数
 cnt=0;// 何文字目か
+
 document.addEventListener('keydown',(event)=>{// 何かキーが押されたら、実行 https://developer.mozilla.org/ja/docs/Web/API/Element/keydown_event
     if(event.key===question[word_num][cnt]){// 正答時
         answer=answer+event.key;
