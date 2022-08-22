@@ -20,6 +20,11 @@ cnt=0;// 何文字目か
 isStarted=false;// 始まったか
 time=0;// 時間
 
+
+document.getElementById("miss").textContent="ミスタイプ数："+miss+"回";
+document.getElementById("correct").textContent="正しいタイプ数："+correct+"回";
+document.getElementById("time").textContent="経過時間："+time+"秒";
+
 document.addEventListener('keydown',(event)=>{// 何かキーが押されたら、実行 https://developer.mozilla.org/ja/docs/Web/API/Element/keydown_event
     if(event.key===question[word_num][cnt]){// 正答時
         answer=answer+event.key;
@@ -38,11 +43,11 @@ document.addEventListener('keydown',(event)=>{// 何かキーが押されたら�
         isStarted=true;
         setInterval(()=>{
             time++;
-            document.getElementById("time").textContent=time;
+            document.getElementById("time").textContent="経過時間："+time+"秒";
         },1000);
     }
     document.getElementById("question").textContent=question[word_num];
     document.getElementById("answer").textContent=answer;
-    document.getElementById("miss").textContent=miss;
-    document.getElementById("correct").textContent=correct;
+    document.getElementById("miss").textContent="ミスタイプ数："+miss+"回";
+    document.getElementById("correct").textContent="正しいタイプ数："+correct+"回";
 })

@@ -6,28 +6,17 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <table id="elements">
-            <tr>
-                <th>問題</th>
-                <td id="question">スペースキーを押して開始</td>
-            </tr>
-            <tr>
-                <th>あなたの答え</th>
+        <div id="elements">    
+            <p id="mondai">問題</p>
+            <p id="question">スペースキーを押して開始</p>
+            <table id="kaito">
+                <th id="header">あなたの答え</th>
                 <td id="answer"></td>
-            </tr>
-            <tr>
-                <th>あなたの正しいタイプ数</th>
-                <td id="correct">0</td>
-            </tr>
-            <tr>
-                <th>あなたのミスタイプ数</th>
-                <td id="miss">0</td>
-            </tr>
-            <tr>
-                <th>時間</th>
-                <td id="time">0</td>
-            </tr>
-        </table>
+            </table>
+            <p id="correct"></p>
+            <p id="miss"></p>
+            <p id="time"></p>
+        </div>
         <script src="./script.js"></script>
     </body>
 </html>
