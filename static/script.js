@@ -2,9 +2,9 @@ let question=["foo","bar","hogehoge","fugafuga","piyopiyo"];// 問題
 
 // 配列をシャッフルする。
 function shuffle(array){
-    for(i=0;i<array.length;i++){
-        j=Math.floor(Math.random()*array.length);
-        tmp=array[i];
+    for(let i=0;i<array.length;i++){
+        let j=Math.floor(Math.random()*array.length);
+        let tmp=array[i];
         array[i]=array[j];
         array[j]=tmp;
     }
@@ -12,13 +12,13 @@ function shuffle(array){
 }
 question=shuffle(question);
 
-answer="";// 現在の到達状況
-word_num=0;// 何問目か
-correct=0;// 正答文字数
-miss=0;// ミスタイプ数
-cnt=0;// 何文字目か
-isStarted=false;// 始まったか
-time=0;// 時間
+let answer="";// 現在の到達状況
+let word_num=0;// 何問目か
+let correct=0;// 正答文字数
+let miss=0;// ミスタイプ数
+let cnt=0;// 何文字目か
+let isStarted=false;// 始まったか
+let time=0;// 時間
 
 
 document.getElementById("miss").textContent="ミスタイプ数："+miss+"回";
