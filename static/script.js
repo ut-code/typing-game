@@ -1,4 +1,4 @@
-question=["foo","bar","hogehoge","fugafuga","piyopiyo"];// 問題
+let question=["foo","bar","hogehoge","fugafuga","piyopiyo"];// 問題
 
 // 配列をシャッフルする。
 function shuffle(array){
