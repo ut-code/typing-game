@@ -12,18 +12,13 @@ app.listen(3000);
 
 // データベースからPrismaで問題をとってくる
 async function getQuestions() {
-    const questions = await prisma.questions.findMany({
+    // questionsに問題が配列の形で入っている。
+    const questions = await (await prisma.questions.findMany({
         select: {
             // id: true,
             question: true,
         },
-    });
-    let l = []
-    for (let i = 0; i < questions.length; i++) {
-        l.push(questions[i].question)
-    }
-    console.log(l)
-    return l
+    })).map((data)=>(data.question));
 }
 // exports.questions_list = getQuestions();
 getQuestions();
