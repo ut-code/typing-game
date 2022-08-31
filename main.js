@@ -1,29 +1,26 @@
+// Prisma関係
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-const express = require("express")
+const express = require("express");
 const fs = require("fs");
 
 const app = express();
 
-app.use(express.static("static"))
-
-app.listen(3000);
+app.use(express.static("static"));
+app.use(express.json());
 
 // データベースからPrismaで問題をとってくる
-async function getQuestions() {
-    const questions = await prisma.questions.findMany({
+app.post("/questions", async (request, response) => {
+    // questionsに問題が配列の形で入っている。
+    const questions = await (await prisma.questions.findMany({
         select: {
             // id: true,
             question: true,
         },
-    });
-    let l = []
-    for (let i = 0; i < questions.length; i++) {
-        l.push(questions[i].question)
-    }
-    console.log(l)
-    return l
-}
-// exports.questions_list = getQuestions();
-getQuestions();
+    })).map((data) => (data.question));
+    // JSON形式でscript.jsに送信
+    response.json(questions);
+});
+
+app.listen(3000);
