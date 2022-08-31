@@ -1,28 +1,28 @@
 body {
-    background-color: #eeeeee; 
+  background-color: #eeeeee;
 }
 #elements {
-    background: #ffffff;
-    width: 500px;
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #cccccc;
-    margin: 30px auto;
+  background: #ffffff;
+  width: 500px;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #cccccc;
+  margin: 30px auto;
 }
 #mondai {
-    font-size: 25px;
+  font-size: 25px;
 }
 #question {
-    font-size: 30px;
-    background-color: rgb(210, 232, 144);
+  font-size: 30px;
+  background-color: rgb(210, 232, 144);
 }
 #kaito {
-    font-size: 20px;
-    border-spacing: 50px 0px;
+  font-size: 20px;
+  border-spacing: 50px 0px;
 }
 #header {
-    font-weight: normal;
+  font-weight: normal;
 }
 #answer {
-    background-color: khaki;
+  background-color: khaki;
 }
