@@ -16,7 +16,6 @@ app.use(express.json());
 // データベースからPrismaで問題をとってくる
 async function getQuestion() {
     const records = await prisma.questions.findMany();
-    console.log(records);
     return records;
 }
 
@@ -33,7 +32,6 @@ app.post("/questions", async (request, response) => {
 // データベースからPrismaでランキングをとってくる
 async function getRanking() {
     const records = await prisma.ranking.findMany();
-    console.log(records)
     return records;
 }
 
