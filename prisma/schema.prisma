@@ -15,3 +15,10 @@ model questions {
   id       Int    @id @default(autoincrement())
   question String
 }
+
+model ranking {
+  record_id Int    @id @default(autoincrement())
+  problem   Int    @default(1)
+  username  String @default("test")
+  score     Int
+}
