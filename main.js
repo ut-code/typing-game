@@ -48,6 +48,14 @@ let time;
 app.post("/finished", (request, response) => {
     time = request.body.time;
     response.send();
-})
+});
+
+app.get("/finished", (request, response) => {
+    const template = fs.readFileSync("finished.ejs", "utf-8");
+    const html = ejs.render(template, {
+        time: time
+    });
+    response.send(html);
+});
 
 app.listen(3000);

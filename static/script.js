@@ -54,8 +54,8 @@ async function finished(time) {
         headers: { "Content-Type": "application/json" },
         body: json
     });
-    alert("終了! 時間" + time + "秒");
-}
+    window.location.href = '/finished';
+};
 
 
 let answer = "";// 現在の到達状況
