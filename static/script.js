@@ -30,7 +30,7 @@ async function getQuestions() {
             word_num++;
             answer = "";
             cnt = 0;
-            if (word_num === questions.length) document.write("終了! 時間" + time + "秒");
+            if (word_num === questions.length) finished(time);
         }
         if (event.key === " " && isStarted === false) {// スペースが押されたら、時間計測
             isStarted = true;
@@ -46,6 +46,16 @@ async function getQuestions() {
     });
 };
 getQuestions();
+
+async function finished(time) {
+    const json = JSON.stringify({ time: time });
+    await fetch("/finished", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: json
+    });
+    alert("終了! 時間" + time + "秒");
+}
 
 
 let answer = "";// 現在の到達状況

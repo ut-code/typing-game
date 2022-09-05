@@ -44,4 +44,10 @@ app.get("/results", async (request, response) => {
     response.send(html);
 });
 
+let time;
+app.post("/finished", (request, response) => {
+    time = request.body.time;
+    response.send();
+})
+
 app.listen(3000);
