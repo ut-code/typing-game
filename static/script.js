@@ -49,12 +49,14 @@ getQuestions();
 
 async function finished(time) {
     const json = JSON.stringify({ time: time });
-    await fetch("/finished", {
+    const response=await fetch("/finished", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: json
     });
-    window.location.href = '/finished';
+    const html=await response.text();
+    document.body.innerHTML=html;
+    // window.location.href = '/finished';
 };
 
 

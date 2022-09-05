@@ -44,14 +44,9 @@ app.get("/results", async (request, response) => {
     response.send(html);
 });
 
-let time;
 app.post("/finished", (request, response) => {
-    time = request.body.time;
-    response.send();
-});
-
-app.get("/finished", (request, response) => {
-    const template = fs.readFileSync("finished.ejs", "utf-8");
+    const time = request.body.time;
+    const template = fs.readFileSync("finished.ejs", "utf-8");//finished.ejsにはbody要素の中身を書く。
     const html = ejs.render(template, {
         time: time
     });
