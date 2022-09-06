@@ -8,7 +8,7 @@
 $ npm install
 ```
 
- `.env` ファイルを設定
+`.env` ファイルを設定
 
 ```
 $ npx prisma db push
