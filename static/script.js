@@ -342,6 +342,7 @@ async function getQuestions() {
       "ミスタイプ数：" + miss + "回";
     document.getElementById("correct").textContent =
       "正しいタイプ数：" + correct + "回";
+    // キーボードの色を変える
     document.getElementById(e.code).style.backgroundColor = "red";
     setTimeout(() => {
       document.getElementById(e.code).style.backgroundColor = "white";
