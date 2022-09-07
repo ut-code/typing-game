@@ -1,3 +1,5 @@
+// ここからキーボード配列の操作
+
 const eventCode = [
   "Esc",
   "F1",
@@ -243,32 +245,50 @@ const dvorak = {
   CCC: "App.",
   CtrlRight: "Ctrl",
 };
-
-let layout = true;
-if (document.getElementById("keyLayout").value === "dvorak") layout = false;
-const convert = (e) => {
-  return layout ? qwerty[e.code].toLowerCase() : dvorak[e.code].toLowerCase();
+const qwertyNewRow = [
+  "Backquote",
+  "Tab",
+  "CapsLock",
+  "ShiftLeft",
+  "ControlLeft",
+];
+const dvorakNewRow = [
+  "Backquote",
+  "Tab",
+  "CapsLock",
+  "ShiftLeft",
+  "ControlLeft",
+];
+const keyLayout = {
+  qwerty: { layout: qwerty, newRow: qwertyNewRow },
+  dvorak: { layout: dvorak, newRow: dvorakNewRow },
 };
-const qwertytr = ["Backquote", "Tab", "CapsLock", "ShiftLeft", "ControlLeft"];
+
+let keyLayoutType = document.getElementById("keyLayout").value;
+const convert = (e) => {
+  return keyLayout[keyLayoutType].layout[e.code].toLowerCase();
+};
 const keyboard = document.getElementById("keyboard");
 let tr = document.createElement("tr");
 for (const code of eventCode) {
   if (
-    code === qwertytr[0] ||
-    code === qwertytr[1] ||
-    code === qwertytr[2] ||
-    code === qwertytr[3] ||
-    code === qwertytr[4]
+    code === keyLayout[keyLayoutType].newRow[0] ||
+    code === keyLayout[keyLayoutType].newRow[1] ||
+    code === keyLayout[keyLayoutType].newRow[2] ||
+    code === keyLayout[keyLayoutType].newRow[3] ||
+    code === keyLayout[keyLayoutType].newRow[4]
   ) {
     keyboard.appendChild(tr);
     tr = document.createElement("tr");
   }
   const td = document.createElement("td");
-  td.textContent = layout ? qwerty[code] : dvorak[code];
+  td.textContent = keyLayout[keyLayoutType].layout[code];
   td.id = code;
   tr.appendChild(td);
 }
 keyboard.appendChild(tr);
+
+// ここまでキーボード配列の操作
 
 let questions = []; // 問題
 // 問題をquestionsに格納
