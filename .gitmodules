@@ -1,0 +1,3 @@
+[submodule "keyboard-layout-creater"]
+	path = keyboard-layout-creater
+	url = https://github.com/chvmvd/keyboard-layout-creater
