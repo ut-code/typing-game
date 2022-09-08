@@ -9,7 +9,7 @@
     "prepare": "husky install",
     "format": "npx prettier --write .",
     "build": "vite build client --outDir ../dist",
-    "demo": "vite build client --outDir ../dist && echo 'success!' && node server/main.js"
+    "demo": "npm run build && echo 'success!' && npm run start"
   },
   "repository": {
     "type": "git",
