@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node main.js",
+    "start": "node server/main.js",
     "prepare": "husky install",
-    "format": "npx prettier --write ."
+    "format": "npx prettier --write .",
+    "build": "vite build client --outDir ../dist"
   },
   "repository": {
     "type": "git",

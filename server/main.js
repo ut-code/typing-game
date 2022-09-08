@@ -9,7 +9,7 @@ const fs = require("fs");
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("client"));
+app.use(express.static("dist"));
 app.use(express.json());
 
 // データベースからPrismaで問題をとってくる
