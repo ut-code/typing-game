@@ -9,7 +9,7 @@ const fs = require("fs");
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("static"));
+app.use(express.static("dist"));
 app.use(express.json());
 
 // データベースからPrismaで問題をとってくる
@@ -35,7 +35,7 @@ async function getRanking() {
 
 app.get("/results", async (request, response) => {
   const records = await getRanking();
-  const template = fs.readFileSync("results.ejs", "utf-8");
+  const template = fs.readFileSync("./server/results.ejs", "utf-8");
   const html = ejs.render(template, {
     listItems: records,
   });
@@ -49,7 +49,7 @@ app.post("/finished", (request, response) => {
 });
 
 app.get("/finished", (request, response) => {
-  const template = fs.readFileSync("finished.ejs", "utf-8");
+  const template = fs.readFileSync("./server/finished.ejs", "utf-8");
   const html = ejs.render(template, {
     time: time,
   });
