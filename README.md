@@ -14,8 +14,8 @@ $ npm install
 $ npx prisma db push
 ```
 
-### サーバの起動
+### サーバの起動(ビルドも自動実行)
 
 ```
-$ npm run start
+$ npm run demo
 ```
