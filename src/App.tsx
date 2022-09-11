@@ -1,6 +1,7 @@
 import eventCode from "./eventCode.json";
 import qwerty from "./qwerty.json";
 import { useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import EventCode from "./eventCode.d.ts";
 import makeJSONFile from "./components/makeJSONFile";
 import ReadJSONFile from "./components/ReadJSONFile";
@@ -8,6 +9,36 @@ import ReadJSONFile from "./components/ReadJSONFile";
 let defaultKeyLayout: EventCode = qwerty;
 
 export default function App() {
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/physical" element={<Physical />}></Route>
+        <Route path="/functional" element={<Functional />}></Route>
+      </Routes>
+    </>
+  );
+}
+
+function Home() {
+  return (
+    <>
+      <main>
+        <h2>Keyboard Layout Maker</h2>
+        <p>
+          駒場祭のタイピングゲームのキーボード配列を作成するためのプログラムです。
+        </p>
+      </main>
+      <nav>
+        <Link to="/physical">物理配列</Link>
+        <br />
+        <Link to="/functional">論理配列</Link>
+      </nav>
+    </>
+  );
+}
+
+function Functional() {
   const [keys, setKeys] = useState<string[]>(
     eventCode.map((code) => defaultKeyLayout[code])
   );
@@ -52,4 +83,8 @@ export default function App() {
       </button>
     </>
   );
+}
+
+function Physical() {
+  return <div>hello</div>;
 }
