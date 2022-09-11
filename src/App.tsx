@@ -1,6 +1,6 @@
 import eventCode from "./eventCode.json";
 import qwerty from "./qwerty.json";
-import React, { useState } from "react";
+import { useState } from "react";
 import EventCode from "./eventCode.d.ts";
 import makeJSONFile from "./components/makeJSONFile";
 import ReadJSONFile from "./components/ReadJSONFile";
