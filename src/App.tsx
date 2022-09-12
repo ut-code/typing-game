@@ -36,6 +36,9 @@ function Home() {
   );
 }
 
+/**
+ * ファイル名を入力させるinputタグ
+ */
 function GetFileName({
   fileName,
   setFileName,
@@ -50,6 +53,29 @@ function GetFileName({
       value={fileName}
       onChange={(e) => {
         setFileName(e.target.value);
+      }}
+    />
+  );
+}
+
+/**
+ * i番目を入力させるinputタグ
+ */
+function GetManySettings({
+  items,
+  setItems,
+  i,
+}: {
+  items: string[];
+  setItems: (value: string[]) => void;
+  i: number;
+}) {
+  return (
+    <input
+      type="text"
+      value={items[i]}
+      onChange={(e) => {
+        setItems(items.map((item, j) => (i === j ? e.target.value : item)));
       }}
     />
   );
@@ -72,13 +98,11 @@ function Functional() {
       {eventCode.map((code, i) => (
         <div key={code}>
           {code}
-          <input
-            type="text"
-            value={keys[i]}
-            onChange={(e) => {
-              setKeys(keys.map((key, j) => (i === j ? e.target.value : key)));
-            }}
-          ></input>
+          <GetManySettings
+            items={keys}
+            setItems={setKeys}
+            i={i}
+          ></GetManySettings>
         </div>
       ))}
       <GetFileName fileName={fileName} setFileName={setFileName}></GetFileName>
