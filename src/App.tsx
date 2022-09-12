@@ -30,6 +30,15 @@ export default function App() {
           </div>
         ))}
       </div>
+      <div id="hoge">
+        <div style={{ position: "relative", left: "10px" }}>aaa</div>
+        <div>bbb</div>
+        <div>ccc</div>
+        <span className="br" />
+        <div style={{ position: "relative", left: "10px" }}>ddd</div>
+        <div>eee</div>
+        <div>fff</div>
+      </div>
     </>
   );
 }
