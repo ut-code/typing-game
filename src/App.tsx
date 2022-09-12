@@ -9,20 +9,26 @@ import "./App.css";
  * `row` 行の `column` 列までの幅の合計を計算します。
  * @param row `row`
  * @param column `column`
- * @param margin `margin`
- * @returns `width` と `margin` の合計
+ * @returns `width` と `jis109.eventCode.marginColumn` の合計
  */
-function sumHeight(row: number, column: number, margin: number) {
-  let sum = 1;
+function sumWidth(row: number, column: number) {
+  let sum = jis109.marginColumn;
   let j = 0;
   for (const code of eventCode) {
-    if (jis109[code].row === row && jis109[code].column < column) {
-      sum += jis109[code].width + margin;
+    if (
+      jis109.eventCode[code].row === row &&
+      jis109.eventCode[code].column < column
+    ) {
+      sum += jis109.eventCode[code].width + jis109.marginColumn;
       j++;
     }
     if (j >= column) break;
   }
   return sum;
+}
+
+function sumHeight(row: number) {
+  return jis109.marginRow + (jis109.height + jis109.marginRow) * (row - 1);
 }
 
 export default function App() {
@@ -35,12 +41,16 @@ export default function App() {
             className="key"
             style={{
               position: "absolute",
-              top: jis109[code].row * 4 + "vw",
+              top: sumHeight(jis109.eventCode[code].row) * 3 + "vw",
               left:
-                sumHeight(jis109[code].row, jis109[code].column, 0.3 / 3.7) *
-                  3.7 +
+                sumWidth(
+                  jis109.eventCode[code].row,
+                  jis109.eventCode[code].column
+                ) *
+                  3 +
                 "vw",
-              width: jis109[code].width * 3.7 + "vw",
+              width: jis109.eventCode[code].width * 3 + "vw",
+              height: jis109.height * 3 + "vw",
             }}
             // ref={dom=>{console.log(dom?.textContent)}}
           >
