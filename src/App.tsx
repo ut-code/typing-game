@@ -167,8 +167,8 @@ function Physical() {
   const [columns, setColumns] = useState<number[]>(
     eventCode.map((code) => jis109[code].column)
   );
-  const [heights, setHeights] = useState<number[]>(
-    eventCode.map((code) => jis109[code].height)
+  const [widths, setWidths] = useState<number[]>(
+    eventCode.map((code) => jis109[code].width)
   );
   const [styles, setStyles] = useState<string[]>(
     eventCode.map((code) => jis109[code].style)
@@ -180,7 +180,7 @@ function Physical() {
         f={(x) => {
           setRows(eventCode.map((code) => x[code].row));
           setColumns(eventCode.map((code) => x[code].column));
-          setHeights(eventCode.map((code) => x[code].height));
+          setWidths(eventCode.map((code) => x[code].width));
           setStyles(eventCode.map((code) => x[code].style));
         }}
       ></ReadJSONFile>
@@ -209,9 +209,9 @@ function Physical() {
             type="number"
             min={0}
             style={{ width: "80px" }}
-            placeholder="height"
-            items={heights}
-            setItems={setHeights}
+            placeholder="width"
+            items={widths}
+            setItems={setWidths}
             i={i}
           ></GetManySettings>
           <GetManySettings<string>
@@ -229,7 +229,7 @@ function Physical() {
           [eventCode[i]]: {
             row: rows[i],
             column: columns[i],
-            height: heights[i],
+            width: widths[i],
             style: styles[i],
           },
         })}

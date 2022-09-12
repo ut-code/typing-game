@@ -2,475 +2,475 @@
   "Esc": {
     "row": 1,
     "column": 1,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "F1": {
     "row": 1,
     "column": 2,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "F2": {
     "row": 1,
     "column": 3,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "F3": {
     "row": 1,
     "column": 4,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "F4": {
     "row": 1,
     "column": 5,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "F5": {
     "row": 1,
     "column": 6,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "F6": {
     "row": 1,
     "column": 7,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "F7": {
     "row": 1,
     "column": 8,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "F8": {
     "row": 1,
     "column": 9,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "F9": {
     "row": 1,
     "column": 10,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "F10": {
     "row": 1,
     "column": 11,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "F11": {
     "row": 1,
     "column": 12,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "F12": {
     "row": 1,
     "column": 13,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Backquote": {
     "row": 2,
     "column": 1,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Digit1": {
     "row": 2,
     "column": 2,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Digit2": {
     "row": 2,
     "column": 3,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Digit3": {
     "row": 2,
     "column": 4,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Digit4": {
     "row": 2,
     "column": 5,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Digit5": {
     "row": 2,
     "column": 6,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Digit6": {
     "row": 2,
     "column": 7,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Digit7": {
     "row": 2,
     "column": 8,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Digit8": {
     "row": 2,
     "column": 9,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Digit9": {
     "row": 2,
     "column": 10,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Digit0": {
     "row": 2,
     "column": 11,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Minus": {
     "row": 2,
     "column": 12,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Equal": {
     "row": 2,
     "column": 13,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "IntlYen": {
     "row": 2,
     "column": 14,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Backspace": {
     "row": 2,
     "column": 15,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Tab": {
     "row": 3,
     "column": 1,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyQ": {
     "row": 3,
     "column": 2,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyW": {
     "row": 3,
     "column": 3,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyE": {
     "row": 3,
     "column": 4,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyR": {
     "row": 3,
     "column": 5,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyT": {
     "row": 3,
     "column": 6,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyY": {
     "row": 3,
     "column": 7,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyU": {
     "row": 3,
     "column": 8,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyI": {
     "row": 3,
     "column": 9,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyO": {
     "row": 3,
     "column": 10,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyP": {
     "row": 3,
     "column": 11,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "BracketLeft": {
     "row": 3,
     "column": 12,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "BracketRight": {
     "row": 3,
     "column": 13,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Enter": {
     "row": 3,
     "column": 14,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "CapsLock": {
     "row": 4,
     "column": 1,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyA": {
     "row": 4,
     "column": 2,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyS": {
     "row": 4,
     "column": 3,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyD": {
     "row": 4,
     "column": 4,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyF": {
     "row": 4,
     "column": 5,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyG": {
     "row": 4,
     "column": 6,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyH": {
     "row": 4,
     "column": 7,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyJ": {
     "row": 4,
     "column": 8,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyK": {
     "row": 4,
     "column": 9,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyL": {
     "row": 4,
     "column": 10,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Semicolon": {
     "row": 4,
     "column": 11,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Quote": {
     "row": 4,
     "column": 12,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Backslash": {
     "row": 4,
     "column": 13,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "ShiftLeft": {
     "row": 5,
     "column": 1,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyZ": {
     "row": 5,
     "column": 2,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyX": {
     "row": 5,
     "column": 3,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyC": {
     "row": 5,
     "column": 4,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyV": {
     "row": 5,
     "column": 5,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyB": {
     "row": 5,
     "column": 6,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyN": {
     "row": 5,
     "column": 7,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KeyM": {
     "row": 5,
     "column": 8,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Comma": {
     "row": 5,
     "column": 9,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Period": {
     "row": 5,
     "column": 10,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Slash": {
     "row": 5,
     "column": 11,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "IntlRo": {
     "row": 5,
     "column": 12,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "ShiftRight": {
     "row": 5,
     "column": 13,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "ControlLeft": {
     "row": 6,
     "column": 1,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "AAA": {
     "row": 6,
     "column": 2,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "AltLeft": {
     "row": 6,
     "column": 3,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "NonConvert": {
     "row": 6,
     "column": 4,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Space": {
     "row": 6,
     "column": 5,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "Convert": {
     "row": 6,
     "column": 6,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "KanaMode": {
     "row": 6,
     "column": 7,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "AltRight": {
     "row": 6,
     "column": 8,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "BBB": {
     "row": 6,
     "column": 9,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "CCC": {
     "row": 6,
     "column": 10,
-    "height": 50,
+    "width": 50,
     "style": ""
   },
   "CtrlRight": {
     "row": 6,
     "column": 11,
-    "height": 50,
+    "width": 50,
     "style": ""
   }
 }
