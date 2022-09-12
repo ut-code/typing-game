@@ -2,8 +2,8 @@ import { useState } from "react";
 import Keyboard from "./components/keyboard";
 
 export default function App() {
-  const [functional, setFunctional] = useState<string>("");
-  const [physical, setPhysical] = useState<string>("");
+  const [functional, setFunctional] = useState<string>("qwerty");
+  const [physical, setPhysical] = useState<string>("jis109");
   return (
     <>
       <select
@@ -20,7 +20,7 @@ export default function App() {
           JIS109
         </option>
       </select>
-      <Keyboard></Keyboard>
+      <Keyboard functional={functional} physical={physical}></Keyboard>
     </>
   );
 }

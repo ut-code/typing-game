@@ -5,9 +5,9 @@ import dvorak from "./data/dvorak.json";
 import jis109 from "./data/JIS109.json";
 import "./keyboard.css";
 
-const functionalLayout = "qwerty";
+let functionalLayout = "qwerty";
 const functionalLayoutType = { qwerty: qwerty, dvorak: dvorak };
-const physicalLayout = "jis109";
+let physicalLayout = "jis109";
 const physicalLayoutType = { jis109: jis109 };
 const magnification = 3;
 
@@ -49,7 +49,15 @@ function sumHeight(row: number) {
   );
 }
 
-export default function Keyboard() {
+export default function Keyboard({
+  functional,
+  physical,
+}: {
+  functional: string;
+  physical: string;
+}) {
+  functionalLayout = functional;
+  physicalLayout = physical;
   return (
     <>
       <div id="keyboard">
