@@ -61,21 +61,40 @@ function GetFileName({
 /**
  * i番目を入力させるinputタグ
  */
-function GetManySettings({
+function GetManySettings<T extends string | number>({
+  type,
   items,
   setItems,
   i,
+  min,
+  style,
+  placeholder,
 }: {
-  items: string[];
-  setItems: (value: string[]) => void;
+  type: "string" | "number";
+  items: T[];
+  setItems: (value: T[]) => void;
   i: number;
+  min?: number;
+  style?: object;
+  placeholder?: string;
 }) {
   return (
     <input
-      type="text"
+      type={type === "string" ? "text" : "number"}
+      min={min}
+      style={style}
+      placeholder={placeholder}
       value={items[i]}
       onChange={(e) => {
-        setItems(items.map((item, j) => (i === j ? e.target.value : item)));
+        setItems(
+          items.map((item, j) =>
+            i === j
+              ? item
+              : type === "string"
+              ? e.target.value
+              : e.target.valueAsNumber
+          )
+        );
       }}
     />
   );
@@ -98,7 +117,8 @@ function Functional() {
       {eventCode.map((code, i) => (
         <div key={code}>
           {code}
-          <GetManySettings
+          <GetManySettings<string>
+            type="string"
             items={keys}
             setItems={setKeys}
             i={i}
@@ -131,56 +151,40 @@ function Physical() {
       {eventCode.map((code, i) => (
         <div key={code}>
           {code}
-          <input
+          <GetManySettings<number>
             type="number"
-            min="0"
+            min={0}
             style={{ width: "80px" }}
             placeholder="row"
-            value={rows[i]}
-            onChange={(e) => {
-              setRows(
-                rows.map((row, j) => (i === j ? e.target.valueAsNumber : row))
-              );
-            }}
-          />
-          <input
+            items={rows}
+            setItems={setRows}
+            i={i}
+          ></GetManySettings>
+          <GetManySettings<number>
             type="number"
-            min="0"
+            min={0}
             style={{ width: "80px" }}
             placeholder="column"
-            value={columns[i]}
-            onChange={(e) => {
-              setColumns(
-                columns.map((column, j) =>
-                  i === j ? e.target.valueAsNumber : column
-                )
-              );
-            }}
-          />
-          <input
+            items={columns}
+            setItems={setColumns}
+            i={i}
+          ></GetManySettings>
+          <GetManySettings<number>
             type="number"
-            min="0"
+            min={0}
             style={{ width: "80px" }}
             placeholder="height"
-            value={heights[i]}
-            onChange={(e) => {
-              setHeights(
-                heights.map((height, j) =>
-                  i === j ? e.target.valueAsNumber : height
-                )
-              );
-            }}
-          />
-          <input
-            type="text"
+            items={heights}
+            setItems={setHeights}
+            i={i}
+          ></GetManySettings>
+          <GetManySettings<string>
+            type="string"
             placeholder="style"
-            value={styles[i]}
-            onChange={(e) => {
-              setStyles(
-                styles.map((style, j) => (i === j ? e.target.value : style))
-              );
-            }}
-          />
+            items={styles}
+            setItems={setStyles}
+            i={i}
+          ></GetManySettings>
         </div>
       ))}
     </>
