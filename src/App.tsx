@@ -127,10 +127,9 @@ function ConfirmButton({
   );
 }
 
-let defaultKeyLayout: EventCode = qwerty;
 function Functional() {
   const [keys, setKeys] = useState<string[]>(
-    eventCode.map((code) => defaultKeyLayout[code])
+    eventCode.map((code) => qwerty[code])
   );
   const [fileName, setFileName] = useState<string>("");
   return (
