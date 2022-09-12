@@ -6,8 +6,6 @@ import EventCode from "./eventCode.d.ts";
 import makeJSONFile from "./components/makeJSONFile";
 import ReadJSONFile from "./components/ReadJSONFile";
 
-let defaultKeyLayout: EventCode = qwerty;
-
 export default function App() {
   return (
     <>
@@ -38,6 +36,7 @@ function Home() {
   );
 }
 
+let defaultKeyLayout: EventCode = qwerty;
 function Functional() {
   const [keys, setKeys] = useState<string[]>(
     eventCode.map((code) => defaultKeyLayout[code])
@@ -52,15 +51,16 @@ function Functional() {
         }}
       ></ReadJSONFile>
       {eventCode.map((code, i) => (
-        <li key={code}>
+        <div key={code}>
           {code}
           <input
+            type="text"
             value={keys[i]}
             onChange={(e) => {
               setKeys(keys.map((key, j) => (i === j ? e.target.value : key)));
             }}
           ></input>
-        </li>
+        </div>
       ))}
       <input
         type="text"
@@ -86,5 +86,67 @@ function Functional() {
 }
 
 function Physical() {
-  return <div>hello</div>;
+  const [rows, setRows] = useState<number[]>([]);
+  const [columns, setColumns] = useState<number[]>([]);
+  const [heights, setHeights] = useState<number[]>([]);
+  const [styles, setStyles] = useState<string[]>([]);
+  return (
+    <>
+      {eventCode.map((code, i) => (
+        <div key={code}>
+          {code}
+          <input
+            type="number"
+            min="0"
+            style={{ width: "80px" }}
+            placeholder="row"
+            value={rows[i]}
+            onChange={(e) => {
+              setRows(
+                rows.map((row, j) => (i === j ? e.target.valueAsNumber : row))
+              );
+            }}
+          />
+          <input
+            type="number"
+            min="0"
+            style={{ width: "80px" }}
+            placeholder="column"
+            value={columns[i]}
+            onChange={(e) => {
+              setColumns(
+                columns.map((column, j) =>
+                  i === j ? e.target.valueAsNumber : column
+                )
+              );
+            }}
+          />
+          <input
+            type="number"
+            min="0"
+            style={{ width: "80px" }}
+            placeholder="height"
+            value={heights[i]}
+            onChange={(e) => {
+              setHeights(
+                heights.map((height, j) =>
+                  i === j ? e.target.valueAsNumber : height
+                )
+              );
+            }}
+          />
+          <input
+            type="text"
+            placeholder="style"
+            value={styles[i]}
+            onChange={(e) => {
+              setStyles(
+                styles.map((style, j) => (i === j ? e.target.value : style))
+              );
+            }}
+          />
+        </div>
+      ))}
+    </>
+  );
 }
