@@ -137,8 +137,7 @@ function Functional() {
     <>
       <ReadJSONFile
         f={(x: EventCode) => {
-          defaultKeyLayout = x;
-          setKeys(eventCode.map((code) => defaultKeyLayout[code]));
+          setKeys(eventCode.map((code) => x[code]));
         }}
       ></ReadJSONFile>
       {eventCode.map((code, i) => (
