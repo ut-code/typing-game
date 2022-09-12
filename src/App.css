@@ -1,18 +1,18 @@
-#keyboard{
-    background-color: lightblue;
+#keyboard {
+  background-color: lightblue;
 }
 
-#Esc{
-    background-color: red;
+#Esc {
+  background-color: red;
 }
 
-#row{
-    display: flex;
-    justify-content: space-around;
+#row {
+  display: flex;
+  justify-content: space-around;
 }
 
-.code{
-    width: 50px;
-    height: 50px;
-    background-color: lightcoral;
+.code {
+  width: 50px;
+  height: 50px;
+  background-color: lightcoral;
 }

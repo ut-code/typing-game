@@ -1,15 +1,9 @@
-import eventCode from "./eventCode.json"
-import qwerty from "./qwerty.json"
-import dvorak from "./dvorak.json"
-import "./App.css"
+import eventCode from "./eventCode.json";
+import qwerty from "./qwerty.json";
+import dvorak from "./dvorak.json";
+import "./App.css";
 
-const newRow = [
-  "Backquote",
-  "Tab",
-  "CapsLock",
-  "ShiftLeft",
-  "ControlLeft",
-];
+const newRow = ["Backquote", "Tab", "CapsLock", "ShiftLeft", "ControlLeft"];
 
 const result = [];
 let cnt = 0;
@@ -26,8 +20,14 @@ export default function App() {
   return (
     <>
       <div id="keyboard">
-        {result.map((row,i)=>(
-          <div id="row" key={i}>{row.map((code)=>(<div className="code" key={code}>{qwerty[code]}</div>))}</div>
+        {result.map((row, i) => (
+          <div id="row" key={i}>
+            {row.map((code) => (
+              <div className="code" key={code}>
+                {qwerty[code]}
+              </div>
+            ))}
+          </div>
         ))}
       </div>
     </>
