@@ -102,30 +102,11 @@ function GetManySettings<T extends string | number>({
 }
 
 /**
- * `i` 番目のオブジェクトを決めてそれを出力するコンポーネントです。
- * @param f `i` を受け取って、`i` 番目のオブジェクトを返す関数
- * @param fileName ファイル名
+ * 確定ボタンのコンポーネントです。
+ * @param f `onClick` 用の関数
  */
-function ConfirmButton({
-  f,
-  fileName,
-}: {
-  f: (i: number) => object;
-  fileName: string;
-}) {
-  return (
-    <button
-      onClick={() => {
-        let result = {};
-        for (let i = 0; i < eventCode.length; i++) {
-          Object.assign(result, f(i));
-        }
-        makeJSONFile(result, fileName);
-      }}
-    >
-      確定
-    </button>
-  );
+function ConfirmButton({ f }: { f: () => void }) {
+  return <button onClick={f}>確定</button>;
 }
 
 function Functional() {
@@ -153,37 +134,78 @@ function Functional() {
       ))}
       <GetFileName fileName={fileName} setFileName={setFileName}></GetFileName>
       <ConfirmButton
-        f={(i) => ({ [eventCode[i]]: keys[i] })}
-        fileName={fileName}
+        f={() => {
+          let object = {};
+          for (let i = 0; i < eventCode.length; i++) {
+            Object.assign(object, { [eventCode[i]]: keys[i] });
+          }
+          makeJSONFile(object, fileName);
+        }}
       ></ConfirmButton>
     </>
   );
 }
 
 function Physical() {
+  const [marginRow, setMarginRow] = useState<number>(jis109.marginRow);
+  const [marginColumn, setMarginColumn] = useState<number>(jis109.marginColumn);
+  const [height, setHeight] = useState<number>(jis109.height);
   const [rows, setRows] = useState<number[]>(
-    eventCode.map((code) => jis109[code].row)
+    eventCode.map((code) => jis109.eventCode[code].row)
   );
   const [columns, setColumns] = useState<number[]>(
-    eventCode.map((code) => jis109[code].column)
+    eventCode.map((code) => jis109.eventCode[code].column)
   );
   const [widths, setWidths] = useState<number[]>(
-    eventCode.map((code) => jis109[code].width)
+    eventCode.map((code) => jis109.eventCode[code].width)
   );
   const [styles, setStyles] = useState<string[]>(
-    eventCode.map((code) => jis109[code].style)
+    eventCode.map((code) => jis109.eventCode[code].style)
   );
   const [fileName, setFileName] = useState<string>("");
   return (
     <>
       <ReadJSONFile
         f={(x) => {
-          setRows(eventCode.map((code) => x[code].row));
-          setColumns(eventCode.map((code) => x[code].column));
-          setWidths(eventCode.map((code) => x[code].width));
-          setStyles(eventCode.map((code) => x[code].style));
+          setMarginRow(x.marginRow);
+          setMarginColumn(x.marginColumn);
+          setHeight(x.height);
+          setRows(eventCode.map((code) => x.eventCode[code].row));
+          setColumns(eventCode.map((code) => x.eventCode[code].column));
+          setWidths(eventCode.map((code) => x.eventCode[code].width));
+          setStyles(eventCode.map((code) => x.eventCode[code].style));
         }}
       ></ReadJSONFile>
+      <div>
+        margin-row
+        <input
+          type="number"
+          value={marginRow}
+          onChange={(e) => {
+            setMarginRow(e.target.valueAsNumber);
+          }}
+        />
+      </div>
+      <div>
+        margin-column
+        <input
+          type="number"
+          value={marginColumn}
+          onChange={(e) => {
+            setMarginColumn(e.target.valueAsNumber);
+          }}
+        />
+      </div>
+      <div>
+        height
+        <input
+          type="number"
+          value={height}
+          onChange={(e) => {
+            setHeight(e.target.valueAsNumber);
+          }}
+        />
+      </div>
       {eventCode.map((code, i) => (
         <div key={code}>
           {code}
@@ -225,15 +247,26 @@ function Physical() {
       ))}
       <GetFileName fileName={fileName} setFileName={setFileName}></GetFileName>
       <ConfirmButton
-        f={(i) => ({
-          [eventCode[i]]: {
-            row: rows[i],
-            column: columns[i],
-            width: widths[i],
-            style: styles[i],
-          },
-        })}
-        fileName={fileName}
+        f={() => {
+          let object = {};
+          Object.assign(object, {
+            marginRow: marginRow,
+            marginColumn: marginColumn,
+            height: height,
+            eventCode: {},
+          });
+          for (let i = 0; i < eventCode.length; i++) {
+            Object.assign(object.eventCode, {
+              [eventCode[i]]: {
+                row: rows[i],
+                column: columns[i],
+                width: widths[i],
+                style: styles[i],
+              },
+            });
+          }
+          makeJSONFile(object, fileName);
+        }}
       ></ConfirmButton>
     </>
   );
