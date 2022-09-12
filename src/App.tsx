@@ -59,7 +59,7 @@ function GetFileName({
 }
 
 /**
- * i番目を入力させるinputタグ
+ * `i` 番目を入力させるinputタグ
  */
 function GetManySettings<T extends string | number>({
   type,
@@ -100,6 +100,33 @@ function GetManySettings<T extends string | number>({
   );
 }
 
+/**
+ * `i` 番目のオブジェクトを決めてそれを出力するコンポーネントです。
+ * @param f `i` を受け取って、`i` 番目のオブジェクトを返す関数
+ * @param fileName ファイル名
+ */
+function ConfirmButton({
+  f,
+  fileName,
+}: {
+  f: (i: number) => object;
+  fileName: string;
+}) {
+  return (
+    <button
+      onClick={() => {
+        let result = {};
+        for (let i = 0; i < eventCode.length; i++) {
+          Object.assign(result, f(i));
+        }
+        makeJSONFile(result, fileName);
+      }}
+    >
+      確定
+    </button>
+  );
+}
+
 let defaultKeyLayout: EventCode = qwerty;
 function Functional() {
   const [keys, setKeys] = useState<string[]>(
@@ -126,17 +153,10 @@ function Functional() {
         </div>
       ))}
       <GetFileName fileName={fileName} setFileName={setFileName}></GetFileName>
-      <button
-        onClick={() => {
-          let result = {};
-          for (let i = 0; i < eventCode.length; i++) {
-            Object.assign(result, { [eventCode[i]]: keys[i] });
-          }
-          makeJSONFile(result, fileName);
-        }}
-      >
-        確定
-      </button>
+      <ConfirmButton
+        f={(i) => ({ [eventCode[i]]: keys[i] })}
+        fileName={fileName}
+      ></ConfirmButton>
     </>
   );
 }
@@ -197,24 +217,17 @@ function Physical() {
         </div>
       ))}
       <GetFileName fileName={fileName} setFileName={setFileName}></GetFileName>
-      <button
-        onClick={() => {
-          let result = {};
-          for (let i = 0; i < eventCode.length; i++) {
-            Object.assign(result, {
-              [eventCode[i]]: {
-                row: rows[i],
-                column: columns[i],
-                height: heights[i],
-                style: styles[i],
-              },
-            });
-          }
-          makeJSONFile(result, fileName);
-        }}
-      >
-        確定
-      </button>
+      <ConfirmButton
+        f={(i) => ({
+          [eventCode[i]]: {
+            row: rows[i],
+            column: columns[i],
+            height: heights[i],
+            style: styles[i],
+          },
+        })}
+        fileName={fileName}
+      ></ConfirmButton>
     </>
   );
 }
