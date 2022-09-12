@@ -88,7 +88,7 @@ function GetManySettings<T extends string | number>({
       onChange={(e) => {
         setItems(
           items.map((item, j) =>
-            i === j
+            i !== j
               ? item
               : type === "string"
               ? e.target.value
