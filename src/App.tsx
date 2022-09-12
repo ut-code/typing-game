@@ -1,5 +1,6 @@
 import eventCode from "./eventCode.json";
 import qwerty from "./qwerty.json";
+import jis109 from "./JIS109.json";
 import { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import EventCode from "./eventCode.d.ts";
@@ -161,10 +162,18 @@ function Functional() {
 }
 
 function Physical() {
-  const [rows, setRows] = useState<number[]>(eventCode.map((code) => 0));
-  const [columns, setColumns] = useState<number[]>(eventCode.map((code) => 0));
-  const [heights, setHeights] = useState<number[]>(eventCode.map((code) => 0));
-  const [styles, setStyles] = useState<string[]>(eventCode.map((code) => ""));
+  const [rows, setRows] = useState<number[]>(
+    eventCode.map((code) => jis109[code].row)
+  );
+  const [columns, setColumns] = useState<number[]>(
+    eventCode.map((code) => jis109[code].column)
+  );
+  const [heights, setHeights] = useState<number[]>(
+    eventCode.map((code) => jis109[code].height)
+  );
+  const [styles, setStyles] = useState<string[]>(
+    eventCode.map((code) => jis109[code].style)
+  );
   const [fileName, setFileName] = useState<string>("");
   return (
     <>
