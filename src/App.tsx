@@ -1,3 +1,4 @@
+import { useState } from "react";
 import eventCode from "./eventCode.json";
 import qwerty from "./qwerty.json";
 import dvorak from "./dvorak.json";
@@ -14,10 +15,11 @@ export default function App() {
             className="key"
             style={{
               position: "absolute",
-              top: jis109[code].row * 10 + "%",
-              left: jis109[code].column * 10 + "%",
-              width: jis109[code].width / 10 + "%",
+              top: jis109[code].row * 4 + "vw",
+              left: jis109[code].column * 4 + "vw",
+              width: jis109[code].width * 3.7 + "vw",
             }}
+            // ref={dom=>{console.log(dom?.textContent)}}
           >
             {code}
           </div>
