@@ -63,6 +63,7 @@ export default function Keyboard({
       <div id="keyboard">
         {eventCode.map((code) => (
           <div
+            key={code}
             id={code}
             className="key"
             style={{
