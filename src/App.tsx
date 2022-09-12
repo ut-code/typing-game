@@ -30,6 +30,15 @@ export default function App() {
           <div id="row" key={i}>{row.map((code)=>(<div className="code" key={code}>{qwerty[code]}</div>))}</div>
         ))}
       </div>
+      <div id="hoge">
+        <div style={{position:"relative",left:"10px"}} >aaa</div>
+        <div>bbb</div>
+        <div>ccc</div>
+        <span className="br" />
+        <div style={{position:"relative",left:"10px"}}>ddd</div>
+        <div>eee</div>
+        <div>fff</div>
+      </div>
     </>
   );
 }
