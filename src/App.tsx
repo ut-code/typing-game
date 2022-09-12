@@ -36,6 +36,25 @@ function Home() {
   );
 }
 
+function GetFileName({
+  fileName,
+  setFileName,
+}: {
+  fileName: string;
+  setFileName: (value: string) => void;
+}) {
+  return (
+    <input
+      type="text"
+      placeholder="ファイル名を入力してください。"
+      value={fileName}
+      onChange={(e) => {
+        setFileName(e.target.value);
+      }}
+    />
+  );
+}
+
 let defaultKeyLayout: EventCode = qwerty;
 function Functional() {
   const [keys, setKeys] = useState<string[]>(
@@ -62,14 +81,7 @@ function Functional() {
           ></input>
         </div>
       ))}
-      <input
-        type="text"
-        placeholder="ファイル名を入力してください。"
-        value={fileName}
-        onChange={(e) => {
-          setFileName(e.target.value);
-        }}
-      />
+      <GetFileName fileName={fileName} setFileName={setFileName}></GetFileName>
       <button
         onClick={() => {
           let result = {};
