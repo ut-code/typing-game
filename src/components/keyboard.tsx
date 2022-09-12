@@ -1,9 +1,9 @@
 import { useState } from "react";
-import eventCode from "./eventCode.json";
-import qwerty from "./qwerty.json";
-import dvorak from "./dvorak.json";
-import jis109 from "./JIS109.json";
-import "./App.css";
+import eventCode from "./data/eventCode.json";
+import qwerty from "./data/qwerty.json";
+import dvorak from "./data/dvorak.json";
+import jis109 from "./data/JIS109.json";
+import "./keyboard.css";
 
 const functionalLayout = "qwerty";
 const functionalLayoutType = { qwerty: qwerty, dvorak: dvorak };
