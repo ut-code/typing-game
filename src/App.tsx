@@ -5,6 +5,12 @@ import dvorak from "./dvorak.json";
 import jis109 from "./JIS109.json";
 import "./App.css";
 
+const functionalLayout = "qwerty";
+const functionalLayoutType = { qwerty: qwerty, dvorak: dvorak };
+const physicalLayout = "jis109";
+const physicalLayoutType = { jis109: jis109 };
+const magnification = 3;
+
 /**
  * `row` 行の `column` 列までの幅の合計を計算します。
  * @param row `row`
@@ -12,14 +18,16 @@ import "./App.css";
  * @returns `width` と `jis109.eventCode.marginColumn` の合計
  */
 function sumWidth(row: number, column: number) {
-  let sum = jis109.marginColumn;
+  let sum = physicalLayoutType[physicalLayout].marginColumn;
   let j = 0;
   for (const code of eventCode) {
     if (
-      jis109.eventCode[code].row === row &&
-      jis109.eventCode[code].column < column
+      physicalLayoutType[physicalLayout].eventCode[code].row === row &&
+      physicalLayoutType[physicalLayout].eventCode[code].column < column
     ) {
-      sum += jis109.eventCode[code].width + jis109.marginColumn;
+      sum +=
+        physicalLayoutType[physicalLayout].eventCode[code].width +
+        physicalLayoutType[physicalLayout].marginColumn;
       j++;
     }
     if (j >= column) break;
@@ -27,8 +35,18 @@ function sumWidth(row: number, column: number) {
   return sum;
 }
 
+/**
+ * `row` までの高さの合計を計算します。
+ * @param row `row`
+ * @returns `row` までの高さの合計
+ */
 function sumHeight(row: number) {
-  return jis109.marginRow + (jis109.height + jis109.marginRow) * (row - 1);
+  return (
+    physicalLayoutType[physicalLayout].marginRow +
+    (physicalLayoutType[physicalLayout].height +
+      physicalLayoutType[physicalLayout].marginRow) *
+      (row - 1)
+  );
 }
 
 export default function App() {
@@ -41,20 +59,30 @@ export default function App() {
             className="key"
             style={{
               position: "absolute",
-              top: sumHeight(jis109.eventCode[code].row) * 3 + "vw",
+              top:
+                sumHeight(
+                  physicalLayoutType[physicalLayout].eventCode[code].row
+                ) *
+                  magnification +
+                "vw",
               left:
                 sumWidth(
-                  jis109.eventCode[code].row,
-                  jis109.eventCode[code].column
+                  physicalLayoutType[physicalLayout].eventCode[code].row,
+                  physicalLayoutType[physicalLayout].eventCode[code].column
                 ) *
-                  3 +
+                  magnification +
                 "vw",
-              width: jis109.eventCode[code].width * 3 + "vw",
-              height: jis109.height * 3 + "vw",
+              width:
+                physicalLayoutType[physicalLayout].eventCode[code].width *
+                  magnification +
+                "vw",
+              height:
+                physicalLayoutType[physicalLayout].height * magnification +
+                "vw",
             }}
             // ref={dom=>{console.log(dom?.textContent)}}
           >
-            {code}
+            {functionalLayoutType[functionalLayout][code]}
           </div>
         ))}
       </div>
