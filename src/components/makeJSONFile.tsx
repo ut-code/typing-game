@@ -1,5 +1,5 @@
 /**
- * `object` を `FileName.json` のJSONファイルに変換して、ダウンロードさせる関数です。
+ * `object` を `FileName.json` に変換して、ダウンロードさせる関数です。
  * @param object 任意のオブジェクト
  * @param fileName 任意のファイル名
  */

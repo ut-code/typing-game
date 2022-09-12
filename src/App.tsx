@@ -129,7 +129,7 @@ function Functional() {
       <button
         onClick={() => {
           let result = {};
-          for (let i = 0; i < keys.length; i++) {
+          for (let i = 0; i < eventCode.length; i++) {
             Object.assign(result, { [eventCode[i]]: keys[i] });
           }
           makeJSONFile(result, fileName);
@@ -142,12 +142,21 @@ function Functional() {
 }
 
 function Physical() {
-  const [rows, setRows] = useState<number[]>([]);
-  const [columns, setColumns] = useState<number[]>([]);
-  const [heights, setHeights] = useState<number[]>([]);
-  const [styles, setStyles] = useState<string[]>([]);
+  const [rows, setRows] = useState<number[]>(eventCode.map((code) => 0));
+  const [columns, setColumns] = useState<number[]>(eventCode.map((code) => 0));
+  const [heights, setHeights] = useState<number[]>(eventCode.map((code) => 0));
+  const [styles, setStyles] = useState<string[]>(eventCode.map((code) => ""));
+  const [fileName, setFileName] = useState<string>("");
   return (
     <>
+      <ReadJSONFile
+        f={(x) => {
+          setRows(eventCode.map((code) => x[code].row));
+          setColumns(eventCode.map((code) => x[code].column));
+          setHeights(eventCode.map((code) => x[code].height));
+          setStyles(eventCode.map((code) => x[code].style));
+        }}
+      ></ReadJSONFile>
       {eventCode.map((code, i) => (
         <div key={code}>
           {code}
@@ -187,6 +196,25 @@ function Physical() {
           ></GetManySettings>
         </div>
       ))}
+      <GetFileName fileName={fileName} setFileName={setFileName}></GetFileName>
+      <button
+        onClick={() => {
+          let result = {};
+          for (let i = 0; i < eventCode.length; i++) {
+            Object.assign(result, {
+              [eventCode[i]]: {
+                row: rows[i],
+                column: columns[i],
+                height: heights[i],
+                style: styles[i],
+              },
+            });
+          }
+          makeJSONFile(result, fileName);
+        }}
+      >
+        確定
+      </button>
     </>
   );
 }
