@@ -7,7 +7,7 @@ export default function App() {
   const [functional, setFunctional] = useState<string>("qwerty");
   const [physical, setPhysical] = useState<string>("jis109");
   const [keyColors, setKeyColors] = useState<string[]>(
-    eventCode.map((code) => "red")
+    eventCode.map((code) => "rgba(0,0,0,0)")
   );
   // useKey('KeyA',()=>{setKeyColors(eventCode.map((code,i)=>(code==='KeyA'?"lightgreen":keyColors[i])))});
   // useEffect(()=>{

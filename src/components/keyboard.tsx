@@ -73,13 +73,13 @@ export default function Keyboard({
             onClick={() => {
               setKeyColors(
                 eventCode.map((tmp, i) =>
-                  tmp === code ? "green" : keyColors[i]
+                  tmp === code ? "orange" : keyColors[i]
                 )
               );
               setTimeout(() => {
                 setKeyColors(
                   eventCode.map((tmp, i) =>
-                    tmp === code ? "red" : keyColors[i]
+                    tmp === code ? "rgba(0,0,0,0)" : keyColors[i]
                   )
                 );
               }, 100);
