@@ -22,9 +22,6 @@ function pressed(keyColors:string[],setKeyColors:(value:string[])=>void,code:str
   }, 100);
 }
 
-function hoge(a:number):void{
-  console.log("hoge");
-}
 export default function App(): JSX.Element {
   const [functional, setFunctional] = useState<string>("qwerty");
   const [physical, setPhysical] = useState<string>("jis109");
@@ -33,13 +30,12 @@ export default function App(): JSX.Element {
   );
   const [content,setContent]=useState<string>("");
   useEffect(() => {
-    function test():void{
-      hoge(1);
-    }
-    // window.addEventListener("keydown", (e)=>pressed(keyColors,setKeyColors,e.code,content,setContent,functional));
-    window.addEventListener("keydown",test);
+    function tmp(e:KeyboardEvent):void{
+      pressed(keyColors,setKeyColors,e.code,content,setContent,functional);
+    }    
+    window.addEventListener("keydown", tmp);
     return ()=>{
-      window.removeEventListener("keydown",test);
+      window.removeEventListener("keydown",tmp);
     }
   },[functional]);
   return (
