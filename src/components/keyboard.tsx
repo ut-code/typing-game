@@ -1,4 +1,4 @@
-import React,{useRef} from "react";
+import React from "react"; // ,{useRef}
 import eventCode from "./data/eventCode.json";
 import qwerty from "./data/qwerty.json";
 import dvorak from "./data/dvorak.json";
@@ -64,7 +64,7 @@ export default function Keyboard({
 }):JSX.Element {
   functionalLayout = functional;
   physicalLayout = physical;
-  const fontSize=0.015; // vw/100
+  // const fontSize=0.015; // vw/100
   return (
     <>
       <div id="keyboard">
@@ -86,19 +86,19 @@ export default function Keyboard({
               height:
                 `${physicalLayoutType[physicalLayout].height * magnification}vw`,
             }}
-            ref={dom=>{
-              let fontSizePx=window.innerWidth*fontSize;
-              const widthPx=physicalLayoutType[physicalLayout].eventCode[code].width * magnification* window.innerWidth*0.01;// func
-              // while(dom?.scrollWidth>=widthPx){
-              //   fontSizePx--;
-              //   // dom?.style.fontSize="10px";//fontSizePx+"px"
-              // }
-              // dom?.style.backgroundColor="black";
-              // console.log(dom?.style.fontSize);
-            }}
-            // while(dom?.scrollWidth>=dom.width){
-              //   dom.fontSize=dom.fontSize-1;
-              // }
+            // ref={dom=>{
+            //   let fontSizePx=window.innerWidth*fontSize;
+            //   const widthPx=physicalLayoutType[physicalLayout].eventCode[code].width * magnification* window.innerWidth*0.01;// func
+            //   // while(dom?.scrollWidth>=widthPx){
+            //   //   fontSizePx--;
+            //   //   // dom?.style.fontSize="10px";//fontSizePx+"px"
+            //   // }
+            //   // dom?.style.backgroundColor="black";
+            //   // console.log(dom?.style.fontSize);
+            // }}
+            // // while(dom?.scrollWidth>=dom.width){
+            //   //   dom.fontSize=dom.fontSize-1;
+            //   // }
           >
             {functionalLayoutType[functionalLayout][code]}
           </div>

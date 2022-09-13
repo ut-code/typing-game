@@ -7,7 +7,8 @@ const functionalLayoutType = { qwerty, dvorak };
 
 
 function pressed(keyColors:string[],setKeyColors:(value:string[])=>void,code:string,content:string,setContent:(value:string)=>void,functional:string):void{
-  setContent((content)=>content+functionalLayoutType[functional][code]);
+  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+  setContent((content: string)=>content+functionalLayoutType[functional][code]);
   setKeyColors(
     eventCode.map((tmp, i) =>
       tmp === code ? "orange" : keyColors[i]
