@@ -23,6 +23,10 @@ function pressed(keyColors:string[],setKeyColors:(value:string[])=>void,code:str
   }, 100);
 }
 
+function toJapanese(content:string):string{
+  return content;
+}
+
 export default function App(): JSX.Element {
   const [functional, setFunctional] = useState<string>("qwerty");
   const [physical, setPhysical] = useState<string>("jis109");
@@ -42,6 +46,7 @@ export default function App(): JSX.Element {
   return (
     <>
     <div>{content}</div>
+    <div>{toJapanese(content)}</div>
       <select
         value={functional}
         onChange={(e) => setFunctional(e.target.value)}
