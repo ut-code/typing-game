@@ -111,6 +111,14 @@ function ConfirmButton({ f }: { f: () => void }) {
   return <button onClick={f}>確定</button>;
 }
 
+function keyToObject(keys: string[]): object {
+  let object = {};
+  for (let i = 0; i < eventCode.length; i++) {
+    Object.assign(object, { [eventCode[i]]: keys[i] });
+  }
+  return object;
+}
+
 function Functional() {
   const [keys, setKeys] = useState<string[]>(
     eventCode.map((code) => qwerty[code])
@@ -118,7 +126,11 @@ function Functional() {
   const [fileName, setFileName] = useState<string>("");
   return (
     <>
-      <Keyboard functional="qwerty" physical="jis109"></Keyboard>
+      <Keyboard
+        functional="custom"
+        physical="jis109"
+        keyLayout={keyToObject(keys)}
+      ></Keyboard>
       <ReadJSONFile
         f={(x: EventCode) => {
           setKeys(eventCode.map((code) => x[code]));
@@ -138,11 +150,7 @@ function Functional() {
       <GetFileName fileName={fileName} setFileName={setFileName}></GetFileName>
       <ConfirmButton
         f={() => {
-          let object = {};
-          for (let i = 0; i < eventCode.length; i++) {
-            Object.assign(object, { [eventCode[i]]: keys[i] });
-          }
-          makeJSONFile(object, fileName);
+          makeJSONFile(keyToObject(keys), fileName);
         }}
       ></ConfirmButton>
     </>
