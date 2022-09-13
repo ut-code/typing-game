@@ -6,6 +6,8 @@ import { Routes, Route, Link } from "react-router-dom";
 import EventCode from "./eventCode.d.ts";
 import makeJSONFile from "./components/makeJSONFile";
 import ReadJSONFile from "./components/ReadJSONFile";
+import Keyboard from "./../keyboard/src/components/keyboard";
+import "./App.css";
 
 export default function App() {
   return (
@@ -116,6 +118,7 @@ function Functional() {
   const [fileName, setFileName] = useState<string>("");
   return (
     <>
+      <Keyboard functional="qwerty" physical="jis109"></Keyboard>
       <ReadJSONFile
         f={(x: EventCode) => {
           setKeys(eventCode.map((code) => x[code]));
