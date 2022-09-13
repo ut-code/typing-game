@@ -70,6 +70,20 @@ export default function Keyboard({
             key={code}
             id={code}
             className="key"
+            onClick={() => {
+              setKeyColors(
+                eventCode.map((tmp, i) =>
+                  tmp === code ? "green" : keyColors[i]
+                )
+              );
+              setTimeout(() => {
+                setKeyColors(
+                  eventCode.map((tmp, i) =>
+                    tmp === code ? "red" : keyColors[i]
+                  )
+                );
+              }, 100);
+            }}
             style={{
               position: "absolute",
               backgroundColor: keyColors[i],

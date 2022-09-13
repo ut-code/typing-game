@@ -9,12 +9,10 @@ export default function App() {
   const [keyColors, setKeyColors] = useState<string[]>(
     eventCode.map((code) => "red")
   );
-  console.log("aaa");
   // useKey('KeyA',()=>{setKeyColors(eventCode.map((code,i)=>(code==='KeyA'?"lightgreen":keyColors[i])))});
   // useEffect(()=>{
   //   window.addEventListener("keydown",(e)=>{
   //     setKeyColors(eventCode.map((code,i)=>(code===e.code?"lightgreen":keyColors[i])));
-  //     // console.log(eventCode.map((code,i)=>(code===e.code?"lightgreen":keyColors[i])));
   //   });
   // },[]);
   return (
