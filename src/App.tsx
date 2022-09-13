@@ -1,16 +1,15 @@
-import { useState, useEffect, useCallback } from "react";
+import { React, useState, useEffect, useCallback } from "react";
 // import {useKey} from "react-use";
 import Keyboard from "./components/keyboard";
 import eventCode from "./components/data/eventCode.json";
-import { render } from "react-dom";
 
-export default function App() {
+export default function App(): JSX.Element {
   const [functional, setFunctional] = useState<string>("qwerty");
   const [physical, setPhysical] = useState<string>("jis109");
   const [keyColors, setKeyColors] = useState<string[]>(
     eventCode.map((code) => "rgba(0,0,0,0)")
   );
-  const [test, setTest] = useState<string[]>([]);
+  // const [test, setTest] = useState<string[]>([])
   // useKey('a',()=>{
   //   // setKeyColors(eventCode.map((code,i)=>(code==='KeyA'?"lightgreen":keyColors[i])));
   //   setTest([false,test[1]]);
