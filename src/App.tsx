@@ -3,6 +3,7 @@ import Keyboard from "./components/keyboard";
 import eventCode from "./components/data/eventCode.json";
 import qwerty from "./components/data/qwerty.json";
 import dvorak from "./components/data/dvorak.json";
+import romantable from "./romantable.json";
 const functionalLayoutType = { qwerty, dvorak };
 
 
@@ -24,7 +25,18 @@ function pressed(keyColors:string[],setKeyColors:(value:string[])=>void,code:str
 }
 
 function toJapanese(content:string):string{
-  return content;
+  console.log(content)
+  let ans="";
+  let tmp="";
+  for(let i=0;i<content.length;i++){
+    tmp=tmp+content[i].toLowerCase();
+    const hoge=romantable.findIndex((element)=>element[0]===tmp);
+    if(hoge!==-1){
+      ans+=romantable[hoge][1];
+      tmp="";
+    }
+  }
+  return ans;
 }
 
 export default function App(): JSX.Element {
