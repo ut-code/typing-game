@@ -52,22 +52,27 @@ function sumHeight(row: number) {
 export default function Keyboard({
   functional,
   physical,
+  keyColors,
+  setKeyColors,
 }: {
   functional: string;
   physical: string;
+  keyColors: string[];
+  setKeyColors: (value: Array<string>) => void;
 }) {
   functionalLayout = functional;
   physicalLayout = physical;
   return (
     <>
       <div id="keyboard">
-        {eventCode.map((code) => (
+        {eventCode.map((code, i) => (
           <div
             key={code}
             id={code}
             className="key"
             style={{
               position: "absolute",
+              backgroundColor: keyColors[i],
               top:
                 sumHeight(
                   physicalLayoutType[physicalLayout].eventCode[code].row
