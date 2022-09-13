@@ -56,7 +56,7 @@ export default function Keyboard({
   physical: string;
   keyColors: string[];
   setKeyColors: (value: string[]) => void;
-  pressed:(keyColors:string[],setKeyColors:(value:string[])=>void,code:string)=>void;
+  pressed:(keyColors:string[],setKeyColors:(value:string[])=>void,code:string,content:string,setContent:(value:string)=>void,functional:string)=>void;
 }):JSX.Element {
   functionalLayout = functional;
   physicalLayout = physical;

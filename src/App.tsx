@@ -1,8 +1,13 @@
 import React, { useState, useEffect} from "react";
 import Keyboard from "./components/keyboard";
 import eventCode from "./components/data/eventCode.json";
+import qwerty from "./components/data/qwerty.json";
+import dvorak from "./components/data/dvorak.json";
+const functionalLayoutType = { qwerty, dvorak };
 
-function pressed(keyColors:string[],setKeyColors:(value:string[])=>void,code:string):void{
+
+function pressed(keyColors:string[],setKeyColors:(value:string[])=>void,code:string,content:string,setContent:(value:string)=>void,functional:string):void{
+  setContent((content)=>content+functionalLayoutType[functional][code]);
   setKeyColors(
     eventCode.map((tmp, i) =>
       tmp === code ? "orange" : keyColors[i]
@@ -23,11 +28,13 @@ export default function App(): JSX.Element {
   const [keyColors, setKeyColors] = useState<string[]>(
     eventCode.map((code) => "rgba(0,0,0,0)")
   );
+  const [content,setContent]=useState<string>("");
   useEffect(() => {
-    document.addEventListener("keydown", (e)=>pressed(keyColors,setKeyColors,e.code));
+    document.addEventListener("keydown", (e)=>pressed(keyColors,setKeyColors,e.code,content,setContent,functional));
   },[]);
   return (
     <>
+    <div>{content}</div>
       <select
         value={functional}
         onChange={(e) => setFunctional(e.target.value)}
