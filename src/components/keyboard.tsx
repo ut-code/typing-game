@@ -45,17 +45,18 @@ function sumHeight(row: number):number {
     physicalLayoutType[physicalLayout].marginRow + (physicalLayoutType[physicalLayout].height + physicalLayoutType[physicalLayout].marginRow) * (row - 1)
   );
 }
-
 export default function Keyboard({
   functional,
   physical,
   keyColors,
   setKeyColors,
+  pressed
 }: {
   functional: string;
   physical: string;
   keyColors: string[];
   setKeyColors: (value: string[]) => void;
+  pressed:(keyColors:string[],setKeyColors:(value:string[])=>void,code:string)=>void;
 }):JSX.Element {
   functionalLayout = functional;
   physicalLayout = physical;
@@ -67,20 +68,7 @@ export default function Keyboard({
             key={code}
             id={code}
             className="key"
-            onClick={() => {
-              setKeyColors(
-                eventCode.map((tmp, i) =>
-                  tmp === code ? "orange" : keyColors[i]
-                )
-              );
-              setTimeout(() => {
-                setKeyColors(
-                  eventCode.map((tmp, i) =>
-                    tmp === code ? "rgba(0,0,0,0)" : keyColors[i]
-                  )
-                );
-              }, 100);
-            }}
+            onClick={()=>pressed(keyColors,setKeyColors,code)}
             style={{
               position: "absolute",
               backgroundColor: keyColors[i],
