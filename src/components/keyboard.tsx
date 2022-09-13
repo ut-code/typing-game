@@ -6,7 +6,7 @@ import jis109 from "./data/JIS109.json";
 import "./keyboard.css";
 
 let functionalLayout = "qwerty";
-const functionalLayoutType = { qwerty, dvorak };
+const functionalLayoutType = { qwerty, dvorak,custom:qwerty };
 let physicalLayout = "jis109";
 const physicalLayoutType = { jis109 };
 const magnification = 3;
@@ -51,7 +51,8 @@ Keyboard.defaultProps={
   setKeyColors:(value:string)=>{},
   pressed:()=>{},
   content:"",
-  setContent:(value:string)=>{}
+  setContent:(value:string)=>{},
+  keyLayout:qwerty
 }
 
 export default function Keyboard({
@@ -61,7 +62,8 @@ export default function Keyboard({
   setKeyColors,
   pressed,
   content,
-  setContent
+  setContent,
+  keyLayout
 }: {
   functional: string;
   physical: string;
@@ -70,9 +72,12 @@ export default function Keyboard({
   pressed?:(keyColors:string[],setKeyColors:(value:string[])=>void,code:string,content:string,setContent:(value:string)=>void,functional:string)=>void;
   content?:string;
   setContent?:(value:string)=>void;
+  keyLayout?:object
 }):JSX.Element {
   functionalLayout = functional;
   physicalLayout = physical;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  functionalLayoutType.custom=keyLayout!;
   // const fontSize=0.015; // vw/100
   return (
     <>
