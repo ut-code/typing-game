@@ -8,7 +8,7 @@ import "./keyboard.css";
 let functionalLayout = "qwerty";
 const functionalLayoutType = { qwerty, dvorak,custom:qwerty };
 let physicalLayout = "jis109";
-const physicalLayoutType = { jis109 };
+const physicalLayoutType = { jis109,custom:jis109 };
 const magnification = 3;
 
 /**
@@ -63,7 +63,8 @@ export default function Keyboard({
   pressed,
   content,
   setContent,
-  keyLayout
+  keyLayout,
+  physicalKeyLayout
 }: {
   functional: string;
   physical: string;
@@ -72,12 +73,15 @@ export default function Keyboard({
   pressed?:(keyColors:string[],setKeyColors:(value:string[])=>void,code:string,content:string,setContent:(value:string)=>void,functional:string)=>void;
   content?:string;
   setContent?:(value:string)=>void;
-  keyLayout?:object
+  keyLayout?:object;
+  physicalKeyLayout?:object;
 }):JSX.Element {
   functionalLayout = functional;
   physicalLayout = physical;
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   functionalLayoutType.custom=keyLayout!;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  physicalLayoutType.custom=physicalKeyLayout!;
   // const fontSize=0.015; // vw/100
   return (
     <>
