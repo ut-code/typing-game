@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import {useKey} from 'react-use'
+import React, { useEffect, useState } from "react";
+// import {useKey} from 'react-use'
 
+const initial = 0;
 const Sample: () => void = () => {
-  const [open, setOpen] = useState(0)
+  const [open, setOpen] = useState(initial);
 
   // const handleKeyDown = (event: KeyboardEvent):void => {
   //   if (event.code === 'KeyA' && open < 10000) {
@@ -10,34 +11,31 @@ const Sample: () => void = () => {
   //     setOpen(open + 1)
   //   }
   // }
-  function increment():void{
-    setOpen(open+1);
-  }
-  function hoge(e:KeyboardEvent):void{
-    if(e.code==="KeyA")setOpen(open+1);
+  function increment(): void {
+    setOpen((open) => ++open);
     console.log(open);
   }
-  useKey('a',hoge);
+  function hoge(e: KeyboardEvent): void {
+    if (e.code === "KeyA") setOpen((open) => open + 1);
+    console.log(open);
+  }
 
-  // useEffect(() => {
-  //   // increment();
-  //   window.addEventListener('keydown', hoge)
-  // },[]) // depsに useState と useCallbackでラップした関数 が必要
+  // useKey('a',increment);
+
+  useEffect(() => {
+    // increment();
+    window.addEventListener("keydown", hoge);
+  }, []); // depsに useState と useCallbackでラップした関数 が必要
 
   return (
     <>
-  <div>sample</div>
-  <button onClick={increment}>test</button>
+      <div>sample</div>
+      <button onClick={increment}>{open}</button>
     </>
-  )
-}
+  );
+};
 
-export default Sample
-
-
-
-
-
+export default Sample;
 
 // import React, { useState, useEffect, useCallback } from "react";
 // // import {useKey} from "react-use";
