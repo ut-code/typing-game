@@ -50,13 +50,17 @@ export default function Keyboard({
   physical,
   keyColors,
   setKeyColors,
-  pressed
+  pressed,
+  content,
+  setContent
 }: {
   functional: string;
   physical: string;
   keyColors: string[];
   setKeyColors: (value: string[]) => void;
   pressed:(keyColors:string[],setKeyColors:(value:string[])=>void,code:string,content:string,setContent:(value:string)=>void,functional:string)=>void;
+  content:string;
+  setContent:(value:string)=>void;
 }):JSX.Element {
   functionalLayout = functional;
   physicalLayout = physical;
@@ -69,7 +73,7 @@ export default function Keyboard({
             key={code}
             id={code}
             className="key"
-            onClick={()=>pressed(keyColors,setKeyColors,code)}
+            onClick={()=>pressed(keyColors,setKeyColors,code,content,setContent,functional)}
             style={{
               position: "absolute",
               backgroundColor: keyColors[i],

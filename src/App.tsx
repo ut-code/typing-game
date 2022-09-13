@@ -30,8 +30,9 @@ export default function App(): JSX.Element {
   );
   const [content,setContent]=useState<string>("");
   useEffect(() => {
-    document.addEventListener("keydown", (e)=>pressed(keyColors,setKeyColors,e.code,content,setContent,functional));
-  },[]);
+    window.addEventListener("keydown", (e)=>pressed(keyColors,setKeyColors,e.code,content,setContent,functional));
+    return window.removeEventListener("keydown", (e)=>pressed(keyColors,setKeyColors,e.code,content,setContent,functional));
+  },[functional]);
   return (
     <>
     <div>{content}</div>
@@ -51,6 +52,8 @@ export default function App(): JSX.Element {
         keyColors={keyColors}
         setKeyColors={setKeyColors}
         pressed={pressed}
+        content={content}
+        setContent={setContent}
       ></Keyboard>
     </>
   );
