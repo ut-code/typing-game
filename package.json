@@ -10,6 +10,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
+    "**/{ts,js,tsx,jsx}": "eslint --fix",
     "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
@@ -22,6 +23,7 @@
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@vitejs/plugin-react": "^2.1.0",
     "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "^22.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.5",
