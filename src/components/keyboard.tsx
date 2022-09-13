@@ -4,7 +4,6 @@ import qwerty from "./data/qwerty.json";
 import dvorak from "./data/dvorak.json";
 import jis109 from "./data/JIS109.json";
 import "./keyboard.css";
-import {Textfit} from "react-textfit";
 
 let functionalLayout = "qwerty";
 const functionalLayoutType = { qwerty, dvorak };
@@ -64,7 +63,6 @@ export default function Keyboard({
   const fontSize=0.015; // vw/100
   return (
     <>
-    {/* <Textfit style={{width:"200px",backgroundColor:"red"}}>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</Textfit> */}
       <div id="keyboard">
         {eventCode.map((code, i) => (
           <div
@@ -79,10 +77,10 @@ export default function Keyboard({
                 `${sumHeight(physicalLayoutType[physicalLayout].eventCode[code].row) * magnification}vw`,
               left:
                 `${sumWidth(physicalLayoutType[physicalLayout].eventCode[code].row,physicalLayoutType[physicalLayout].eventCode[code].column) * magnification}vw`,
-                width:
-                `${physicalLayoutType[physicalLayout].eventCode[code].width * magnification}vw`,
-                height:
-                  `${physicalLayoutType[physicalLayout].height * magnification}vw`
+              width:
+              `${physicalLayoutType[physicalLayout].eventCode[code].width * magnification}vw`,
+              height:
+                `${physicalLayoutType[physicalLayout].height * magnification}vw`,
             }}
             ref={dom=>{
               let fontSizePx=window.innerWidth*fontSize;
@@ -98,14 +96,7 @@ export default function Keyboard({
               //   dom.fontSize=dom.fontSize-1;
               // }
           >
-            <Textfit
-            style={{
-              width:
-              `${physicalLayoutType[physicalLayout].eventCode[code].width * magnification*0.8}vw`,
-              height:
-                `${physicalLayoutType[physicalLayout].height * magnification*0.6}vw`
-            }}
-            >{functionalLayoutType[functionalLayout][code]}</Textfit>
+            {functionalLayoutType[functionalLayout][code]}
           </div>
         ))}
       </div>
