@@ -50,7 +50,7 @@ let questions = []; // 問題
 // 問題をquestionsに格納
 async function getQuestions() {
   // JSON形式でmain.jsから受信
-  const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/questions`, {
+  const response = await fetch("/questions", {
     method: "post",
     headers: { "Content-Type": "application/json" },
   });
@@ -114,7 +114,7 @@ function calcScore(time, correct, miss) {
 async function finished(time, correct, miss) {
   let score = calcScore(time, correct, miss);
   const json = JSON.stringify({ time: time, score: score });
-  await fetch(`${import.meta.env.VITE_API_ENDPOINT}/finished`, {
+  await fetch("/finished", {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: json,
