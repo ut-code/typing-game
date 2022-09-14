@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/main.js",
+    "start": "node backend/main.js",
     "prepare": "husky install",
     "format": "npx prettier --write .",
-    "build": "vite build client --outDir ../dist",
+    "build": "vite build frontend --outDir ../dist",
     "demo": "npm run build && echo 'success!' && npm run start"
   },
   "repository": {
