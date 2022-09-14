@@ -58,9 +58,9 @@ $ npm run demo
 ## ディレクトリ構成
 
 - `/root`
-  - `/client` フロントエンド関係
+  - `/frontend` フロントエンド関係
     - `index.html`,`style.css`,`script.js`がメイン 基本的にはここをいじる。
-  - `/server` バックエンド関係
+  - `/backend` バックエンド関係
     - `main.js` メイン
     - `finished.ejs` 結果ページ
   - `/prisma` Prisma のファイル
