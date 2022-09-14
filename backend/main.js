@@ -30,7 +30,11 @@ let time;
 let score;
 // データベースからPrismaでランキングをとってくる
 async function getRanking() {
-  const records = await prisma.ranking.findMany();
+  const records = await prisma.ranking.findMany({
+    orderBy: {
+      score: "desc",
+    },
+  });
   return records;
 }
 
@@ -50,7 +54,7 @@ app.post("/finished", (request, response) => {
 app.get("/finished", async (request, response) => {
   const submission = await submitScore();
   const records = await getRanking();
-  const template = fs.readFileSync("./server/finished.ejs", "utf-8");
+  const template = fs.readFileSync("./backend/finished.ejs", "utf-8");
   const html = ejs.render(template, {
     time: time,
     score: score,
