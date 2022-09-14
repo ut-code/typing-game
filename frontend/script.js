@@ -2,10 +2,13 @@ let questions = []; // 問題
 // 問題をquestionsに格納
 async function getQuestions() {
   // JSON形式でmain.jsから受信
-  const response = await fetch("/questions", {
-    method: "post",
-    headers: { "Content-Type": "application/json" },
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_API_ENDPOINT}/questions`,
+    {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
   // テキストを取り出し、objectに
   questions = JSON.parse(await response.text());
 
@@ -61,7 +64,7 @@ function calcScore(time, correct, miss) {
 async function finished(time, correct, miss) {
   let score = calcScore(time, correct, miss);
   const json = JSON.stringify({ time: time, score: score });
-  await fetch("/finished", {
+  await fetch(`${import.meta.env.VITE_API_ENDPOINT}/finished`, {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: json,

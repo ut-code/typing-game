@@ -5,10 +5,11 @@ const prisma = new PrismaClient();
 const express = require("express");
 const ejs = require("ejs");
 const fs = require("fs");
+const cors = require("cors");
 
 const app = express();
 
-app.use(express.static("dist"));
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
