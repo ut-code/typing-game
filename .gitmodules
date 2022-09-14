@@ -1,0 +1,3 @@
+[submodule "keyboard-layout-maker"]
+	path = keyboard-layout-maker
+	url = git@github.com:chvmvd/keyboard-layout-maker.git
