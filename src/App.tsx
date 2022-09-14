@@ -61,8 +61,10 @@ export default function App(): JSX.Element {
     <>
     <div>{content}</div>
     <div>{toJapanese(content)}</div>
-    <ReadJSONFile f={(x)=>{functionalLayoutType.custom=x}}></ReadJSONFile>
-    <ReadJSONFile f={(x)=>{physicalLayoutType.custom=x}}></ReadJSONFile>
+    <span>論理配列</span>
+    <ReadJSONFile f={(x)=>{functionalLayoutType.custom=x}}></ReadJSONFile><br />
+    <span>物理配列</span>
+    <ReadJSONFile f={(x)=>{physicalLayoutType.custom=x}}></ReadJSONFile><br />
       <select
         value={functional}
         onChange={(e) => setFunctional(e.target.value)}
