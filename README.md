@@ -2,6 +2,22 @@
 
 駒場祭のタイピングゲーム
 
+### Nodeのインストール
+
+[ut.code(); Learn](https://learn.utcode.net/docs/web-servers/node-js/)を参照
+
+### Nodeのアップデート
+
+```
+nvm install --lts
+```
+
+### npmのアップデート
+
+```
+npm install -g npm
+```
+
 ### セットアップ
 
 1. `$ npm install`
