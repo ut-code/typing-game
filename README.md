@@ -20,6 +20,12 @@ npm install -g npm
 
 ### セットアップ
 
+1. プロジェクトフォルダに移動
+
+1. `$ git clone git@github.com:ut-code/typing-game.git`
+
+1. `$ cd typing-game`
+
 1. `$ npm install`
 
 1. `.env` ファイルを設定
