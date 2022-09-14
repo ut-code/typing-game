@@ -5,13 +5,10 @@ const prisma = new PrismaClient();
 const express = require("express");
 const ejs = require("ejs");
 const fs = require("fs");
-const cors =require("cors");
 
 const app = express();
 
-app.use(cors()); // https://github.com/ut-code/typescript-react-node-template/blob/master/backend/main.ts 参照
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("dist"));
 app.use(express.json());
 
 // データベースからPrismaで問題をとってくる
