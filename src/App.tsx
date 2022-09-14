@@ -4,7 +4,8 @@ import eventCode from "./components/data/eventCode.json";
 import qwerty from "./components/data/qwerty.json";
 import dvorak from "./components/data/dvorak.json";
 import romantable from "./romantable.json";
-const functionalLayoutType = { qwerty, dvorak };
+import ReadJSONFile from "./../keyboard-layout-maker/src/components/ReadJSONFile";
+const functionalLayoutType = { qwerty, dvorak,custom:qwerty };
 
 
 function pressed(keyColors:string[],setKeyColors:(value:string[])=>void,code:string,content:string,setContent:(value:string)=>void,functional:string):void{
@@ -59,12 +60,14 @@ export default function App(): JSX.Element {
     <>
     <div>{content}</div>
     <div>{toJapanese(content)}</div>
+    <ReadJSONFile f={(x)=>{functionalLayoutType.custom=x}}></ReadJSONFile>
       <select
         value={functional}
         onChange={(e) => setFunctional(e.target.value)}
       >
         <option value="qwerty">QWERTY</option>
         <option value="dvorak">Dvorak</option>
+        <option value="custom">Custom</option>
       </select>
       <select value={physical} onChange={(e) => setPhysical(e.target.value)}>
         <option value="jis109">JIS109</option>
@@ -77,6 +80,7 @@ export default function App(): JSX.Element {
         pressed={pressed}
         content={content}
         setContent={setContent}
+        keyLayout={functionalLayoutType.custom}
       ></Keyboard>
     </>
   );
