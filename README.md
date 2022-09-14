@@ -41,7 +41,9 @@ npm install -g npm
 
 ## サーバの起動(ビルドも自動実行)
 
-1. `$ npm run demo`
+```
+$ npm run demo
+```
 
 ## ディレクトリ構成
 
