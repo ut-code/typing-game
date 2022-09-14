@@ -1,6 +1,6 @@
 {
-  "marginRow": 1,
-  "marginColumn": 1,
+  "marginRow": 0.1,
+  "marginColumn": 0.1,
   "height": 1,
   "eventCode": {
     "Esc": {

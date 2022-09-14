@@ -157,6 +157,35 @@ function Functional() {
   );
 }
 
+function physicalKeyToObject(
+  marginRow: number,
+  marginColumn: number,
+  height: number,
+  rows: number[],
+  columns: number[],
+  widths: number[],
+  styles: string[]
+) {
+  let object = {};
+  Object.assign(object, {
+    marginRow: marginRow,
+    marginColumn: marginColumn,
+    height: height,
+    eventCode: {},
+  });
+  for (let i = 0; i < eventCode.length; i++) {
+    Object.assign(object.eventCode, {
+      [eventCode[i]]: {
+        row: rows[i],
+        column: columns[i],
+        width: widths[i],
+        style: styles[i],
+      },
+    });
+  }
+  return object;
+}
+
 function Physical() {
   const [marginRow, setMarginRow] = useState<number>(jis109.marginRow);
   const [marginColumn, setMarginColumn] = useState<number>(jis109.marginColumn);
@@ -176,6 +205,19 @@ function Physical() {
   const [fileName, setFileName] = useState<string>("");
   return (
     <>
+      <Keyboard
+        functional="qwerty"
+        physical="custom"
+        physicalKeyLayout={physicalKeyToObject(
+          marginRow,
+          marginColumn,
+          height,
+          rows,
+          columns,
+          widths,
+          styles
+        )}
+      ></Keyboard>
       <ReadJSONFile
         f={(x) => {
           setMarginRow(x.marginRow);
@@ -259,24 +301,18 @@ function Physical() {
       <GetFileName fileName={fileName} setFileName={setFileName}></GetFileName>
       <ConfirmButton
         f={() => {
-          let object = {};
-          Object.assign(object, {
-            marginRow: marginRow,
-            marginColumn: marginColumn,
-            height: height,
-            eventCode: {},
-          });
-          for (let i = 0; i < eventCode.length; i++) {
-            Object.assign(object.eventCode, {
-              [eventCode[i]]: {
-                row: rows[i],
-                column: columns[i],
-                width: widths[i],
-                style: styles[i],
-              },
-            });
-          }
-          makeJSONFile(object, fileName);
+          makeJSONFile(
+            physicalKeyToObject(
+              marginRow,
+              marginColumn,
+              height,
+              rows,
+              columns,
+              widths,
+              styles
+            ),
+            fileName
+          );
         }}
       ></ConfirmButton>
     </>

@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .git
+keyboard
 
 # Editor directories and files
 .vscode/*
