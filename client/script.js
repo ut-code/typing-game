@@ -81,7 +81,7 @@ async function getQuestions() {
       word_num++;
       answer = "";
       cnt = 0;
-      if (word_num === questions.length) finished(time);
+      if (word_num === questions.length) finished(time, correct, miss);
     }
     if (e.code === "Space" && isStarted === false) {
       // スペースが押されたら、時間計測
@@ -107,8 +107,13 @@ async function getQuestions() {
 }
 getQuestions();
 
-async function finished(time) {
-  const json = JSON.stringify({ time: time });
+function calcScore(time, correct, miss) {
+  return 100 - Math.floor(((time * miss) / correct) * 10);
+}
+
+async function finished(time, correct, miss) {
+  let score = calcScore(time, correct, miss);
+  const json = JSON.stringify({ time: time, score: score });
   await fetch("/finished", {
     method: "post",
     headers: { "Content-Type": "application/json" },
