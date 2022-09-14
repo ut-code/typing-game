@@ -5,8 +5,9 @@ import qwerty from "./components/data/qwerty.json";
 import dvorak from "./components/data/dvorak.json";
 import romantable from "./romantable.json";
 import ReadJSONFile from "./../keyboard-layout-maker/src/components/ReadJSONFile";
+import jis109 from "./components/data/JIS109.json"
 const functionalLayoutType = { qwerty, dvorak,custom:qwerty };
-
+const physicalLayoutType = { jis109,custom:jis109 };
 
 function pressed(keyColors:string[],setKeyColors:(value:string[])=>void,code:string,content:string,setContent:(value:string)=>void,functional:string):void{
   // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
@@ -61,6 +62,7 @@ export default function App(): JSX.Element {
     <div>{content}</div>
     <div>{toJapanese(content)}</div>
     <ReadJSONFile f={(x)=>{functionalLayoutType.custom=x}}></ReadJSONFile>
+    <ReadJSONFile f={(x)=>{physicalLayoutType.custom=x}}></ReadJSONFile>
       <select
         value={functional}
         onChange={(e) => setFunctional(e.target.value)}
@@ -71,6 +73,7 @@ export default function App(): JSX.Element {
       </select>
       <select value={physical} onChange={(e) => setPhysical(e.target.value)}>
         <option value="jis109">JIS109</option>
+        <option value="custom">Custom</option>
       </select>
       <Keyboard
         functional={functional}
@@ -81,6 +84,7 @@ export default function App(): JSX.Element {
         content={content}
         setContent={setContent}
         keyLayout={functionalLayoutType.custom}
+        physicalKeyLayout={physicalLayoutType.custom}
       ></Keyboard>
     </>
   );
