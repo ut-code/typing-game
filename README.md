@@ -25,19 +25,29 @@ npm install -g npm
 
 ## セットアップ
 
-1. プロジェクトフォルダに移動
+プロジェクトフォルダに移動
 
-1. `$ git clone git@github.com:ut-code/typing-game.git`
+```
+$ git clone git@github.com:ut-code/typing-game.git
+```
 
-1. `$ cd typing-game`
+```
+$ cd typing-game
+```
 
-1. `$ npm install`
+```
+$ npm install
+```
 
-1. `$ touch .env`
+```
+$ touch .env
+```
 
-1. `.env` ファイルを設定
+`.env` ファイルを設定
 
-1. `$ npx prisma db push`
+```
+$ npx prisma db push
+```
 
 ## サーバの起動(ビルドも自動実行)
 
