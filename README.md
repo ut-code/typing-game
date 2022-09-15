@@ -49,7 +49,7 @@ $ npm install
 ```
 
 ```
-$ echo `DATABASE_URL=""\n` > .env
+$ echo 'DATABASE_URL=""' > .env
 ```
 
 `.env` ファイルに `DATABASE_URL="データベースのURL"` と書く。
