@@ -2,44 +2,96 @@
 
 駒場祭のタイピングゲーム
 
-### Nodeのインストール
+## Node のインストール
 
 [ut.code(); Learn](https://learn.utcode.net/docs/web-servers/node-js/)を参照
 
-### Nodeのアップデート
+### アップデート
+
+#### Node のアップデート
 
 ```
 nvm install --lts
 ```
 
-### npmのアップデート
+#### npm のアップデート
 
 ```
 npm install -g npm
 ```
 
-### セットアップ
+## Git と GitHub のセットアップ
 
-1. プロジェクトフォルダに移動
+[ut.code(); Learn](https://learn.utcode.net/docs/web-servers/git-github/)を参照
 
-1. `$ git clone git@github.com:ut-code/typing-game.git`
+## セットアップ
 
-1. `$ cd typing-game`
+プロジェクトフォルダに移動
 
-1. `$ npm install`
+```
+$ git clone git@github.com:ut-code/typing-game.git
+```
 
-1. `.env` ファイルを設定
+```
+$ cd typing-game/frontend
+```
 
-1. `$ npx prisma db push`
+```
+$ npm install
+```
 
-### サーバの起動(ビルドも自動実行)
+```
+cd ../backend
+```
 
-1. `$ npm run demo`
+```
+$ npm install
+```
 
-### ディレクトリ構成
+```
+$ echo 'DATABASE_URL=""' > .env
+```
+
+`.env` ファイルに `DATABASE_URL="データベースのURL"` と書く。
+
+```
+$ npx prisma db push
+```
+
+## サーバの起動(ビルドも自動実行)
+
+`typing-game` ディレクトリに移動
+
+```
+$ cd backend
+```
+
+```
+$ npm run dev
+```
+
+`Terminal` をもう一つ開く
+
+`typing-game` ディレクトリに移動
+
+```
+$ cd frontend
+```
+
+```
+$ npm run dev
+```
+
+ブラウザで [`http://127.0.0.1:5173/`](http://127.0.0.1:5173/) にアクセスすると、表示されるはずです。
+
+## ディレクトリ構成
 
 - `/root`
-  - `/client` フロントエンド関係
-  - `/server` バックエンド関係
-  - `/prisma` Prisma のファイル
-  - `/dist` `$ npm run demo` を実行すると、自動で作られる。編集はしない。
+  - `/frontend` フロントエンド関係
+    - `index.html`,`style.css`,`script.js`がメイン 基本的にはここをいじる。
+    - `/dist` `$ npm run dev` を実行すると、自動で作られる。編集はしない。
+  - `/backend` バックエンド関係
+    - `main.js` メイン
+    - `finished.ejs` 結果ページ
+    - `/prisma` Prisma のファイル
+  - `/keyboard`,`/keyboard-layout-maker` サブモジュール これらのフォルダの中は別のリポジトリになっている。

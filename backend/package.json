@@ -1,11 +1,12 @@
 {
-  "name": "typing-game",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "駒場祭のタイピングゲーム",
-  "main": "index.js",
+  "description": "backend",
+  "main": "main.js",
   "scripts": {
-    "prepare": "husky install",
-    "format": "npx prettier --write ."
+    "dev": "node main.js",
+    "build": "",
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
@@ -17,12 +18,13 @@
     "url": "https://github.com/ut-code/typing-game/issues"
   },
   "homepage": "https://github.com/ut-code/typing-game#readme",
-  "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+  "dependencies": {
+    "@prisma/client": "^4.3.1",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1"
   },
   "devDependencies": {
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
-    "prettier": "2.7.1"
+    "prisma": "^4.3.1"
   }
 }

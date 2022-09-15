@@ -1,59 +1,14 @@
-// ここからキーボード配列の操作
-import eventCode from "./eventCode.json";
-import qwerty from "./qwerty.json";
-import dvorak from "./dvorak.json";
-const qwertyNewRow = [
-  "Backquote",
-  "Tab",
-  "CapsLock",
-  "ShiftLeft",
-  "ControlLeft",
-];
-const dvorakNewRow = [
-  "Backquote",
-  "Tab",
-  "CapsLock",
-  "ShiftLeft",
-  "ControlLeft",
-];
-const keyLayout = {
-  qwerty: { layout: qwerty, newRow: qwertyNewRow },
-  dvorak: { layout: dvorak, newRow: dvorakNewRow },
-};
-
-let keyLayoutType = document.getElementById("keyLayout").value;
-const convert = (e) => {
-  return keyLayout[keyLayoutType].layout[e.code].toLowerCase();
-};
-const keyboard = document.getElementById("keyboard");
-let tr = document.createElement("tr");
-for (const code of eventCode) {
-  if (
-    code === keyLayout[keyLayoutType].newRow[0] ||
-    code === keyLayout[keyLayoutType].newRow[1] ||
-    code === keyLayout[keyLayoutType].newRow[2] ||
-    code === keyLayout[keyLayoutType].newRow[3] ||
-    code === keyLayout[keyLayoutType].newRow[4]
-  ) {
-    keyboard.appendChild(tr);
-    tr = document.createElement("tr");
-  }
-  const td = document.createElement("td");
-  td.textContent = keyLayout[keyLayoutType].layout[code];
-  td.id = code;
-  tr.appendChild(td);
-}
-keyboard.appendChild(tr);
-// ここまでキーボード配列の操作
-
 let questions = []; // 問題
 // 問題をquestionsに格納
 async function getQuestions() {
   // JSON形式でmain.jsから受信
-  const response = await fetch("/questions", {
-    method: "post",
-    headers: { "Content-Type": "application/json" },
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_API_ENDPOINT}/questions`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
+    {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
   // テキストを取り出し、objectに
   questions = JSON.parse(await response.text());
 
@@ -67,12 +22,12 @@ async function getQuestions() {
 
   window.addEventListener("keydown", (e) => {
     // 何かキーが押されたら、実行 https://developer.mozilla.org/ja/docs/Web/API/Element/keydown_event
-    if (convert(e) === questions[word_num][cnt]) {
+    if (e.key === questions[word_num][cnt]) {
       // 正答時
-      answer = answer + convert(e);
+      answer = answer + e.key;
       cnt++;
       correct++;
-    } else if (convert(e).length === 1) {
+    } else if (65 <= e.keyCode && e.keyCode <= 90) {
       // 不正解の時
       miss++;
     }
@@ -83,7 +38,7 @@ async function getQuestions() {
       cnt = 0;
       if (word_num === questions.length) finished(time, correct, miss);
     }
-    if (e.code === "Space" && isStarted === false) {
+    if (e.key === " " && isStarted === false) {
       // スペースが押されたら、時間計測
       isStarted = true;
       setInterval(() => {
@@ -98,11 +53,6 @@ async function getQuestions() {
       "ミスタイプ数：" + miss + "回";
     document.getElementById("correct").textContent =
       "正しいタイプ数：" + correct + "回";
-    // キーボードの色を変える
-    document.getElementById(e.code).style.backgroundColor = "red";
-    setTimeout(() => {
-      document.getElementById(e.code).style.backgroundColor = "white";
-    }, 100);
   });
 }
 getQuestions();
@@ -114,12 +64,16 @@ function calcScore(time, correct, miss) {
 async function finished(time, correct, miss) {
   let score = calcScore(time, correct, miss);
   const json = JSON.stringify({ time: time, score: score });
-  await fetch("/finished", {
-    method: "post",
-    headers: { "Content-Type": "application/json" },
-    body: json,
-  });
-  window.location.href = "/finished";
+  const response = await fetch(
+    `${import.meta.env.VITE_API_ENDPOINT}/finished`,
+    {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: json,
+    }
+  );
+  const html = await response.text();
+  document.body.innerHTML = html;
 }
 
 let answer = ""; // 現在の到達状況

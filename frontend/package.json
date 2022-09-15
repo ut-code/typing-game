@@ -1,0 +1,22 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "frontend",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ut-code/typing-game.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ut-code/typing-game/issues"
+  },
+  "homepage": "https://github.com/ut-code/typing-game#readme",
+  "dependencies": {
+    "vite": "^3.1.0"
+  }
+}

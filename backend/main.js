@@ -5,11 +5,12 @@ const prisma = new PrismaClient();
 const express = require("express");
 const ejs = require("ejs");
 const fs = require("fs");
+const cors = require("cors"); // https://github.com/ut-code/typescript-react-node-template/blob/master/backend/main.ts を参照
 
 const app = express();
 
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("dist"));
 app.use(express.json());
 
 // データベースからPrismaで問題をとってくる
@@ -27,31 +28,29 @@ app.post("/questions", async (request, response) => {
   response.json(questions);
 });
 
-let time;
-let score;
 // データベースからPrismaでランキングをとってくる
 async function getRanking() {
-  const records = await prisma.ranking.findMany();
+  const records = await prisma.ranking.findMany({
+    orderBy: {
+      score: "desc",
+    },
+  });
   return records;
 }
 
-async function submitScore() {
+async function submitScore(score) {
   const submission = await prisma.ranking.create({
     data: { score: score },
   });
   return submission;
 }
 
-app.post("/finished", (request, response) => {
-  time = request.body.time;
-  score = request.body.score;
-  response.send();
-});
-
-app.get("/finished", async (request, response) => {
-  const submission = await submitScore();
+app.post("/finished", async (request, response) => {
+  const time = request.body.time;
+  const score = request.body.score;
+  const submission = await submitScore(score);
   const records = await getRanking();
-  const template = fs.readFileSync("./server/finished.ejs", "utf-8");
+  const template = fs.readFileSync("./finished.ejs", "utf-8");
   const html = ejs.render(template, {
     time: time,
     score: score,
