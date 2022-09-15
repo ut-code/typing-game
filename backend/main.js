@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // データベースからPrismaで問題をとってくる
-async function getQuestion() {
+async function getQuestions() {
   const records = await prisma.questions.findMany();
   return records;
 }
@@ -22,7 +22,7 @@ async function getQuestion() {
 //
 app.post("/questions", async (request, response) => {
   // questionsに問題が配列の形で入っている。
-  const records = await getQuestion();
+  const records = await getQuestions();
   const questions = records.map((data) => data.question);
   // JSON形式でscript.jsに送信
   response.json(questions);
