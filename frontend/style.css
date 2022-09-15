@@ -40,12 +40,3 @@ body {
   text-align: right;
   width: 50px;
 }
-
-#keyboard td {
-  --normal-size: 20px;
-  border: 1px solid black;
-  width: var(--normal-size);
-  height: var(--normal-size);
-  text-align: center;
-  font-size: 8px;
-}
