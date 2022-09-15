@@ -74,7 +74,6 @@ async function finished(time, correct, miss) {
   );
   const html = await response.text();
   document.body.innerHTML = html;
-  // window.location.href = "/finished";
 }
 
 let answer = ""; // 現在の到達状況

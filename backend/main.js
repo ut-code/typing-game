@@ -28,8 +28,6 @@ app.post("/questions", async (request, response) => {
   response.json(questions);
 });
 
-let time;
-let score;
 // データベースからPrismaでランキングをとってくる
 async function getRanking() {
   const records = await prisma.ranking.findMany({
@@ -48,8 +46,8 @@ async function submitScore() {
 }
 
 app.post("/finished", async (request, response) => {
-  time = request.body.time;
-  score = request.body.score;
+  const time = request.body.time;
+  const score = request.body.score;
   const submission = await submitScore();
   const records = await getRanking();
   const template = fs.readFileSync("./finished.ejs", "utf-8");
@@ -59,19 +57,6 @@ app.post("/finished", async (request, response) => {
     listItems: records,
   });
   response.send(html);
-  // response.send();
 });
-
-// app.get("/finished", async (request, response) => {
-//   const submission = await submitScore();
-//   const records = await getRanking();
-//   const template = fs.readFileSync("./backend/finished.ejs", "utf-8");
-//   const html = ejs.render(template, {
-//     time: time,
-//     score: score,
-//     listItems: records,
-//   });
-//   response.send(html);
-// });
 
 app.listen(3000);
