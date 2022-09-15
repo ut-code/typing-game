@@ -10,13 +10,13 @@
 
 #### Node のアップデート
 
-```
+```shell
 nvm install --lts
 ```
 
 #### npm のアップデート
 
-```
+```shell
 npm install -g npm
 ```
 
@@ -28,58 +28,58 @@ npm install -g npm
 
 プロジェクトフォルダに移動
 
-```
-$ git clone git@github.com:ut-code/typing-game.git
-```
-
-```
-$ cd typing-game/frontend
+```shell
+git clone git@github.com:ut-code/typing-game.git
 ```
 
-```
-$ npm install
+```shell
+cd typing-game/frontend
 ```
 
+```shell
+npm install
 ```
+
+```shell
 cd ../backend
 ```
 
-```
-$ npm install
+```shell
+npm install
 ```
 
-```
-$ echo 'DATABASE_URL=""' > .env
+```shell
+echo 'DATABASE_URL=""' > .env
 ```
 
 `.env` ファイルに `DATABASE_URL="データベースのURL"` と書く。
 
-```
-$ npx prisma db push
+```shell
+npx prisma db push
 ```
 
 ## サーバの起動(ビルドも自動実行)
 
 `typing-game` ディレクトリに移動
 
-```
-$ cd backend
+```shell
+cd backend
 ```
 
-```
-$ npm run dev
+```shell
+npm run dev
 ```
 
 `Terminal` をもう一つ開く
 
 `typing-game` ディレクトリに移動
 
-```
-$ cd frontend
+```shell
+cd frontend
 ```
 
-```
-$ npm run dev
+```shell
+npm run dev
 ```
 
 ブラウザで [`http://127.0.0.1:5173/`](http://127.0.0.1:5173/) にアクセスすると、表示されるはずです。
