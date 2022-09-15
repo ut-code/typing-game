@@ -64,12 +64,17 @@ function calcScore(time, correct, miss) {
 async function finished(time, correct, miss) {
   let score = calcScore(time, correct, miss);
   const json = JSON.stringify({ time: time, score: score });
-  await fetch(`${import.meta.env.VITE_API_ENDPOINT}/finished`, {
-    method: "post",
-    headers: { "Content-Type": "application/json" },
-    body: json,
-  });
-  window.location.href = "/finished";
+  const response = await fetch(
+    `${import.meta.env.VITE_API_ENDPOINT}/finished`,
+    {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: json,
+    }
+  );
+  const html = await response.text();
+  document.body.innerHTML = html;
+  // window.location.href = "/finished";
 }
 
 let answer = ""; // 現在の到達状況

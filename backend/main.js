@@ -47,22 +47,31 @@ async function submitScore() {
   return submission;
 }
 
-app.post("/finished", (request, response) => {
+app.post("/finished", async (request, response) => {
   time = request.body.time;
   score = request.body.score;
-  response.send();
-});
-
-app.get("/finished", async (request, response) => {
   const submission = await submitScore();
   const records = await getRanking();
-  const template = fs.readFileSync("./backend/finished.ejs", "utf-8");
+  const template = fs.readFileSync("./finished.ejs", "utf-8");
   const html = ejs.render(template, {
     time: time,
     score: score,
     listItems: records,
   });
   response.send(html);
+  // response.send();
 });
+
+// app.get("/finished", async (request, response) => {
+//   const submission = await submitScore();
+//   const records = await getRanking();
+//   const template = fs.readFileSync("./backend/finished.ejs", "utf-8");
+//   const html = ejs.render(template, {
+//     time: time,
+//     score: score,
+//     listItems: records,
+//   });
+//   response.send(html);
+// });
 
 app.listen(3000);
