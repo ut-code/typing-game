@@ -90,6 +90,7 @@ npm run dev
   - `/frontend` フロントエンド関係
     - `index.html`,`style.css`,`script.js`がメイン 基本的にはここをいじる。
     - `/dist` `$ npm run dev` を実行すると、自動で作られる。編集はしない。
+    - `/src` React 用のフォルダ ここからサブモジュールに追加したキーボードを読み込んでいる。
   - `/backend` バックエンド関係
     - `main.js` メイン
     - `finished.ejs` 結果ページ
