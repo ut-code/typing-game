@@ -28,10 +28,19 @@ body {
 }
 
 #keyboard td {
-  --normal-size: 20px;
+  --normal-size: 30px;
   border: 1px solid black;
   width: var(--normal-size);
   height: var(--normal-size);
   text-align: center;
   font-size: 8px;
+  background: #ffffff;
+}
+
+#keyboard {
+  margin: 30px auto;
+}
+
+#keyLayout {
+  margin: auto;
 }
