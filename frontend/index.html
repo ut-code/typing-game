@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-    <meta charset="utf-8" />
-    <title>Typing Game</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <title>タイピングゲーム</title>
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <div id="elements">
       <p id="mondai">問題</p>
       <p id="question">スペースキーを押して開始</p>
-      <table id="kaito">
+      <table id="answer">
         <th id="header">あなたの答え</th>
-        <td id="answer"></td>
+        <td id="your-answer"></td>
       </table>
-      <p id="correct"></p>
-      <p id="miss"></p>
-      <p id="time"></p>
+      <table id="result">
+        <tr>
+          <td class="title">正しいタイプ数：</td>
+          <td id="correct"></td>
+        </tr>
+        <tr>
+          <td class="title">ミスタイプ数：</td>
+          <td id="miss"></td>
+        </tr>
+        <tr>
+          <td class="title">経過時間：</td>
+          <td id="time"></td>
+        </tr>
+      </table>
     </div>
     <script type="module" src="./script.js"></script>
   </body>

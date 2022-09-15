@@ -48,7 +48,7 @@ async function getQuestions() {
       }, 1000);
     }
     document.getElementById("question").textContent = questions[word_num];
-    document.getElementById("answer").textContent = answer;
+    document.getElementById("your-answer").textContent = answer;
     document.getElementById("miss").textContent =
       "ミスタイプ数：" + miss + "回";
     document.getElementById("correct").textContent =
@@ -81,7 +81,6 @@ let cnt = 0; // 何文字目か
 let isStarted = false; // 始まったか
 let time = 0; // 時間
 
-document.getElementById("miss").textContent = "ミスタイプ数：" + miss + "回";
-document.getElementById("correct").textContent =
-  "正しいタイプ数：" + correct + "回";
-document.getElementById("time").textContent = "経過時間：" + time + "秒";
+document.getElementById("correct").textContent = correct + "回";
+document.getElementById("miss").textContent = miss + "回";
+document.getElementById("time").textContent = time + "秒";
