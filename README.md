@@ -49,10 +49,10 @@ $ npm install
 ```
 
 ```
-$ touch .env
+$ echo `DATABASE_URL=""\n` > .env
 ```
 
-`.env` ファイルに `DATABASE_URL=データベースのURL` と書く。
+`.env` ファイルに `DATABASE_URL="データベースのURL"` と書く。
 
 ```
 $ npx prisma db push
