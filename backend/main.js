@@ -38,7 +38,7 @@ async function getRanking() {
   return records;
 }
 
-async function submitScore() {
+async function submitScore(score) {
   const submission = await prisma.ranking.create({
     data: { score: score },
   });
@@ -48,7 +48,7 @@ async function submitScore() {
 app.post("/finished", async (request, response) => {
   const time = request.body.time;
   const score = request.body.score;
-  const submission = await submitScore();
+  const submission = await submitScore(score);
   const records = await getRanking();
   const template = fs.readFileSync("./finished.ejs", "utf-8");
   const html = ejs.render(template, {
