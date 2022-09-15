@@ -63,7 +63,7 @@ $ npx prisma db push
 `typing-game` ディレクトリに移動
 
 ```
-$ cd frontend
+$ cd backend
 ```
 
 ```
