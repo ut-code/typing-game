@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const express = require("express");
 const ejs = require("ejs");
 const fs = require("fs");
-const cors = require("cors");
+const cors = require("cors"); // https://github.com/ut-code/typescript-react-node-template/blob/master/backend/main.ts を参照
 
 const app = express();
 

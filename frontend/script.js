@@ -3,7 +3,7 @@ let questions = []; // 問題
 async function getQuestions() {
   // JSON形式でmain.jsから受信
   const response = await fetch(
-    `${import.meta.env.VITE_API_ENDPOINT}/questions`,
+    `${import.meta.env.VITE_API_ENDPOINT}/questions`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
     {
       method: "post",
       headers: { "Content-Type": "application/json" },
