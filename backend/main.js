@@ -45,12 +45,12 @@ async function submitScore(score) {
   return submission;
 }
 
-app.post("/finished", async (request, response) => {
+app.post("/results", async (request, response) => {
   const time = request.body.time;
   const score = request.body.score;
   const submission = await submitScore(score);
   const records = await getRanking();
-  const template = fs.readFileSync("./finished.ejs", "utf-8");
+  const template = fs.readFileSync("./results.ejs", "utf-8");
   const html = ejs.render(template, {
     time: time,
     score: score,
