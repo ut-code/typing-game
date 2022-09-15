@@ -49,10 +49,10 @@ $ npm install
 ```
 
 ```
-$ touch .env
+$ echo 'DATABASE_URL=""' > .env
 ```
 
-`.env` ファイルに `DATABASE_URL=データベースのURL` と書く。
+`.env` ファイルに `DATABASE_URL="データベースのURL"` と書く。
 
 ```
 $ npx prisma db push
@@ -63,7 +63,7 @@ $ npx prisma db push
 `typing-game` ディレクトリに移動
 
 ```
-$ cd frontend
+$ cd backend
 ```
 
 ```
@@ -82,7 +82,7 @@ $ cd frontend
 $ npm run dev
 ```
 
-ブラウザで `http://127.0.0.1:5173/` にアクセスすると、表示されるはずです。
+ブラウザで [`http://127.0.0.1:5173/`](http://127.0.0.1:5173/) にアクセスすると、表示されるはずです。
 
 ## ディレクトリ構成
 
