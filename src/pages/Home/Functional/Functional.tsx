@@ -8,6 +8,7 @@ import GetManySettings from "./../../../components/GetManySettings";
 import GetFileName from "./../../../components/GetFileName";
 import ConfirmButton from "./../../../components/ConfirmButton";
 import makeJSONFile from "./../../../components/makeJSONFile";
+import BackToHome from "../../../components/BackToHome";
 import "./functional.css";
 import "./../keyboard.css";
 
@@ -60,6 +61,7 @@ export default function Functional() {
           makeJSONFile(keyToObject(keys), fileName);
         }}
       ></ConfirmButton>
+      <BackToHome></BackToHome>
     </>
   );
 }

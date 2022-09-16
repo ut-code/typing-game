@@ -8,6 +8,7 @@ import GetManySettings from "./../../../components/GetManySettings";
 import GetFileName from "./../../../components/GetFileName";
 import makeJSONFile from "./../../../components/makeJSONFile";
 import ConfirmButton from "./../../../components/ConfirmButton";
+import BackToHome from "../../../components/BackToHome";
 import "./physical.css";
 import "./../keyboard.css";
 
@@ -201,6 +202,7 @@ export default function Physical() {
           );
         }}
       ></ConfirmButton>
+      <BackToHome></BackToHome>
     </>
   );
 }
