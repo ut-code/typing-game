@@ -1,4 +1,4 @@
-import React from "react"; // ,{useRef}
+// import React from "react"; // ,{useRef}
 import eventCode from "./data/eventCode.json";
 import qwerty from "./data/qwerty.json";
 import dvorak from "./data/dvorak.json";
@@ -18,14 +18,16 @@ const physicalLayoutType = { jis109,custom:jis109 };
  * @returns `width` と `jis109.eventCode.marginColumn` の合計
  */
 function sumWidth(row: number, column: number):number {
+  // @ts-ignore
   let sum = physicalLayoutType[physicalLayout].marginColumn;
   let j = 0;
   for (const code of eventCode) {
-    if (
+    if (// @ts-ignore
       physicalLayoutType[physicalLayout].eventCode[code].row === row &&
+      // @ts-ignore
       physicalLayoutType[physicalLayout].eventCode[code].column < column
     ) {
-      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+      // @ts-ignore
       sum += physicalLayoutType[physicalLayout].eventCode[code].width + physicalLayoutType[physicalLayout].marginColumn;
       j++;
     }
@@ -41,7 +43,7 @@ function sumWidth(row: number, column: number):number {
  */
 function sumHeight(row: number):number {
   return (
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+    // @ts-ignore
     physicalLayoutType[physicalLayout].marginRow + (physicalLayoutType[physicalLayout].height + physicalLayoutType[physicalLayout].marginRow) * (row - 1)
   );
 }
@@ -81,9 +83,9 @@ export default function Keyboard({
 
   functionalLayout = functional;
   physicalLayout = physical;
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  // @ts-ignore
   functionalLayoutType.custom=keyLayout!;
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  // @ts-ignore
   physicalLayoutType.custom=physicalKeyLayout!;
   // const fontSize=0.015; // vw/100
   return (
@@ -94,17 +96,19 @@ export default function Keyboard({
             key={code}
             id={code}
             className="key"
+            // @ts-ignore
             onClick={()=>pressed(keyColors,setKeyColors,code,content,setContent,functional)}
             style={{
               position: "absolute",
+              // @ts-ignore
               backgroundColor: keyColors[i],
-              top:
+              top:// @ts-ignore
                 `${sumHeight(physicalLayoutType[physicalLayout].eventCode[code].row) * magnification}vw`,
-              left:
+              left:// @ts-ignore
                 `${sumWidth(physicalLayoutType[physicalLayout].eventCode[code].row,physicalLayoutType[physicalLayout].eventCode[code].column) * magnification}vw`,
-              width:
+              width:// @ts-ignore
               `${physicalLayoutType[physicalLayout].eventCode[code].width * magnification}vw`,
-              height:
+              height:// @ts-ignore
                 `${physicalLayoutType[physicalLayout].height * magnification}vw`,
             }}
             // ref={dom=>{
@@ -121,6 +125,7 @@ export default function Keyboard({
             //   //   dom.fontSize=dom.fontSize-1;
             //   // }
           >
+            {/* @ts-ignore */}
             {functionalLayoutType[functionalLayout][code]}
           </div>
         ))}

@@ -10,7 +10,7 @@ const functionalLayoutType = { qwerty, dvorak,custom:qwerty };
 const physicalLayoutType = { jis109,custom:jis109 };
 
 function pressed(keyColors:string[],setKeyColors:(value:string[])=>void,code:string,content:string,setContent:(value:string)=>void,functional:string):void{
-  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+  // @ts-ignore
   setContent((content: string)=>content+functionalLayoutType[functional][code]);
   setKeyColors(
     eventCode.map((tmp, i) =>
@@ -62,8 +62,10 @@ export default function App(): JSX.Element {
     <div>{content}</div>
     <div>{toJapanese(content)}</div>
     <span>論理配列</span>
+    {/* @ts-ignore */}
     <ReadJSONFile f={(x)=>{functionalLayoutType.custom=x}}></ReadJSONFile><br />
     <span>物理配列</span>
+    {/* @ts-ignore */}
     <ReadJSONFile f={(x)=>{physicalLayoutType.custom=x}}></ReadJSONFile><br />
       <select
         value={functional}

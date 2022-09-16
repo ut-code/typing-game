@@ -1,11 +1,13 @@
 import {useState,useEffect} from "react";
 
-export default function useWindowDimensions():object{
-    function getWindowDimensions():object{
+type WindowDimensions={width:number,height:number};
+
+export default function useWindowDimensions():WindowDimensions{
+    function getWindowDimensions():WindowDimensions{
         const {innerWidth:width,innerHeight:height}=window;
         return {width,height};
     }
-    const [windowDimensions,setWindowDimensions]=useState<object>(getWindowDimensions());
+    const [windowDimensions,setWindowDimensions]=useState<WindowDimensions>(getWindowDimensions());
     useEffect(()=>{
         function onResize():void{
             setWindowDimensions(getWindowDimensions());
