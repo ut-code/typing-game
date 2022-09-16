@@ -1,4 +1,3 @@
-import eventCode from "./../eventCode.json";
 /**
  * 確定ボタンのコンポーネントです。
  * @param f `onClick` 用の関数

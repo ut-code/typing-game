@@ -1,6 +1,6 @@
 import { useState } from "react";
-import eventCode from "./../eventCode.json";
-import jis109 from "./../JIS109.json";
+import eventCode from "./../../keyboard/src/components/data/eventCode.json";
+import jis109 from "./../../keyboard/src/components/data/JIS109.json";
 import Keyboard from "../../keyboard/src/components/keyboard";
 import ReadJSONFile from "./ReadJSONFile";
 import GetManySettings from "./GetManySettings";
