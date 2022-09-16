@@ -30,9 +30,8 @@ function sumWidth(row: number, column: number): number {
       // @ts-ignore
       physicalLayoutType[physicalLayout].eventCode[code].column < column
     ) {
-      // @ts-ignore
-      sum +=
-        physicalLayoutType[physicalLayout].eventCode[code].width +
+      sum += // @ts-ignore
+        physicalLayoutType[physicalLayout].eventCode[code].width + // @ts-ignore
         physicalLayoutType[physicalLayout].marginColumn;
       j++;
     }
@@ -49,8 +48,8 @@ function sumWidth(row: number, column: number): number {
 function sumHeight(row: number): number {
   return (
     // @ts-ignore
-    physicalLayoutType[physicalLayout].marginRow +
-    (physicalLayoutType[physicalLayout].height +
+    physicalLayoutType[physicalLayout].marginRow + // @ts-ignore
+    (physicalLayoutType[physicalLayout].height + // @ts-ignore
       physicalLayoutType[physicalLayout].marginRow) *
       (row - 1)
   );
@@ -113,9 +112,10 @@ export default function Keyboard({
             key={code}
             id={code}
             className="key"
-            // @ts-ignore
             onClick={() =>
+              // @ts-ignore
               pressed(
+                // @ts-ignore
                 keyColors,
                 setKeyColors,
                 code,
@@ -128,26 +128,27 @@ export default function Keyboard({
               position: "absolute",
               // @ts-ignore
               backgroundColor: keyColors[i],
-              // @ts-ignore
               top: `${
                 sumHeight(
+                  // @ts-ignore
                   physicalLayoutType[physicalLayout].eventCode[code].row
                 ) * magnification
               }vw`,
               // @ts-ignore
               left: `${
                 sumWidth(
-                  physicalLayoutType[physicalLayout].eventCode[code].row,
+                  // @ts-ignore
+                  physicalLayoutType[physicalLayout].eventCode[code].row, // @ts-ignore
                   physicalLayoutType[physicalLayout].eventCode[code].column
                 ) * magnification
               }vw`,
-              // @ts-ignore
               width: `${
+                // @ts-ignore
                 physicalLayoutType[physicalLayout].eventCode[code].width *
                 magnification
               }vw`,
-              // @ts-ignore
               height: `${
+                // @ts-ignore
                 physicalLayoutType[physicalLayout].height * magnification
               }vw`,
             }}

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React, { useState, useEffect } from "react";
 import Keyboard from "./components/keyboard";
@@ -19,8 +18,9 @@ function pressed(
   setContent: (value: string) => void,
   functional: string
 ): void {
-  // @ts-ignore
   setContent(
+    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     (content: string) => `${content}${functionalLayoutType[functional][code]}`
   );
   setKeyColors(
@@ -69,17 +69,17 @@ export default function App(): JSX.Element {
       <div>{content}</div>
       <div>{toJapanese(content)}</div>
       <span>論理配列</span>
-      {/* @ts-ignore */}
       <ReadJSONFile
         f={(x) => {
+          // @ts-ignore
           functionalLayoutType.custom = x;
         }}
       ></ReadJSONFile>
       <br />
       <span>物理配列</span>
-      {/* @ts-ignore */}
       <ReadJSONFile
         f={(x) => {
+          // @ts-ignore
           physicalLayoutType.custom = x;
         }}
       ></ReadJSONFile>
