@@ -4,12 +4,12 @@ import qwerty from "./data/qwerty.json";
 import dvorak from "./data/dvorak.json";
 import jis109 from "./data/JIS109.json";
 import "./keyboard.css";
+import useWindowDimensions from "./useWindowDimensions";
 
 let functionalLayout = "qwerty";
 const functionalLayoutType = { qwerty, dvorak,custom:qwerty };
 let physicalLayout = "jis109";
 const physicalLayoutType = { jis109,custom:jis109 };
-const magnification = 3;
 
 /**
  * `row` 行の `column` 列までの幅の合計を計算します。
@@ -76,6 +76,9 @@ export default function Keyboard({
   keyLayout?:object;
   physicalKeyLayout?:object;
 }):JSX.Element {
+  const {width,height}=useWindowDimensions();
+  const magnification=5.9*(width<650?1:650/width);
+
   functionalLayout = functional;
   physicalLayout = physical;
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
