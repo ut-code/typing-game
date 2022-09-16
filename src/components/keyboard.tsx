@@ -55,6 +55,19 @@ function sumHeight(row: number): number {
   );
 }
 
+function fontSize(keyName: string): string {
+  let cnt = 0;
+  for (let i = 0; i < keyName.length; i++) {
+    if (keyName.charCodeAt(i) < 256) cnt++;
+    else cnt += 2;
+  }
+  if (cnt === 1) return "one";
+  else if (cnt <= 3) return "three";
+  else if (cnt <= 4) return "four";
+  else if (cnt <= 6) return "six";
+  else return "inf";
+}
+
 Keyboard.defaultProps = {
   keyColors: "",
   setKeyColors: (value: string) => {},
@@ -111,7 +124,10 @@ export default function Keyboard({
           <div
             key={code}
             id={code}
-            className="key"
+            className={`key ${fontSize(
+              // @ts-ignore
+              functionalLayoutType[functionalLayout][code]
+            )}`}
             onClick={() =>
               // @ts-ignore
               pressed(
