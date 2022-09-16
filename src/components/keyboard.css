@@ -7,8 +7,8 @@
   align-items: center;
 }
 
-@media(min-width:650px){
-  /* 650以上はそのまま固定 */
+@media(min-width:850px){
+  /* 850以上はそのまま固定 */
   .key{
     border-radius: 1.3px;
     font-size: 9.75px;

@@ -77,7 +77,7 @@ export default function Keyboard({
   physicalKeyLayout?:object;
 }):JSX.Element {
   const {width,height}=useWindowDimensions();
-  const magnification=5.9*(width<650?1:650/width);
+  const magnification=5.8*(width<850?1:850/width);
 
   functionalLayout = functional;
   physicalLayout = physical;
