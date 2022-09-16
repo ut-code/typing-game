@@ -27,6 +27,7 @@ export default function GetManySettings<T extends string | number>({
       value={items[i]}
       onChange={(e) => {
         setItems(
+          // @ts-ignore
           items.map((item, j) =>
             i !== j
               ? item

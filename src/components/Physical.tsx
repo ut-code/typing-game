@@ -28,6 +28,7 @@ function physicalKeyToObject(
     eventCode: {},
   });
   for (let i = 0; i < eventCode.length; i++) {
+    // @ts-ignore
     Object.assign(object.eventCode, {
       [eventCode[i]]: {
         row: rows[i],
@@ -45,15 +46,19 @@ export default function Physical() {
   const [marginColumn, setMarginColumn] = useState<number>(jis109.marginColumn);
   const [height, setHeight] = useState<number>(jis109.height);
   const [rows, setRows] = useState<number[]>(
+    // @ts-ignore
     eventCode.map((code) => jis109.eventCode[code].row)
   );
   const [columns, setColumns] = useState<number[]>(
+    // @ts-ignore
     eventCode.map((code) => jis109.eventCode[code].column)
   );
   const [widths, setWidths] = useState<number[]>(
+    // @ts-ignore
     eventCode.map((code) => jis109.eventCode[code].width)
   );
   const [styles, setStyles] = useState<string[]>(
+    // @ts-ignore
     eventCode.map((code) => jis109.eventCode[code].style)
   );
   const [fileName, setFileName] = useState<string>("");
@@ -75,12 +80,19 @@ export default function Physical() {
       <div className="box"></div>
       <ReadJSONFile
         f={(x: object) => {
+          // @ts-ignore
           setMarginRow(x.marginRow);
+          // @ts-ignore
           setMarginColumn(x.marginColumn);
+          // @ts-ignore
           setHeight(x.height);
+          // @ts-ignore
           setRows(eventCode.map((code) => x.eventCode[code].row));
+          // @ts-ignore
           setColumns(eventCode.map((code) => x.eventCode[code].column));
+          // @ts-ignore
           setWidths(eventCode.map((code) => x.eventCode[code].width));
+          // @ts-ignore
           setStyles(eventCode.map((code) => x.eventCode[code].style));
         }}
       ></ReadJSONFile>

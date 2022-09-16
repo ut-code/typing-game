@@ -21,6 +21,7 @@ function keyToObject(keys: string[]): object {
 
 export default function Functional() {
   const [keys, setKeys] = useState<string[]>(
+    // @ts-ignore
     eventCode.map((code) => qwerty[code])
   );
   const [fileName, setFileName] = useState<string>("");
@@ -34,6 +35,7 @@ export default function Functional() {
       <div className="box"></div>
       <ReadJSONFile
         f={(x: object) => {
+          // @ts-ignore
           setKeys(eventCode.map((code) => x[code]));
         }}
       ></ReadJSONFile>
