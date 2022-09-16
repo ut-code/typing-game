@@ -7,7 +7,8 @@ import EventCode from "./eventCode.d.ts";
 import makeJSONFile from "./components/makeJSONFile";
 import ReadJSONFile from "./components/ReadJSONFile";
 import Keyboard from "./../keyboard/src/components/keyboard";
-import "./App.css";
+import "./keyboard.css";
+import "./physical.css";
 
 export default function App() {
   return (

@@ -1,0 +1,32 @@
+/* 画面が十分大きい時 */
+th {
+  font-size: 15px;
+  text-align: left;
+}
+
+.row,
+.column,
+.width {
+  width: 50px;
+}
+
+.style {
+  width: 200px;
+}
+
+/* input要素が収まらない時、 */
+@media (max-width: 510px) {
+  th {
+    display: block;
+  }
+  td {
+    display: block;
+  }
+
+  .row,
+  .column,
+  .width,
+  .style {
+    width: auto;
+  }
+}
