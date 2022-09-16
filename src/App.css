@@ -1,5 +1,63 @@
+/* 画面が十分大きい時 */
+/* キーボード */
 #keyboard {
-  left: 40%;
-  top: 20%;
+  left: 510px;
   position: fixed;
+}
+
+/* input要素 */
+th {
+  font-size: 15px;
+  text-align: left;
+}
+
+.row,
+.column,
+.width {
+  width: 50px;
+}
+
+.style {
+  width: 200px;
+}
+
+/* キーボードを上側に表示 */
+@media (max-width: 1340px) {
+  #keyboard {
+    top: 0;
+    left: 0;
+    background-color: white;
+    width: 100vw;
+    height: 330px;
+  }
+  #box {
+    height: 340px;
+  }
+}
+
+/* キーボードの大きさが小さくなり始めた時 */
+@media (max-width: 850px) {
+  #keyboard {
+    height: 39vw;
+  }
+  #box {
+    height: 40vw;
+  }
+}
+
+/* input要素が収まらない時、 */
+@media (max-width: 510px) {
+  th {
+    display: block;
+  }
+  td {
+    display: block;
+  }
+
+  .row,
+  .column,
+  .width,
+  .style {
+    width: auto;
+  }
 }

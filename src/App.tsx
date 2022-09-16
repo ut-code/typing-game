@@ -69,23 +69,23 @@ function GetManySettings<T extends string | number>({
   items,
   setItems,
   i,
+  className,
   min,
-  style,
   placeholder,
 }: {
   type: "string" | "number";
   items: T[];
   setItems: (value: T[]) => void;
   i: number;
+  className?: string;
   min?: number;
-  style?: object;
   placeholder?: string;
 }) {
   return (
     <input
       type={type === "string" ? "text" : "number"}
+      className={className}
       min={min}
-      style={style}
       placeholder={placeholder}
       value={items[i]}
       onChange={(e) => {
@@ -218,6 +218,7 @@ function Physical() {
           styles
         )}
       ></Keyboard>
+      <div id="box"></div>
       <ReadJSONFile
         f={(x) => {
           setMarginRow(x.marginRow);
@@ -229,75 +230,94 @@ function Physical() {
           setStyles(eventCode.map((code) => x.eventCode[code].style));
         }}
       ></ReadJSONFile>
-      <div>
-        margin-row
-        <input
-          type="number"
-          value={marginRow}
-          onChange={(e) => {
-            setMarginRow(e.target.valueAsNumber);
-          }}
-        />
-      </div>
-      <div>
-        margin-column
-        <input
-          type="number"
-          value={marginColumn}
-          onChange={(e) => {
-            setMarginColumn(e.target.valueAsNumber);
-          }}
-        />
-      </div>
-      <div>
-        height
-        <input
-          type="number"
-          value={height}
-          onChange={(e) => {
-            setHeight(e.target.valueAsNumber);
-          }}
-        />
-      </div>
-      {eventCode.map((code, i) => (
-        <div key={code}>
-          {code}
-          <GetManySettings<number>
-            type="number"
-            min={0}
-            style={{ width: "80px" }}
-            placeholder="row"
-            items={rows}
-            setItems={setRows}
-            i={i}
-          ></GetManySettings>
-          <GetManySettings<number>
-            type="number"
-            min={0}
-            style={{ width: "80px" }}
-            placeholder="column"
-            items={columns}
-            setItems={setColumns}
-            i={i}
-          ></GetManySettings>
-          <GetManySettings<number>
-            type="number"
-            min={0}
-            style={{ width: "80px" }}
-            placeholder="width"
-            items={widths}
-            setItems={setWidths}
-            i={i}
-          ></GetManySettings>
-          <GetManySettings<string>
-            type="string"
-            placeholder="style"
-            items={styles}
-            setItems={setStyles}
-            i={i}
-          ></GetManySettings>
-        </div>
-      ))}
+      <table>
+        <tr>
+          <th>margin-row</th>
+          <td>
+            <input
+              type="number"
+              value={marginRow}
+              onChange={(e) => {
+                setMarginRow(e.target.valueAsNumber);
+              }}
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>margin-column</th>
+          <td>
+            <input
+              type="number"
+              value={marginColumn}
+              onChange={(e) => {
+                setMarginColumn(e.target.valueAsNumber);
+              }}
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>height</th>
+          <td>
+            <input
+              type="number"
+              value={height}
+              onChange={(e) => {
+                setHeight(e.target.valueAsNumber);
+              }}
+            />
+          </td>
+        </tr>
+      </table>
+      <table>
+        {eventCode.map((code, i) => (
+          <tr key={code}>
+            <th>{code}</th>
+            <td>
+              <GetManySettings<number>
+                type="number"
+                min={0}
+                className="row"
+                placeholder="row"
+                items={rows}
+                setItems={setRows}
+                i={i}
+              ></GetManySettings>
+            </td>
+            <td>
+              <GetManySettings<number>
+                type="number"
+                min={0}
+                className="column"
+                placeholder="column"
+                items={columns}
+                setItems={setColumns}
+                i={i}
+              ></GetManySettings>
+            </td>
+            <td>
+              <GetManySettings<number>
+                type="number"
+                min={0}
+                className="width"
+                placeholder="width"
+                items={widths}
+                setItems={setWidths}
+                i={i}
+              ></GetManySettings>
+            </td>
+            <td>
+              <GetManySettings<string>
+                type="string"
+                className="style"
+                placeholder="style"
+                items={styles}
+                setItems={setStyles}
+                i={i}
+              ></GetManySettings>
+            </td>
+          </tr>
+        ))}
+      </table>
       <GetFileName fileName={fileName} setFileName={setFileName}></GetFileName>
       <ConfirmButton
         f={() => {
