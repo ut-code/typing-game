@@ -9,6 +9,7 @@ import ReadJSONFile from "./components/ReadJSONFile";
 import Keyboard from "./../keyboard/src/components/keyboard";
 import "./keyboard.css";
 import "./physical.css";
+import "./functional.css";
 
 export default function App() {
   return (
@@ -132,22 +133,27 @@ function Functional() {
         physical="jis109"
         keyLayout={keyToObject(keys)}
       ></Keyboard>
+      <div className="box"></div>
       <ReadJSONFile
         f={(x: EventCode) => {
           setKeys(eventCode.map((code) => x[code]));
         }}
       ></ReadJSONFile>
-      {eventCode.map((code, i) => (
-        <div key={code}>
-          {code}
-          <GetManySettings<string>
-            type="string"
-            items={keys}
-            setItems={setKeys}
-            i={i}
-          ></GetManySettings>
-        </div>
-      ))}
+      <table>
+        {eventCode.map((code, i) => (
+          <tr key={code}>
+            <th>{code}</th>
+            <td>
+              <GetManySettings<string>
+                type="string"
+                items={keys}
+                setItems={setKeys}
+                i={i}
+              ></GetManySettings>
+            </td>
+          </tr>
+        ))}
+      </table>
       <GetFileName fileName={fileName} setFileName={setFileName}></GetFileName>
       <ConfirmButton
         f={() => {
@@ -219,7 +225,7 @@ function Physical() {
           styles
         )}
       ></Keyboard>
-      <div id="box"></div>
+      <div className="box"></div>
       <ReadJSONFile
         f={(x) => {
           setMarginRow(x.marginRow);

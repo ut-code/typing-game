@@ -13,7 +13,7 @@
     width: 100vw;
     height: 330px;
   }
-  #box {
+  .box {
     height: 340px;
   }
 }
@@ -23,7 +23,7 @@
   #keyboard {
     height: 39vw;
   }
-  #box {
+  .box {
     height: 40vw;
   }
 }
