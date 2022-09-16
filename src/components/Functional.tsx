@@ -1,4 +1,5 @@
 import { useState } from "react";
+import EventCode from "./../../keyboard/src/components/data/eventCode";
 import eventCode from "./../../keyboard/src/components/data/eventCode.json";
 import qwerty from "../../keyboard/src/components/data/qwerty.json";
 import Keyboard from "../../keyboard/src/components/keyboard";
@@ -32,7 +33,7 @@ export default function Functional() {
       ></Keyboard>
       <div className="box"></div>
       <ReadJSONFile
-        f={(x: EventCode) => {
+        f={(x: object) => {
           setKeys(eventCode.map((code) => x[code]));
         }}
       ></ReadJSONFile>

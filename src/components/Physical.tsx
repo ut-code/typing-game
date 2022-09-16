@@ -1,4 +1,5 @@
 import { useState } from "react";
+import EventCode from "./../../keyboard/src/components/data/eventCode";
 import eventCode from "./../../keyboard/src/components/data/eventCode.json";
 import jis109 from "./../../keyboard/src/components/data/JIS109.json";
 import Keyboard from "../../keyboard/src/components/keyboard";
@@ -73,7 +74,7 @@ export default function Physical() {
       ></Keyboard>
       <div className="box"></div>
       <ReadJSONFile
-        f={(x) => {
+        f={(x: object) => {
           setMarginRow(x.marginRow);
           setMarginColumn(x.marginColumn);
           setHeight(x.height);

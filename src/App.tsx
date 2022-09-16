@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import EventCode from "./eventCode.d.ts";
 import Home from "./components/Home";
 import Functional from "./components/Functional";
 import Physical from "./components/Physical";
