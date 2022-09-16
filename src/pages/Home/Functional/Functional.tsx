@@ -1,15 +1,15 @@
 import { useState } from "react";
-import EventCode from "./../../keyboard/src/components/data/eventCode";
-import eventCode from "./../../keyboard/src/components/data/eventCode.json";
-import qwerty from "../../keyboard/src/components/data/qwerty.json";
-import Keyboard from "../../keyboard/src/components/keyboard";
-import ReadJSONFile from "./ReadJSONFile";
-import GetManySettings from "./GetManySettings";
-import GetFileName from "./GetFileName";
-import ConfirmButton from "./ConfirmButton";
-import makeJSONFile from "./makeJSONFile";
+import EventCode from "./../../../../keyboard/src/components/data/eventCode";
+import eventCode from "./../../../../keyboard/src/components/data/eventCode.json";
+import qwerty from "../../../../keyboard/src/components/data/qwerty.json";
+import Keyboard from "../../../../keyboard/src/components/keyboard";
+import ReadJSONFile from "./../../../components/ReadJSONFile";
+import GetManySettings from "./../../../components/GetManySettings";
+import GetFileName from "./../../../components/GetFileName";
+import ConfirmButton from "./../../../components/ConfirmButton";
+import makeJSONFile from "./../../../components/makeJSONFile";
 import "./functional.css";
-import "./keyboard.css";
+import "./../keyboard.css";
 
 function keyToObject(keys: string[]): object {
   let object = {};

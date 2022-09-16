@@ -9,9 +9,9 @@ export default function Home() {
         </p>
       </main>
       <nav>
-        <Link to="/physical">物理配列</Link>
-        <br />
         <Link to="/functional">論理配列</Link>
+        <br />
+        <Link to="/physical">物理配列</Link>
       </nav>
     </>
   );

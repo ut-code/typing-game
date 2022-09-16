@@ -1,15 +1,15 @@
 import { useState } from "react";
-import EventCode from "./../../keyboard/src/components/data/eventCode";
-import eventCode from "./../../keyboard/src/components/data/eventCode.json";
-import jis109 from "./../../keyboard/src/components/data/JIS109.json";
-import Keyboard from "../../keyboard/src/components/keyboard";
-import ReadJSONFile from "./ReadJSONFile";
-import GetManySettings from "./GetManySettings";
-import GetFileName from "./GetFileName";
-import makeJSONFile from "./makeJSONFile";
-import ConfirmButton from "./ConfirmButton";
+import EventCode from "./../../../../keyboard/src/components/data/eventCode";
+import eventCode from "./../../../../keyboard/src/components/data/eventCode.json";
+import jis109 from "./../../../../keyboard/src/components/data/JIS109.json";
+import Keyboard from "../../../../keyboard/src/components/keyboard";
+import ReadJSONFile from "./../../../components/ReadJSONFile";
+import GetManySettings from "./../../../components/GetManySettings";
+import GetFileName from "./../../../components/GetFileName";
+import makeJSONFile from "./../../../components/makeJSONFile";
+import ConfirmButton from "./../../../components/ConfirmButton";
 import "./physical.css";
-import "./keyboard.css";
+import "./../keyboard.css";
 
 function physicalKeyToObject(
   marginRow: number,
