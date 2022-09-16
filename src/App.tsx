@@ -11,7 +11,7 @@ const physicalLayoutType = { jis109,custom:jis109 };
 
 function pressed(keyColors:string[],setKeyColors:(value:string[])=>void,code:string,content:string,setContent:(value:string)=>void,functional:string):void{
   // @ts-ignore
-  setContent((content: string)=>content+functionalLayoutType[functional][code]);
+  setContent((content: string)=>`${content}${functionalLayoutType[functional][code]}`);
   setKeyColors(
     eventCode.map((tmp, i) =>
       tmp === code ? "orange" : keyColors[i]
