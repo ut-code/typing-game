@@ -68,24 +68,15 @@ function fontSize(keyName: string): string {
   else return "inf";
 }
 
-Keyboard.defaultProps = {
-  keyColors: "",
-  setKeyColors: (value: string) => {},
-  pressed: () => {},
-  content: "",
-  setContent: (value: string) => {},
-  keyLayout: qwerty,
-};
-
 export default function Keyboard({
   functional,
   physical,
-  keyColors,
-  setKeyColors,
-  pressed,
-  content,
-  setContent,
-  keyLayout,
+  keyColors = [],
+  setKeyColors = (value: string[]) => {},
+  pressed = () => {},
+  content = "",
+  setContent = (value: string) => {},
+  keyLayout = qwerty,
   physicalKeyLayout,
 }: {
   functional: string;
@@ -111,12 +102,9 @@ export default function Keyboard({
   functionalLayout = functional;
   physicalLayout = physical;
   // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  functionalLayoutType.custom = keyLayout!;
+  functionalLayoutType.custom = keyLayout;
   // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  physicalLayoutType.custom = physicalKeyLayout!;
-  // const fontSize=0.015; // vw/100
+  physicalLayoutType.custom = physicalKeyLayout;
   return (
     <>
       <div id="keyboard">
