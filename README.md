@@ -4,18 +4,18 @@
 
 ### Installation
 
-```
-$ npm install
+```shell
+npm install
 ```
 
 ### Local Development
 
-```
-$ npm run dev
+```shell
+npm run dev
 ```
 
 ### Build
 
-```
-$ npm run build
+```shell
+npm run build
 ```
