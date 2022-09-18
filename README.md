@@ -37,7 +37,7 @@ git submodule update --init --recursive
 ```
 
 ```shell
-echo 'DATABASE_URL=""' > .env
+echo 'DATABASE_URL=""' > backend/.env
 ```
 
 `.env` ファイルに `DATABASE_URL="データベースのURL"` と書く。
