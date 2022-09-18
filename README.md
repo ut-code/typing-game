@@ -51,11 +51,7 @@ npm run setup
 `typing-game` ディレクトリに移動
 
 ```shell
-cd backend
-```
-
-```shell
-npm run dev
+npm run backend:dev
 ```
 
 `Terminal` をもう一つ開く
@@ -63,11 +59,7 @@ npm run dev
 `typing-game` ディレクトリに移動
 
 ```shell
-cd frontend
-```
-
-```shell
-npm run dev
+npm run frontend:dev
 ```
 
 ブラウザで [`http://127.0.0.1:5173/`](http://127.0.0.1:5173/) にアクセスすると、表示されるはずです。
