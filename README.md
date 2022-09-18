@@ -37,6 +37,10 @@ git submodule update --init --recursive
 ```
 
 ```shell
+npm install
+```
+
+```shell
 cd typing-game/frontend
 ```
 
