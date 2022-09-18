@@ -41,6 +41,10 @@ npm install
 ```
 
 ```shell
+git submodule update --init --recursive
+```
+
+```shell
 cd ../backend
 ```
 
