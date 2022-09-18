@@ -4,7 +4,8 @@
   "scripts": {
     "prepare": "husky install",
     "format": "npx prettier --write .",
-    "setup": "npm run setup:env && npm run setup:install",
+    "setup": "npm run setup:install",
+    "setup:env": "echo 'DATABASE_URL=\"\"' > backend/.env",
     "setup:install": "npm install && npm run frontend:install && npm run backend:install",
     "frontend:install": "cd frontend && npm install",
     "backend:install": "cd backend && npm install",
