@@ -7,7 +7,9 @@
     "setup": "npm run setup:env && npm run setup:install",
     "setup:install": "npm install && npm run frontend:install && npm run backend:install",
     "frontend:install": "cd frontend && npm install",
-    "backend:install": "cd backend && npm install"
+    "backend:install": "cd backend && npm install",
+    "frontend/dev": "cd frontend && npm run dev",
+    "backend/dev": "cd backend && npm run dev"
   },
   "repository": {
     "type": "git",
