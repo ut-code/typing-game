@@ -37,33 +37,13 @@ git submodule update --init --recursive
 ```
 
 ```shell
-npm install
-```
-
-```shell
-cd typing-game/frontend
-```
-
-```shell
-npm install
-```
-
-```shell
-cd ../backend
-```
-
-```shell
-npm install
-```
-
-```shell
-echo 'DATABASE_URL=""' > .env
+echo 'DATABASE_URL=""' > backend/.env
 ```
 
 `.env` ファイルに `DATABASE_URL="データベースのURL"` と書く。
 
 ```shell
-npx prisma db push
+npm run setup
 ```
 
 ## サーバの起動(ビルドも自動実行)
