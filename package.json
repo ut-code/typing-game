@@ -3,7 +3,12 @@
   "description": "駒場祭のタイピングゲーム",
   "scripts": {
     "prepare": "husky install",
-    "format": "npx prettier --write ."
+    "format": "npx prettier --write .",
+    "setup": "npm run setup:env && npm run setup:install",
+    "setup:env": "echo 'DATABASE_URL=\"\"' > .env",
+    "setup:install": "npm run install && npm run frontend:install && npm run backend:install",
+    "frontend:install": "cd frontend && npm run install",
+    "backend:install": "cd backend && npm run install"
   },
   "repository": {
     "type": "git",
