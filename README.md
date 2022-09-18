@@ -33,6 +33,10 @@ git clone git@github.com:ut-code/typing-game.git
 ```
 
 ```shell
+cd typing-game
+```
+
+```shell
 npm run setup:env
 ```
 
