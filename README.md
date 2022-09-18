@@ -33,6 +33,14 @@ git clone git@github.com:ut-code/typing-game.git
 ```
 
 ```shell
+git submodule update --init --recursive
+```
+
+```shell
+npm install
+```
+
+```shell
 cd typing-game/frontend
 ```
 
