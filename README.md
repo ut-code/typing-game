@@ -33,15 +33,15 @@ git clone git@github.com:ut-code/typing-game.git
 ```
 
 ```shell
+git submodule update --init --recursive
+```
+
+```shell
 cd typing-game/frontend
 ```
 
 ```shell
 npm install
-```
-
-```shell
-git submodule update --init --recursive
 ```
 
 ```shell
