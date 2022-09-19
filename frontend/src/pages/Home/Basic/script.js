@@ -51,6 +51,34 @@ export default function script() {
     //シャッフルする
     questions = shuffle(questions);
 
+    const alphabet = [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j",
+      "k",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z",
+    ];
     const observer = new MutationObserver(() => {
       const content = document.getElementById("content").textContent;
       const key = content[content.length - 1];
@@ -59,7 +87,7 @@ export default function script() {
         answer = answer + key;
         cnt++;
         correct++;
-      } else if (true) {
+      } else if (alphabet.includes(key.toLowerCase())) {
         // 不正解の時
         miss++;
       }
@@ -86,7 +114,7 @@ export default function script() {
 
     // 何かキーが押されたら、実行 https://developer.mozilla.org/ja/docs/Web/API/Element/keydown_event
     window.addEventListener("keydown", (e) => {
-      if (e.key === " ") e.preventDefault(); // キーボードの既定の動作を無効化 https://developer.mozilla.org/ja/docs/Web/API/Event/preventDefault を参照
+      if (e.key !== "F5" && e.key !== "F12") e.preventDefault(); // キーボードの既定の動作を無効化 https://developer.mozilla.org/ja/docs/Web/API/Event/preventDefault を参照
       if (e.key === " " && isStarted === false) {
         document.getElementById("question").textContent = questions[word_num];
         // スペースが押されたら、時間計測
