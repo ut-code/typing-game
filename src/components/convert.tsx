@@ -36,7 +36,7 @@ export function convert(
         shift = true;
         break;
       case "Back Space":
-        ans = content.slice(0, -1);
+        ans += ""; // ans = content.slice(0, -1);
         break;
       default:
         ans += "";
