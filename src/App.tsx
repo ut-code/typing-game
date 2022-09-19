@@ -49,7 +49,11 @@ function toJapanese(content: string): string {
   return ans;
 }
 
-export default function App(): JSX.Element {
+export default function App({
+  element = <></>,
+}: {
+  element?: JSX.Element;
+}): JSX.Element {
   const [functional, setFunctional] = useState<string>("qwerty");
   const [physical, setPhysical] = useState<string>("jis109");
   const [keyColors, setKeyColors] = useState<string[]>(
@@ -69,6 +73,7 @@ export default function App(): JSX.Element {
     <>
       <div id="wrapper">
         <div id="settings">
+          {element}
           <div>{content}</div>
           <div>{toJapanese(content)}</div>
           <span>論理配列</span>
