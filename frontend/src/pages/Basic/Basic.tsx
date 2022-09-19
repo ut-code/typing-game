@@ -112,48 +112,59 @@ export default function Basic() {
           <!-- ここからstyleタグ -->
         <style>
         body {
-            background-color: #eeeeee;
-          }
-          #elements {
-            background: #ffffff;
-            width: 500px;
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #cccccc;
-            margin: 30px auto;
-          }
-          #mondai {
-            font-size: 25px;
-            margin: 10px auto;
-          }
-          #question {
-            font-size: 30px;
-            background-color: rgb(210, 232, 144);
-            margin: 20px auto;
-          }
-          #answer {
-            font-size: 20px;
-            border-spacing: 50px 10px;
-          }
-          #answer #header {
-            font-weight: normal;
-          }
-          #answer #your-answer {
-            background-color: khaki;
-          }
-          #result {
-            font-size: 15px;
-            border-spacing: 50px 0px;
-          }
-          #result th {
-            font-weight: normal;
-            text-align: right;
-          }
-          #result td {
-            text-align: right;
-            width: 50px;
-          }
-          </style>
+          background-color: #eeeeee;
+        }
+        #elements {
+          background: #ffffff;
+          width: 500px;
+          padding: 15px;
+          text-align: center;
+          border: 1px solid #cccccc;
+          margin: 10px auto;
+        }
+        #mondai {
+          font-size: 25px;
+          margin: 10px auto;
+        }
+        #question {
+          font-size: 30px;
+          background-color: rgb(210, 232, 144);
+          margin: 20px auto;
+        }
+        #answer {
+          font-size: 20px;
+          border-spacing: 50px 10px;
+        }
+        #answer #header {
+          font-weight: normal;
+        }
+        #answer #your-answer {
+          background-color: khaki;
+        }
+        
+        #keyboard td {
+          --normal-size: 30px;
+          border: 1px solid black;
+          width: var(--normal-size);
+          height: var(--normal-size);
+          text-align: center;
+          font-size: 8px;
+          background: #ffffff;
+        }
+        
+        #result {
+          font-size: 15px;
+          border-spacing: 50px 0px;
+        }
+        #result th {
+          font-weight: normal;
+          text-align: right;
+        }
+        #result td {
+          text-align: right;
+          width: 50px;
+        }
+        </style>
           <!-- ここから、HTMLファイル -->
         <div id="elements">
               <p id="mondai">問題</p>
