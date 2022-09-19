@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React, { useState, useEffect } from "react";
 import Keyboard from "./components/keyboard";
+import {keyup,convert} from "./components/convert";
 import eventCode from "./components/data/eventCode.json";
 import qwerty from "./components/data/qwerty.json";
 import dvorak from "./components/data/dvorak.json";
@@ -12,7 +13,7 @@ import "./App.css";
 const functionalLayoutType = { qwerty, dvorak, custom: qwerty };
 const physicalLayoutType = { jis109, custom: jis109 };
 
-function pressed(
+function keydown(
   keyColors: string[],
   setKeyColors: (value: string[]) => void,
   code: string,
@@ -22,8 +23,7 @@ function pressed(
 ): void {
   setContent(
     // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    (content: string) => `${content}${functionalLayoutType[functional][code]}`
+    (content: string) => convert(code,functional,functionalLayoutType,content)
   );
   setKeyColors(
     eventCode.map((tmp, i) => (tmp === code ? "orange" : keyColors[i]))
@@ -64,11 +64,16 @@ export default function App({
   const [content, setContent] = useState<string>("");
   useEffect(() => {
     function tmp(e: KeyboardEvent): void {
-      pressed(keyColors, setKeyColors, e.code, content, setContent, functional);
+      keydown(keyColors, setKeyColors, e.code, content, setContent, functional);
+    }
+    function temp(e:KeyboardEvent):void{
+      keyup(e.code);
     }
     window.addEventListener("keydown", tmp);
+    window.addEventListener("keyup",temp);
     return () => {
       window.removeEventListener("keydown", tmp);
+      window.removeEventListener("keyup",temp);
     };
   }, [functional]);
   if (output !== undefined)
@@ -78,7 +83,7 @@ export default function App({
       <div id="wrapper">
         <div id="settings">
           {element}
-          <div>{content}</div>
+          {content}
           <div>{toJapanese(content)}</div>
           <span>論理配列</span>
           <ReadJSONFile
@@ -117,7 +122,7 @@ export default function App({
           physical={physical}
           keyColors={keyColors}
           setKeyColors={setKeyColors}
-          pressed={pressed}
+          pressed={keydown}
           content={content}
           setContent={setContent}
           keyLayout={functionalLayoutType.custom}
