@@ -141,17 +141,6 @@ export default function Basic() {
         #answer #your-answer {
           background-color: khaki;
         }
-        
-        #keyboard td {
-          --normal-size: 30px;
-          border: 1px solid black;
-          width: var(--normal-size);
-          height: var(--normal-size);
-          text-align: center;
-          font-size: 8px;
-          background: #ffffff;
-        }
-        
         #result {
           font-size: 15px;
           border-spacing: 50px 0px;
