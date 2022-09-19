@@ -34,7 +34,7 @@ body {
   font-size: 15px;
   border-spacing: 4vw 0vw;
 }
-#result p {
+thead th {
   font-size: 20px;
 }
 #result th {

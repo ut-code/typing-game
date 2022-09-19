@@ -23,10 +23,15 @@ export default function Basic() {
               </tr>
             </tbody>
           </table>
+          <div id="hoge">a</div>
         </div>
         <div>
           <table id="result">
-            <p>結果</p>
+            <thead>
+              <tr>
+                <th>結果</th>
+              </tr>
+            </thead>
             <tbody>
               <tr>
                 <th>正しいタイプ数：</th>
@@ -53,6 +58,7 @@ export default function Basic() {
             に飛んでください。
           </>
         }
+        output="hoge"
       />
     </>
   );
