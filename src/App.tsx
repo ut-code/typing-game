@@ -78,7 +78,7 @@ export default function App({
     };
   }, [functional]);
   if (output !== undefined && document.getElementById(output) !== null)
-    document.getElementById(output)!.textContent = content.slice(-1, 0);
+    document.getElementById(output)!.textContent = content[content.length - 1];
   return (
     <>
       <div id="wrapper">
