@@ -45,3 +45,6 @@ thead th {
   text-align: right;
   width: 3vw;
 }
+#content {
+  display: none;
+}

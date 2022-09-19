@@ -51,37 +51,32 @@ export default function script() {
     //シャッフルする
     questions = shuffle(questions);
 
-    let count = 0;
     const observer = new MutationObserver(() => {
       const content = document.getElementById("content").textContent;
       const key = content[content.length - 1];
-      count++;
-      if (count % 2 === 0 && isStarted) {
-        count = 0;
-        if (key === questions[word_num][cnt]) {
-          // 正答時
-          answer = answer + key;
-          cnt++;
-          correct++;
-        } else if (true) {
-          // 不正解の時
-          miss++;
-        }
-        if (cnt == questions[word_num].length) {
-          // 次の問題へ
-          word_num++;
-          answer = "";
-          cnt = 0;
-          if (word_num === questions.length) {
-            clearInterval(timerId);
-            results(time, correct, miss);
-          }
-        }
-        document.getElementById("question").textContent = questions[word_num];
-        document.getElementById("your-answer").textContent = answer;
-        document.getElementById("miss").textContent = miss + "回";
-        document.getElementById("correct").textContent = correct + "回";
+      if (key === questions[word_num][cnt]) {
+        // 正答時
+        answer = answer + key;
+        cnt++;
+        correct++;
+      } else if (true) {
+        // 不正解の時
+        miss++;
       }
+      if (cnt == questions[word_num].length) {
+        // 次の問題へ
+        word_num++;
+        answer = "";
+        cnt = 0;
+        if (word_num === questions.length) {
+          clearInterval(timerId);
+          results(time, correct, miss);
+        }
+      }
+      document.getElementById("question").textContent = questions[word_num];
+      document.getElementById("your-answer").textContent = answer;
+      document.getElementById("miss").textContent = miss + "回";
+      document.getElementById("correct").textContent = correct + "回";
     });
     observer.observe(document.getElementById("content"), {
       attributes: true,
