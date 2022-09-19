@@ -53,9 +53,10 @@ export default function script() {
 
     let count = 0;
     const observer = new MutationObserver(() => {
-      const key = document.getElementById("key").textContent;
+      const content = document.getElementById("content").textContent;
+      const key = content[content.length - 1];
       count++;
-      if (count % 2 === 0) {
+      if (count % 2 === 0 && isStarted) {
         count = 0;
         if (key === questions[word_num][cnt]) {
           // 正答時
@@ -82,7 +83,7 @@ export default function script() {
         document.getElementById("correct").textContent = correct + "回";
       }
     });
-    observer.observe(document.getElementById("key"), {
+    observer.observe(document.getElementById("content"), {
       attributes: true,
       childList: true,
       subtree: true,
@@ -92,6 +93,7 @@ export default function script() {
     window.addEventListener("keydown", (e) => {
       if (e.key === " ") e.preventDefault(); // キーボードの既定の動作を無効化 https://developer.mozilla.org/ja/docs/Web/API/Event/preventDefault を参照
       if (e.key === " " && isStarted === false) {
+        document.getElementById("question").textContent = questions[word_num];
         // スペースが押されたら、時間計測
         isStarted = true;
         timerId = setInterval(() => {

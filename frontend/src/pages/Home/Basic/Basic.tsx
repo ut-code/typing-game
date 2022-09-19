@@ -5,12 +5,12 @@ import "./style.css";
 import script from "./script";
 
 export default function Basic() {
-  const [key, setKey] = useState<string>("a");
+  const [content, setContent] = useState<string>("a");
   useEffect(() => {
     script();
   }, []);
-  const hoge = document.getElementById("key");
-  if (hoge !== null) hoge.textContent = key;
+  const hoge = document.getElementById("content");
+  if (hoge !== null) hoge.textContent = content;
   return (
     <>
       {/* ここからHTMLファイル */}
@@ -52,7 +52,7 @@ export default function Basic() {
         </div>
       </div>
       {/* ここまでHTMLファイル */}
-      <div id="key"></div>
+      <div id="content"></div>
       <Keyboard
         element={
           <>
@@ -61,8 +61,8 @@ export default function Basic() {
             に飛んでください。
           </>
         }
-        output={key}
-        setOutput={setKey}
+        output={content}
+        setOutput={setContent}
       />
     </>
   );
