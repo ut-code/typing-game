@@ -15,22 +15,28 @@ export default function Basic() {
         <p id="mondai">問題</p>
         <p id="question">スペースキーを押して開始</p>
         <table id="answer">
-          <th id="header">あなたの答え</th>
-          <td id="your-answer"></td>
+          <tbody>
+            <tr>
+              <th id="header">あなたの答え</th>
+              <td id="your-answer"></td>
+            </tr>
+          </tbody>
         </table>
         <table id="result">
-          <tr>
-            <th>正しいタイプ数：</th>
-            <td id="correct"></td>
-          </tr>
-          <tr>
-            <th>ミスタイプ数：</th>
-            <td id="miss"></td>
-          </tr>
-          <tr>
-            <th>経過時間：</th>
-            <td id="time"></td>
-          </tr>
+          <tbody>
+            <tr>
+              <th>正しいタイプ数：</th>
+              <td id="correct"></td>
+            </tr>
+            <tr>
+              <th>ミスタイプ数：</th>
+              <td id="miss"></td>
+            </tr>
+            <tr>
+              <th>経過時間：</th>
+              <td id="time"></td>
+            </tr>
+          </tbody>
         </table>
       </div>
       {/* ここまでHTMLファイル */}
