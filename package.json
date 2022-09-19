@@ -1,11 +1,16 @@
 {
   "name": "typing-game",
-  "version": "1.0.0",
   "description": "駒場祭のタイピングゲーム",
-  "main": "index.js",
   "scripts": {
     "prepare": "husky install",
-    "format": "npx prettier --write ."
+    "format": "npx prettier --write .",
+    "setup": "npm run setup:install",
+    "setup:env": "echo 'DATABASE_URL=\"\"' > backend/.env",
+    "setup:install": "git submodule update --init --recursive && npm install && npm run frontend:install && npm run backend:install",
+    "frontend:install": "cd frontend && npm install",
+    "backend:install": "cd backend && npm install",
+    "frontend:dev": "cd frontend && npm run dev",
+    "backend:dev": "cd backend && npm run dev"
   },
   "repository": {
     "type": "git",

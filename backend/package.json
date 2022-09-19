@@ -1,7 +1,5 @@
 {
   "name": "backend",
-  "version": "1.0.0",
-  "description": "backend",
   "main": "main.js",
   "scripts": {
     "dev": "node main.js",

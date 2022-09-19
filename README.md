@@ -10,13 +10,13 @@
 
 #### Node のアップデート
 
-```
+```shell
 nvm install --lts
 ```
 
 #### npm のアップデート
 
-```
+```shell
 npm install -g npm
 ```
 
@@ -28,58 +28,38 @@ npm install -g npm
 
 プロジェクトフォルダに移動
 
-```
-$ git clone git@github.com:ut-code/typing-game.git
-```
-
-```
-$ cd typing-game/frontend
+```shell
+git clone git@github.com:ut-code/typing-game.git
 ```
 
-```
-$ npm install
-```
-
-```
-cd ../backend
+```shell
+cd typing-game
 ```
 
-```
-$ npm install
-```
-
-```
-$ echo 'DATABASE_URL=""' > .env
+```shell
+npm run setup:env
 ```
 
 `.env` ファイルに `DATABASE_URL="データベースのURL"` と書く。
 
-```
-$ npx prisma db push
+```shell
+npm run setup
 ```
 
 ## サーバの起動(ビルドも自動実行)
 
 `typing-game` ディレクトリに移動
 
-```
-$ cd backend
-```
-
-```
-$ npm run dev
+```shell
+npm run backend:dev
 ```
 
 `Terminal` をもう一つ開く
 
 `typing-game` ディレクトリに移動
 
-```
-$ cd frontend
-```
-
-```
-$ npm run dev
+```shell
+npm run frontend:dev
 ```
 
 ブラウザで [`http://127.0.0.1:5173/`](http://127.0.0.1:5173/) にアクセスすると、表示されるはずです。
@@ -90,6 +70,7 @@ $ npm run dev
   - `/frontend` フロントエンド関係
     - `index.html`,`style.css`,`script.js`がメイン 基本的にはここをいじる。
     - `/dist` `$ npm run dev` を実行すると、自動で作られる。編集はしない。
+    - `/src` React 用のフォルダ ここからサブモジュールに追加したキーボードを読み込んでいる。
   - `/backend` バックエンド関係
     - `main.js` メイン
     - `finished.ejs` 結果ページ

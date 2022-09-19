@@ -11,19 +11,21 @@ body {
 }
 #mondai {
   font-size: 25px;
+  margin: 10px auto;
 }
 #question {
   font-size: 30px;
   background-color: rgb(210, 232, 144);
-}
-#kaito {
-  font-size: 20px;
-  border-spacing: 50px 0px;
-}
-#header {
-  font-weight: normal;
+  margin: 20px auto;
 }
 #answer {
+  font-size: 20px;
+  border-spacing: 50px 10px;
+}
+#answer #header {
+  font-weight: normal;
+}
+#answer #your-answer {
   background-color: khaki;
 }
 
@@ -43,4 +45,17 @@ body {
 
 #keyLayout {
   margin: auto;
+}
+
+#result {
+  font-size: 15px;
+  border-spacing: 50px 0px;
+}
+#result th {
+  font-weight: normal;
+  text-align: right;
+}
+#result td {
+  text-align: right;
+  width: 50px;
 }
