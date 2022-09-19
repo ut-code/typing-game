@@ -22,7 +22,6 @@ export function convert(
   // @ts-ignore
   const key = functionalLayoutType[functional][code];
   let ans = content;
-  console.log(code);
   if (key === undefined) {
     ans += "";
   } else if (key.length === 1) {

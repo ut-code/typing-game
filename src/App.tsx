@@ -77,7 +77,7 @@ export default function App({
       window.removeEventListener("keyup", temp);
     };
   }, [functional]);
-  if (output !== undefined && output !== null)
+  if (output !== undefined && document.getElementById(output) !== null)
     document.getElementById(output)!.textContent = content;
   return (
     <>
