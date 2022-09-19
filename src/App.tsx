@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React, { useState, useEffect } from "react";
 import Keyboard from "./components/keyboard";
@@ -35,7 +36,6 @@ function pressed(
 }
 
 function toJapanese(content: string): string {
-  console.log(content);
   let ans = "";
   let tmp = "";
   for (let i = 0; i < content.length; i++) {
@@ -51,8 +51,10 @@ function toJapanese(content: string): string {
 
 export default function App({
   element = <></>,
+  output,
 }: {
   element?: JSX.Element;
+  output?: string;
 }): JSX.Element {
   const [functional, setFunctional] = useState<string>("qwerty");
   const [physical, setPhysical] = useState<string>("jis109");
@@ -69,6 +71,8 @@ export default function App({
       window.removeEventListener("keydown", tmp);
     };
   }, [functional]);
+  if (output !== undefined)
+    document.getElementById(output)!.textContent = content;
   return (
     <>
       <div id="wrapper">
