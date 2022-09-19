@@ -51,28 +51,46 @@ export default function script() {
     //シャッフルする
     questions = shuffle(questions);
 
+    let count = 0;
+    const observer = new MutationObserver(() => {
+      const key = document.getElementById("key").textContent;
+      count++;
+      if (count % 2 === 0) {
+        count = 0;
+        if (key === questions[word_num][cnt]) {
+          // 正答時
+          answer = answer + key;
+          cnt++;
+          correct++;
+        } else if (true) {
+          // 不正解の時
+          miss++;
+        }
+        if (cnt == questions[word_num].length) {
+          // 次の問題へ
+          word_num++;
+          answer = "";
+          cnt = 0;
+          if (word_num === questions.length) {
+            clearInterval(timerId);
+            results(time, correct, miss);
+          }
+        }
+        document.getElementById("question").textContent = questions[word_num];
+        document.getElementById("your-answer").textContent = answer;
+        document.getElementById("miss").textContent = miss + "回";
+        document.getElementById("correct").textContent = correct + "回";
+      }
+    });
+    observer.observe(document.getElementById("key"), {
+      attributes: true,
+      childList: true,
+      subtree: true,
+    });
+
+    // 何かキーが押されたら、実行 https://developer.mozilla.org/ja/docs/Web/API/Element/keydown_event
     window.addEventListener("keydown", (e) => {
       if (e.key === " ") e.preventDefault(); // キーボードの既定の動作を無効化 https://developer.mozilla.org/ja/docs/Web/API/Event/preventDefault を参照
-      // 何かキーが押されたら、実行 https://developer.mozilla.org/ja/docs/Web/API/Element/keydown_event
-      if (e.key === questions[word_num][cnt]) {
-        // 正答時
-        answer = answer + e.key;
-        cnt++;
-        correct++;
-      } else if (65 <= e.keyCode && e.keyCode <= 90) {
-        // 不正解の時
-        miss++;
-      }
-      if (cnt == questions[word_num].length) {
-        // 次の問題へ
-        word_num++;
-        answer = "";
-        cnt = 0;
-        if (word_num === questions.length) {
-          clearInterval(timerId);
-          results(time, correct, miss);
-        }
-      }
       if (e.key === " " && isStarted === false) {
         // スペースが押されたら、時間計測
         isStarted = true;
@@ -81,10 +99,6 @@ export default function script() {
           document.getElementById("time").textContent = time + "秒";
         }, 1000);
       }
-      document.getElementById("question").textContent = questions[word_num];
-      document.getElementById("your-answer").textContent = answer;
-      document.getElementById("miss").textContent = miss + "回";
-      document.getElementById("correct").textContent = correct + "回";
     });
   }
   main();

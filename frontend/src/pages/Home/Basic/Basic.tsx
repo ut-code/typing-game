@@ -1,13 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Keyboard from "./../../../../../keyboard/src/App";
 import "./style.css";
 // @ts-ignore
 import script from "./script";
 
 export default function Basic() {
+  const [key, setKey] = useState<string>("a");
   useEffect(() => {
     script();
   }, []);
+  const hoge = document.getElementById("key");
+  if (hoge !== null) hoge.textContent = key;
   return (
     <>
       {/* ここからHTMLファイル */}
@@ -23,7 +26,6 @@ export default function Basic() {
               </tr>
             </tbody>
           </table>
-          <div id="hoge">a</div>
         </div>
         <div>
           <table id="result">
@@ -50,6 +52,7 @@ export default function Basic() {
         </div>
       </div>
       {/* ここまでHTMLファイル */}
+      <div id="key"></div>
       <Keyboard
         element={
           <>
@@ -58,7 +61,8 @@ export default function Basic() {
             に飛んでください。
           </>
         }
-        output="hoge"
+        output={key}
+        setOutput={setKey}
       />
     </>
   );
