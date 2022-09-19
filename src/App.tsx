@@ -52,10 +52,12 @@ function toJapanese(content: string): string {
 
 export default function App({
   element = <></>,
-  output,
+  output = "",
+  setOutput = () => {},
 }: {
   element?: JSX.Element;
   output?: string;
+  setOutput?: (value: string) => void;
 }): JSX.Element {
   const [functional, setFunctional] = useState<string>("qwerty");
   const [physical, setPhysical] = useState<string>("jis109");
@@ -77,8 +79,7 @@ export default function App({
       window.removeEventListener("keyup", temp);
     };
   }, [functional]);
-  if (output !== undefined && document.getElementById(output) !== null)
-    document.getElementById(output)!.textContent = content[content.length - 1];
+  setOutput(content[content.length - 1]);
   return (
     <>
       <div id="wrapper">
