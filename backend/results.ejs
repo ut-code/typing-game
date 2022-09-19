@@ -3,22 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <title>結果</title>
+    <style type="text/css">
+      .yourResults {
+        font-size: large;
+        background: scroll;
+        background-color: rgb(194, 218, 218);
+        width: 500px;
+        margin: 0% 30%;
+      }
+      .rankBoard {
+        background: #ffffff;
+        width: 500px;
+        padding: 15px;
+        border: 1px solid #cccccc;
+        margin: auto;
+        text-align: center;
+      }
+      .flex{
+        display: flex;
+      }
+    </style>
   </head>
   <body>
-    <div>
-      終了!時間<%= time %>秒
-      スコア<%= score %>点
-    </div>
-    <div id="elements">
-      <p id="results">結果</p>
-      <table id="ranking">
-        <% i=1 %>
-        <% for (let listItem of listItems) {%>
-        <tr><th><%= i %></th><th><%= listItem.username %></th><th><%= listItem.score %></th></tr>
-        <% i++ %>
-        <% } %>
-      </table>
-      <a href="/">戻る</a>
+    <div class="flex">
+      <div class="yourResults">
+        <p id="finish">終了!</p>
+        <p id="Time">時間<%= time %>秒</p>
+        <p id="Score">スコア<%= score %>点</p>
+      </div>
+      <div class="rankBoard">
+        <p id="results">結果</p>
+        <table id="ranking">
+          <% i=1 %>
+          <% for (let listItem of listItems) {%>
+          <tr><th><%= i %></th><th><%= listItem.username %></th><th><%= listItem.score %></th></tr>
+          <% i++ %>
+          <% } %>
+        </table>
+        <a href="/">戻る</a>
+      </div>
     </div>
   </body>
 </html>
