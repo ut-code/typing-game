@@ -52,7 +52,7 @@ export default function script() {
     questions = shuffle(questions);
 
     window.addEventListener("keydown", (e) => {
-      e.preventDefault(); // キーボードの既定の動作を無効化 https://developer.mozilla.org/ja/docs/Web/API/Event/preventDefault を参照
+      if (e.key === " ") e.preventDefault(); // キーボードの既定の動作を無効化 https://developer.mozilla.org/ja/docs/Web/API/Event/preventDefault を参照
       // 何かキーが押されたら、実行 https://developer.mozilla.org/ja/docs/Web/API/Element/keydown_event
       if (e.key === questions[word_num][cnt]) {
         // 正答時
