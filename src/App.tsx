@@ -79,7 +79,7 @@ export default function App({
       window.removeEventListener("keyup", temp);
     };
   }, [functional]);
-  setOutput(content[content.length - 1]);
+  setOutput(content);
   return (
     <>
       <div id="wrapper">
