@@ -3,24 +3,26 @@ body {
 }
 #elements {
   background: #ffffff;
-  width: 500px;
-  padding: 15px;
+  width: 95vw;
+  padding: 1vw;
   text-align: center;
-  border: 1px solid #cccccc;
-  margin: 10px auto;
+  border: 0.2vw solid #cccccc;
+  margin: 1vw auto;
+  display: flex;
 }
 #mondai {
   font-size: 25px;
-  margin: 10px auto;
+  margin: 1vw auto;
 }
 #question {
+  width: 70vw;
   font-size: 30px;
   background-color: rgb(210, 232, 144);
-  margin: 20px auto;
+  margin: 1vw auto;
 }
 #answer {
   font-size: 20px;
-  border-spacing: 50px 10px;
+  border-spacing: 5vw 1vw;
 }
 #answer #header {
   font-weight: normal;
@@ -30,7 +32,10 @@ body {
 }
 #result {
   font-size: 15px;
-  border-spacing: 50px 0px;
+  border-spacing: 4vw 0vw;
+}
+#result p {
+  font-size: 20px;
 }
 #result th {
   font-weight: normal;
@@ -38,5 +43,5 @@ body {
 }
 #result td {
   text-align: right;
-  width: 50px;
+  width: 3vw;
 }
