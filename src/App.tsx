@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React, { useState, useEffect } from "react";
 import Keyboard from "./components/keyboard";
-import {keyup,convert} from "./components/convert";
+import { keyup, convert } from "./components/convert";
 import eventCode from "./components/data/eventCode.json";
 import qwerty from "./components/data/qwerty.json";
 import dvorak from "./components/data/dvorak.json";
@@ -23,7 +23,8 @@ function keydown(
 ): void {
   setContent(
     // @ts-ignore
-    (content: string) => convert(code,functional,functionalLayoutType,content)
+    (content: string) =>
+      convert(code, functional, functionalLayoutType, content)
   );
   setKeyColors(
     eventCode.map((tmp, i) => (tmp === code ? "orange" : keyColors[i]))
@@ -66,14 +67,14 @@ export default function App({
     function tmp(e: KeyboardEvent): void {
       keydown(keyColors, setKeyColors, e.code, content, setContent, functional);
     }
-    function temp(e:KeyboardEvent):void{
-      keyup(e.code);
+    function temp(e: KeyboardEvent): void {
+      keyup(e.code, functional, functionalLayoutType);
     }
     window.addEventListener("keydown", tmp);
-    window.addEventListener("keyup",temp);
+    window.addEventListener("keyup", temp);
     return () => {
       window.removeEventListener("keydown", tmp);
-      window.removeEventListener("keyup",temp);
+      window.removeEventListener("keyup", temp);
     };
   }, [functional]);
   if (output !== undefined)
