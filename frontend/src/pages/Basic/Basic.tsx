@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Keyboard from "./../../../../keyboard/src/App";
 export default function Basic() {
   useEffect(() => {
+    //ここから、script.js
     let questions = []; // 問題
     let timerId; //clearIntervalをするため 無視してOK
 
@@ -101,12 +102,14 @@ export default function Basic() {
     document.getElementById("correct").textContent = correct + "回";
     document.getElementById("miss").textContent = miss + "回";
     document.getElementById("time").textContent = time + "秒";
+    //ここまでscript.js
   }, []);
   return (
     <>
       <div
         dangerouslySetInnerHTML={{
           __html: `
+          <!-- ここからstyleタグ -->
         <style>
         body {
             background-color: #eeeeee;
@@ -150,7 +153,8 @@ export default function Basic() {
             text-align: right;
             width: 50px;
           }
-          </style>          
+          </style>
+          <!-- ここから、HTMLファイル -->
         <div id="elements">
               <p id="mondai">問題</p>
               <p id="question">スペースキーを押して開始</p>
@@ -173,6 +177,7 @@ export default function Basic() {
                 </tr>
               </table>
             </div>
+            <!-- ここまでHTMLファイル -->
         `,
         }}
       ></div>
