@@ -34,9 +34,6 @@ export default function Basic() {
         </table>
       </div>
       {/* ここまでHTMLファイル */}
-      キーボード配列を自分で作りたい人は、
-      <a href="https://keyboard-layout-maker.onrender.com/">このリンク</a>
-      に飛んでください。
       <Keyboard />
     </>
   );
