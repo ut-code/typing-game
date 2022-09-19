@@ -7,6 +7,7 @@ import dvorak from "./components/data/dvorak.json";
 import romantable from "./romantable.json";
 import ReadJSONFile from "./../keyboard-layout-maker/src/components/ReadJSONFile";
 import jis109 from "./components/data/JIS109.json";
+import "./App.css";
 const functionalLayoutType = { qwerty, dvorak, custom: qwerty };
 const physicalLayoutType = { jis109, custom: jis109 };
 
@@ -66,50 +67,54 @@ export default function App(): JSX.Element {
   }, [functional]);
   return (
     <>
-      キーボード配列を自分で作りたい人は、
-      <a href="https://keyboard-layout-maker.onrender.com/">このリンク</a>
-      に飛んでください。
-      <div>{content}</div>
-      <div>{toJapanese(content)}</div>
-      <span>論理配列</span>
-      <ReadJSONFile
-        f={(x) => {
-          // @ts-ignore
-          functionalLayoutType.custom = x;
-        }}
-      ></ReadJSONFile>
-      <br />
-      <span>物理配列</span>
-      <ReadJSONFile
-        f={(x) => {
-          // @ts-ignore
-          physicalLayoutType.custom = x;
-        }}
-      ></ReadJSONFile>
-      <br />
-      <select
-        value={functional}
-        onChange={(e) => setFunctional(e.target.value)}
-      >
-        <option value="qwerty">QWERTY</option>
-        <option value="dvorak">Dvorak</option>
-        <option value="custom">Custom</option>
-      </select>
-      <select value={physical} onChange={(e) => setPhysical(e.target.value)}>
-        <option value="jis109">JIS109</option>
-        <option value="custom">Custom</option>
-      </select>
-      <Keyboard
-        functional={functional}
-        physical={physical}
-        keyColors={keyColors}
-        setKeyColors={setKeyColors}
-        pressed={pressed}
-        content={content}
-        setContent={setContent}
-        keyLayout={functionalLayoutType.custom}
-        physicalKeyLayout={physicalLayoutType.custom}
-      ></Keyboard>
+      <div id="wrapper">
+        <div id="settings">
+          <div>{content}</div>
+          <div>{toJapanese(content)}</div>
+          <span>論理配列</span>
+          <ReadJSONFile
+            f={(x) => {
+              // @ts-ignore
+              functionalLayoutType.custom = x;
+            }}
+          ></ReadJSONFile>
+          <br />
+          <span>物理配列</span>
+          <ReadJSONFile
+            f={(x) => {
+              // @ts-ignore
+              physicalLayoutType.custom = x;
+            }}
+          ></ReadJSONFile>
+          <br />
+          <select
+            value={functional}
+            onChange={(e) => setFunctional(e.target.value)}
+          >
+            <option value="qwerty">QWERTY</option>
+            <option value="dvorak">Dvorak</option>
+            <option value="custom">Custom</option>
+          </select>
+          <select
+            value={physical}
+            onChange={(e) => setPhysical(e.target.value)}
+          >
+            <option value="jis109">JIS109</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+        <Keyboard
+          functional={functional}
+          physical={physical}
+          keyColors={keyColors}
+          setKeyColors={setKeyColors}
+          pressed={pressed}
+          content={content}
+          setContent={setContent}
+          keyLayout={functionalLayoutType.custom}
+          physicalKeyLayout={physicalLayoutType.custom}
+        ></Keyboard>
+      </div>
     </>
   );
 }
