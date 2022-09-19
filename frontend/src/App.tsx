@@ -1,11 +1,13 @@
-import Keyboard from "./../../keyboard/src/App";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Basic from "./pages/Basic/Basic";
 export default function App() {
   return (
     <>
-      キーボード配列を自分で作りたい人は、
-      <a href="https://keyboard-layout-maker.onrender.com/">このリンク</a>
-      に飛んでください。
-      <Keyboard />
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/basic" element={<Basic />}></Route>
+      </Routes>
     </>
   );
 }
