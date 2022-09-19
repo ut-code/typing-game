@@ -66,6 +66,9 @@ export default function App(): JSX.Element {
   }, [functional]);
   return (
     <>
+      キーボード配列を自分で作りたい人は、
+      <a href="https://keyboard-layout-maker.onrender.com/">このリンク</a>
+      に飛んでください。
       <div>{content}</div>
       <div>{toJapanese(content)}</div>
       <span>論理配列</span>
