@@ -73,28 +73,31 @@ export default function Keyboard({
   physical,
   keyColors = [],
   setKeyColors = (value: string[]) => {},
-  pressed = () => {},
+  keydown = () => {},
   content = "",
   setContent = (value: string) => {},
   keyLayout = qwerty,
   physicalKeyLayout,
+  isDefault,
 }: {
   functional: string;
   physical: string;
   keyColors?: string[];
   setKeyColors?: (value: string[]) => void;
-  pressed?: (
+  keydown?: (
     keyColors: string[],
     setKeyColors: (value: string[]) => void,
-    code: string,
+    e: KeyboardEvent,
     content: string,
     setContent: (value: string) => void,
-    functional: string
+    functional: string,
+    isDefault: boolean
   ) => void;
   content?: string;
   setContent?: (value: string) => void;
   keyLayout?: object;
   physicalKeyLayout?: object;
+  isDefault: boolean;
 }): JSX.Element {
   const { width } = useWindowDimensions();
   const magnification = 5.8 * (width < 850 ? 1 : 850 / width);
@@ -118,14 +121,15 @@ export default function Keyboard({
             )}`}
             onClick={() =>
               // @ts-ignore
-              pressed(
+              keydown(
                 // @ts-ignore
                 keyColors,
                 setKeyColors,
-                code,
+                new KeyboardEvent("keydown", { code }),
                 content,
                 setContent,
-                functional
+                functional,
+                isDefault
               )
             }
             style={{

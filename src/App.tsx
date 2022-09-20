@@ -108,7 +108,7 @@ export default function App({
       <div id="wrapper">
         <div id="settings">
           {element}
-          {/* {content} */}
+          {content}
           {/* <div>{toJapanese(content)}</div> */}
           <div>
             <input
@@ -161,11 +161,12 @@ export default function App({
           physical={physical}
           keyColors={keyColors}
           setKeyColors={setKeyColors}
-          pressed={keydown}
+          keydown={keydown}
           content={content}
           setContent={setContent}
           keyLayout={functionalLayoutType.custom}
           physicalKeyLayout={physicalLayoutType.custom}
+          isDefault={isDefault}
         ></Keyboard>
       </div>
     </>
