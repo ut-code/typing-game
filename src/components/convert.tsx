@@ -14,13 +14,14 @@ export function keyup(
   }
 }
 export function convert(
-  code: string,
+  e: KeyboardEvent,
   functional: string,
   functionalLayoutType: object,
-  content: string
+  content: string,
+  isDefault: boolean
 ): string {
   // @ts-ignore
-  const key = functionalLayoutType[functional][code];
+  const key = functionalLayoutType[functional][e.code];
   let ans = content;
   if (key === undefined) {
     ans += "";
@@ -43,5 +44,5 @@ export function convert(
         break;
     }
   }
-  return ans;
+  return isDefault ? content + e.key : ans;
 }

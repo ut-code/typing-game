@@ -16,26 +16,42 @@ const physicalLayoutType = { jis109, custom: jis109 };
 function keydown(
   keyColors: string[],
   setKeyColors: (value: string[]) => void,
-  code: string,
+  e: KeyboardEvent,
   content: string,
   setContent: (value: string) => void,
-  functional: string
+  functional: string,
+  isDefault: boolean
 ): void {
   setContent(
     // @ts-ignore
     (content: string) =>
-      convert(code, functional, functionalLayoutType, content)
+      convert(e, functional, functionalLayoutType, content, isDefault)
   );
   setKeyColors(
-    eventCode.map((tmp, i) => (tmp === code ? "orange" : keyColors[i]))
+    // @ts-ignore
+    eventCode.map((tmp, i) =>
+      (!isDefault && tmp === e.code) ||
+      (isDefault && functionalLayoutType[functional][tmp].toLowerCase()) ===
+        e.key.toLowerCase()
+        ? "orange"
+        : keyColors[i]
+    )
   );
   setTimeout(() => {
     setKeyColors(
-      eventCode.map((tmp, i) => (tmp === code ? "rgba(0,0,0,0)" : keyColors[i]))
+      // @ts-ignore
+      eventCode.map((tmp, i) =>
+        (!isDefault && tmp === e.code) ||
+        (isDefault && functionalLayoutType[functional][tmp].toLowerCase()) ===
+          e.key.toLowerCase()
+          ? "rgba(0,0,0,0)"
+          : keyColors[i]
+      )
     );
   }, 100);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function toJapanese(content: string): string {
   let ans = "";
   let tmp = "";
@@ -59,6 +75,7 @@ export default function App({
   output?: string;
   setOutput?: (value: string) => void;
 }): JSX.Element {
+  const [isDefault, setIsDefault] = useState<boolean>(true);
   const [functional, setFunctional] = useState<string>("qwerty");
   const [physical, setPhysical] = useState<string>("jis109");
   const [keyColors, setKeyColors] = useState<string[]>(
@@ -67,7 +84,15 @@ export default function App({
   const [content, setContent] = useState<string>("");
   useEffect(() => {
     function tmp(e: KeyboardEvent): void {
-      keydown(keyColors, setKeyColors, e.code, content, setContent, functional);
+      keydown(
+        keyColors,
+        setKeyColors,
+        e,
+        content,
+        setContent,
+        functional,
+        isDefault
+      );
     }
     function temp(e: KeyboardEvent): void {
       keyup(e.code, functional, functionalLayoutType);
@@ -78,46 +103,60 @@ export default function App({
       window.removeEventListener("keydown", tmp);
       window.removeEventListener("keyup", temp);
     };
-  }, [functional]);
+  }, [functional, isDefault]);
   setOutput(content);
   return (
     <>
       <div id="wrapper">
         <div id="settings">
           {element}
-          {content}
-          <div>{toJapanese(content)}</div>
-          <span>論理配列</span>
-          <ReadJSONFile
-            f={(x) => {
-              // @ts-ignore
-              functionalLayoutType.custom = x;
-            }}
-          ></ReadJSONFile>
-          <br />
-          <span>物理配列</span>
-          <ReadJSONFile
-            f={(x) => {
-              // @ts-ignore
-              physicalLayoutType.custom = x;
-            }}
-          ></ReadJSONFile>
-          <br />
-          <select
-            value={functional}
-            onChange={(e) => setFunctional(e.target.value)}
-          >
-            <option value="qwerty">QWERTY</option>
-            <option value="dvorak">Dvorak</option>
-            <option value="custom">Custom</option>
-          </select>
-          <select
-            value={physical}
-            onChange={(e) => setPhysical(e.target.value)}
-          >
-            <option value="jis109">JIS109</option>
-            <option value="custom">Custom</option>
-          </select>
+          {/* {content}
+          <div>{toJapanese(content)}</div> */}
+          <div>
+            <input
+              type="checkbox"
+              checked={isDefault}
+              onChange={(e) => {
+                setIsDefault(e.target.checked);
+              }}
+            />
+            <label>Default</label>
+          </div>
+          {!isDefault && (
+            <>
+              <span>論理配列</span>
+              <ReadJSONFile
+                f={(x) => {
+                  // @ts-ignore
+                  functionalLayoutType.custom = x;
+                }}
+              ></ReadJSONFile>
+              <br />
+              <span>物理配列</span>
+              <ReadJSONFile
+                f={(x) => {
+                  // @ts-ignore
+                  physicalLayoutType.custom = x;
+                }}
+              ></ReadJSONFile>
+              <br />
+              <select
+                value={functional}
+                onChange={(e) => setFunctional(e.target.value)}
+              >
+                <option value="qwerty">QWERTY</option>
+                <option value="dvorak">Dvorak</option>
+                <option value="custom">Custom</option>
+              </select>
+              <select
+                value={physical}
+                onChange={(e) => setPhysical(e.target.value)}
+              >
+                <option value="jis109">JIS109</option>
+                <option value="custom">Custom</option>
+              </select>
+            </>
+          )}
         </div>
         <Keyboard
           functional={functional}
