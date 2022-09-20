@@ -28,9 +28,8 @@ function keydown(
       convert(e, functional, functionalLayoutType, content, isDefault)
   );
   setKeyColors(
-    // @ts-ignore
     eventCode.map((tmp, i) =>
-      (!isDefault && tmp === e.code) ||
+      (!isDefault && tmp === e.code) || // @ts-ignore
       (isDefault && functionalLayoutType[functional][tmp].toLowerCase()) ===
         e.key.toLowerCase()
         ? "orange"
@@ -39,9 +38,8 @@ function keydown(
   );
   setTimeout(() => {
     setKeyColors(
-      // @ts-ignore
       eventCode.map((tmp, i) =>
-        (!isDefault && tmp === e.code) ||
+        (!isDefault && tmp === e.code) || // @ts-ignore
         (isDefault && functionalLayoutType[functional][tmp].toLowerCase()) ===
           e.key.toLowerCase()
           ? "rgba(0,0,0,0)"
@@ -110,8 +108,8 @@ export default function App({
       <div id="wrapper">
         <div id="settings">
           {element}
-          {/* {content}
-          <div>{toJapanese(content)}</div> */}
+          {/* {content} */}
+          {/* <div>{toJapanese(content)}</div> */}
           <div>
             <input
               type="checkbox"

@@ -44,5 +44,5 @@ export function convert(
         break;
     }
   }
-  return isDefault ? content + e.key : ans;
+  return isDefault ? content + (e.key.length === 1 ? e.key : "") : ans;
 }
