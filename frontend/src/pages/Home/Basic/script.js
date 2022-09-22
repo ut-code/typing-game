@@ -1,4 +1,4 @@
-export default function script() {
+export default async function script() {
   // ここから
   let questions = []; // 問題
   let timerId; //clearIntervalをするため 無視してOK
