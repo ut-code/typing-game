@@ -9,6 +9,7 @@ body {
   border: 0.2vw solid #cccccc;
   margin: 1vw auto;
   display: flex;
+  position: relative;
 }
 #mondai {
   font-size: 25px;
@@ -47,5 +48,12 @@ thead th {
   width: 3vw;
 }
 #content {
-  display: none;
+  position: absolute;
+  left: 1vw;
+  top: 23vw;
+}
+#settings {
+  position: absolute;
+  left: 1vw;
+  top: 25vw;
 }

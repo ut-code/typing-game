@@ -5,12 +5,13 @@ import "./style.css";
 import script from "./script";
 
 export default function Basic() {
-  const [content, setContent] = useState<string>("a");
+  let [content, setContent] = useState<string>("a");
   useEffect(() => {
     script();
   }, []);
-  const hoge = document.getElementById("content");
-  if (hoge !== null) hoge.textContent = content;
+  const cont = document.getElementById("content");
+  if (cont !== null) cont.textContent = content;
+  if (content.length > 100) content = content.slice(content.length - 100);
   return (
     <>
       {/* ここからHTMLファイル */}
@@ -56,6 +57,7 @@ export default function Basic() {
         </div>
       </div>
       {/* ここまでHTMLファイル */}
+      {/* 下のdivの中にReactがキーボードの入力結果をいい感じにして、出力している。これを、読み取って使えば良い。 */}
       <div id="content"></div>
       <Keyboard
         element={
