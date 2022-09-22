@@ -27,8 +27,8 @@ export default async function script() {
   }
 
   // scoreを計算する関数
-  function calcScore(time, correct, miss) {
-    return 100 - Math.floor(((time * miss) / correct) * 10);
+  function calcScore(timeLeft, correct, miss) {
+    return timeLeft * Math.floor((correct / (miss + correct)) * 100);
   }
 
   async function results(timeLeft, time, correct, miss) {
@@ -95,6 +95,9 @@ export default async function script() {
         // 不正解の時
         miss++;
       }
+      if (timeLimit - time <= 0) {
+        results(timeLimit - time, time, correct, miss);
+      }
       if (cnt == questions[word_num].length) {
         // 次の問題へ
         word_num++;
@@ -105,11 +108,11 @@ export default async function script() {
           results(timeLimit - time, time, correct, miss);
         }
       }
-      if (timeLimit - time < 0) {
-        // 時間制限でも終了
-        clearInterval(timerId);
-        results(timeLimit - time, time, correct, miss);
-      }
+      // if (time > timeLimit) {
+      //   // 時間制限でも終了, ただキー押さないと移行しない
+      //   // clearInterval(timerId);
+      //   results(timeLimit - time, time, correct, miss);
+      // }
       document.getElementById("question").textContent = questions[word_num];
       document.getElementById("your-answer").textContent = answer;
       document.getElementById("miss").textContent = miss + "回";
@@ -143,6 +146,10 @@ export default async function script() {
           document.getElementById("time").textContent = time + "秒";
           document.getElementById("timeLeft").textContent =
             timeLimit - time + "秒";
+          if (timeLimit - time <= 0) {
+            clearInterval(timerId);
+            document.getElementById("question").textContent = "キーを押してね";
+          }
         }, 1000);
       }
     });
@@ -156,7 +163,7 @@ export default async function script() {
   let cnt = 0; // 何文字目か
   let isStarted = false; // 始まったか
   let time = 0; // 時間
-  let timeLimit = 30; // 制限時間
+  let timeLimit = 15; // 制限時間
 
   document.getElementById("correct").textContent = correct + "回";
   document.getElementById("miss").textContent = miss + "回";
