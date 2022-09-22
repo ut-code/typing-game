@@ -31,8 +31,8 @@ export default async function script() {
     return 100 - Math.floor(((time * miss) / correct) * 10);
   }
 
-  async function results(time, correct, miss) {
-    let score = calcScore(time, correct, miss);
+  async function results(timeLeft, time, correct, miss) {
+    let score = calcScore(timeLeft, correct, miss);
     const json = JSON.stringify({ time: time, score: score });
     const response = await fetch(
       `${import.meta.env.VITE_API_ENDPOINT}/results`,
@@ -102,8 +102,13 @@ export default async function script() {
         cnt = 0;
         if (word_num === questions.length) {
           clearInterval(timerId);
-          results(time, correct, miss);
+          results(timeLimit - time, time, correct, miss);
         }
+      }
+      if (timeLimit - time < 0) {
+        // 時間制限でも終了
+        clearInterval(timerId);
+        results(timeLimit - time, time, correct, miss);
       }
       document.getElementById("question").textContent = questions[word_num];
       document.getElementById("your-answer").textContent = answer;
@@ -136,6 +141,8 @@ export default async function script() {
         timerId = setInterval(() => {
           time++;
           document.getElementById("time").textContent = time + "秒";
+          document.getElementById("timeLeft").textContent =
+            timeLimit - time + "秒";
         }, 1000);
       }
     });
@@ -149,9 +156,11 @@ export default async function script() {
   let cnt = 0; // 何文字目か
   let isStarted = false; // 始まったか
   let time = 0; // 時間
+  let timeLimit = 30; // 制限時間
 
   document.getElementById("correct").textContent = correct + "回";
   document.getElementById("miss").textContent = miss + "回";
   document.getElementById("time").textContent = time + "秒";
+  document.getElementById("timeLeft").textContent = timeLimit - time + "秒";
   // ここまで
 }
