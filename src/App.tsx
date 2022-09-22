@@ -4,21 +4,13 @@ import React, { useState, useEffect } from "react";
 import Keyboard from "./components/keyboard";
 import { keyup, convert } from "./components/convert";
 import eventCode from "./components/data/eventCode.json";
-import qwerty from "./components/data/qwerty.json";
-import dvorak from "./components/data/dvorak.json";
 import romantable from "./romantable.json";
 import ReadJSONFile from "./../keyboard-layout-maker/src/components/ReadJSONFile";
-import jis109 from "./components/data/JIS109.json";
+import {
+  functionalLayoutType,
+  physicalLayoutType,
+} from "./components/data/keyboardSettings";
 import "./App.css";
-const functionalLayoutType = {
-  qwerty: { name: "QWERTY", id: "qwerty", content: qwerty },
-  dvorak: { name: "Dvorak", id: "dvorak", content: dvorak },
-  custom: { name: "Custom", id: "custom", content: qwerty },
-};
-const physicalLayoutType = {
-  jis109: { name: "JIS109", id: "jis109", content: jis109 },
-  custom: { name: "Custom", id: "custom", content: jis109 },
-};
 
 function keydown(
   keyColors: string[],

@@ -3,15 +3,15 @@
 import React from "react"; // ,{useRef}
 import eventCode from "./data/eventCode.json";
 import qwerty from "./data/qwerty.json";
-import dvorak from "./data/dvorak.json";
-import jis109 from "./data/JIS109.json";
 import "./keyboard.css";
 import useWindowDimensions from "./useWindowDimensions";
+import {
+  functionalLayoutType,
+  physicalLayoutType,
+} from "./data/keyboardSettings";
 
 let functionalLayout = "qwerty";
-const functionalLayoutType = { qwerty, dvorak, custom: qwerty };
 let physicalLayout = "jis109";
-const physicalLayoutType = { jis109, custom: jis109 };
 
 /**
  * `row` 行の `column` 列までの幅の合計を計算します。
