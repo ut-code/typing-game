@@ -18,5 +18,4 @@ export default async function script() {
     window.location.href = "/basic";
   }
   document.getElementById("play-button").onclick = postCook;
-  //   postCook();
 }

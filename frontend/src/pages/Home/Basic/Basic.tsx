@@ -47,6 +47,10 @@ export default function Basic() {
                 <th>経過時間：</th>
                 <td id="time"></td>
               </tr>
+              <tr>
+                <th>残り時間：</th>
+                <td id="timeLeft"></td>
+              </tr>
             </tbody>
           </table>
         </div>
