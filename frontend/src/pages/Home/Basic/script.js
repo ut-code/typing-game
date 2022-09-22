@@ -126,17 +126,6 @@ export default async function script() {
 
     // 何かキーが押されたら、実行 https://developer.mozilla.org/ja/docs/Web/API/Element/keydown_event
     window.addEventListener("keydown", (e) => {
-      // allowedKeyに書かれたキーの動作は無効化しない
-      const allowedKey = [
-        "F5",
-        "F12",
-        "Alt",
-        "ArrowUp",
-        "ArrowDown",
-        "ArrowLeft",
-        "ArrowRight",
-      ];
-      if (!allowedKey.includes(e.key)) e.preventDefault(); // キーボードの既定の動作を無効化 https://developer.mozilla.org/ja/docs/Web/API/Event/preventDefault を参照
       if (e.key === " " && isStarted === false) {
         document.getElementById("question").textContent = questions[word_num];
         // スペースが押されたら、時間計測
