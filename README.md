@@ -7,6 +7,10 @@
 npm install
 ```
 
+```shell
+git submodule update --init --recursive
+```
+
 ### Local Development
 
 ```shell
