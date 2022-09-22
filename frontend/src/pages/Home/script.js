@@ -4,7 +4,7 @@ export default async function script() {
     // JSON形式でmain.jsから受信
     // const json = JSON.stringify({ username: username, qnumber: qnumber });
     const response = await fetch(
-      `${import.meta.env.VITE_API_ENDPOINT}/cook`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
+      `${import.meta.env.VITE_API_ENDPOINT}/cookSave`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
       {
         method: "post",
         headers: { "Content-Type": "application/json" },
