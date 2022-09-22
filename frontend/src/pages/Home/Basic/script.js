@@ -1,4 +1,4 @@
-export default function script() {
+export default async function script() {
   // ここから
   let questions = []; // 問題
   let timerId; //clearIntervalをするため 無視してOK
@@ -26,6 +26,7 @@ export default function script() {
     return questions;
   }
 
+  // scoreを計算する関数
   function calcScore(time, correct, miss) {
     return 100 - Math.floor(((time * miss) / correct) * 10);
   }
@@ -79,20 +80,18 @@ export default function script() {
       "y",
       "z",
     ];
+    // キーボードの入力をReactがdivの中に出力しているので、その変更が行われたのを読み取っている。
     const observer = new MutationObserver(() => {
+      // https://developer.mozilla.org/ja/docs/Web/API/MutationObserver
       const content = document.getElementById("content").textContent;
-      const key = content[content.length - 1];
-      const numb = content.length;
-      let letters = content;
-      if (content.length > 150) {
-        let letters = content.shift();
-      }
+      const key = content[content.length - 1]; // 追加された文字すなわち一番最後の文字を取り出す。
       if (key === questions[word_num][cnt]) {
         // 正答時
         answer = answer + key;
         cnt++;
         correct++;
       } else if (alphabet.includes(key.toLowerCase())) {
+        // 間違えていたときでアルファベットであれば、不正解とする。
         // 不正解の時
         miss++;
       }
@@ -119,7 +118,17 @@ export default function script() {
 
     // 何かキーが押されたら、実行 https://developer.mozilla.org/ja/docs/Web/API/Element/keydown_event
     window.addEventListener("keydown", (e) => {
-      if (e.key !== "F5" && e.key !== "F12") e.preventDefault(); // キーボードの既定の動作を無効化 https://developer.mozilla.org/ja/docs/Web/API/Event/preventDefault を参照
+      // allowedKeyに書かれたキーの動作は無効化しない
+      const allowedKey = [
+        "F5",
+        "F12",
+        "Alt",
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+      ];
+      if (!allowedKey.includes(e.key)) e.preventDefault(); // キーボードの既定の動作を無効化 https://developer.mozilla.org/ja/docs/Web/API/Event/preventDefault を参照
       if (e.key === " " && isStarted === false) {
         document.getElementById("question").textContent = questions[word_num];
         // スペースが押されたら、時間計測

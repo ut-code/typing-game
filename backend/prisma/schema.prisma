@@ -13,6 +13,7 @@ datasource db {
 // 問題
 model questions {
   id       Int    @id @default(autoincrement())
+  qnumber  Int    @default(0)
   question String
 }
 

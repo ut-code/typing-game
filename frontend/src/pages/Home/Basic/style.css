@@ -23,12 +23,13 @@ body {
 }
 #answer {
   font-size: 20px;
-  border-spacing: 5vw 1vw;
+  border-spacing: 1vw 1vw;
 }
 #answer #header {
   font-weight: normal;
 }
 #answer #your-answer {
+  width: 58vw;
   background-color: khaki;
 }
 #result {
