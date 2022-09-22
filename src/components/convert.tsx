@@ -7,7 +7,7 @@ export function keyup(
   functionalLayoutType: object
 ): void {
   // @ts-ignore
-  const key = functionalLayoutType[functional][code];
+  const key = functionalLayoutType[functional].content[code];
   switch (key) {
     case "Shift":
       shift = false;
@@ -21,7 +21,7 @@ export function convert(
   isDefault: boolean
 ): string {
   // @ts-ignore
-  const key = functionalLayoutType[functional][e.code];
+  const key = functionalLayoutType[functional].content[e.code];
   let ans = content;
   if (key === undefined) {
     ans += "";

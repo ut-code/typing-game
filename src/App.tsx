@@ -10,8 +10,15 @@ import romantable from "./romantable.json";
 import ReadJSONFile from "./../keyboard-layout-maker/src/components/ReadJSONFile";
 import jis109 from "./components/data/JIS109.json";
 import "./App.css";
-const functionalLayoutType = { qwerty, dvorak, custom: qwerty };
-const physicalLayoutType = { jis109, custom: jis109 };
+const functionalLayoutType = {
+  qwerty: { name: "QWERTY", id: "qwerty", content: qwerty },
+  dvorak: { name: "Dvorak", id: "dvorak", content: dvorak },
+  custom: { name: "Custom", id: "custom", content: qwerty },
+};
+const physicalLayoutType = {
+  jis109: { name: "JIS109", id: "jis109", content: jis109 },
+  custom: { name: "Custom", id: "custom", content: jis109 },
+};
 
 function keydown(
   keyColors: string[],
@@ -29,8 +36,9 @@ function keydown(
   );
   setKeyColors(
     eventCode.map((tmp, i) =>
-      (!isDefault && tmp === e.code) || // @ts-ignore
-      (isDefault && functionalLayoutType[functional][tmp].toLowerCase()) ===
+      (!isDefault && tmp === e.code) ||
+      (isDefault && // @ts-ignore
+        functionalLayoutType[functional].content[tmp].toLowerCase()) ===
         e.key.toLowerCase()
         ? "orange"
         : keyColors[i]
@@ -39,8 +47,9 @@ function keydown(
   setTimeout(() => {
     setKeyColors(
       eventCode.map((tmp, i) =>
-        (!isDefault && tmp === e.code) || // @ts-ignore
-        (isDefault && functionalLayoutType[functional][tmp].toLowerCase()) ===
+        (!isDefault && tmp === e.code) ||
+        (isDefault && // @ts-ignore
+          functionalLayoutType[functional].content[tmp].toLowerCase()) ===
           e.key.toLowerCase()
           ? "rgba(0,0,0,0)"
           : keyColors[i]
@@ -126,7 +135,7 @@ export default function App({
               <ReadJSONFile
                 f={(x) => {
                   // @ts-ignore
-                  functionalLayoutType.custom = x;
+                  functionalLayoutType.custom.content = x;
                 }}
               ></ReadJSONFile>
               <br />
@@ -134,7 +143,7 @@ export default function App({
               <ReadJSONFile
                 f={(x) => {
                   // @ts-ignore
-                  physicalLayoutType.custom = x;
+                  physicalLayoutType.custom.content = x;
                 }}
               ></ReadJSONFile>
               <br />
@@ -164,8 +173,8 @@ export default function App({
           keydown={keydown}
           content={content}
           setContent={setContent}
-          keyLayout={functionalLayoutType.custom}
-          physicalKeyLayout={physicalLayoutType.custom}
+          keyLayout={functionalLayoutType.custom.content}
+          physicalKeyLayout={physicalLayoutType.custom.content}
           isDefault={isDefault}
         ></Keyboard>
       </div>
