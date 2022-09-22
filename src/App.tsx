@@ -151,16 +151,27 @@ export default function App({
                 value={functional}
                 onChange={(e) => setFunctional(e.target.value)}
               >
-                <option value="qwerty">QWERTY</option>
-                <option value="dvorak">Dvorak</option>
-                <option value="custom">Custom</option>
+                {Object.keys(functionalLayoutType).map((key, i) => (
+                  // @ts-ignore
+                  <option key={i} value={functionalLayoutType[key].id}>
+                    {" "}
+                    {/* @ts-ignore */}
+                    {functionalLayoutType[key].name}
+                  </option>
+                ))}
               </select>
               <select
                 value={physical}
                 onChange={(e) => setPhysical(e.target.value)}
               >
-                <option value="jis109">JIS109</option>
-                <option value="custom">Custom</option>
+                {Object.keys(physicalLayoutType).map((key, i) => (
+                  // @ts-ignore
+                  <option key={i} value={physicalLayoutType[key].id}>
+                    {" "}
+                    {/* @ts-ignore */}
+                    {physicalLayoutType[key].name}
+                  </option>
+                ))}
               </select>
             </>
           )}
