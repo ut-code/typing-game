@@ -22,19 +22,20 @@ body {
 }
 #answer {
   font-size: 20px;
-  border-spacing: 5vw 1vw;
+  border-spacing: 1vw 1vw;
 }
 #answer #header {
   font-weight: normal;
 }
 #answer #your-answer {
+  width: 58vw;
   background-color: khaki;
 }
 #result {
   font-size: 15px;
   border-spacing: 4vw 0vw;
 }
-#result p {
+thead th {
   font-size: 20px;
 }
 #result th {
@@ -44,4 +45,7 @@ body {
 #result td {
   text-align: right;
   width: 3vw;
+}
+#content {
+  display: none;
 }

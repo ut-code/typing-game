@@ -1,24 +1,5 @@
 export default function script() {
   // ここから
-  // ユーザーの入力情報を受け取る関数
-  async function getCook() {
-    // JSON形式でmain.jsから受信
-    window.location.href = "/Basic";
-    const json = JSON.stringify({ username: username, qnumber: qnumber });
-    const response = await fetch(
-      `${import.meta.env.VITE_API_ENDPOINT}/cook`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
-      {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-
-    // テキストを取り出し、objectに
-    let username = JSON.parse(await response.text().username);
-    let qnumber = JSON.parse(await response.text().qnumber);
-  }
-  getCook();
-
   let questions = []; // 問題
   let timerId; //clearIntervalをするため 無視してOK
 
@@ -70,15 +51,43 @@ export default function script() {
     //シャッフルする
     questions = shuffle(questions);
 
-    window.addEventListener("keydown", (e) => {
-      e.preventDefault(); // キーボードの既定の動作を無効化 https://developer.mozilla.org/ja/docs/Web/API/Event/preventDefault を参照
-      // 何かキーが押されたら、実行 https://developer.mozilla.org/ja/docs/Web/API/Element/keydown_event
-      if (e.key === questions[word_num][cnt]) {
+    const alphabet = [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j",
+      "k",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z",
+    ];
+    const observer = new MutationObserver(() => {
+      const content = document.getElementById("content").textContent;
+      const key = content[content.length - 1];
+      if (key === questions[word_num][cnt]) {
         // 正答時
-        answer = answer + e.key;
+        answer = answer + key;
         cnt++;
         correct++;
-      } else if (65 <= e.keyCode && e.keyCode <= 90) {
+      } else if (alphabet.includes(key.toLowerCase())) {
         // 不正解の時
         miss++;
       }
@@ -92,7 +101,22 @@ export default function script() {
           results(time, correct, miss);
         }
       }
+      document.getElementById("question").textContent = questions[word_num];
+      document.getElementById("your-answer").textContent = answer;
+      document.getElementById("miss").textContent = miss + "回";
+      document.getElementById("correct").textContent = correct + "回";
+    });
+    observer.observe(document.getElementById("content"), {
+      attributes: true,
+      childList: true,
+      subtree: true,
+    });
+
+    // 何かキーが押されたら、実行 https://developer.mozilla.org/ja/docs/Web/API/Element/keydown_event
+    window.addEventListener("keydown", (e) => {
+      if (e.key !== "F5" && e.key !== "F12") e.preventDefault(); // キーボードの既定の動作を無効化 https://developer.mozilla.org/ja/docs/Web/API/Event/preventDefault を参照
       if (e.key === " " && isStarted === false) {
+        document.getElementById("question").textContent = questions[word_num];
         // スペースが押されたら、時間計測
         isStarted = true;
         timerId = setInterval(() => {
@@ -100,10 +124,6 @@ export default function script() {
           document.getElementById("time").textContent = time + "秒";
         }, 1000);
       }
-      document.getElementById("question").textContent = questions[word_num];
-      document.getElementById("your-answer").textContent = answer;
-      document.getElementById("miss").textContent = miss + "回";
-      document.getElementById("correct").textContent = correct + "回";
     });
   }
   main();

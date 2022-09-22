@@ -1,13 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Keyboard from "./../../../../../keyboard/src/App";
 import "./style.css";
 // @ts-ignore
 import script from "./script";
 
 export default function Basic() {
+  const [content, setContent] = useState<string>("a");
   useEffect(() => {
     script();
   }, []);
+  const hoge = document.getElementById("content");
+  if (hoge !== null) hoge.textContent = content;
   return (
     <>
       {/* ここからHTMLファイル */}
@@ -26,7 +29,11 @@ export default function Basic() {
         </div>
         <div>
           <table id="result">
-            <p>結果</p>
+            <thead>
+              <tr>
+                <th>結果</th>
+              </tr>
+            </thead>
             <tbody>
               <tr>
                 <th>正しいタイプ数：</th>
@@ -45,6 +52,7 @@ export default function Basic() {
         </div>
       </div>
       {/* ここまでHTMLファイル */}
+      <div id="content"></div>
       <Keyboard
         element={
           <>
@@ -53,6 +61,8 @@ export default function Basic() {
             に飛んでください。
           </>
         }
+        output={content}
+        setOutput={setContent}
       />
     </>
   );
