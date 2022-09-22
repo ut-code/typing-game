@@ -36,7 +36,7 @@ function physicalKeyToObject(
         row: rows[i],
         column: columns[i],
         width: widths[i],
-        style: JSON.parse(styles[i]),
+        style: styles[i],
       },
     });
   }
