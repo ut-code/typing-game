@@ -12,11 +12,9 @@ export default function Home() {
       <header>
         <b>タイピングゲーム ホーム画面</b>
       </header>
-      <form method="post" action="/cook">
-        ユーザーネーム: <input name="username" placeholder="Guest" />
-        問題番号: <input name="question-number" placeholder="0" />
-        <button name="play-button">プレイする</button>
-      </form>
+      ユーザーネーム: <input name="username" placeholder="Guest" />
+      問題番号: <input name="question-number" placeholder="0" />
+      <button id="play-button">プレイする</button>
     </>
   );
 }

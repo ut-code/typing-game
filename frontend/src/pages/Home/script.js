@@ -12,7 +12,7 @@ export default async function script() {
     );
 
     // テキストを取り出し、objectに
-    const x = await response.text();
+    // const x = await response.text();
     // let username = JSON.parse(await response.text().username);
     // let qnumber = JSON.parse(await response.text().qnumber);
     window.location.href = "/basic";
