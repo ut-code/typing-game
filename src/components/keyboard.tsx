@@ -21,18 +21,18 @@ let physicalLayout = "jis109";
  */
 function sumWidth(row: number, column: number): number {
   // @ts-ignore
-  let sum = physicalLayoutType[physicalLayout].marginColumn;
+  let sum = physicalLayoutType[physicalLayout].content.marginColumn;
   let j = 0;
   for (const code of eventCode) {
     if (
       // @ts-ignore
-      physicalLayoutType[physicalLayout].eventCode[code].row === row &&
+      physicalLayoutType[physicalLayout].content.eventCode[code].row === row &&
       // @ts-ignore
-      physicalLayoutType[physicalLayout].eventCode[code].column < column
+      physicalLayoutType[physicalLayout].content.eventCode[code].column < column
     ) {
       sum += // @ts-ignore
-        physicalLayoutType[physicalLayout].eventCode[code].width + // @ts-ignore
-        physicalLayoutType[physicalLayout].marginColumn;
+        physicalLayoutType[physicalLayout].content.eventCode[code].width + // @ts-ignore
+        physicalLayoutType[physicalLayout].content.marginColumn;
       j++;
     }
     if (j >= column) break;
@@ -48,9 +48,9 @@ function sumWidth(row: number, column: number): number {
 function sumHeight(row: number): number {
   return (
     // @ts-ignore
-    physicalLayoutType[physicalLayout].marginRow + // @ts-ignore
-    (physicalLayoutType[physicalLayout].height + // @ts-ignore
-      physicalLayoutType[physicalLayout].marginRow) *
+    physicalLayoutType[physicalLayout].content.marginRow + // @ts-ignore
+    (physicalLayoutType[physicalLayout].content.height + // @ts-ignore
+      physicalLayoutType[physicalLayout].content.marginRow) *
       (row - 1)
   );
 }
@@ -105,9 +105,9 @@ export default function Keyboard({
   functionalLayout = functional;
   physicalLayout = physical;
   // @ts-ignore
-  functionalLayoutType.custom = keyLayout;
+  functionalLayoutType.custom.content = keyLayout;
   // @ts-ignore
-  physicalLayoutType.custom = physicalKeyLayout;
+  physicalLayoutType.custom.content = physicalKeyLayout;
   return (
     <>
       <div id="keyboard">
@@ -117,7 +117,7 @@ export default function Keyboard({
             id={code}
             className={`key ${fontSize(
               // @ts-ignore
-              functionalLayoutType[functionalLayout][code]
+              functionalLayoutType[functionalLayout].content[code]
             )}`}
             onClick={() =>
               // @ts-ignore
@@ -139,30 +139,33 @@ export default function Keyboard({
               top: `${
                 sumHeight(
                   // @ts-ignore
-                  physicalLayoutType[physicalLayout].eventCode[code].row
+                  physicalLayoutType[physicalLayout].content.eventCode[code].row
                 ) * magnification
               }vw`,
               // @ts-ignore
               left: `${
                 sumWidth(
                   // @ts-ignore
-                  physicalLayoutType[physicalLayout].eventCode[code].row, // @ts-ignore
-                  physicalLayoutType[physicalLayout].eventCode[code].column
+                  physicalLayoutType[physicalLayout].content.eventCode[code]
+                    .row, // @ts-ignore
+                  physicalLayoutType[physicalLayout].content.eventCode[code]
+                    .column
                 ) * magnification
               }vw`,
               width: `${
                 // @ts-ignore
-                physicalLayoutType[physicalLayout].eventCode[code].width *
-                magnification
+                physicalLayoutType[physicalLayout].content.eventCode[code]
+                  .width * magnification
               }vw`,
               height: `${
                 // @ts-ignore
-                physicalLayoutType[physicalLayout].height * magnification
+                physicalLayoutType[physicalLayout].content.height *
+                magnification
               }vw`,
             }}
             // ref={dom=>{
             //   let fontSizePx=window.innerWidth*fontSize;
-            //   const widthPx=physicalLayoutType[physicalLayout].eventCode[code].width * magnification* window.innerWidth*0.01;// func
+            //   const widthPx=physicalLayoutType[physicalLayout].content.eventCode[code].width * magnification* window.innerWidth*0.01;// func
             //   // while(dom?.scrollWidth>=widthPx){
             //   //   fontSizePx--;
             //   //   // dom?.style.fontSize="10px";//fontSizePx+"px"
@@ -175,7 +178,7 @@ export default function Keyboard({
             //   // }
           >
             {/* @ts-ignore */}
-            {functionalLayoutType[functionalLayout][code]}
+            {functionalLayoutType[functionalLayout].content[code]}
           </div>
         ))}
       </div>
