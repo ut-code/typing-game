@@ -11,7 +11,7 @@ export default function Basic() {
   }, []);
   const cont = document.getElementById("content");
   if (cont !== null) cont.textContent = content;
-  if (content.length > 100) content = content.slice(1);
+  if (content.length > 100) content = content.slice(content.length - 100);
   return (
     <>
       {/* ここからHTMLファイル */}
