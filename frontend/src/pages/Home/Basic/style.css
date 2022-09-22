@@ -48,12 +48,5 @@ thead th {
   width: 3vw;
 }
 #content {
-  position: absolute;
-  left: 1vw;
-  top: 23vw;
-}
-#settings {
-  position: absolute;
-  left: 1vw;
-  top: 25vw;
+  display: none;
 }
