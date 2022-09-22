@@ -23,7 +23,7 @@ export default async function script() {
       let j = Math.floor(Math.random() * array.length);
       [array[i], array[j]] = [array[j], array[i]];
     }
-    return questions;
+    return array;
   }
 
   // scoreを計算する関数

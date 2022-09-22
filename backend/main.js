@@ -12,16 +12,20 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// ExpressでCookieを使用するのに必要
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
-app.post("/cook", (request, response) => {
-  response.json({
-    username: request.body.username,
-    qnumber: request.body.question - number,
-  });
+// Homeでユーザーが入力した情報をcookieに保存
+app.post("/cookSave", (request, response) => {
+  const username = request.body.username;
+  const qnumber = request.body.questionNumber;
   // response.cookie("username", username);
   // response.cookie("qnumber", qnumber);
+  response.json({
+    username: username,
+    qnumber: qnumber,
+  });
 });
 
 // データベースからPrismaで問題をとってくる
