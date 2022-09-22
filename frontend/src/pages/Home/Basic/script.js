@@ -82,6 +82,11 @@ export default function script() {
     const observer = new MutationObserver(() => {
       const content = document.getElementById("content").textContent;
       const key = content[content.length - 1];
+      const numb = content.length;
+      let letters = content;
+      if (content.length > 150) {
+        let letters = content.shift();
+      }
       if (key === questions[word_num][cnt]) {
         // 正答時
         answer = answer + key;

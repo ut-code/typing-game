@@ -47,10 +47,12 @@ thead th {
   width: 3vw;
 }
 #content {
-  display: none;
+  position: absolute;
+  left: 1vw;
+  top: 23vw;
 }
 #settings {
   position: absolute;
   left: 1vw;
-  top: 23vw;
+  top: 25vw;
 }

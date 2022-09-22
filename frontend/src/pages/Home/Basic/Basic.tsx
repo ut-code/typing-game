@@ -5,12 +5,13 @@ import "./style.css";
 import script from "./script";
 
 export default function Basic() {
-  const [content, setContent] = useState<string>("a");
+  let [content, setContent] = useState<string>("a");
   useEffect(() => {
     script();
   }, []);
-  const hoge = document.getElementById("content");
-  if (hoge !== null) hoge.textContent = content;
+  const cont = document.getElementById("content");
+  if (cont !== null) cont.textContent = content;
+  if (content.length > 100) content = content.slice(1);
   return (
     <>
       {/* ここからHTMLファイル */}
