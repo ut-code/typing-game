@@ -26,6 +26,7 @@ export default async function script() {
     return questions;
   }
 
+  // scoreを計算する関数
   function calcScore(time, correct, miss) {
     return 100 - Math.floor(((time * miss) / correct) * 10);
   }
@@ -79,15 +80,18 @@ export default async function script() {
       "y",
       "z",
     ];
+    // キーボードの入力をReactがdivの中に出力しているので、その変更が行われたのを読み取っている。
     const observer = new MutationObserver(() => {
+      // https://developer.mozilla.org/ja/docs/Web/API/MutationObserver
       const content = document.getElementById("content").textContent;
-      const key = content[content.length - 1];
+      const key = content[content.length - 1]; // 追加された文字すなわち一番最後の文字を取り出す。
       if (key === questions[word_num][cnt]) {
         // 正答時
         answer = answer + key;
         cnt++;
         correct++;
       } else if (alphabet.includes(key.toLowerCase())) {
+        // 間違えていたときでアルファベットであれば、不正解とする。
         // 不正解の時
         miss++;
       }

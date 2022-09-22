@@ -52,6 +52,7 @@ export default function Basic() {
         </div>
       </div>
       {/* ここまでHTMLファイル */}
+      {/* 下のdivの中にReactがキーボードの入力結果をいい感じにして、出力している。これを、読み取って使えば良い。 */}
       <div id="content"></div>
       <Keyboard
         element={
