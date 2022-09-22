@@ -1,5 +1,6 @@
-import { useState } from "react";
-import EventCode from "./../../../../keyboard/src/components/data/eventCode";
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
+import React, { useState } from "react";
+// import EventCode from "./../../../../keyboard/src/components/data/eventCode";
 import eventCode from "./../../../../keyboard/src/components/data/eventCode.json";
 import qwerty from "../../../../keyboard/src/components/data/qwerty.json";
 import Keyboard from "../../../../keyboard/src/components/keyboard";
@@ -13,14 +14,14 @@ import "./functional.css";
 import "./../keyboard.css";
 
 function keyToObject(keys: string[]): object {
-  let object = {};
+  const object = {};
   for (let i = 0; i < eventCode.length; i++) {
     Object.assign(object, { [eventCode[i]]: keys[i] });
   }
   return object;
 }
 
-export default function Functional() {
+export default function Functional(): JSX.Element {
   const [keys, setKeys] = useState<string[]>(
     // @ts-ignore
     eventCode.map((code) => qwerty[code])

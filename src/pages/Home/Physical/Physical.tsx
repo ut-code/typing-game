@@ -1,5 +1,6 @@
-import { useState } from "react";
-import EventCode from "./../../../../keyboard/src/components/data/eventCode";
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
+import React, { useState } from "react";
+// import EventCode from "./../../../../keyboard/src/components/data/eventCode";
 import eventCode from "./../../../../keyboard/src/components/data/eventCode.json";
 import jis109 from "./../../../../keyboard/src/components/data/JIS109.json";
 import Keyboard from "../../../../keyboard/src/components/keyboard";
@@ -20,12 +21,12 @@ function physicalKeyToObject(
   columns: number[],
   widths: number[],
   styles: string[]
-) {
-  let object = {};
+): object {
+  const object = {};
   Object.assign(object, {
-    marginRow: marginRow,
-    marginColumn: marginColumn,
-    height: height,
+    marginRow,
+    marginColumn,
+    height,
     eventCode: {},
   });
   for (let i = 0; i < eventCode.length; i++) {
@@ -42,7 +43,7 @@ function physicalKeyToObject(
   return object;
 }
 
-export default function Physical() {
+export default function Physical(): JSX.Element {
   const [marginRow, setMarginRow] = useState<number>(jis109.marginRow);
   const [marginColumn, setMarginColumn] = useState<number>(jis109.marginColumn);
   const [height, setHeight] = useState<number>(jis109.height);
