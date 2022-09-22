@@ -21,6 +21,53 @@ function keydown(
   functional: string,
   isDefault: boolean
 ): void {
+  const prohibitedKey = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "0",
+    "Enter",
+    "Space",
+  ];
+  if (
+    // @ts-ignore
+    prohibitedKey.includes(functionalLayoutType[functional].content[e.code])
+  ) {
+    e.preventDefault();
+  }
+
   setContent(
     // @ts-ignore
     (content: string) =>
@@ -109,7 +156,7 @@ export default function App({
       <div id="wrapper">
         <div id="settings">
           {element}
-          {content}
+          {/* {content} */}
           {/* <div>{toJapanese(content)}</div> */}
           <div>
             <input
