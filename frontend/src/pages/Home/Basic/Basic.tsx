@@ -9,6 +9,8 @@ export default function Basic() {
   useEffect(() => {
     script();
   }, []);
+  const cont = document.getElementById("content");
+  if (cont !== null) cont.textContent = content;
   return (
     <>
       {/* ここからHTMLファイル */}
