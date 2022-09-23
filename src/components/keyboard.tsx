@@ -2,16 +2,17 @@
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React from "react"; // ,{useRef}
 import eventCode from "./data/eventCode.json";
-import qwerty from "./data/qwerty.json";
 import "./keyboard.css";
 import useWindowDimensions from "./useWindowDimensions";
 import {
   functionalLayoutType,
   physicalLayoutType,
+  defaultFunctionalLayout,
+  defaultPhysicalLayout,
 } from "./data/keyboardSettings";
 
-let functionalLayout = "qwerty";
-let physicalLayout = "jis109";
+let functionalLayout = defaultFunctionalLayout;
+let physicalLayout = defaultPhysicalLayout;
 
 /**
  * `row` 行の `column` 列までの幅の合計を計算します。
@@ -33,7 +34,7 @@ function sumWidth(row: number, column: number): number {
       sum += // @ts-ignore
         physicalLayoutType[physicalLayout].content.eventCode[code].width + // @ts-ignore
         (physicalLayoutType[physicalLayout].content.eventCode[code].width === 0
-          ? 0
+          ? 0 // @ts-ignore
           : physicalLayoutType[physicalLayout].content.marginColumn);
       j++;
     }
@@ -78,7 +79,7 @@ export default function Keyboard({
   keydown = () => {},
   content = "",
   setContent = (value: string) => {},
-  keyLayout = qwerty,
+  keyLayout = functionalLayoutType[defaultFunctionalLayout].content,
   physicalKeyLayout,
   isDefault,
 }: {

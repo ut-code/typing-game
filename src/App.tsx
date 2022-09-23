@@ -9,6 +9,8 @@ import ReadJSONFile from "./../keyboard-layout-maker/src/components/ReadJSONFile
 import {
   functionalLayoutType,
   physicalLayoutType,
+  defaultFunctionalLayout,
+  defaultPhysicalLayout,
 } from "./components/data/keyboardSettings";
 import "./App.css";
 
@@ -123,8 +125,8 @@ export default function App({
   setOutput?: (value: string) => void;
 }): JSX.Element {
   const [isDefault, setIsDefault] = useState<boolean>(true);
-  const [functional, setFunctional] = useState<string>("qwerty");
-  const [physical, setPhysical] = useState<string>("jis109");
+  const [functional, setFunctional] = useState<string>(defaultFunctionalLayout);
+  const [physical, setPhysical] = useState<string>(defaultPhysicalLayout);
   const [keyColors, setKeyColors] = useState<string[]>(
     eventCode.map((code) => "rgba(0,0,0,0)")
   );
