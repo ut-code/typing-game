@@ -1,0 +1,15 @@
+body {
+  background-color: #eeeeee;
+  padding: 2vw;
+}
+#userinput {
+  width: 40vw;
+}
+header {
+  font-size: 30px;
+  padding: 2vw;
+}
+footer {
+  font-size: 13px;
+  padding: 2vw;
+}
