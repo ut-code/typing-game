@@ -2,7 +2,11 @@
 import React, { useState } from "react";
 // import EventCode from "./../../../../keyboard/src/components/data/eventCode";
 import eventCode from "./../../../../keyboard/src/components/data/eventCode.json";
-import qwerty from "../../../../keyboard/src/components/data/qwerty.json";
+import {
+  functionalLayoutType,
+  defaultFunctionalLayout,
+  defaultPhysicalLayout,
+} from "../../../../keyboard/src/components/data/keyboardSettings";
 import Keyboard from "../../../../keyboard/src/components/keyboard";
 import ReadJSONFile from "./../../../components/ReadJSONFile";
 import GetManySettings from "./../../../components/GetManySettings";
@@ -24,15 +28,18 @@ function keyToObject(keys: string[]): object {
 export default function Functional(): JSX.Element {
   const [keys, setKeys] = useState<string[]>(
     // @ts-ignore
-    eventCode.map((code) => qwerty[code])
+    eventCode.map(
+      (code) => functionalLayoutType[defaultFunctionalLayout].content[code]
+    )
   );
   const [fileName, setFileName] = useState<string>("");
   return (
     <>
       <Keyboard
         functional="custom"
-        physical="jis109"
+        physical={defaultPhysicalLayout}
         keyLayout={keyToObject(keys)}
+        isDefault={true}
       ></Keyboard>
       <div className="box"></div>
       <ReadJSONFile
@@ -42,19 +49,21 @@ export default function Functional(): JSX.Element {
         }}
       ></ReadJSONFile>
       <table>
-        {eventCode.map((code, i) => (
-          <tr key={code}>
-            <th>{code}</th>
-            <td>
-              <GetManySettings<string>
-                type="string"
-                items={keys}
-                setItems={setKeys}
-                i={i}
-              ></GetManySettings>
-            </td>
-          </tr>
-        ))}
+        <tbody>
+          {eventCode.map((code, i) => (
+            <tr key={code}>
+              <th>{code}</th>
+              <td>
+                <GetManySettings<string>
+                  type="string"
+                  items={keys}
+                  setItems={setKeys}
+                  i={i}
+                ></GetManySettings>
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
       <GetFileName fileName={fileName} setFileName={setFileName}></GetFileName>
       <ConfirmButton
