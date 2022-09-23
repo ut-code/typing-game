@@ -51,3 +51,7 @@ thead th {
 #content {
   display: none;
 }
+footer {
+  font-size: 13px;
+  padding: 2vw;
+}

@@ -4,7 +4,7 @@ import "./style.css";
 import script from "./script";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Form } from "react-bootstrap";
+import { Button, Table, Stack } from "react-bootstrap";
 
 let i: number = 1;
 // const listItems: string[] = ['りんご', 'バナナ', 'みかん'];
@@ -19,36 +19,52 @@ export default function Result() {
         <title>結果</title>
       </head>
       <body>
-        <div class="flex">
+        <Stack gap={3}>
           <div class="yourResults">
-            <p id="finish">終了!</p>
-            <p id="time">時間秒</p>
-            <p id="score">スコア点</p>
+            <p>結果</p>
+            <p id="time"></p>
+            <p id="score"></p>
           </div>
           <div class="rankBoard">
-            <p id="results">結果</p>
-            <table id="ranking">
+            <Table striped id="ranking">
               {/* {i=1} */}
-              <tr>
-                <th>1</th>
-                <th>Guest</th>
-                <th>100</th>
-              </tr>
-              <tr>
-                <th>2</th>
-                <th>Guest</th>
-                <th>80</th>
-              </tr>
+              <thead name="ranking-head">
+                <tr>
+                  <th>順位</th>
+                  <th>ユーザ</th>
+                  <th>得点</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>1</th>
+                  <th>Guest</th>
+                  <th>100</th>
+                </tr>
+                <tr>
+                  <th>2</th>
+                  <th>Guest</th>
+                  <th>80</th>
+                </tr>
+              </tbody>
               {/* <% i=1 %>
               <% for (let listItem of listItems) {%>
               <tr><th><%= i %></th><th><%= listItem.username %></th><th><%= listItem.score %></th></tr>
               <% i++ %>
               <% } %> */}
-            </table>
-            <a href="/">戻る</a>
+            </Table>
           </div>
-        </div>
+          <div>
+            <Button href="/" variant="secondary">
+              Back
+            </Button>
+          </div>
+        </Stack>
       </body>
+      <footer>
+        <hr></hr>
+        <p>© Copyright 2022 ut.code();</p>
+      </footer>
     </>
   );
 }

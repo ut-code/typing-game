@@ -13,3 +13,8 @@ footer {
   font-size: 13px;
   padding: 2vw;
 }
+.accordion-button {
+  background-color: rgb(100, 149, 65) !important;
+  color: white !important;
+}
+/* 矢印も白にしたい */
