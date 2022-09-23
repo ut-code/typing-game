@@ -1,7 +1,7 @@
 import { useEffect } from "react";
+import "./style.css";
 // @ts-ignore
 import script from "./script.js";
-import "./style.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Form } from "react-bootstrap";

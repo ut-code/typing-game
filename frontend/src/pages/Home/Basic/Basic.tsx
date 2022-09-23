@@ -4,6 +4,9 @@ import "./style.css";
 // @ts-ignore
 import script from "./script";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button, Form } from "react-bootstrap";
+
 export default function Basic() {
   const [content, setContent] = useState<string>("a");
   useEffect(() => {
