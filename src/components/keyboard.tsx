@@ -32,7 +32,9 @@ function sumWidth(row: number, column: number): number {
     ) {
       sum += // @ts-ignore
         physicalLayoutType[physicalLayout].content.eventCode[code].width + // @ts-ignore
-        physicalLayoutType[physicalLayout].content.marginColumn;
+        (physicalLayoutType[physicalLayout].content.eventCode[code].width === 0
+          ? 0
+          : physicalLayoutType[physicalLayout].content.marginColumn);
       j++;
     }
     if (j >= column) break;
@@ -112,74 +114,80 @@ export default function Keyboard({
     <>
       <div id="keyboard">
         {eventCode.map((code, i) => (
-          <div
-            key={code}
-            id={code}
-            className={`key ${fontSize(
-              // @ts-ignore
-              functionalLayoutType[functionalLayout].content[code]
-            )}`}
-            onClick={() =>
-              // @ts-ignore
-              keydown(
-                // @ts-ignore
-                keyColors,
-                setKeyColors,
-                new KeyboardEvent("keydown", { code }),
-                content,
-                setContent,
-                functional,
-                isDefault
-              )
-            }
-            style={{
-              position: "absolute",
-              // @ts-ignore
-              backgroundColor: keyColors[i],
-              top: `${
-                sumHeight(
-                  // @ts-ignore
-                  physicalLayoutType[physicalLayout].content.eventCode[code].row
-                ) * magnification
-              }vw`,
-              // @ts-ignore
-              left: `${
-                sumWidth(
-                  // @ts-ignore
-                  physicalLayoutType[physicalLayout].content.eventCode[code]
-                    .row, // @ts-ignore
-                  physicalLayoutType[physicalLayout].content.eventCode[code]
-                    .column
-                ) * magnification
-              }vw`,
-              width: `${
-                // @ts-ignore
-                physicalLayoutType[physicalLayout].content.eventCode[code]
-                  .width * magnification
-              }vw`,
-              height: `${
-                // @ts-ignore
-                physicalLayoutType[physicalLayout].content.height *
-                magnification
-              }vw`,
-            }}
-            // ref={dom=>{
-            //   let fontSizePx=window.innerWidth*fontSize;
-            //   const widthPx=physicalLayoutType[physicalLayout].content.eventCode[code].width * magnification* window.innerWidth*0.01;// func
-            //   // while(dom?.scrollWidth>=widthPx){
-            //   //   fontSizePx--;
-            //   //   // dom?.style.fontSize="10px";//fontSizePx+"px"
-            //   // }
-            //   // dom?.style.backgroundColor="black";
-            //   // console.log(dom?.style.fontSize);
-            // }}
-            // // while(dom?.scrollWidth>=dom.width){
-            //   //   dom.fontSize=dom.fontSize-1;
-            //   // }
-          >
+          <React.Fragment key={code}>
             {/* @ts-ignore */}
-            {functionalLayoutType[functionalLayout].content[code]}
-          </div>
+            {physicalLayoutType[physicalLayout].content.eventCode[code]
+              .width !== 0 && (
+              <div
+                id={code}
+                className={`key ${fontSize(
+                  // @ts-ignore
+                  functionalLayoutType[functionalLayout].content[code]
+                )}`}
+                onClick={() =>
+                  // @ts-ignore
+                  keydown(
+                    // @ts-ignore
+                    keyColors,
+                    setKeyColors,
+                    new KeyboardEvent("keydown", { code }),
+                    content,
+                    setContent,
+                    functional,
+                    isDefault
+                  )
+                }
+                style={{
+                  position: "absolute",
+                  // @ts-ignore
+                  backgroundColor: keyColors[i],
+                  top: `${
+                    sumHeight(
+                      // @ts-ignore
+                      physicalLayoutType[physicalLayout].content.eventCode[code]
+                        .row
+                    ) * magnification
+                  }vw`,
+                  // @ts-ignore
+                  left: `${
+                    sumWidth(
+                      // @ts-ignore
+                      physicalLayoutType[physicalLayout].content.eventCode[code]
+                        .row, // @ts-ignore
+                      physicalLayoutType[physicalLayout].content.eventCode[code]
+                        .column
+                    ) * magnification
+                  }vw`,
+                  width: `${
+                    // @ts-ignore
+                    physicalLayoutType[physicalLayout].content.eventCode[code]
+                      .width * magnification
+                  }vw`,
+                  height: `${
+                    // @ts-ignore
+                    physicalLayoutType[physicalLayout].content.height *
+                    magnification
+                  }vw`,
+                }}
+                // ref={dom=>{
+                //   let fontSizePx=window.innerWidth*fontSize;
+                //   const widthPx=physicalLayoutType[physicalLayout].content.eventCode[code].width * magnification* window.innerWidth*0.01;// func
+                //   // while(dom?.scrollWidth>=widthPx){
+                //   //   fontSizePx--;
+                //   //   // dom?.style.fontSize="10px";//fontSizePx+"px"
+                //   // }
+                //   // dom?.style.backgroundColor="black";
+                //   // console.log(dom?.style.fontSize);
+                // }}
+                // // while(dom?.scrollWidth>=dom.width){
+                //   //   dom.fontSize=dom.fontSize-1;
+                //   // }
+              >
+                {/* @ts-ignore */}
+                {functionalLayoutType[functionalLayout].content[code]}
+              </div>
+            )}
+          </React.Fragment>
         ))}
       </div>
     </>
