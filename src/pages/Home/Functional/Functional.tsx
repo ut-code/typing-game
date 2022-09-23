@@ -27,8 +27,8 @@ function keyToObject(keys: string[]): object {
 
 export default function Functional(): JSX.Element {
   const [keys, setKeys] = useState<string[]>(
-    // @ts-ignore
     eventCode.map(
+      // @ts-ignore
       (code) => functionalLayoutType[defaultFunctionalLayout].content[code]
     )
   );
