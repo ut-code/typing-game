@@ -1,5 +1,6 @@
 body {
   background-color: #eeeeee;
+  padding: 2vw;
 }
 #elements {
   background: #ffffff;
@@ -18,7 +19,7 @@ body {
 #question {
   width: 70vw;
   font-size: 30px;
-  background-color: rgb(210, 232, 144);
+  background-color: #649541;
   margin: 1vw auto;
 }
 #answer {
@@ -30,7 +31,7 @@ body {
 }
 #answer #your-answer {
   width: 58vw;
-  background-color: khaki;
+  background-color: #f7e056;
 }
 #result {
   font-size: 15px;
