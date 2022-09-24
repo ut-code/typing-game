@@ -4,13 +4,15 @@ body {
 }
 #elements {
   background: #ffffff;
+  border: 0.2vw solid #cccccc;
   width: 95vw;
+  height: 15vh;
+  border-radius: 5px;
   padding: 1vw;
   text-align: center;
-  border: 0.2vw solid #cccccc;
-  margin: 1vw auto;
-  display: flex;
-  position: relative;
+  /* margin: 1vw auto; */
+  /* display: flex; */
+  /* position: relative; */
 }
 #mondai {
   font-size: 25px;
@@ -19,7 +21,7 @@ body {
 #question {
   width: 70vw;
   font-size: 30px;
-  background-color: #649541;
+  /* background-color: #649541; */
   margin: 1vw auto;
 }
 #answer {
@@ -32,6 +34,9 @@ body {
 #answer #your-answer {
   width: 58vw;
   background-color: #f7e056;
+}
+#your-answer {
+  font-size: 15px;
 }
 #result {
   font-size: 15px;
