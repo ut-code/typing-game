@@ -10,7 +10,7 @@ body {
   border-radius: 5px;
   padding: 1vw;
   text-align: center;
-  /* margin: 1vw auto; */
+  margin: 2vw auto;
   /* display: flex; */
   /* position: relative; */
 }
@@ -28,33 +28,35 @@ body {
   font-size: 20px;
   border-spacing: 1vw 1vw;
 }
-#answer #header {
-  font-weight: normal;
-}
-#answer #your-answer {
-  width: 58vw;
-  background-color: #f7e056;
-}
 #your-answer {
   font-size: 15px;
-}
-#result {
-  font-size: 15px;
-  border-spacing: 4vw 0vw;
+  /* 動いてなくない?? */
 }
 thead th {
   font-size: 20px;
 }
-#result th {
-  font-weight: normal;
+#current {
+  font-size: 15px;
+  border-spacing: 4vw 0vw;
+}
+#current th {
+  font-weight: bolder;
   text-align: right;
 }
-#result td {
+#current td {
   text-align: right;
   width: 3vw;
 }
 #content {
   display: none;
+}
+#score-related {
+  display: flex;
+  justify-content: space-between;
+}
+#progress {
+  font-size: 15px;
+  text-align: right;
 }
 footer {
   font-size: 13px;
