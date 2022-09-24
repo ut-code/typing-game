@@ -28,7 +28,7 @@ export default async function script() {
 
   // scoreを計算する関数
   function calcScore(timeLeft, correct, miss) {
-    return timeLeft * Math.floor((correct / (miss + correct)) * 100);
+    return timeLeft * Math.floor((correct / (miss + correct + 1)) * 100);
   }
 
   async function results(timeLeft, time, correct, miss) {
