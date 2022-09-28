@@ -145,6 +145,15 @@ export default async function script() {
   }
   main();
 
+  /*const content = document.getElementById("content");
+  if (content != null) {
+    const content = content.textContent;
+  }
+  if (content.length > 2) {
+    content = content.slice(content.length-11,content.length-1);
+  }
+  console.log(content)*/
+
   let answer = ""; // 現在の到達状況
   let word_num = 0; // 何問目か
   let correct = 0; // 正答文字数
