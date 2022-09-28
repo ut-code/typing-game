@@ -38,6 +38,13 @@
     <div class="flex">
       <div class="yourResults">
         <p id="finish">終了!</p>
+        <% i=1 %>
+        <% for (let listItem of listItems) {%>
+        <%if (score == listItem.score) {%>
+        <p>順位<%=i %>位</p>
+        <% break } else {%>
+        <% i++ } %>
+        <% } %>
         <p id="Time">時間<%= time %>秒</p>
         <p id="Score">スコア<%= score %>点</p>
       </div>
