@@ -1,0 +1,26 @@
+body {
+  background-color: #eeeeee;
+  padding: 2vw;
+  margin: auto;
+}
+.yourResults {
+  font-size: 20px;
+  /* background: scroll; */
+  background-color: rgb(100, 149, 65);
+  border: 1px solid #cccccc;
+  width: 500px;
+  /* margin: 0% 30%; */
+  /* margin: auto; */
+  text-align: center;
+}
+.rankBoard {
+  background: #ffffff;
+  width: 500px;
+  border: 1px solid #cccccc;
+  /* margin: auto; */
+  text-align: center;
+}
+footer {
+  font-size: 13px;
+  padding: 2vw;
+}

@@ -1,15 +1,18 @@
 body {
   background-color: #eeeeee;
+  padding: 2vw;
 }
 #elements {
   background: #ffffff;
+  border: 0.2vw solid #cccccc;
   width: 95vw;
+  height: 15vh;
+  border-radius: 5px;
   padding: 1vw;
   text-align: center;
-  border: 0.2vw solid #cccccc;
-  margin: 1vw auto;
-  display: flex;
-  position: relative;
+  margin: 2vw auto;
+  /* display: flex; */
+  /* position: relative; */
 }
 #mondai {
   font-size: 25px;
@@ -18,42 +21,44 @@ body {
 #question {
   width: 70vw;
   font-size: 30px;
-  background-color: rgb(210, 232, 144);
+  /* background-color: #649541; */
   margin: 1vw auto;
 }
 #answer {
   font-size: 20px;
   border-spacing: 1vw 1vw;
 }
-#answer #header {
-  font-weight: normal;
-}
-#answer #your-answer {
-  width: 58vw;
-  background-color: khaki;
-}
-#result {
+#your-answer {
   font-size: 15px;
-  border-spacing: 4vw 0vw;
+  /* 動いてなくない?? */
 }
 thead th {
   font-size: 20px;
 }
-#result th {
-  font-weight: normal;
+#current {
+  font-size: 15px;
+  border-spacing: 4vw 0vw;
+}
+#current th {
+  font-weight: bolder;
   text-align: right;
 }
-#result td {
+#current td {
   text-align: right;
   width: 3vw;
 }
 #content {
-  position: absolute;
-  left: 1vw;
-  top: 23vw;
+  display: none;
 }
-#settings {
-  position: absolute;
-  left: 1vw;
-  top: 25vw;
+#score-related {
+  display: flex;
+  justify-content: space-between;
+}
+#progress {
+  font-size: 15px;
+  text-align: right;
+}
+footer {
+  font-size: 13px;
+  padding: 2vw;
 }

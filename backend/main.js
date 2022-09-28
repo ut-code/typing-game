@@ -16,10 +16,12 @@ app.use(express.json());
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
+let username = "Guest"; // 仮置き
+let qnumber = 0; // 仮置き
 // Homeでユーザーが入力した情報をcookieに保存
 app.post("/cookSave", (request, response) => {
-  const username = request.body.username;
-  const qnumber = request.body.questionNumber;
+  let username = request.body.username;
+  let qnumber = request.body.questionNumber;
   // response.cookie("username", username);
   // response.cookie("qnumber", qnumber);
   response.json({
@@ -34,7 +36,7 @@ app.post("/questions", async (request, response) => {
   // const qnumber = request.cookies.qnumber;
   const records = await prisma.questions.findMany({
     where: {
-      qnumber: 0,
+      qnumber: qnumber,
     },
   });
   const questions = records.map((data) => data.question);

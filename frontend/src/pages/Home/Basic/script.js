@@ -27,12 +27,12 @@ export default async function script() {
   }
 
   // scoreを計算する関数
-  function calcScore(time, correct, miss) {
-    return 100 - Math.floor(((time * miss) / correct) * 10);
+  function calcScore(timeLeft, correct, miss) {
+    return timeLeft * Math.floor((correct / (miss + correct + 1)) * 100);
   }
 
-  async function results(time, correct, miss) {
-    let score = calcScore(time, correct, miss);
+  async function results(timeLeft, time, correct, miss) {
+    let score = calcScore(timeLeft, correct, miss);
     const json = JSON.stringify({ time: time, score: score });
     const response = await fetch(
       `${import.meta.env.VITE_API_ENDPOINT}/results`,
@@ -95,6 +95,9 @@ export default async function script() {
         // 不正解の時
         miss++;
       }
+      if (timeLimit - time <= 0) {
+        results(timeLimit - time, time, correct, miss);
+      }
       if (cnt == questions[word_num].length) {
         // 次の問題へ
         word_num++;
@@ -102,9 +105,14 @@ export default async function script() {
         cnt = 0;
         if (word_num === questions.length) {
           clearInterval(timerId);
-          results(time, correct, miss);
+          results(timeLimit - time, time, correct, miss);
         }
       }
+      // if (time > timeLimit) {
+      //   // 時間制限でも終了, ただキー押さないと移行しない
+      //   // clearInterval(timerId);
+      //   results(timeLimit - time, time, correct, miss);
+      // }
       document.getElementById("question").textContent = questions[word_num];
       document.getElementById("your-answer").textContent = answer;
       document.getElementById("miss").textContent = miss + "回";
@@ -118,17 +126,6 @@ export default async function script() {
 
     // 何かキーが押されたら、実行 https://developer.mozilla.org/ja/docs/Web/API/Element/keydown_event
     window.addEventListener("keydown", (e) => {
-      // allowedKeyに書かれたキーの動作は無効化しない
-      const allowedKey = [
-        "F5",
-        "F12",
-        "Alt",
-        "ArrowUp",
-        "ArrowDown",
-        "ArrowLeft",
-        "ArrowRight",
-      ];
-      if (!allowedKey.includes(e.key)) e.preventDefault(); // キーボードの既定の動作を無効化 https://developer.mozilla.org/ja/docs/Web/API/Event/preventDefault を参照
       if (e.key === " " && isStarted === false) {
         document.getElementById("question").textContent = questions[word_num];
         // スペースが押されたら、時間計測
@@ -136,6 +133,12 @@ export default async function script() {
         timerId = setInterval(() => {
           time++;
           document.getElementById("time").textContent = time + "秒";
+          document.getElementById("timeLeft").textContent =
+            timeLimit - time + "秒";
+          if (timeLimit - time <= 0) {
+            clearInterval(timerId);
+            document.getElementById("question").textContent = "キーを押してね";
+          }
         }, 1000);
       }
     });
@@ -158,9 +161,11 @@ export default async function script() {
   let cnt = 0; // 何文字目か
   let isStarted = false; // 始まったか
   let time = 0; // 時間
+  let timeLimit = 15; // 制限時間
 
   document.getElementById("correct").textContent = correct + "回";
   document.getElementById("miss").textContent = miss + "回";
   document.getElementById("time").textContent = time + "秒";
+  document.getElementById("timeLeft").textContent = timeLimit - time + "秒";
   // ここまで
 }
