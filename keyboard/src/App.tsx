@@ -5,7 +5,7 @@ import Keyboard from "./components/keyboard";
 import { keyup, convert } from "./components/convert";
 import eventCode from "./components/data/eventCode.json";
 import romantable from "./romantable.json";
-import ReadJSONFile from "./../keyboard-layout-maker/src/components/ReadJSONFile";
+import ReadJSONFile from "./../../src/components/ReadJSONFile";
 import {
   functionalLayoutType,
   physicalLayoutType,
