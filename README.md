@@ -29,8 +29,10 @@ npm install -g npm
 プロジェクトフォルダに移動
 
 ```shell
-git clone git@github.com:ut-code/typing-game.git
+git clone --recursive git@github.com:ut-code/typing-game.git
 ```
+
+※ クローンをしている時少し時間がかかりますが、あまり気にしないでください。
 
 ```shell
 cd typing-game
