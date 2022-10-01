@@ -76,7 +76,7 @@ npm run frontend:dev
           - `Home.tsx` , `script.js` , `style.css` を編集する。
           - `Basic`
             - `Home.tsx` , `script.js` , `style.css` を編集する。
-    - `/dist` `$ npm run dev` を実行すると、自動で作られる。編集はしない。
+    - `/dist` `$ npm run build` を実行すると、自動で作られる。編集はしない。
   - `/backend` バックエンド関係
     - `main.js` メイン
     - `finished.ejs` 結果ページ
