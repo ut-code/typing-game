@@ -7,7 +7,7 @@
     "setup": "npm run setup:install",
     "setup:env": "echo 'DATABASE_URL=\"\"' > backend/.env",
     "setup:db_push": "cd backend && npx prisma db push",
-    "setup:install": "git submodule update --init --recursive && npm install && npm run frontend:install && npm run backend:install && npm run setup:db_push",
+    "setup:install": "npm install && npm run frontend:install && npm run backend:install && npm run setup:db_push",
     "frontend:install": "cd frontend && npm install",
     "backend:install": "cd backend && npm install",
     "frontend:dev": "cd frontend && npm run dev",
