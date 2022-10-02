@@ -18,7 +18,7 @@ export default function Result() {
       <head>
         <title>結果</title>
       </head>
-      <body>
+      <div>
         <Stack gap={3}>
           <div class="yourResults">
             <p>結果</p>
@@ -60,7 +60,7 @@ export default function Result() {
             </Button>
           </div>
         </Stack>
-      </body>
+      </div>
       <footer>
         <hr></hr>
         <p>© Copyright 2022 ut.code();</p>
