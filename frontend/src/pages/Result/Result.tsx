@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Footer from "./../../components/Footer";
+import { Helmet } from "react-helmet";
 import "./style.css";
 // @ts-ignore
 import script from "./script";
@@ -16,9 +17,10 @@ export default function Result() {
   }, []);
   return (
     <>
-      {/* <head>
+      <Helmet>
+        {/* https://github.com/nfl/react-helmet */}
         <title>結果</title>
-      </head> */}
+      </Helmet>
       <Stack gap={3}>
         <div className="yourResults">
           <p>結果</p>
