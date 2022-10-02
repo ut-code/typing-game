@@ -18,7 +18,7 @@ export default function Basic() {
   return (
     <>
       {/* ここからHTMLファイル */}
-      <body>
+      <div>
         <div id="score-related">
           <table id="current">
             <tbody>
@@ -56,7 +56,7 @@ export default function Basic() {
         <Button href="/" variant="secondary">
           Back
         </Button>
-      </body>
+      </div>
       {/* ここまでHTMLファイル */}
       {/* 下のdivの中にReactがキーボードの入力結果をいい感じにして、出力している。これを、読み取って使えば良い。 */}
       <div id="content"></div>

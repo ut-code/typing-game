@@ -15,7 +15,7 @@ export default function Home() {
       <header>
         <b>ut.code(); タイピングゲーム</b>
       </header>
-      <body>
+      <div>
         {/* ユーザーネーム: <input name="username" placeholder="Guest" />
         問題番号: <input name="questionNumber" placeholder="0" /> */}
         <Stack gap={3}>
@@ -58,7 +58,7 @@ export default function Home() {
             </Accordion.Item>
           </Accordion>
         </Stack>
-      </body>
+      </div>
       <footer>
         <hr></hr>
         <p>© Copyright 2022 ut.code();</p>
