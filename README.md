@@ -32,8 +32,6 @@ npm install -g npm
 git clone --recursive git@github.com:ut-code/typing-game.git
 ```
 
-※ クローンをしている時少し時間がかかりますが、あまり気にしないでください。
-
 ```shell
 cd typing-game
 ```
