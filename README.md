@@ -87,4 +87,4 @@ npm run autoupdate
     - `main.js` メイン
     - `finished.ejs` 結果ページ
     - `/prisma` Prisma のファイル
-  - `/keyboard`,`/keyboard-layout-maker` サブモジュール これらのフォルダの中は別のリポジトリになっている。
+  - `/keyboard-layout-maker` サブモジュール これらのフォルダの中は別のリポジトリになっている。
