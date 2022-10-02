@@ -19,49 +19,47 @@ export default function Result() {
       {/* <head>
         <title>結果</title>
       </head> */}
-      <div>
-        <Stack gap={3}>
-          <div className="yourResults">
-            <p>結果</p>
-            <p id="time"></p>
-            <p id="score"></p>
-          </div>
-          <div className="rankBoard">
-            <Table striped id="ranking">
-              {/* {i=1} */}
-              <thead id="ranking-head">
-                <tr>
-                  <th>順位</th>
-                  <th>ユーザ</th>
-                  <th>得点</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>1</th>
-                  <th>Guest</th>
-                  <th>100</th>
-                </tr>
-                <tr>
-                  <th>2</th>
-                  <th>Guest</th>
-                  <th>80</th>
-                </tr>
-              </tbody>
-              {/* <% i=1 %>
+      <Stack gap={3}>
+        <div className="yourResults">
+          <p>結果</p>
+          <p id="time"></p>
+          <p id="score"></p>
+        </div>
+        <div className="rankBoard">
+          <Table striped id="ranking">
+            {/* {i=1} */}
+            <thead id="ranking-head">
+              <tr>
+                <th>順位</th>
+                <th>ユーザ</th>
+                <th>得点</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>1</th>
+                <th>Guest</th>
+                <th>100</th>
+              </tr>
+              <tr>
+                <th>2</th>
+                <th>Guest</th>
+                <th>80</th>
+              </tr>
+            </tbody>
+            {/* <% i=1 %>
               <% for (let listItem of listItems) {%>
               <tr><th><%= i %></th><th><%= listItem.username %></th><th><%= listItem.score %></th></tr>
               <% i++ %>
               <% } %> */}
-            </Table>
-          </div>
-          <div>
-            <Button href="/" variant="secondary">
-              Back
-            </Button>
-          </div>
-        </Stack>
-      </div>
+          </Table>
+        </div>
+        <div>
+          <Button href="/" variant="secondary">
+            Back
+          </Button>
+        </div>
+      </Stack>
       <Footer />
     </>
   );
