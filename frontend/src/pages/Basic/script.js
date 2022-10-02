@@ -83,11 +83,16 @@ export default async function script() {
     // キーボードの入力をReactがdivの中に出力しているので、その変更が行われたのを読み取っている。
     const observer = new MutationObserver(() => {
       // https://developer.mozilla.org/ja/docs/Web/API/MutationObserver
-      const content = document.getElementById("content").textContent;
+
+      const previousContent = content;
+      content = document.getElementById("content").textContent;
       const key = content[content.length - 1]; // 追加された文字すなわち一番最後の文字を取り出す。
+
+      if (content === previousContent) return;
+
       if (key === questions[word_num][cnt]) {
         // 正答時
-        answer = answer + key;
+        answer += key;
         cnt++;
         correct++;
       } else if (alphabet.includes(key.toLowerCase())) {
@@ -162,6 +167,8 @@ export default async function script() {
   let isStarted = false; // 始まったか
   let time = 0; // 時間
   let timeLimit = 15; // 制限時間
+
+  let content = document.getElementById("content").textContent;
 
   document.getElementById("correct").textContent = correct + "回";
   document.getElementById("miss").textContent = miss + "回";
