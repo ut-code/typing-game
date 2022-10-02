@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import Header from "./../components/Header";
+import Footer from "./../components/Footer";
 import "./style.css";
 // @ts-ignore
 import script from "./script.js";
@@ -12,9 +14,7 @@ export default function Home() {
   }, []);
   return (
     <>
-      <header>
-        <b>ut.code(); タイピングゲーム</b>
-      </header>
+      <Header />
       <div>
         {/* ユーザーネーム: <input name="username" placeholder="Guest" />
         問題番号: <input name="questionNumber" placeholder="0" /> */}
@@ -59,10 +59,7 @@ export default function Home() {
           </Accordion>
         </Stack>
       </div>
-      <footer>
-        <hr></hr>
-        <p>© Copyright 2022 ut.code();</p>
-      </footer>
+      <Footer />
     </>
   );
 }

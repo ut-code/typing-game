@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Footer from "./../../components/Footer";
 import "./style.css";
 // @ts-ignore
 import script from "./script";
@@ -15,20 +16,20 @@ export default function Result() {
   }, []);
   return (
     <>
-      <head>
+      {/* <head>
         <title>結果</title>
-      </head>
+      </head> */}
       <div>
         <Stack gap={3}>
-          <div class="yourResults">
+          <div className="yourResults">
             <p>結果</p>
             <p id="time"></p>
             <p id="score"></p>
           </div>
-          <div class="rankBoard">
+          <div className="rankBoard">
             <Table striped id="ranking">
               {/* {i=1} */}
-              <thead name="ranking-head">
+              <thead id="ranking-head">
                 <tr>
                   <th>順位</th>
                   <th>ユーザ</th>
@@ -61,10 +62,7 @@ export default function Result() {
           </div>
         </Stack>
       </div>
-      <footer>
-        <hr></hr>
-        <p>© Copyright 2022 ut.code();</p>
-      </footer>
+      <Footer />
     </>
   );
 }
