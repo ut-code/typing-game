@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
+import React from "react";
 /**
  * `i` 番目を入力させるinputタグ
  */
@@ -17,7 +19,7 @@ export default function GetManySettings<T extends string | number>({
   className?: string;
   min?: number;
   placeholder?: string;
-}) {
+}): JSX.Element {
   return (
     <input
       type={type === "string" ? "text" : "number"}
