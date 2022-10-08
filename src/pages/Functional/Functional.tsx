@@ -44,6 +44,7 @@ export default function Functional(): JSX.Element {
         physical={defaultPhysicalLayout}
         keyLayout={keyToObject(keys)}
         isDefault={true}
+        shift={false}
       ></Keyboard>
       <div className="box"></div>
       <ReadJSONFile

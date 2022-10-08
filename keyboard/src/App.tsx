@@ -21,7 +21,9 @@ function keydown(
   content: string,
   setContent: (value: string) => void,
   functional: string,
-  isDefault: boolean
+  isDefault: boolean,
+  shift:boolean,
+  setShift:(value:boolean)=>void
 ): void {
   const prohibitedKey = [
     "A",
@@ -75,7 +77,7 @@ function keydown(
   setContent(
     // @ts-ignore
     (content: string) =>
-      convert(e, functional, functionalLayoutType, content, isDefault)
+      convert(e, functional, functionalLayoutType, content, isDefault,shift,setShift)
   );
   setKeyColors(
     eventCode.map((tmp, i) =>
@@ -132,6 +134,7 @@ export default function App({
     eventCode.map((code) => "rgba(0,0,0,0)")
   );
   const [content, setContent] = useState<string>("");
+  const [shift,setShift]=useState<boolean>(false);
   useEffect(() => {
     function tmp(e: KeyboardEvent): void {
       keydown(
@@ -141,11 +144,13 @@ export default function App({
         content,
         setContent,
         functional,
-        isDefault
+        isDefault,
+        shift,
+        setShift
       );
     }
     function temp(e: KeyboardEvent): void {
-      keyup(e.code, functional, functionalLayoutType);
+      keyup(e.code, functional, functionalLayoutType,shift,setShift);
     }
     window.addEventListener("keydown", tmp);
     window.addEventListener("keyup", temp);
@@ -210,7 +215,6 @@ export default function App({
                 {Object.keys(physicalLayoutType).map((key, i) => (
                   // @ts-ignore
                   <option key={i} value={physicalLayoutType[key].id}>
-                    {" "}
                     {/* @ts-ignore */}
                     {physicalLayoutType[key].name}
                   </option>
@@ -230,6 +234,8 @@ export default function App({
           keyLayout={functionalLayoutType.custom.content}
           physicalKeyLayout={physicalLayoutType.custom.content}
           isDefault={isDefault}
+          shift={shift}
+          setShift={setShift}
         ></Keyboard>
       </div>
     </>

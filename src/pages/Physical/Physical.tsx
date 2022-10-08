@@ -86,6 +86,7 @@ export default function Physical(): JSX.Element {
           styles
         )}
         isDefault={true}
+        shift={false}
       ></Keyboard>
       <div className="box"></div>
       <ReadJSONFile

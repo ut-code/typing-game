@@ -82,6 +82,8 @@ export default function Keyboard({
   keyLayout = functionalLayoutType[defaultFunctionalLayout].content,
   physicalKeyLayout,
   isDefault,
+  shift,
+  setShift
 }: {
   functional: string;
   physical: string;
@@ -94,13 +96,17 @@ export default function Keyboard({
     content: string,
     setContent: (value: string) => void,
     functional: string,
-    isDefault: boolean
+    isDefault: boolean,
+    shift:boolean,
+    setShift:(value:boolean)=>void
   ) => void;
   content?: string;
   setContent?: (value: string) => void;
   keyLayout?: object;
   physicalKeyLayout?: object;
   isDefault: boolean;
+  shift:boolean;
+  setShift?:(value:boolean)=>void
 }): JSX.Element {
   const { width } = useWindowDimensions();
   const magnification = 5.8 * (width < 850 ? 1 : 850 / width);
@@ -123,7 +129,7 @@ export default function Keyboard({
                 id={code}
                 className={`key ${fontSize(
                   // @ts-ignore
-                  functionalLayoutType[functionalLayout].content[code][0]
+                  functionalLayoutType[functionalLayout].content[code][!shift?0:1]
                 )}`}
                 onClick={() =>
                   // @ts-ignore
@@ -135,7 +141,9 @@ export default function Keyboard({
                     content,
                     setContent,
                     functional,
-                    isDefault
+                    isDefault,
+                    shift,
+                    setShift
                   )
                 }
                 style={{
@@ -185,7 +193,7 @@ export default function Keyboard({
                 //   // }
               >
                 {/* @ts-ignore */}
-                {functionalLayoutType[functionalLayout].content[code][0]}
+                {functionalLayoutType[functionalLayout].content[code][!shift?0:1]}
               </div>
             )}
           </React.Fragment>
