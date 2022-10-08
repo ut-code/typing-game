@@ -17,21 +17,25 @@ import BackToHome from "./../../components/BackToHome";
 import "./functional.css";
 import "./../keyboard.css";
 
-function keyToObject(keys: string[]): object {
+function keyToObject(keys: string[][]): object {
   const object = {};
   for (let i = 0; i < eventCode.length; i++) {
-    Object.assign(object, { [eventCode[i]]: keys[i] });
+    Object.assign(object, { [eventCode[i]]: [keys[0][i],keys[1][i]] });
   }
   return object;
 }
 
 export default function Functional(): JSX.Element {
-  const [keys, setKeys] = useState<string[]>(
+  const [keys, setKeys] = useState<string[][]>([
     eventCode.map(
       // @ts-ignore
-      (code) => functionalLayoutType[defaultFunctionalLayout].content[code]
+      (code) => functionalLayoutType[defaultFunctionalLayout].content[code][0]
+    ),
+    eventCode.map(
+      // @ts-ignore
+      (code) => functionalLayoutType[defaultFunctionalLayout].content[code][1]
     )
-  );
+  ]);
   const [fileName, setFileName] = useState<string>("");
   return (
     <>
@@ -45,7 +49,7 @@ export default function Functional(): JSX.Element {
       <ReadJSONFile
         f={(x: object) => {
           // @ts-ignore
-          setKeys(eventCode.map((code) => x[code]));
+          setKeys([eventCode.map((code) => x[code][0]),eventCode.map((code) => x[code][1])]);
         }}
       ></ReadJSONFile>
       <table>
@@ -56,8 +60,8 @@ export default function Functional(): JSX.Element {
               <td>
                 <GetManySettings<string>
                   type="string"
-                  items={keys}
-                  setItems={setKeys}
+                  items={keys[0]}
+                  setItems={(value:string[])=>{setKeys([value,keys[1]])}}
                   i={i}
                 ></GetManySettings>
               </td>

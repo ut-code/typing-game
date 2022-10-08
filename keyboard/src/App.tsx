@@ -81,7 +81,7 @@ function keydown(
     eventCode.map((tmp, i) =>
       (!isDefault && tmp === e.code) ||
       (isDefault && // @ts-ignore
-        functionalLayoutType[functional].content[tmp].toLowerCase()) ===
+        functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
         e.key.toLowerCase()
         ? "orange"
         : keyColors[i]
@@ -92,7 +92,7 @@ function keydown(
       eventCode.map((tmp, i) =>
         (!isDefault && tmp === e.code) ||
         (isDefault && // @ts-ignore
-          functionalLayoutType[functional].content[tmp].toLowerCase()) ===
+          functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
           e.key.toLowerCase()
           ? "rgba(0,0,0,0)"
           : keyColors[i]
@@ -106,7 +106,7 @@ function toJapanese(content: string): string {
   let ans = "";
   let tmp = "";
   for (let i = 0; i < content.length; i++) {
-    tmp = tmp + content[i].toLowerCase();
+    tmp = tmp + content[i][0].toLowerCase();
     const hoge = romantable.findIndex((element) => element[0] === tmp);
     if (hoge !== -1) {
       ans += romantable[hoge][1];

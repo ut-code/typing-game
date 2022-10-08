@@ -123,7 +123,7 @@ export default function Keyboard({
                 id={code}
                 className={`key ${fontSize(
                   // @ts-ignore
-                  functionalLayoutType[functionalLayout].content[code]
+                  functionalLayoutType[functionalLayout].content[code][0]
                 )}`}
                 onClick={() =>
                   // @ts-ignore
@@ -185,7 +185,7 @@ export default function Keyboard({
                 //   // }
               >
                 {/* @ts-ignore */}
-                {functionalLayoutType[functionalLayout].content[code]}
+                {functionalLayoutType[functionalLayout].content[code][0]}
               </div>
             )}
           </React.Fragment>
