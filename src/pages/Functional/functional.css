@@ -2,6 +2,11 @@
 th {
   text-align: left;
 }
+
+.input {
+  width: 180px;
+}
+
 /* input要素が収まらない時、 */
 @media (max-width: 450px) {
   th {
