@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
+
+let shift_temp=false;
 export function keyup(
   code: string,
   functional: string,
@@ -8,10 +10,11 @@ export function keyup(
   setShift: (value: boolean) => void
 ): void {
   // @ts-ignore
-  const key = functionalLayoutType[functional].content[code][!shift?0:1];
+  const key = functionalLayoutType[functional].content[code][!shift_temp?0:1];
   switch (key) {
     case "Shift":
       setShift(false);
+      shift_temp=false;
   }
 }
 export function convert(
@@ -24,12 +27,12 @@ export function convert(
   setShift: (value: boolean) => void
 ): string {
   // @ts-ignore
-  let key = functionalLayoutType[functional].content[e.code];
+  const keys = functionalLayoutType[functional].content[e.code];
   let ans = content;
-  if (key === undefined) {
+  if (keys === undefined) {
     ans += "";
   } else {
-    key=key[!shift?0:1];
+    const key=keys[!shift_temp?0:1];
     if (key.length === 1) {
       ans += key;
     } else {
@@ -39,6 +42,7 @@ export function convert(
           break;
         case "Shift":
           setShift(true);
+          shift_temp=true;
           break;
         case "Back Space":
           ans += ""; // ans = content.slice(0, -1);

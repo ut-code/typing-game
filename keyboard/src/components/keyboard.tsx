@@ -143,7 +143,8 @@ export default function Keyboard({
                     functional,
                     isDefault,
                     shift,
-                    setShift
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                    setShift!
                   )
                 }
                 style={{
