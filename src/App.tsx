@@ -1,7 +1,7 @@
 import React, { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import Functional from "./pages/Home/Functional/Functional";
-import Physical from "./pages/Home/Physical/Physical";
+import Home from "./pages/Home";
+import Functional from "./pages/Functional/Functional";
+import Physical from "./pages/Physical/Physical";
 
 export default function App(): JSX.Element {
   return (

@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React, { useState } from "react";
 // import EventCode from "./../../../../keyboard/src/components/data/eventCode";
-import eventCode from "./../../../../keyboard/src/components/data/eventCode.json";
+import eventCode from "./../../../keyboard/src/components/data/eventCode.json";
 import {
   functionalLayoutType,
   defaultFunctionalLayout,
   defaultPhysicalLayout,
-} from "../../../../keyboard/src/components/data/keyboardSettings";
-import Keyboard from "../../../../keyboard/src/components/keyboard";
-import ReadJSONFile from "./../../../components/ReadJSONFile";
-import GetManySettings from "./../../../components/GetManySettings";
-import GetFileName from "./../../../components/GetFileName";
-import ConfirmButton from "./../../../components/ConfirmButton";
-import makeJSONFile from "./../../../components/makeJSONFile";
-import BackToHome from "../../../components/BackToHome";
+} from "./../../../keyboard/src/components/data/keyboardSettings";
+import Keyboard from "./../../../keyboard/src/components/keyboard";
+import ReadJSONFile from "./../../components/ReadJSONFile";
+import GetManySettings from "./../../components/GetManySettings";
+import GetFileName from "./../../components/GetFileName";
+import ConfirmButton from "./../../components/ConfirmButton";
+import makeJSONFile from "./../../components/makeJSONFile";
+import BackToHome from "./../../components/BackToHome";
 import "./functional.css";
 import "./../keyboard.css";
 
