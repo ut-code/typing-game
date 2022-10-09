@@ -2,7 +2,7 @@
   "name": "backend",
   "main": "main.js",
   "scripts": {
-    "dev": "node main.js",
+    "dev": "node-dev main.js",
     "build": "",
     "start": "node main.js"
   },
@@ -24,6 +24,7 @@
     "express": "^4.18.1"
   },
   "devDependencies": {
+    "node-dev": "^7.4.3",
     "prisma": "^4.3.1"
   }
 }
