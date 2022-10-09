@@ -158,7 +158,7 @@ export default function App({
       window.removeEventListener("keydown", tmp);
       window.removeEventListener("keyup", temp);
     };
-  }, [functional, isDefault]);
+  }, [functional, isDefault,shift]);
   setOutput(content);
   return (
     <>
