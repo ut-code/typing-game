@@ -26,6 +26,7 @@ function keyToObject(keys: string[][]): object {
 }
 
 export default function Functional(): JSX.Element {
+  const [shift, setShift] = useState<boolean>(false);
   const [keys, setKeys] = useState<string[][]>([
     eventCode.map(
       // @ts-ignore
@@ -39,12 +40,22 @@ export default function Functional(): JSX.Element {
   const [fileName, setFileName] = useState<string>("");
   return (
     <>
+      <div id="shift">
+        <input
+          type="checkbox"
+          checked={shift}
+          onChange={(e) => {
+            setShift(e.target.checked);
+          }}
+        />
+        <label>Shift</label>
+      </div>
       <Keyboard
         functional="custom"
         physical={defaultPhysicalLayout}
         keyLayout={keyToObject(keys)}
         isDefault={true}
-        shift={false}
+        shift={shift}
       ></Keyboard>
       <div className="box"></div>
       <ReadJSONFile
