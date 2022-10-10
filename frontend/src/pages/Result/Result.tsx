@@ -8,15 +8,50 @@ import script from "./script";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Table, Stack } from "react-bootstrap";
 
-let i: number = 1;
+let i: number = 0;
 // const listItems: string[] = ['りんご', 'バナナ', 'みかん'];
 
 export default function Result() {
+  const [name, setName] = useState("");
+  const [id, setId] = useState("AWS");
+  const [score, setScore] = useState(0);
+  const [listItems, setListItems] = useState([
+    { record_id: 1, problem: 1, username: "reactmuzui", score: -100 },
+  ]);
   useEffect(() => {
     script();
   }, []);
+  useEffect(() => {
+    (async () => {
+      await fetch(
+        `${import.meta.env.VITE_API_ENDPOINT}/test`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
+        {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setScore(data.score);
+        });
+      //     // (`https://api.github.com/users/${id}`)
+      //       .then(response => response.json())
+      //       .then(data => {
+      //         setName(data.name)
+      //       })
+    })();
+  }, [score]);
   return (
     <>
+      <p>{score}</p>
+      <p>{listItems[i].score}</p>
+      <ul>
+        {listItems.map((listItem) => (
+          <li key={listItem.record_id}>
+            {listItem.username} {listItem.score}
+          </li>
+        ))}
+      </ul>
       <Helmet>
         {/* https://github.com/nfl/react-helmet */}
         <title>結果</title>
@@ -38,22 +73,24 @@ export default function Result() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th>1</th>
+              {listItems.map((listItem) => (
+                <tr key={listItem.record_id}>
+                  <th>1</th>
+                  <th>{listItem.username}</th>
+                  <th>{listItem.score}</th>
+                </tr>
+              ))}
+              {/* <tr>
+                <th>2</th>
                 <th>Guest</th>
                 <th>100</th>
               </tr>
               <tr>
-                <th>2</th>
+                <th>3</th>
                 <th>Guest</th>
                 <th>80</th>
-              </tr>
+              </tr> */}
             </tbody>
-            {/* <% i=1 %>
-              <% for (let listItem of listItems) {%>
-              <tr><th><%= i %></th><th><%= listItem.username %></th><th><%= listItem.score %></th></tr>
-              <% i++ %>
-              <% } %> */}
           </Table>
         </div>
         <div>

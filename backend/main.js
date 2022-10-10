@@ -76,4 +76,11 @@ app.post("/results", async (request, response) => {
   response.send(html);
 });
 
+app.post("/test", async (request, response) => {
+  const records = await getRanking();
+  // const scores = records.map((data) => data.score);
+  // JSON形式でscript.jsに送信
+  response.json(records[0]);
+});
+
 app.listen(3000);
