@@ -9,12 +9,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Table, Stack } from "react-bootstrap";
 
 let i: number = 0;
-// const listItems: string[] = ['りんご', 'バナナ', 'みかん'];
+type Product = {
+  record_id: number;
+  problem: number;
+  username: string;
+  score: number;
+};
 
 export default function Result() {
   const [name, setName] = useState("");
   const [id, setId] = useState("AWS");
   const [score, setScore] = useState(0);
+  const [count, setCount] = useState(1);
+  const increment = () => setCount((prevCount) => prevCount + 1);
+  // const [listItems, setListItems] = useState<Product | null>(null);
   const [listItems, setListItems] = useState([
     { record_id: 1, problem: 1, username: "reactmuzui", score: -100 },
   ]);
@@ -33,18 +41,13 @@ export default function Result() {
         .then((response) => response.json())
         .then((data) => {
           setScore(data.score);
+          // alert(typeof(data))
+          setListItems(data);
         });
-      //     // (`https://api.github.com/users/${id}`)
-      //       .then(response => response.json())
-      //       .then(data => {
-      //         setName(data.name)
-      //       })
     })();
-  }, [score]);
+  }, []);
   return (
     <>
-      <p>{score}</p>
-      <p>{listItems[i].score}</p>
       <ul>
         {listItems.map((listItem) => (
           <li key={listItem.record_id}>
@@ -75,9 +78,10 @@ export default function Result() {
             <tbody>
               {listItems.map((listItem) => (
                 <tr key={listItem.record_id}>
-                  <th>1</th>
+                  <th>{count}</th>
                   <th>{listItem.username}</th>
                   <th>{listItem.score}</th>
+                  {/* {increment()} */}
                 </tr>
               ))}
               {/* <tr>
