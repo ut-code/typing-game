@@ -20,8 +20,8 @@ let username = "Guest"; // 仮置き
 let qnumber = 0; // 仮置き
 // Homeでユーザーが入力した情報をcookieに保存
 app.post("/cookSave", (request, response) => {
-  let username = request.body.username;
-  let qnumber = request.body.questionNumber;
+  username = request.body.username;
+  qnumber = request.body.questionNumber;
   // response.cookie("username", username);
   // response.cookie("qnumber", qnumber);
   response.json({
@@ -33,10 +33,10 @@ app.post("/cookSave", (request, response) => {
 // データベースからPrismaで問題をとってくる
 app.post("/questions", async (request, response) => {
   // questionsに問題が配列の形で入っている。
-  // const qnumber = request.cookies.qnumber;
+  // qnumber = request.cookies.qnumber;
   const records = await prisma.questions.findMany({
     where: {
-      qnumber: qnumber,
+      qnumber: 0, // qnumber,
     },
   });
   const questions = records.map((data) => data.question);
@@ -61,19 +61,41 @@ async function submitScore(username, score) {
   return submission;
 }
 
+// app.post("/results", async (request, response) => {
+//   const time = request.body.time;
+//   const username = "not working :<"; // 仮ユーザーネーム、本当はcookieから取得
+//   const score = request.body.score;
+//   const submission = await submitScore(username, score);
+//   const records = await getRanking();
+//   const template = fs.readFileSync("./results.ejs", "utf-8");
+//   const html = ejs.render(template, {
+//     time: time,
+//     score: score,
+//     listItems: records,
+//   });
+//   response.send(html);
+// });
+
+let time = -2; // 仮置き
+let score = -2; // 仮置き
 app.post("/results", async (request, response) => {
-  const time = request.body.time;
-  const username = "not working :<"; // 仮ユーザーネーム、本当はcookieから取得
-  const score = request.body.score;
-  const submission = await submitScore(username, score);
+  time = request.body.time;
+  username = "not working :<"; // 仮ユーザーネーム、本当はcookieから取得
+  score = request.body.score;
+  await submitScore(username, score);
+  // response.json({ time: time, score: score, username: username});
+  response.json();
+});
+
+// app,post("/fetchscore", (request, response) => {
+//   response.json({ time: time, score: score, username: username });
+// });
+
+app.post("/fetchranking", async (request, response) => {
   const records = await getRanking();
-  const template = fs.readFileSync("./results.ejs", "utf-8");
-  const html = ejs.render(template, {
-    time: time,
-    score: score,
-    listItems: records,
-  });
-  response.send(html);
+  // const scores = records.map((data) => data.score);
+  // JSON形式でscript.jsに送信
+  response.json(records);
 });
 
 app.listen(3000);
