@@ -20,8 +20,8 @@ let username = "Guest"; // 仮置き
 let qnumber = 0; // 仮置き
 // Homeでユーザーが入力した情報をcookieに保存
 app.post("/cookSave", (request, response) => {
-  let username = request.body.username;
-  let qnumber = request.body.questionNumber;
+  username = request.body.username;
+  qnumber = request.body.questionNumber;
   // response.cookie("username", username);
   // response.cookie("qnumber", qnumber);
   response.json({
@@ -33,10 +33,10 @@ app.post("/cookSave", (request, response) => {
 // データベースからPrismaで問題をとってくる
 app.post("/questions", async (request, response) => {
   // questionsに問題が配列の形で入っている。
-  // const qnumber = request.cookies.qnumber;
+  // qnumber = request.cookies.qnumber;
   const records = await prisma.questions.findMany({
     where: {
-      qnumber: qnumber,
+      qnumber: 0, // qnumber,
     },
   });
   const questions = records.map((data) => data.question);
