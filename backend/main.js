@@ -61,22 +61,37 @@ async function submitScore(username, score) {
   return submission;
 }
 
+// app.post("/results", async (request, response) => {
+//   const time = request.body.time;
+//   const username = "not working :<"; // 仮ユーザーネーム、本当はcookieから取得
+//   const score = request.body.score;
+//   const submission = await submitScore(username, score);
+//   const records = await getRanking();
+//   const template = fs.readFileSync("./results.ejs", "utf-8");
+//   const html = ejs.render(template, {
+//     time: time,
+//     score: score,
+//     listItems: records,
+//   });
+//   response.send(html);
+// });
+
+let time = -2; // 仮置き
+let score = -2; // 仮置き
 app.post("/results", async (request, response) => {
-  const time = request.body.time;
-  const username = "not working :<"; // 仮ユーザーネーム、本当はcookieから取得
-  const score = request.body.score;
-  const submission = await submitScore(username, score);
-  const records = await getRanking();
-  const template = fs.readFileSync("./results.ejs", "utf-8");
-  const html = ejs.render(template, {
-    time: time,
-    score: score,
-    listItems: records,
-  });
-  response.send(html);
+  time = request.body.time;
+  username = "not working :<"; // 仮ユーザーネーム、本当はcookieから取得
+  score = request.body.score;
+  await submitScore(username, score);
+  // response.json({ time: time, score: score, username: username});
+  response.json();
 });
 
-app.post("/test", async (request, response) => {
+// app,post("/fetchscore", (request, response) => {
+//   response.json({ time: time, score: score, username: username });
+// });
+
+app.post("/fetchranking", async (request, response) => {
   const records = await getRanking();
   // const scores = records.map((data) => data.score);
   // JSON形式でscript.jsに送信

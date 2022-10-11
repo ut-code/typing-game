@@ -42,8 +42,9 @@ export default async function script() {
         body: json,
       }
     );
-    const html = await response.text();
-    document.body.innerHTML = html;
+    window.location.href = "/result";
+    // const html = await response.text();
+    // document.body.innerHTML = html;
   }
 
   async function main() {

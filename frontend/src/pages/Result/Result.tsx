@@ -8,31 +8,41 @@ import script from "./script";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Table, Stack } from "react-bootstrap";
 
-let i: number = 0;
-type Product = {
-  record_id: number;
-  problem: number;
-  username: string;
-  score: number;
-};
-
 export default function Result() {
-  const [name, setName] = useState("");
-  const [id, setId] = useState("AWS");
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState(-1);
+  const [time, setTime] = useState(-1);
   const [count, setCount] = useState(1);
   const increment = () => setCount((prevCount) => prevCount + 1);
-  // const [listItems, setListItems] = useState<Product | null>(null);
   const [listItems, setListItems] = useState([
     { record_id: 1, problem: 1, username: "reactmuzui", score: -100 },
   ]);
+
+  // script.jsを読み込む
   useEffect(() => {
     script();
   }, []);
+  // リザルト画面のscore, timeをfetchAPIしてくる
+  // useEffect(() => {
+  //   (async () => {
+  //     await fetch(
+  //       `${import.meta.env.VITE_API_ENDPOINT}/fetchscore`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
+  //       {
+  //         method: "post",
+  //         headers: { "Content-Type": "application/json" },
+  //       }
+  //     )
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         setScore(data.score);
+  //         setTime(data.time)
+  //       });
+  //   })();
+  // }, []);
+  // RankingをfetchAPIしてくる
   useEffect(() => {
     (async () => {
       await fetch(
-        `${import.meta.env.VITE_API_ENDPOINT}/test`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
+        `${import.meta.env.VITE_API_ENDPOINT}/fetchranking`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
         {
           method: "post",
           headers: { "Content-Type": "application/json" },
@@ -40,7 +50,6 @@ export default function Result() {
       )
         .then((response) => response.json())
         .then((data) => {
-          setScore(data.score);
           // alert(typeof(data))
           setListItems(data);
         });
@@ -48,22 +57,16 @@ export default function Result() {
   }, []);
   return (
     <>
-      <ul>
-        {listItems.map((listItem) => (
-          <li key={listItem.record_id}>
-            {listItem.username} {listItem.score}
-          </li>
-        ))}
-      </ul>
       <Helmet>
         {/* https://github.com/nfl/react-helmet */}
         <title>結果</title>
       </Helmet>
       <Stack gap={3}>
         <div className="yourResults">
-          <p>結果</p>
-          <p id="time"></p>
-          <p id="score"></p>
+          <p>終了!</p>
+          {/* {listItems.map((listItem) => ( # 順位 */}
+          <p id="time">時間{time}秒</p>
+          <p id="score">スコア{score}点</p>
         </div>
         <div className="rankBoard">
           <Table striped id="ranking">
@@ -84,16 +87,6 @@ export default function Result() {
                   {/* {increment()} */}
                 </tr>
               ))}
-              {/* <tr>
-                <th>2</th>
-                <th>Guest</th>
-                <th>100</th>
-              </tr>
-              <tr>
-                <th>3</th>
-                <th>Guest</th>
-                <th>80</th>
-              </tr> */}
             </tbody>
           </Table>
         </div>
