@@ -1,5 +1,6 @@
 # typing-game
 
+<img src="frontend/src/components/logo.png" width="300">  
 駒場祭のタイピングゲーム
 
 ## Node のインストール
