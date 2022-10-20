@@ -20,19 +20,24 @@ export default function Home() {
       <Stack gap={3}>
         <div id="userinput">
           <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3" controlId="username">
               <Form.Label>ユーザーネーム</Form.Label>
               <Form.Control placeholder="Guest" />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3" controlId="qnumber">
               <Form.Label>問題番号</Form.Label>
               <Form.Select>
                 <option>0</option>
                 <option>11</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
               </Form.Select>
               <Form.Text className="text-muted">
-                0: テスト用 11: ゲティスバーグ演説
+                0: テスト用 11: ゲティスバーグ演説 20: ロンドン橋落ちた 21:
+                ハンプティダンプティ 22: きらきら星 23: Hey Diddle Diddle
               </Form.Text>
             </Form.Group>
 
