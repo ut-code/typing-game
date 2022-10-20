@@ -20,8 +20,8 @@ app.use(cookieParser());
 app.post("/cookSave", (request, response) => {
   username = request.body.username;
   qnumber = request.body.qnumber;
-  response.cookie("username", username, { path: "/" });
-  response.cookie("qnumber", qnumber, { path: "/" });
+  response.cookie("username", username);
+  response.cookie("qnumber", qnumber);
   response.json({
     username: username,
     qnumber: qnumber,
@@ -32,7 +32,6 @@ app.post("/cookSave", (request, response) => {
 app.post("/questions", async (request, response) => {
   // questionsに問題が配列の形で入っている。
   let qnumber = parseInt(request.cookies.qnumber) || 0;
-  // qnumber = request.cookies.qnumber;
   const records = await prisma.questions.findMany({
     where: {
       qnumber: qnumber,

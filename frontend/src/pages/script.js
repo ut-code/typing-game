@@ -9,6 +9,7 @@ export default async function script() {
       `${import.meta.env.VITE_API_ENDPOINT}/cookSave`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
       {
         method: "post",
+        // credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: json,
       }
