@@ -16,14 +16,12 @@ app.use(express.json());
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
-let username = "Guest"; // 仮置き
-let qnumber = 0; // 仮置き
-// Homeでユーザーが入力した情報をcookieに保存
+// Homeでユーザーが入力した情報をCookieに保存
 app.post("/cookSave", (request, response) => {
   username = request.body.username;
-  qnumber = request.body.questionNumber;
-  // response.cookie("username", username);
-  // response.cookie("qnumber", qnumber);
+  qnumber = request.body.qnumber;
+  response.cookie("username", username, { path: "/" });
+  response.cookie("qnumber", qnumber, { path: "/" });
   response.json({
     username: username,
     qnumber: qnumber,
@@ -33,10 +31,11 @@ app.post("/cookSave", (request, response) => {
 // データベースからPrismaで問題をとってくる
 app.post("/questions", async (request, response) => {
   // questionsに問題が配列の形で入っている。
+  let qnumber = parseInt(request.cookies.qnumber) || 0;
   // qnumber = request.cookies.qnumber;
   const records = await prisma.questions.findMany({
     where: {
-      qnumber: 0, // qnumber,
+      qnumber: qnumber,
     },
   });
   const questions = records.map((data) => data.question);
@@ -76,15 +75,13 @@ async function submitScore(username, score) {
 //   response.send(html);
 // });
 
-let time = -2; // 仮置き
-let score = -2; // 仮置き
 app.post("/results", async (request, response) => {
   time = request.body.time;
-  username = "not working :<"; // 仮ユーザーネーム、本当はcookieから取得
+  let username = request.cookies.username || "cookie not working :<"; // 仮ユーザーネーム
   score = request.body.score;
   await submitScore(username, score);
   // response.json({ time: time, score: score, username: username});
-  response.json();
+  response.json({});
 });
 
 // app,post("/fetchscore", (request, response) => {
