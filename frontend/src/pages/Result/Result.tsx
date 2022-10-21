@@ -9,8 +9,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Table, Stack } from "react-bootstrap";
 
 export default function Result() {
-  const [score, setScore] = useState(-1);
-  const [time, setTime] = useState(-1);
   const [count, setCount] = useState(1);
   const increment = () => setCount((prevCount) => prevCount + 1);
   const [listItems, setListItems] = useState([
@@ -21,23 +19,6 @@ export default function Result() {
   useEffect(() => {
     script();
   }, []);
-  // リザルト画面のscore, timeをfetchAPIしてくる
-  // useEffect(() => {
-  //   (async () => {
-  //     await fetch(
-  //       `${import.meta.env.VITE_API_ENDPOINT}/fetchscore`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
-  //       {
-  //         method: "post",
-  //         headers: { "Content-Type": "application/json" },
-  //       }
-  //     )
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         setScore(data.score);
-  //         setTime(data.time)
-  //       });
-  //   })();
-  // }, []);
   // RankingをfetchAPIしてくる
   useEffect(() => {
     (async () => {
@@ -64,8 +45,6 @@ export default function Result() {
         <div className="yourResults">
           <p>終了!</p>
           {/* {listItems.map((listItem) => ( # 順位 */}
-          {/* <p id="time">時間{time}秒</p>
-          <p id="score">スコア{score}点</p> */}
           <p id="time"></p>
           <p id="score"></p>
         </div>
