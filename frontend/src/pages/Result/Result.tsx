@@ -42,7 +42,7 @@ export default function Result() {
   useEffect(() => {
     (async () => {
       await fetch(
-        `${import.meta.env.VITE_API_ENDPOINT}/fetchranking`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
+        `${import.meta.env.VITE_API_ENDPOINT}/fetchRanking`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
         {
           method: "post",
           headers: { "Content-Type": "application/json" },
@@ -50,7 +50,6 @@ export default function Result() {
       )
         .then((response) => response.json())
         .then((data) => {
-          // alert(typeof(data))
           setListItems(data);
         });
     })();
@@ -65,8 +64,10 @@ export default function Result() {
         <div className="yourResults">
           <p>終了!</p>
           {/* {listItems.map((listItem) => ( # 順位 */}
-          <p id="time">時間{time}秒</p>
-          <p id="score">スコア{score}点</p>
+          {/* <p id="time">時間{time}秒</p>
+          <p id="score">スコア{score}点</p> */}
+          <p id="time"></p>
+          <p id="score"></p>
         </div>
         <div className="rankBoard">
           <Table striped id="ranking">

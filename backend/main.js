@@ -80,19 +80,24 @@ async function submitScore(username, score) {
 
 app.post("/results", async (request, response) => {
   time = request.body.time;
-  let username =
-    localStorage.getItem("username") || "localStorage not working :<"; // 仮ユーザーネーム
+  localStorage.setItem("time", time);
+  let username = localStorage.getItem("username") || "Guest";
   score = request.body.score;
+  localStorage.setItem("score", score);
   await submitScore(username, score);
-  // response.json({ time: time, score: score, username: username});
-  response.json({});
+  response.json({ time: time, score: score, username: username });
 });
 
-// app,post("/fetchscore", (request, response) => {
-//   response.json({ time: time, score: score, username: username });
-// });
+app.post("/fetchScore", (request, response) => {
+  let username = localStorage.getItem("username") || "Guest";
+  response.json({
+    time: localStorage.getItem("time"),
+    score: localStorage.getItem("score"),
+    username: username,
+  });
+});
 
-app.post("/fetchranking", async (request, response) => {
+app.post("/fetchRanking", async (request, response) => {
   const records = await getRanking();
   // const scores = records.map((data) => data.score);
   // JSON形式でscript.jsに送信
