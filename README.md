@@ -1,6 +1,6 @@
 # typing-game
 
-<img src="frontend/src/components/logo.png" width="300">
+<img src="frontend/public/logo.png" width="300">
 
 駒場祭のタイピングゲーム
 
