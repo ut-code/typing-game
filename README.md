@@ -1,4 +1,4 @@
-# keyboard-layout-maker
+# keyboard-layout-creator
 
 [駒場祭のタイピングゲーム](https://github.com/ut-code/typing-game)のキーボード配列を作成するためのプログラムです。
 
