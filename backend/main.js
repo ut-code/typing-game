@@ -16,27 +16,30 @@ app.use(express.json());
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
-// Homeでユーザーが入力した情報をCookieに保存
-app.post("/cookSave", (request, response) => {
-  username = request.body.username;
-  qnumber = request.body.qnumber;
-  response.cookie("username", username);
-  response.cookie("qnumber", qnumber);
+// Cookieの代替案としてlocalStorage(node.js版)
+var LocalStorage = require("node-localstorage").LocalStorage,
+  localStorage = new LocalStorage("./scratch");
+
+// Homeでユーザーが入力した情報をlocalStorageに保存
+app.post("/localSave", (request, response) => {
+  localStorage.setItem("username", request.body.username);
+  localStorage.setItem("qnumber", request.body.qnumber);
   response.json({
-    username: username,
-    qnumber: qnumber,
+    // username: username,
+    // qnumber: qnumber,
   });
 });
 
 // データベースからPrismaで問題をとってくる
 app.post("/questions", async (request, response) => {
-  // questionsに問題が配列の形で入っている。
-  let qnumber = parseInt(request.cookies.qnumber) || 0;
+  // localStorageから問題番号を拾ってくる
+  let qnumber = Number(localStorage.getItem("qnumber")) || 0; // parseInt(request.cookies.qnumber) || 0;
   const records = await prisma.questions.findMany({
     where: {
       qnumber: qnumber,
     },
   });
+  // questionsに問題が配列の形で入っている。
   const questions = records.map((data) => data.question);
   // JSON形式でscript.jsに送信
   response.json(questions);
@@ -52,6 +55,7 @@ async function getRanking() {
   return records;
 }
 
+// submit時のデータベースとのやり取りを関数化しただけ
 async function submitScore(username, score) {
   const submission = await prisma.ranking.create({
     data: { username: username, score: score },
@@ -76,18 +80,24 @@ async function submitScore(username, score) {
 
 app.post("/results", async (request, response) => {
   time = request.body.time;
-  let username = request.cookies.username || "cookie not working :<"; // 仮ユーザーネーム
+  localStorage.setItem("time", time);
+  let username = localStorage.getItem("username") || "Guest";
   score = request.body.score;
+  localStorage.setItem("score", score);
   await submitScore(username, score);
-  // response.json({ time: time, score: score, username: username});
-  response.json({});
+  response.json({ time: time, score: score, username: username });
 });
 
-// app,post("/fetchscore", (request, response) => {
-//   response.json({ time: time, score: score, username: username });
-// });
+app.post("/fetchScore", (request, response) => {
+  let username = localStorage.getItem("username") || "Guest";
+  response.json({
+    time: localStorage.getItem("time"),
+    score: localStorage.getItem("score"),
+    username: username,
+  });
+});
 
-app.post("/fetchranking", async (request, response) => {
+app.post("/fetchRanking", async (request, response) => {
   const records = await getRanking();
   // const scores = records.map((data) => data.score);
   // JSON形式でscript.jsに送信

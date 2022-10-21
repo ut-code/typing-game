@@ -10,7 +10,6 @@ export default async function script() {
       `${import.meta.env.VITE_API_ENDPOINT}/questions`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
       {
         method: "post",
-        // credentials: "include",
         headers: { "Content-Type": "application/json" },
       }
     );
@@ -168,7 +167,7 @@ export default async function script() {
   let cnt = 0; // 何文字目か
   let isStarted = false; // 始まったか
   let time = 0; // 時間
-  let timeLimit = 15; // 制限時間
+  let timeLimit = 45; // 制限時間
 
   let content = document.getElementById("content").textContent;
 
