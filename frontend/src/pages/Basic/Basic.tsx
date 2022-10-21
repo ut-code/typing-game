@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Keyboard from "./../../../../keyboard-layout-maker/keyboard/src/App";
+import Keyboard from "./../../../../keyboard-layout-creator/keyboard/src/App";
 import "./style.css";
 // @ts-ignore
 import script from "./script";
@@ -62,7 +62,9 @@ export default function Basic() {
         element={
           <>
             キーボード配列を自分で作りたい人は、
-            <a href="https://keyboard-layout-maker.onrender.com/">このリンク</a>
+            <a href="https://keyboard-layout-creator.onrender.com/">
+              このリンク
+            </a>
             に飛んでください。
           </>
         }
