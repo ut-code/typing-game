@@ -28,7 +28,7 @@ export default async function script(now, setNow) {
 
   // scoreを計算する関数
   function calcScore(timeLeft, correct, miss) {
-    return timeLeft * Math.floor((correct / (miss + correct + 1)) * 100);
+    return timeLeft * Math.floor(correct ** 2 / (miss + correct + 1));
   }
 
   async function results(timeLeft, time, correct, miss) {
@@ -126,7 +126,12 @@ export default async function script(now, setNow) {
       //   // clearInterval(timerId);
       //   results(timeLimit - time, time, correct, miss);
       // }
-      document.getElementById("question").textContent = questions[word_num];
+
+      document.getElementById("answered").textContent = questions[
+        word_num
+      ].slice(0, cnt);
+      document.getElementById("question").textContent =
+        questions[word_num].slice(cnt);
       document.getElementById("your-answer").textContent = answer;
       document.getElementById("miss").textContent = miss + "回";
       document.getElementById("correct").textContent = correct + "回";
