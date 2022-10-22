@@ -30,11 +30,11 @@ export default function Functional(): JSX.Element {
   const [keys, setKeys] = useState<string[][]>([
     keyCodes.map(
       // @ts-ignore
-      (code) => functionalLayoutType[defaultFunctionalLayout].content[code][0]
+      (keyCode) => functionalLayoutType[defaultFunctionalLayout].content[keyCode][0]
     ),
     keyCodes.map(
       // @ts-ignore
-      (code) => functionalLayoutType[defaultFunctionalLayout].content[code][1]
+      (keyCode) => functionalLayoutType[defaultFunctionalLayout].content[keyCode][1]
     ),
   ]);
   const [fileName, setFileName] = useState<string>("");
@@ -62,16 +62,16 @@ export default function Functional(): JSX.Element {
         f={(x: object) => {
           setKeys([
             // @ts-ignore
-            keyCodes.map((code) => x[code][0]), // @ts-ignore
-            keyCodes.map((code) => x[code][1]),
+            keyCodes.map((keyCode) => x[keyCode][0]), // @ts-ignore
+            keyCodes.map((keyCode) => x[keyCode][1]),
           ]);
         }}
       ></ReadJSONFile>
       <table>
         <tbody>
-          {keyCodes.map((code, i) => (
-            <tr key={code}>
-              <th>{code}</th>
+          {keyCodes.map((keyCode, i) => (
+            <tr key={keyCode}>
+              <th>{keyCode}</th>
               <td>
                 <GetManySettings<string>
                   type="string"

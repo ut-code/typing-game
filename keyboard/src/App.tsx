@@ -131,7 +131,7 @@ export default function App({
   const [functional, setFunctional] = useState<string>(defaultFunctionalLayout);
   const [physical, setPhysical] = useState<string>(defaultPhysicalLayout);
   const [keyColors, setKeyColors] = useState<string[]>(
-    keyCodes.map((code) => "rgba(0,0,0,0)")
+    keyCodes.map(() => "rgba(0,0,0,0)")
   );
   const [content, setContent] = useState<string>("");
   const [shift,setShift]=useState<boolean>(false);

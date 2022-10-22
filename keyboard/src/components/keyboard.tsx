@@ -24,16 +24,16 @@ function sumWidth(row: number, column: number): number {
   // @ts-ignore
   let sum = physicalLayoutType[physicalLayout].content.marginColumn;
   let j = 0;
-  for (const code of keyCodes) {
+  for (const keyCode of keyCodes) {
     if (
       // @ts-ignore
-      physicalLayoutType[physicalLayout].content.keyCodes[code].row === row &&
+      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].row === row &&
       // @ts-ignore
-      physicalLayoutType[physicalLayout].content.keyCodes[code].column < column
+      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].column < column
     ) {
       sum += // @ts-ignore
-        physicalLayoutType[physicalLayout].content.keyCodes[code].width + // @ts-ignore
-        (physicalLayoutType[physicalLayout].content.keyCodes[code].width === 0
+        physicalLayoutType[physicalLayout].content.keyCodes[keyCode].width + // @ts-ignore
+        (physicalLayoutType[physicalLayout].content.keyCodes[keyCode].width === 0
           ? 0 // @ts-ignore
           : physicalLayoutType[physicalLayout].content.marginColumn);
       j++;
@@ -120,16 +120,16 @@ export default function Keyboard({
   return (
     <>
       <div id="keyboard">
-        {keyCodes.map((code, i) => (
-          <React.Fragment key={code}>
+        {keyCodes.map((keyCode, i) => (
+          <React.Fragment key={keyCode}>
             {/* @ts-ignore */}
-            {physicalLayoutType[physicalLayout].content.keyCodes[code]
+            {physicalLayoutType[physicalLayout].content.keyCodes[keyCode]
               .width !== 0 && (
               <div
-                id={code}
+                id={keyCode}
                 className={`key ${fontSize(
                   // @ts-ignore
-                  functionalLayoutType[functionalLayout].content[code][!shift?0:1]
+                  functionalLayoutType[functionalLayout].content[keyCode][!shift?0:1]
                 )}`}
                 onClick={() =>
                   // @ts-ignore
@@ -137,7 +137,7 @@ export default function Keyboard({
                     // @ts-ignore
                     keyColors,
                     setKeyColors,
-                    new KeyboardEvent("keydown", { code }),
+                    new KeyboardEvent("keydown", { code: keyCode }),
                     content,
                     setContent,
                     functional,
@@ -154,7 +154,7 @@ export default function Keyboard({
                   top: `${
                     sumHeight(
                       // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.keyCodes[code]
+                      physicalLayoutType[physicalLayout].content.keyCodes[keyCode]
                         .row
                     ) * magnification
                   }vw`,
@@ -162,15 +162,15 @@ export default function Keyboard({
                   left: `${
                     sumWidth(
                       // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.keyCodes[code]
+                      physicalLayoutType[physicalLayout].content.keyCodes[keyCode]
                         .row, // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.keyCodes[code]
+                      physicalLayoutType[physicalLayout].content.keyCodes[keyCode]
                         .column
                     ) * magnification
                   }vw`,
                   width: `${
                     // @ts-ignore
-                    physicalLayoutType[physicalLayout].content.keyCodes[code]
+                    physicalLayoutType[physicalLayout].content.keyCodes[keyCode]
                       .width * magnification
                   }vw`,
                   height: `${
@@ -181,7 +181,7 @@ export default function Keyboard({
                 }}
                 // ref={dom=>{
                 //   let fontSizePx=window.innerWidth*fontSize;
-                //   const widthPx=physicalLayoutType[physicalLayout].content.keyCodes[code].width * magnification* window.innerWidth*0.01;// func
+                //   const widthPx=physicalLayoutType[physicalLayout].content.keyCodes[keyCode].width * magnification* window.innerWidth*0.01;// func
                 //   // while(dom?.scrollWidth>=widthPx){
                 //   //   fontSizePx--;
                 //   //   // dom?.style.fontSize="10px";//fontSizePx+"px"
@@ -194,7 +194,7 @@ export default function Keyboard({
                 //   // }
               >
                 {/* @ts-ignore */}
-                {functionalLayoutType[functionalLayout].content[code][!shift?0:1]}
+                {functionalLayoutType[functionalLayout].content[keyCode][!shift?0:1]}
               </div>
             )}
           </React.Fragment>

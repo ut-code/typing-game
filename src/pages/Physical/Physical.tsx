@@ -56,19 +56,19 @@ export default function Physical(): JSX.Element {
   const [height, setHeight] = useState<number>(defaultPhysical.height);
   const [rows, setRows] = useState<number[]>(
     // @ts-ignore
-    keyCodes.map((code) => defaultPhysical.keyCodes[code].row)
+    keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].row)
   );
   const [columns, setColumns] = useState<number[]>(
     // @ts-ignore
-    keyCodes.map((code) => defaultPhysical.keyCodes[code].column)
+    keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].column)
   );
   const [widths, setWidths] = useState<number[]>(
     // @ts-ignore
-    keyCodes.map((code) => defaultPhysical.keyCodes[code].width)
+    keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].width)
   );
   const [styles, setStyles] = useState<string[]>(
     // @ts-ignore
-    keyCodes.map((code) => defaultPhysical.keyCodes[code].style)
+    keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].style)
   );
   const [fileName, setFileName] = useState<string>("");
   return (
