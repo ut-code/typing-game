@@ -21,4 +21,5 @@ export default async function script(listItems) {
   document.getElementById("time").textContent = "時間" + data.time + "秒";
   document.getElementById("score").textContent = "スコア" + data.score + "点";
   document.getElementById("yourRank").textContent = "順位" + rank + "位";
+  document.getElementById("name").textContent = data.username;
 }

@@ -44,8 +44,9 @@ export default function Result() {
       <Stack gap={3}>
         <div className="yourResults">
           <p id="finish">終了!</p>
-          <p id="yourRank"></p>
           {/* {listItems.map((listItem) => ( # 順位 */}
+          <p id="name"></p>
+          <p id="yourRank"></p>
           <p id="time"></p>
           <p id="score"></p>
         </div>
