@@ -1,0 +1,20 @@
+services:
+  - name: web
+    type: web
+    env: static
+    buildCommand: npm run frontend:install && cd frontend && npm run build
+    staticPublishPath: frontend/dist
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: sameorigin
+  - name: server
+    type: web
+    env: node
+    buildCommand: npm run backend:install
+    startCommand: cd backend && npm run start
+    region: singapore
+    plan: free
+    envVars:
+      - key: PORT
+        value: 3000

@@ -1,4 +1,4 @@
-export default async function script() {
+export default async function script(now, setNow) {
   // ここから
   let questions = []; // 問題
   let timerId; //clearIntervalをするため 無視してOK
@@ -27,12 +27,26 @@ export default async function script() {
   }
 
   // scoreを計算する関数
-  function calcScore(timeLeft, correct, miss) {
-    return timeLeft * Math.floor(correct ** 2 / (miss + correct + 1));
+  function calcScore(time, word_num, correct, miss) {
+    // 使う変数
+    let progress = word_num / questions.length;
+    let diff = 2 ** questions.length;
+    let correct_rate = correct ** 2 / (miss + correct + 1);
+    let velocity = correct / time;
+
+    // 重みをつけて算出
+    let w1 = 1;
+    let w2 = 0.1;
+    let w3 = 1;
+    let w4 = 10;
+    return Math.floor(
+      1000 * progress * (w2 * diff + w3 * correct_rate + w4 * velocity)
+    );
+
   }
 
-  async function results(timeLeft, time, correct, miss) {
-    let score = calcScore(timeLeft, correct, miss);
+  async function results(time, word_num, correct, miss) {
+    let score = calcScore(time, word_num, correct, miss);
     const json = JSON.stringify({ time: time, score: score });
     const response = await fetch(
       `${import.meta.env.VITE_API_ENDPOINT}/results`,
@@ -91,6 +105,12 @@ export default async function script() {
 
       if (content === previousContent) return;
 
+      document.getElementById("progress-number").textContent =
+        word_num + 1 + "/" + questions.length + "問";
+
+      // 何問目/全問題数を右上に表示
+      document.getElementById("progress-number").textContent =
+        word_num + 1 + "/" + questions.length + "問";
       if (key === questions[word_num][cnt]) {
         // 正答時
         answer += key;
@@ -107,11 +127,12 @@ export default async function script() {
       if (cnt == questions[word_num].length) {
         // 次の問題へ
         word_num++;
+        setNow(Math.round((word_num / questions.length) * 100));
         answer = "";
         cnt = 0;
         if (word_num === questions.length) {
           clearInterval(timerId);
-          results(timeLimit - time, time, correct, miss);
+          results(time, word_num, correct, miss);
         }
       }
       // if (time > timeLimit) {
@@ -152,6 +173,8 @@ export default async function script() {
               "キーを押すと結果が出ます";
             document.getElementById("answered").textContent = "";
           }
+          // 何問目/全問題数を右上に表示
+          // document.getElementById("progress-number").textContent = word_num+1 + "/" + questions.length + "問";
         }, 1000);
       }
     });
