@@ -20,4 +20,4 @@ export const physicalLayoutType = {
 
 export const defaultFunctionalLayoutType = "us_qwerty";
 
-export const defaultPhysicalLayout = "us_default";
+export const defaultPhysicalLayoutType = "us_default";

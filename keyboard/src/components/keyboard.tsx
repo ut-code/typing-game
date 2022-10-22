@@ -8,11 +8,11 @@ import {
   functionalLayoutType,
   physicalLayoutType,
   defaultFunctionalLayoutType,
-  defaultPhysicalLayout,
+  defaultPhysicalLayoutType,
 } from "./data/keyboardSettings";
 
 let functionalLayout = defaultFunctionalLayoutType;
-let physicalLayout = defaultPhysicalLayout;
+let physicalLayout = defaultPhysicalLayoutType;
 
 /**
  * `row` 行の `column` 列までの幅の合計を計算します。

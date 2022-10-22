@@ -10,7 +10,7 @@ import {
   functionalLayoutType,
   physicalLayoutType,
   defaultFunctionalLayoutType,
-  defaultPhysicalLayout,
+  defaultPhysicalLayoutType,
 } from "./components/data/keyboardSettings";
 import "./App.css";
 
@@ -129,7 +129,7 @@ export default function App({
 }): JSX.Element {
   const [isDefault, setIsDefault] = useState<boolean>(true);
   const [functional, setFunctional] = useState<string>(defaultFunctionalLayoutType);
-  const [physical, setPhysical] = useState<string>(defaultPhysicalLayout);
+  const [physical, setPhysical] = useState<string>(defaultPhysicalLayoutType);
   const [keyColors, setKeyColors] = useState<string[]>(
     keyCodes.map(() => "rgba(0,0,0,0)")
   );
