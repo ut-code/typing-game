@@ -9,7 +9,8 @@ import { Button, ProgressBar, Stack } from "react-bootstrap";
 
 export default function Basic() {
   const [content, setContent] = useState<string>("a");
-  const now = 60;
+  const [now, setNow] = useState<number>(65);
+
   useEffect(() => {
     script();
   }, []);
@@ -21,10 +22,6 @@ export default function Basic() {
       <div id="score-related">
         <table id="current">
           <tbody>
-            <tr>
-              <th>スコア：</th>
-              <td id="score">000000</td>
-            </tr>
             <tr>
               <th>正しいタイプ数：</th>
               <td id="correct"></td>
@@ -47,7 +44,13 @@ export default function Basic() {
         <Stack gap={0} id="progress">
           <div id="progress-number"></div>
           <div className="pb-5" id="progress-bar">
-            <ProgressBar variant="success" now={50} />
+            <ProgressBar
+              variant="success"
+              striped
+              animated
+              now={now}
+              label={`${now}%`}
+            />
           </div>
         </Stack>
       </div>

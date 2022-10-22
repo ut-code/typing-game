@@ -10,7 +10,7 @@ body {
   border-radius: 5px;
   padding: 1vw;
   text-align: center;
-  margin: 2vw auto;
+  margin: 1vw auto;
   /* display: flex; */
   /* position: relative; */
 }
@@ -21,7 +21,6 @@ body {
 #question {
   width: 70vw;
   font-size: 30px;
-  /* background-color: #649541; */
   margin: 1vw auto;
 }
 #answer {
@@ -60,7 +59,7 @@ thead th {
   width: 30vw;
 }
 #score-related #progress #progress-number {
-  font-size: 30px;
+  font-size: 20px;
   text-align: right;
   height: 80px;
 }
