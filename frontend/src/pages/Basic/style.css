@@ -44,19 +44,17 @@ thead th {
 }
 #current td {
   text-align: right;
-  width: 3vw;
+  width: 5vw;
 }
 #content {
   display: none;
 }
 #score-related {
-  display: flex;
   justify-content: space-between;
 }
 #score-related #progress {
   margin: 0 0 0 auto;
   padding: 1vw;
-  width: 30vw;
 }
 #score-related #progress #progress-number {
   font-size: 20px;

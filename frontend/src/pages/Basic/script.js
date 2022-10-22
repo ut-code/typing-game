@@ -1,4 +1,4 @@
-export default async function script() {
+export default async function script(now, setNow) {
   // ここから
   let questions = []; // 問題
   let timerId; //clearIntervalをするため 無視してOK
@@ -113,6 +113,7 @@ export default async function script() {
       if (cnt == questions[word_num].length) {
         // 次の問題へ
         word_num++;
+        setNow(Math.round((word_num / questions.length) * 100));
         answer = "";
         cnt = 0;
         if (word_num === questions.length) {
