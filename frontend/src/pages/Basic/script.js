@@ -148,7 +148,9 @@ export default async function script() {
             timeLimit - time + "秒";
           if (timeLimit - time <= 0) {
             clearInterval(timerId);
-            document.getElementById("question").textContent = "キーを押してね";
+            document.getElementById("question").textContent =
+              "キーを押すと結果が出ます";
+            document.getElementById("answered").textContent = "";
           }
         }, 1000);
       }
