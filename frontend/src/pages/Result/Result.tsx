@@ -19,6 +19,7 @@ export default function Result() {
   useEffect(() => {
     script();
   }, []);
+
   // RankingをfetchAPIしてくる
   useEffect(() => {
     (async () => {
@@ -35,6 +36,7 @@ export default function Result() {
         });
     })();
   }, []);
+
   return (
     <>
       <Helmet>

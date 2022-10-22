@@ -10,7 +10,7 @@ body {
   border-radius: 5px;
   padding: 1vw;
   text-align: center;
-  margin: 2vw auto;
+  margin: 1vw auto;
   /* display: flex; */
   /* position: relative; */
 }
@@ -21,7 +21,6 @@ body {
 #question {
   width: 70vw;
   font-size: 30px;
-  /* background-color: #649541; */
   margin: 1vw auto;
 }
 #answer {
@@ -54,9 +53,19 @@ thead th {
   display: flex;
   justify-content: space-between;
 }
-#progress {
-  font-size: 15px;
+#score-related #progress {
+  margin: 0 0 0 auto;
+  padding: 1vw;
+  width: 30vw;
+}
+#score-related #progress #progress-number {
+  font-size: 20px;
   text-align: right;
+  height: 80px;
+}
+#score-related #progress #progress-bar {
+  margin: 0 0 0 auto;
+  width: 20vw;
 }
 footer {
   font-size: 13px;
