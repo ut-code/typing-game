@@ -51,8 +51,9 @@ export default function Home() {
           <Accordion.Item eventKey="0">
             <Accordion.Header>遊び方</Accordion.Header>
             <Accordion.Body>
-              問題番号を選択してPlayボタンを押します。スペースキーで開始すると問題が表示されます。<br></br>
-              残り時間が0になると得点が0になります。高得点を目指して頑張りましょう！
+              ユーザーネームを入力し、問題番号を選択してPlayボタンを押します。スペースキーを押すと問題が表示され、ゲームがスタートします。
+              <br></br>
+              速く正確なタイピングで、高得点を目指して頑張りましょう！制限時間に気をつけて！
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

@@ -15,7 +15,7 @@ export default function Result() {
 
   // script.jsを読み込む
   useEffect(() => {
-    script();
+    script(listItems);
   }, []);
 
   // RankingをfetchAPIしてくる
@@ -43,10 +43,16 @@ export default function Result() {
       </Helmet>
       <Stack gap={3}>
         <div className="yourResults">
-          <p>終了!</p>
+          <p id="finish">終了!</p>
+          <p id="yourRank"></p>
           {/* {listItems.map((listItem) => ( # 順位 */}
           <p id="time"></p>
           <p id="score"></p>
+        </div>
+        <div>
+          <Button href="/" variant="secondary">
+            Back
+          </Button>
         </div>
         <div className="rankBoard">
           <Table striped id="ranking">
