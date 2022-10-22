@@ -61,8 +61,9 @@ export default function Basic() {
       <div id="elements">
         <div id="answer">
           {/* <p id="mondai">問題</p> */}
-          <p id="question">[Space]を押して開始</p>
-          <p id="your-answer"></p>
+          <span id="answered"></span>
+          <span id="question">[Space]を押して開始</span>
+          {/*<p id="your-answer"></p>*/}
         </div>
       </div>
       <Button href="/" variant="secondary">

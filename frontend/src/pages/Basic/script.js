@@ -42,6 +42,7 @@ export default async function script(now, setNow) {
     return Math.floor(
       1000 * progress * (w2 * diff + w3 * correct_rate + w4 * velocity)
     );
+
   }
 
   async function results(time, word_num, correct, miss) {
@@ -139,7 +140,12 @@ export default async function script(now, setNow) {
       //   // clearInterval(timerId);
       //   results(timeLimit - time, time, correct, miss);
       // }
-      document.getElementById("question").textContent = questions[word_num];
+
+      document.getElementById("answered").textContent = questions[
+        word_num
+      ].slice(0, cnt);
+      document.getElementById("question").textContent =
+        questions[word_num].slice(cnt);
       document.getElementById("your-answer").textContent = answer;
       document.getElementById("miss").textContent = miss + "回";
       document.getElementById("correct").textContent = correct + "回";
