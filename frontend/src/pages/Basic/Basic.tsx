@@ -5,7 +5,7 @@ import "./style.css";
 import script from "./script";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "react-bootstrap";
+import { Button, ProgressBar } from "react-bootstrap";
 
 export default function Basic() {
   const [content, setContent] = useState<string>("a");
@@ -43,7 +43,7 @@ export default function Basic() {
             </tr>
           </tbody>
         </table>
-        <div id="progress">3/10問</div>
+        <div id="progress-number" class="progress"></div>
       </div>
       <div id="elements">
         <div id="answer">

@@ -54,9 +54,11 @@ thead th {
   display: flex;
   justify-content: space-between;
 }
-#progress {
-  font-size: 15px;
+.progress {
+  font-size: 30px;
   text-align: right;
+  padding: 1vw;
+  height: 80px;
 }
 footer {
   font-size: 13px;
