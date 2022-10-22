@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React, { useState } from "react";
-// import keyCode from "./../../../../keyboard/src/components/data/keyCode";
-import keyCode from "./../../../keyboard/src/components/data/keyCode.json";
+// import keyCodes from "./../../../../keyboard/src/components/data/keyCodes";
+import keyCodes from "./../../../keyboard/src/components/data/keyCodes.json";
 import {
   functionalLayoutType,
   defaultFunctionalLayout,
@@ -19,8 +19,8 @@ import "./../keyboard.css";
 
 function keyToObject(keys: string[][]): object {
   const object = {};
-  for (let i = 0; i < keyCode.length; i++) {
-    Object.assign(object, { [keyCode[i]]: [keys[0][i], keys[1][i]] });
+  for (let i = 0; i < keyCodes.length; i++) {
+    Object.assign(object, { [keyCodes[i]]: [keys[0][i], keys[1][i]] });
   }
   return object;
 }
@@ -28,11 +28,11 @@ function keyToObject(keys: string[][]): object {
 export default function Functional(): JSX.Element {
   const [shift, setShift] = useState<boolean>(false);
   const [keys, setKeys] = useState<string[][]>([
-    keyCode.map(
+    keyCodes.map(
       // @ts-ignore
       (code) => functionalLayoutType[defaultFunctionalLayout].content[code][0]
     ),
-    keyCode.map(
+    keyCodes.map(
       // @ts-ignore
       (code) => functionalLayoutType[defaultFunctionalLayout].content[code][1]
     ),
@@ -62,14 +62,14 @@ export default function Functional(): JSX.Element {
         f={(x: object) => {
           setKeys([
             // @ts-ignore
-            keyCode.map((code) => x[code][0]), // @ts-ignore
-            keyCode.map((code) => x[code][1]),
+            keyCodes.map((code) => x[code][0]), // @ts-ignore
+            keyCodes.map((code) => x[code][1]),
           ]);
         }}
       ></ReadJSONFile>
       <table>
         <tbody>
-          {keyCode.map((code, i) => (
+          {keyCodes.map((code, i) => (
             <tr key={code}>
               <th>{code}</th>
               <td>

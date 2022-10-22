@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Keyboard from "./components/keyboard";
 import { keyup, convert } from "./components/convert";
-import keyCode from "./components/data/keyCode.json";
+import keyCodes from "./components/data/keyCodes.json";
 import romantable from "./romantable.json";
 import ReadJSONFile from "./../../src/components/ReadJSONFile";
 import {
@@ -80,7 +80,7 @@ function keydown(
       convert(e, functional, functionalLayoutType, content, isDefault,shift,setShift)
   );
   setKeyColors(
-    keyCode.map((tmp, i) =>
+    keyCodes.map((tmp, i) =>
       (!isDefault && tmp === e.code) ||
       (isDefault && // @ts-ignore
         functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
@@ -91,7 +91,7 @@ function keydown(
   );
   setTimeout(() => {
     setKeyColors(
-      keyCode.map((tmp, i) =>
+      keyCodes.map((tmp, i) =>
         (!isDefault && tmp === e.code) ||
         (isDefault && // @ts-ignore
           functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
@@ -131,7 +131,7 @@ export default function App({
   const [functional, setFunctional] = useState<string>(defaultFunctionalLayout);
   const [physical, setPhysical] = useState<string>(defaultPhysicalLayout);
   const [keyColors, setKeyColors] = useState<string[]>(
-    keyCode.map((code) => "rgba(0,0,0,0)")
+    keyCodes.map((code) => "rgba(0,0,0,0)")
   );
   const [content, setContent] = useState<string>("");
   const [shift,setShift]=useState<boolean>(false);
