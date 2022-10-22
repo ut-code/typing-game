@@ -5,13 +5,14 @@ import "./style.css";
 import script from "./script";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "react-bootstrap";
+import { Button, ProgressBar, Stack } from "react-bootstrap";
 
 export default function Basic() {
   const [content, setContent] = useState<string>("a");
-  const now = 60;
+  const [now, setNow] = useState<number>(0);
+
   useEffect(() => {
-    script();
+    script(now, setNow);
   }, []);
   const cont = document.getElementById("content");
   if (cont !== null) cont.textContent = content;
@@ -19,31 +20,43 @@ export default function Basic() {
     <>
       {/* ここからHTMLファイル */}
       <div id="score-related">
-        <table id="current">
-          <tbody>
-            <tr>
-              <th id="scoreTitle">スコア :</th>
-              <td id="score">000000</td>
-            </tr>
-            <tr>
-              <th>正しいタイプ数：</th>
-              <td id="correct"></td>
-            </tr>
-            <tr>
-              <th>ミスタイプ数：</th>
-              <td id="miss"></td>
-            </tr>
-            <tr>
-              <th>経過時間：</th>
-              <td id="time"></td>
-            </tr>
-            <tr>
-              <th>残り時間：</th>
-              <td id="timeLeft"></td>
-            </tr>
-          </tbody>
-        </table>
-        <div id="progress">3/10問</div>
+        <Stack direction="horizontal" gap={0}>
+          <table id="current">
+            <tbody>
+              <tr>
+                <th>正しいタイプ数：</th>
+                <td id="correct"></td>
+              </tr>
+              <tr>
+                <th>ミスタイプ数：</th>
+                <td id="miss"></td>
+              </tr>
+              <tr>
+                <th>経過時間：</th>
+                <td id="time"></td>
+              </tr>
+              <tr>
+                <th>残り時間：</th>
+                <td id="timeLeft"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div id="html"></div>
+
+          <Stack gap={0} id="progress">
+            <div id="progress-number"></div>
+            <div className="pb-5" id="progress-bar">
+              <ProgressBar
+                variant="success"
+                striped
+                animated
+                now={now}
+                label={`${now}%`}
+              />
+            </div>
+          </Stack>
+        </Stack>
       </div>
       <div id="elements">
         <div id="answer">

@@ -9,8 +9,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Table, Stack } from "react-bootstrap";
 
 export default function Result() {
-  const [count, setCount] = useState(1);
-  const increment = () => setCount((prevCount) => prevCount + 1);
   const [listItems, setListItems] = useState([
     { record_id: 1, problem: 1, username: "reactmuzui", score: -100 },
   ]);
@@ -19,6 +17,7 @@ export default function Result() {
   useEffect(() => {
     script();
   }, []);
+
   // RankingをfetchAPIしてくる
   useEffect(() => {
     (async () => {
@@ -35,6 +34,7 @@ export default function Result() {
         });
     })();
   }, []);
+
   return (
     <>
       <Helmet>
@@ -59,9 +59,9 @@ export default function Result() {
               </tr>
             </thead>
             <tbody>
-              {listItems.map((listItem) => (
+              {listItems.map((listItem, i) => (
                 <tr key={listItem.record_id}>
-                  <th>{count}</th>
+                  <th>{i + 1}</th>
                   <th>{listItem.username}</th>
                   <th>{listItem.score}</th>
                   {/* {increment()} */}

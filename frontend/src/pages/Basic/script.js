@@ -1,4 +1,4 @@
-export default async function script() {
+export default async function script(now, setNow) {
   // ここから
   let questions = []; // 問題
   let timerId; //clearIntervalをするため 無視してOK
@@ -91,6 +91,12 @@ export default async function script() {
 
       if (content === previousContent) return;
 
+      document.getElementById("progress-number").textContent =
+        word_num + 1 + "/" + questions.length + "問";
+
+      // 何問目/全問題数を右上に表示
+      document.getElementById("progress-number").textContent =
+        word_num + 1 + "/" + questions.length + "問";
       if (key === questions[word_num][cnt]) {
         // 正答時
         answer += key;
@@ -107,6 +113,7 @@ export default async function script() {
       if (cnt == questions[word_num].length) {
         // 次の問題へ
         word_num++;
+        setNow(Math.round((word_num / questions.length) * 100));
         answer = "";
         cnt = 0;
         if (word_num === questions.length) {
@@ -150,6 +157,8 @@ export default async function script() {
             clearInterval(timerId);
             document.getElementById("question").textContent = "キーを押してね";
           }
+          // 何問目/全問題数を右上に表示
+          // document.getElementById("progress-number").textContent = word_num+1 + "/" + questions.length + "問";
         }, 1000);
       }
     });
