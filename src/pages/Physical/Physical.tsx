@@ -98,13 +98,13 @@ export default function Physical(): JSX.Element {
           // @ts-ignore
           setHeight(x.height);
           // @ts-ignore
-          setRows(keyCodes.map((code) => x.keyCodes[code].row));
+          setRows(keyCodes.map((keyCode) => x.keyCodes[keyCode].row));
           // @ts-ignore
-          setColumns(keyCodes.map((code) => x.keyCodes[code].column));
+          setColumns(keyCodes.map((keyCode) => x.keyCodes[keyCode].column));
           // @ts-ignore
-          setWidths(keyCodes.map((code) => x.keyCodes[code].width));
+          setWidths(keyCodes.map((keyCode) => x.keyCodes[keyCode].width));
           // @ts-ignore
-          setStyles(keyCodes.map((code) => x.keyCodes[code].style));
+          setStyles(keyCodes.map((keyCode) => x.keyCodes[keyCode].style));
         }}
       ></ReadJSONFile>
       <table>
@@ -149,9 +149,9 @@ export default function Physical(): JSX.Element {
       </table>
       <table>
         <tbody>
-          {keyCodes.map((code, i) => (
-            <tr key={code}>
-              <th>{code}</th>
+          {keyCodes.map((keyCode, i) => (
+            <tr key={keyCode}>
+              <th>{keyCode}</th>
               <td>
                 <GetManySettings<number>
                   type="number"
