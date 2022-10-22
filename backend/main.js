@@ -63,21 +63,6 @@ async function submitScore(username, score) {
   return submission;
 }
 
-// app.post("/results", async (request, response) => {
-//   const time = request.body.time;
-//   const username = "not working :<"; // 仮ユーザーネーム、本当はcookieから取得
-//   const score = request.body.score;
-//   const submission = await submitScore(username, score);
-//   const records = await getRanking();
-//   const template = fs.readFileSync("./results.ejs", "utf-8");
-//   const html = ejs.render(template, {
-//     time: time,
-//     score: score,
-//     listItems: records,
-//   });
-//   response.send(html);
-// });
-
 app.post("/results", async (request, response) => {
   time = request.body.time;
   localStorage.setItem("time", time);
