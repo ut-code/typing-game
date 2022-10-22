@@ -18,6 +18,10 @@ body {
   font-size: 25px;
   margin: 1vw auto;
 }
+#answered {
+  font-size: 30px;
+  color: rgb(208, 205, 214);
+}
 #question {
   width: 70vw;
   font-size: 30px;
@@ -44,7 +48,7 @@ thead th {
   text-align: right;
 }
 #current td {
-  text-align: right;
+  text-align: center;
   width: 3vw;
 }
 #content {
@@ -57,6 +61,13 @@ thead th {
 #progress {
   font-size: 15px;
   text-align: right;
+}
+#scoreTitle {
+  font-size: 2vw;
+}
+#score {
+  font-size: 3vw;
+  color: rgb(68, 5, 102);
 }
 footer {
   font-size: 13px;
