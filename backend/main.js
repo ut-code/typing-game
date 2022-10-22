@@ -73,18 +73,19 @@ app.post("/results", async (request, response) => {
   response.json({ time: time, score: score, username: username });
 });
 
+// localStorageから種々のデータを取ってくる
 app.post("/fetchScore", (request, response) => {
-  let username = localStorage.getItem("username") || "Guest";
   response.json({
-    time: localStorage.getItem("time"),
-    score: localStorage.getItem("score"),
-    username: username,
+    time: localStorage.getItem("time") || "-1",
+    score: localStorage.getItem("score") || "-1",
+    username: localStorage.getItem("username") || "Guest",
+    qnumber: localStorage.getItem("qnumber") || "-1",
   });
 });
 
+// /result表示用にrankingをデータベースから取ってくる
 app.post("/fetchRanking", async (request, response) => {
   const records = await getRanking();
-  // const scores = records.map((data) => data.score);
   // JSON形式でscript.jsに送信
   response.json(records);
 });
