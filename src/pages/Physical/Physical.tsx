@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import keyCodes from "./../../../keyboard/src/components/data/keyCodes.json";
 import {
   physicalLayoutType,
-  defaultFunctionalLayout,
-  defaultPhysicalLayout,
+  defaultFunctionalLayoutType,
+  defaultPhysicalLayoutType,
 } from "./../../../keyboard/src/components/data/keyboardSettings";
 import Keyboard from "./../../../keyboard/src/components/keyboard";
 import ReadJSONFile from "./../../components/ReadJSONFile";
@@ -48,7 +48,7 @@ function physicalKeyToObject(
 }
 
 export default function Physical(): JSX.Element {
-  const defaultPhysical = physicalLayoutType[defaultPhysicalLayout].content;
+  const defaultPhysical = physicalLayoutType[defaultPhysicalLayoutType].content;
   const [marginRow, setMarginRow] = useState<number>(defaultPhysical.marginRow);
   const [marginColumn, setMarginColumn] = useState<number>(
     defaultPhysical.marginColumn
@@ -74,7 +74,7 @@ export default function Physical(): JSX.Element {
   return (
     <>
       <Keyboard
-        functional={defaultFunctionalLayout}
+        functional={defaultFunctionalLayoutType}
         physical="custom"
         physicalKeyLayout={physicalKeyToObject(
           marginRow,

@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import keyCodes from "./../../../keyboard/src/components/data/keyCodes.json";
 import {
   functionalLayoutType,
-  defaultFunctionalLayout,
-  defaultPhysicalLayout,
+  defaultFunctionalLayoutType,
+  defaultPhysicalLayoutType,
 } from "./../../../keyboard/src/components/data/keyboardSettings";
 import Keyboard from "./../../../keyboard/src/components/keyboard";
 import ReadJSONFile from "./../../components/ReadJSONFile";
@@ -30,11 +30,13 @@ export default function Functional(): JSX.Element {
   const [keys, setKeys] = useState<string[][]>([
     keyCodes.map(
       // @ts-ignore
-      (keyCode) => functionalLayoutType[defaultFunctionalLayout].content[keyCode][0]
+      (keyCode) =>
+        functionalLayoutType[defaultFunctionalLayoutType].content[keyCode][0]
     ),
     keyCodes.map(
       // @ts-ignore
-      (keyCode) => functionalLayoutType[defaultFunctionalLayout].content[keyCode][1]
+      (keyCode) =>
+        functionalLayoutType[defaultFunctionalLayoutType].content[keyCode][1]
     ),
   ]);
   const [fileName, setFileName] = useState<string>("");
@@ -52,7 +54,7 @@ export default function Functional(): JSX.Element {
       </div>
       <Keyboard
         functional="custom"
-        physical={defaultPhysicalLayout}
+        physical={defaultPhysicalLayoutType}
         keyLayout={keyToObject(keys)}
         isDefault={true}
         shift={shift}
