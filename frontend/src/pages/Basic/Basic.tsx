@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Keyboard from "./../../../../keyboard-layout-creator/keyboard/src/App";
+import Keyboard from "./../../../keyboard-layout-creator/keyboard/src/App";
 import "./style.css";
 // @ts-ignore
 import script from "./script";
