@@ -5,7 +5,7 @@ import "./style.css";
 import script from "./script";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, ProgressBar } from "react-bootstrap";
+import { Button, ProgressBar, Stack } from "react-bootstrap";
 
 export default function Basic() {
   const [content, setContent] = useState<string>("a");
@@ -43,7 +43,13 @@ export default function Basic() {
             </tr>
           </tbody>
         </table>
-        <div id="progress-number" class="progress"></div>
+        {/* <div id="progress-number"></div> */}
+        <Stack gap={0} id="progress">
+          <div id="progress-number"></div>
+          <div className="pb-5" id="progress-bar">
+            <ProgressBar variant="success" now={50} />
+          </div>
+        </Stack>
       </div>
       <div id="elements">
         <div id="answer">

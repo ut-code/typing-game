@@ -94,6 +94,9 @@ export default async function script() {
       document.getElementById("progress-number").textContent =
         word_num + 1 + "/" + questions.length + "問";
 
+      // 何問目/全問題数を右上に表示
+      document.getElementById("progress-number").textContent =
+        word_num + 1 + "/" + questions.length + "問";
       if (key === questions[word_num][cnt]) {
         // 正答時
         answer += key;
@@ -116,9 +119,6 @@ export default async function script() {
           clearInterval(timerId);
           results(timeLimit - time, time, correct, miss);
         }
-        // 何問目/全問題数を右上に表示
-        document.getElementById("progress-number").textContent =
-          word_num + 1 + "/" + questions.length + "問";
       }
       // if (time > timeLimit) {
       //   // 時間制限でも終了, ただキー押さないと移行しない

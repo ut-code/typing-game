@@ -54,11 +54,19 @@ thead th {
   display: flex;
   justify-content: space-between;
 }
-.progress {
+#score-related #progress {
+  margin: 0 0 0 auto;
+  padding: 1vw;
+  width: 30vw;
+}
+#score-related #progress #progress-number {
   font-size: 30px;
   text-align: right;
-  padding: 1vw;
   height: 80px;
+}
+#score-related #progress #progress-bar {
+  margin: 0 0 0 auto;
+  width: 20vw;
 }
 footer {
   font-size: 13px;
