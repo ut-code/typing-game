@@ -32,15 +32,15 @@ export default async function script(now, setNow) {
     let progress = word_num / questions.length;
     let diff = 2 ** questions.length;
     let correct_rate = correct ** 2 / (miss + correct + 1);
-    let velocity = word_num / time;
+    let velocity = correct / time;
 
     // 重みをつけて算出
     let w1 = 1;
     let w2 = 0.1;
-    let w3 = 0.1;
+    let w3 = 1;
     let w4 = 10;
     return Math.floor(
-      1000 * w1 * progress * w2 * diff * w3 * correct_rate * w4 * velocity
+      1000 * progress * (w2 * diff + w3 * correct_rate + w4 * velocity)
     );
   }
 
