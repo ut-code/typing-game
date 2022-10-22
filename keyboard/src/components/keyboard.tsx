@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React from "react"; // ,{useRef}
-import eventCode from "./data/eventCode.json";
+import keyCode from "./data/keyCode.json";
 import "./keyboard.css";
 import useWindowDimensions from "./useWindowDimensions";
 import {
@@ -18,22 +18,22 @@ let physicalLayout = defaultPhysicalLayout;
  * `row` 行の `column` 列までの幅の合計を計算します。
  * @param row `row`
  * @param column `column`
- * @returns `width` と `jis109.eventCode.marginColumn` の合計
+ * @returns `width` と `jis109.keyCode.marginColumn` の合計
  */
 function sumWidth(row: number, column: number): number {
   // @ts-ignore
   let sum = physicalLayoutType[physicalLayout].content.marginColumn;
   let j = 0;
-  for (const code of eventCode) {
+  for (const code of keyCode) {
     if (
       // @ts-ignore
-      physicalLayoutType[physicalLayout].content.eventCode[code].row === row &&
+      physicalLayoutType[physicalLayout].content.keyCode[code].row === row &&
       // @ts-ignore
-      physicalLayoutType[physicalLayout].content.eventCode[code].column < column
+      physicalLayoutType[physicalLayout].content.keyCode[code].column < column
     ) {
       sum += // @ts-ignore
-        physicalLayoutType[physicalLayout].content.eventCode[code].width + // @ts-ignore
-        (physicalLayoutType[physicalLayout].content.eventCode[code].width === 0
+        physicalLayoutType[physicalLayout].content.keyCode[code].width + // @ts-ignore
+        (physicalLayoutType[physicalLayout].content.keyCode[code].width === 0
           ? 0 // @ts-ignore
           : physicalLayoutType[physicalLayout].content.marginColumn);
       j++;
@@ -120,10 +120,10 @@ export default function Keyboard({
   return (
     <>
       <div id="keyboard">
-        {eventCode.map((code, i) => (
+        {keyCode.map((code, i) => (
           <React.Fragment key={code}>
             {/* @ts-ignore */}
-            {physicalLayoutType[physicalLayout].content.eventCode[code]
+            {physicalLayoutType[physicalLayout].content.keyCode[code]
               .width !== 0 && (
               <div
                 id={code}
@@ -154,7 +154,7 @@ export default function Keyboard({
                   top: `${
                     sumHeight(
                       // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.eventCode[code]
+                      physicalLayoutType[physicalLayout].content.keyCode[code]
                         .row
                     ) * magnification
                   }vw`,
@@ -162,15 +162,15 @@ export default function Keyboard({
                   left: `${
                     sumWidth(
                       // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.eventCode[code]
+                      physicalLayoutType[physicalLayout].content.keyCode[code]
                         .row, // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.eventCode[code]
+                      physicalLayoutType[physicalLayout].content.keyCode[code]
                         .column
                     ) * magnification
                   }vw`,
                   width: `${
                     // @ts-ignore
-                    physicalLayoutType[physicalLayout].content.eventCode[code]
+                    physicalLayoutType[physicalLayout].content.keyCode[code]
                       .width * magnification
                   }vw`,
                   height: `${
@@ -181,7 +181,7 @@ export default function Keyboard({
                 }}
                 // ref={dom=>{
                 //   let fontSizePx=window.innerWidth*fontSize;
-                //   const widthPx=physicalLayoutType[physicalLayout].content.eventCode[code].width * magnification* window.innerWidth*0.01;// func
+                //   const widthPx=physicalLayoutType[physicalLayout].content.keyCode[code].width * magnification* window.innerWidth*0.01;// func
                 //   // while(dom?.scrollWidth>=widthPx){
                 //   //   fontSizePx--;
                 //   //   // dom?.style.fontSize="10px";//fontSizePx+"px"

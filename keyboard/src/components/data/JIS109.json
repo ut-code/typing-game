@@ -2,7 +2,7 @@
   "marginRow": 0.1,
   "marginColumn": 0.1,
   "height": 1,
-  "eventCode": {
+  "keyCode": {
     "Esc": { "row": 1, "column": 1, "width": 1, "style": "{}" },
     "F1": { "row": 1, "column": 2, "width": 1, "style": "{}" },
     "F2": { "row": 1, "column": 3, "width": 1, "style": "{}" },

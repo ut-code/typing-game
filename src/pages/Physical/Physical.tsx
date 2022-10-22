@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React, { useState } from "react";
-// import EventCode from "./../../../../keyboard/src/components/data/eventCode";
-import eventCode from "./../../../keyboard/src/components/data/eventCode.json";
+// import keyCode from "./../../../../keyboard/src/components/data/keyCode";
+import keyCode from "./../../../keyboard/src/components/data/keyCode.json";
 import {
   physicalLayoutType,
   defaultFunctionalLayout,
@@ -31,12 +31,12 @@ function physicalKeyToObject(
     marginRow,
     marginColumn,
     height,
-    eventCode: {},
+    keyCode: {},
   });
-  for (let i = 0; i < eventCode.length; i++) {
+  for (let i = 0; i < keyCode.length; i++) {
     // @ts-ignore
-    Object.assign(object.eventCode, {
-      [eventCode[i]]: {
+    Object.assign(object.keyCode, {
+      [keyCode[i]]: {
         row: rows[i],
         column: columns[i],
         width: widths[i],
@@ -56,19 +56,19 @@ export default function Physical(): JSX.Element {
   const [height, setHeight] = useState<number>(defaultPhysical.height);
   const [rows, setRows] = useState<number[]>(
     // @ts-ignore
-    eventCode.map((code) => defaultPhysical.eventCode[code].row)
+    keyCode.map((code) => defaultPhysical.keyCode[code].row)
   );
   const [columns, setColumns] = useState<number[]>(
     // @ts-ignore
-    eventCode.map((code) => defaultPhysical.eventCode[code].column)
+    keyCode.map((code) => defaultPhysical.keyCode[code].column)
   );
   const [widths, setWidths] = useState<number[]>(
     // @ts-ignore
-    eventCode.map((code) => defaultPhysical.eventCode[code].width)
+    keyCode.map((code) => defaultPhysical.keyCode[code].width)
   );
   const [styles, setStyles] = useState<string[]>(
     // @ts-ignore
-    eventCode.map((code) => defaultPhysical.eventCode[code].style)
+    keyCode.map((code) => defaultPhysical.keyCode[code].style)
   );
   const [fileName, setFileName] = useState<string>("");
   return (
@@ -98,13 +98,13 @@ export default function Physical(): JSX.Element {
           // @ts-ignore
           setHeight(x.height);
           // @ts-ignore
-          setRows(eventCode.map((code) => x.eventCode[code].row));
+          setRows(keyCode.map((code) => x.keyCode[code].row));
           // @ts-ignore
-          setColumns(eventCode.map((code) => x.eventCode[code].column));
+          setColumns(keyCode.map((code) => x.keyCode[code].column));
           // @ts-ignore
-          setWidths(eventCode.map((code) => x.eventCode[code].width));
+          setWidths(keyCode.map((code) => x.keyCode[code].width));
           // @ts-ignore
-          setStyles(eventCode.map((code) => x.eventCode[code].style));
+          setStyles(keyCode.map((code) => x.keyCode[code].style));
         }}
       ></ReadJSONFile>
       <table>
@@ -149,7 +149,7 @@ export default function Physical(): JSX.Element {
       </table>
       <table>
         <tbody>
-          {eventCode.map((code, i) => (
+          {keyCode.map((code, i) => (
             <tr key={code}>
               <th>{code}</th>
               <td>
