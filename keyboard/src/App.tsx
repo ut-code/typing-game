@@ -9,7 +9,7 @@ import ReadJSONFile from "./../../src/components/ReadJSONFile";
 import {
   functionalLayoutType,
   physicalLayoutType,
-  defaultFunctionalLayout,
+  defaultFunctionalLayoutType,
   defaultPhysicalLayout,
 } from "./components/data/keyboardSettings";
 import "./App.css";
@@ -128,7 +128,7 @@ export default function App({
   setOutput?: (value: string) => void;
 }): JSX.Element {
   const [isDefault, setIsDefault] = useState<boolean>(true);
-  const [functional, setFunctional] = useState<string>(defaultFunctionalLayout);
+  const [functional, setFunctional] = useState<string>(defaultFunctionalLayoutType);
   const [physical, setPhysical] = useState<string>(defaultPhysicalLayout);
   const [keyColors, setKeyColors] = useState<string[]>(
     keyCodes.map(() => "rgba(0,0,0,0)")

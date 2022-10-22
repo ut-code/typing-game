@@ -18,6 +18,6 @@ export const physicalLayoutType = {
   custom: { name: "Custom", id: "custom", content: jis109 },
 };
 
-export const defaultFunctionalLayout = "us_qwerty";
+export const defaultFunctionalLayoutType = "us_qwerty";
 
 export const defaultPhysicalLayout = "us_default";

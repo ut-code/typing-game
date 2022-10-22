@@ -7,11 +7,11 @@ import useWindowDimensions from "./useWindowDimensions";
 import {
   functionalLayoutType,
   physicalLayoutType,
-  defaultFunctionalLayout,
+  defaultFunctionalLayoutType,
   defaultPhysicalLayout,
 } from "./data/keyboardSettings";
 
-let functionalLayout = defaultFunctionalLayout;
+let functionalLayout = defaultFunctionalLayoutType;
 let physicalLayout = defaultPhysicalLayout;
 
 /**
@@ -79,7 +79,7 @@ export default function Keyboard({
   keydown = () => {},
   content = "",
   setContent = (value: string) => {},
-  keyLayout = functionalLayoutType[defaultFunctionalLayout].content,
+  keyLayout = functionalLayoutType[defaultFunctionalLayoutType].content,
   physicalKeyLayout,
   isDefault,
   shift,
