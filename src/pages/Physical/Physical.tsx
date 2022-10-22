@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import keyCodes from "./../../../keyboard/src/components/data/keyCodes.json";
 import {
   physicalLayoutType,
-  defaultFunctionalLayout,
-  defaultPhysicalLayout,
+  defaultFunctionalLayoutType,
+  defaultPhysicalLayoutType,
 } from "./../../../keyboard/src/components/data/keyboardSettings";
 import Keyboard from "./../../../keyboard/src/components/keyboard";
 import ReadJSONFile from "./../../components/ReadJSONFile";
@@ -48,7 +48,7 @@ function physicalKeyToObject(
 }
 
 export default function Physical(): JSX.Element {
-  const defaultPhysical = physicalLayoutType[defaultPhysicalLayout].content;
+  const defaultPhysical = physicalLayoutType[defaultPhysicalLayoutType].content;
   const [marginRow, setMarginRow] = useState<number>(defaultPhysical.marginRow);
   const [marginColumn, setMarginColumn] = useState<number>(
     defaultPhysical.marginColumn
@@ -74,7 +74,7 @@ export default function Physical(): JSX.Element {
   return (
     <>
       <Keyboard
-        functional={defaultFunctionalLayout}
+        functional={defaultFunctionalLayoutType}
         physical="custom"
         physicalKeyLayout={physicalKeyToObject(
           marginRow,
@@ -98,13 +98,13 @@ export default function Physical(): JSX.Element {
           // @ts-ignore
           setHeight(x.height);
           // @ts-ignore
-          setRows(keyCodes.map((code) => x.keyCodes[code].row));
+          setRows(keyCodes.map((keyCode) => x.keyCodes[keyCode].row));
           // @ts-ignore
-          setColumns(keyCodes.map((code) => x.keyCodes[code].column));
+          setColumns(keyCodes.map((keyCode) => x.keyCodes[keyCode].column));
           // @ts-ignore
-          setWidths(keyCodes.map((code) => x.keyCodes[code].width));
+          setWidths(keyCodes.map((keyCode) => x.keyCodes[keyCode].width));
           // @ts-ignore
-          setStyles(keyCodes.map((code) => x.keyCodes[code].style));
+          setStyles(keyCodes.map((keyCode) => x.keyCodes[keyCode].style));
         }}
       ></ReadJSONFile>
       <table>
@@ -149,9 +149,9 @@ export default function Physical(): JSX.Element {
       </table>
       <table>
         <tbody>
-          {keyCodes.map((code, i) => (
-            <tr key={code}>
-              <th>{code}</th>
+          {keyCodes.map((keyCode, i) => (
+            <tr key={keyCode}>
+              <th>{keyCode}</th>
               <td>
                 <GetManySettings<number>
                   type="number"
