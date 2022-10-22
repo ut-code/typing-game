@@ -27,12 +27,25 @@ export default async function script(now, setNow) {
   }
 
   // scoreを計算する関数
-  function calcScore(timeLeft, correct, miss) {
-    return timeLeft * Math.floor((correct / (miss + correct + 1)) * 100);
+  function calcScore(time, word_num, correct, miss) {
+    // 使う変数
+    let progress = word_num / questions.length;
+    let diff = 2 ** questions.length;
+    let correct_rate = correct ** 2 / (miss + correct + 1);
+    let velocity = word_num / time;
+
+    // 重みをつけて算出
+    let w1 = 1;
+    let w2 = 0.1;
+    let w3 = 0.1;
+    let w4 = 10;
+    return Math.floor(
+      1000 * w1 * progress * w2 * diff * w3 * correct_rate * w4 * velocity
+    );
   }
 
-  async function results(timeLeft, time, correct, miss) {
-    let score = calcScore(timeLeft, correct, miss);
+  async function results(time, word_num, correct, miss) {
+    let score = calcScore(time, word_num, correct, miss);
     const json = JSON.stringify({ time: time, score: score });
     const response = await fetch(
       `${import.meta.env.VITE_API_ENDPOINT}/results`,
@@ -118,7 +131,7 @@ export default async function script(now, setNow) {
         cnt = 0;
         if (word_num === questions.length) {
           clearInterval(timerId);
-          results(timeLimit - time, time, correct, miss);
+          results(time, word_num, correct, miss);
         }
       }
       // if (time > timeLimit) {
