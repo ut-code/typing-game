@@ -42,8 +42,19 @@ export default async function script(now, setNow) {
     return Math.floor(
       1000 * progress * (w2 * diff + w3 * correct_rate + w4 * velocity)
     );
-
   }
+
+  const response = await fetch(
+    `${import.meta.env.VITE_API_ENDPOINT}/fetchScore`,
+    {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+  // わざわざstringにしてからobjectにしている...
+  let tmp = await response.text();
+  let data = JSON.parse(tmp);
+  let qnumber = Number(data.qnumber);
 
   async function results(time, word_num, correct, miss) {
     let score = calcScore(time, word_num, correct, miss);
@@ -64,8 +75,10 @@ export default async function script(now, setNow) {
   async function main() {
     //問題をとってくる
     await getQuestions();
-    //シャッフルする
-    questions = shuffle(questions);
+    //シャッフルする、ただし順番が無関係な問題のみ
+    if (qnumber === 0) {
+      questions = shuffle(questions);
+    }
 
     const alphabet = [
       "a",
@@ -169,10 +182,10 @@ export default async function script(now, setNow) {
             timeLimit - time + "秒";
           if (timeLimit - time <= 0) {
             clearInterval(timerId);
-            document.getElementById("question").textContent = "キーを押してね";
+            document.getElementById("question").textContent =
+              "キーを押すと結果が出ます";
+            document.getElementById("answered").textContent = "";
           }
-          // 何問目/全問題数を右上に表示
-          // document.getElementById("progress-number").textContent = word_num+1 + "/" + questions.length + "問";
         }, 1000);
       }
     });
