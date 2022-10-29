@@ -66,7 +66,7 @@ async function submitScore(username, score) {
 app.post("/results", async (request, response) => {
   time = request.body.time;
   localStorage.setItem("time", time);
-  let username = localStorage.getItem("username") || "Guest";
+  username = localStorage.getItem("username") || "Guest";
   score = request.body.score;
   localStorage.setItem("score", score);
   await submitScore(username, score);

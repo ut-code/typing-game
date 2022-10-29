@@ -74,6 +74,18 @@ thead th {
   /* color: rgb(68, 5, 102); */
   margin: 0 0 0 auto;
 }
+#rawcode {
+  overflow: auto;
+  border: 1px solid #cccccc;
+  width: 30vw;
+  height: 10vw;
+}
+#compilecode {
+  overflow: auto;
+  border: 1px solid #cccccc;
+  width: 30vw;
+  height: 10vw;
+}
 footer {
   font-size: 13px;
   padding: 2vw;
