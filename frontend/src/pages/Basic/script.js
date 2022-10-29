@@ -3,6 +3,9 @@ export default async function script(now, setNow) {
   let questions = []; // 問題
   let timerId; //clearIntervalをするため 無視してOK
 
+  let typeSE = new Audio("../../../public/typeSE.mp3");
+  let correctSE = new Audio("../../../public/correctSE.mp3");
+
   // 問題をquestionsに格納する関数
   async function getQuestions() {
     // JSON形式でmain.jsから受信
@@ -112,6 +115,10 @@ export default async function script(now, setNow) {
     const observer = new MutationObserver(() => {
       // https://developer.mozilla.org/ja/docs/Web/API/MutationObserver
 
+      // タイプ音が鳴る。早すぎると間に合わない
+      typeSE.pause();
+      typeSE.play();
+
       const previousContent = content;
       content = document.getElementById("content").textContent;
       const key = content[content.length - 1]; // 追加された文字すなわち一番最後の文字を取り出す。
@@ -139,8 +146,13 @@ export default async function script(now, setNow) {
       }
       if (cnt == questions[word_num].length) {
         // 次の問題へ
-        if (qnumber === 1) addcode(questions[word_num]);
+        // if (qnumber === 1) addcode(questions[word_num]);
         word_num++;
+
+        // 正解音が鳴る。最後の問題だけちょっと切れている
+        correctSE.pause();
+        correctSE.play();
+
         setNow(Math.round((word_num / questions.length) * 100));
         answer = "";
         cnt = 0;
