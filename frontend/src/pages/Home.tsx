@@ -29,6 +29,7 @@ export default function Home() {
               <Form.Label>問題番号</Form.Label>
               <Form.Select>
                 <option>0</option>
+                <option>1</option>
                 <option>11</option>
                 <option>20</option>
                 <option>21</option>
@@ -36,8 +37,9 @@ export default function Home() {
                 <option>23</option>
               </Form.Select>
               <Form.Text className="text-muted">
-                0: テスト用 11: ゲティスバーグ演説 20: ロンドン橋落ちた 21:
-                ハンプティダンプティ 22: きらきら星 23: Hey Diddle Diddle
+                0: テスト用 1: javascript 11: ゲティスバーグ演説 20:
+                ロンドン橋落ちた 21: ハンプティダンプティ 22: きらきら星 23: Hey
+                Diddle Diddle
               </Form.Text>
             </Form.Group>
 
@@ -51,7 +53,8 @@ export default function Home() {
           <Accordion.Item eventKey="0">
             <Accordion.Header>遊び方</Accordion.Header>
             <Accordion.Body>
-              問題番号を選択してPlayボタンを押します。スペースキーで開始すると問題が表示されます。<br></br>
+              問題番号を選択してPlayボタンを押します。スペースキーで開始すると問題が表示されます。
+              <br></br>
               残り時間が0になると得点が0になります。高得点を目指して頑張りましょう！
             </Accordion.Body>
           </Accordion.Item>

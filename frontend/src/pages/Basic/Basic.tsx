@@ -3,6 +3,7 @@ import Keyboard from "./../../../keyboard-layout-creator/keyboard/src/App";
 import "./style.css";
 // @ts-ignore
 import script from "./script";
+// import learnhtml from "./learnhtml";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, ProgressBar, Stack } from "react-bootstrap";
@@ -20,7 +21,7 @@ export default function Basic() {
     <>
       {/* ここからHTMLファイル */}
       <div id="score-related">
-        <Stack direction="horizontal" gap={0}>
+        <Stack direction="horizontal" gap={3}>
           <table id="current">
             <tbody>
               <tr>
@@ -42,7 +43,11 @@ export default function Basic() {
             </tbody>
           </table>
 
-          <div id="html"></div>
+          <div id="rawcode">{}</div>
+
+          <div id="compilecode">
+            {/* addcodeを画面に表示したものを入れる */}
+          </div>
 
           <Stack gap={0} id="progress">
             <div id="progress-number"></div>

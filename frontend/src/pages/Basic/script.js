@@ -139,6 +139,7 @@ export default async function script(now, setNow) {
       }
       if (cnt == questions[word_num].length) {
         // 次の問題へ
+        if (qnumber === 1) addcode(questions[word_num]);
         word_num++;
         setNow(Math.round((word_num / questions.length) * 100));
         answer = "";
@@ -206,7 +207,7 @@ export default async function script(now, setNow) {
   let cnt = 0; // 何文字目か
   let isStarted = false; // 始まったか
   let time = 0; // 時間
-  let timeLimit = 45; // 制限時間
+  let timeLimit = 30; // 制限時間
 
   let content = document.getElementById("content").textContent;
 
@@ -214,5 +215,18 @@ export default async function script(now, setNow) {
   document.getElementById("miss").textContent = miss + "回";
   document.getElementById("time").textContent = time + "秒";
   document.getElementById("timeLeft").textContent = timeLimit - time + "秒";
+
+  // Web開発追体験(learn.jsに移植したい)
+  function addcode(question) {
+    let rawcode = document.createElement("code");
+    q;
+    rawcode.textContent = question;
+    document.getElementById("rawcode").appendChild(rawcode);
+    // document.getElementById("rawcode").textContent = question;
+    // let code = document.createElement("script");
+    // code.textContent = question;
+    // document.getElementById("rawcode").appendChild(code);
+    document.getElementById("compilecode").innerHTML = question;
+  }
   // ここまで
 }
