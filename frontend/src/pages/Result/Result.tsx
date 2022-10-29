@@ -43,8 +43,6 @@ export default function Result() {
       </Helmet>
       <Stack gap={3}>
         <div className="yourResults">
-          <p id="finish">終了!</p>
-          {/* {listItems.map((listItem) => ( # 順位 */}
           <p id="name"></p>
           <p id="yourRank"></p>
           <p id="time"></p>
@@ -57,7 +55,6 @@ export default function Result() {
         </div>
         <div className="rankBoard">
           <Table striped id="ranking">
-            {/* {i=1} */}
             <thead id="ranking-head">
               <tr>
                 <th>順位</th>
@@ -71,7 +68,6 @@ export default function Result() {
                   <th>{i + 1}</th>
                   <th>{listItem.username}</th>
                   <th>{listItem.score}</th>
-                  {/* {increment()} */}
                 </tr>
               ))}
             </tbody>
