@@ -19,8 +19,6 @@ export default function Home() {
   return (
     <>
       <Header />
-      {/* ユーザーネーム: <input name="username" placeholder="Guest" />
-        問題番号: <input name="questionNumber" placeholder="0" /> */}
       <Stack gap={3}>
         <div id="userinput">
           <Form>

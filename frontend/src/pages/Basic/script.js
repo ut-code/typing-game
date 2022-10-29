@@ -71,8 +71,6 @@ export default async function script(now, setNow) {
       }
     );
     window.location.href = "/result";
-    // const html = await response.text();
-    // document.body.innerHTML = html;
   }
 
   async function main() {
@@ -136,10 +134,12 @@ export default async function script(now, setNow) {
         answer += key;
         cnt++;
         correct++;
+        document.getElementById("correct").textContent = correct + "回";
       } else if (alphabet.includes(key.toLowerCase())) {
         // 間違えていたときでアルファベットであれば、不正解とする。
         // 不正解の時
         miss++;
+        document.getElementById("miss").textContent = miss + "回";
       }
       if (timeLimit - time <= 0) {
         results(timeLimit - time, time, correct, miss);
@@ -161,11 +161,6 @@ export default async function script(now, setNow) {
           results(time, word_num, correct, miss);
         }
       }
-      // if (time > timeLimit) {
-      //   // 時間制限でも終了, ただキー押さないと移行しない
-      //   // clearInterval(timerId);
-      //   results(timeLimit - time, time, correct, miss);
-      // }
 
       document.getElementById("answered").textContent = questions[
         word_num
