@@ -61,17 +61,15 @@ export default async function script(now, setNow) {
 
   async function results(time, word_num, correct, miss) {
     let score = calcScore(time, word_num, correct, miss);
-    if (score !== 0) {
-      const json = JSON.stringify({ time: time, score: score });
-      const response = await fetch(
-        `${import.meta.env.VITE_API_ENDPOINT}/results`,
-        {
-          method: "post",
-          headers: { "Content-Type": "application/json" },
-          body: json,
-        }
-      );
-    }
+    const json = JSON.stringify({ time: time, score: score });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_ENDPOINT}/results`,
+      {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: json,
+      }
+    );
     window.location.href = "/result";
   }
 
@@ -194,9 +192,6 @@ export default async function script(now, setNow) {
             clearInterval(timerId);
             isFinished = true;
             results(time, word_num, correct, miss);
-            // document.getElementById("question").textContent =
-            //   "キーを押して結果を表示";
-            // document.getElementById("answered").textContent = "";
           }
         }, 1000);
       }
