@@ -3,7 +3,6 @@ import Keyboard from "./../../../keyboard-layout-creator/keyboard/src/App";
 import "./style.css";
 // @ts-ignore
 import script from "./script";
-// import learnhtml from "./learnhtml";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, ProgressBar, Stack } from "react-bootstrap";
