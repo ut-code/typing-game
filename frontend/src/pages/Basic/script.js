@@ -157,9 +157,9 @@ export default async function script(now, setNow) {
         setNow(Math.round((word_num / questions.length) * 100));
         answer = "";
         cnt = 0;
-        if (word_num === questions.length) {
+        if (word_num === questions.length && isFinished === false) {
           // 二重submitを防ぐflag
-          // isFinished = true;
+          isFinished = true;
           results(time, word_num, correct, miss);
         }
       }
