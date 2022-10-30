@@ -79,7 +79,7 @@ app.post("/fetchScore", (request, response) => {
     time: localStorage.getItem("time") || "-1",
     score: localStorage.getItem("score") || "-1",
     username: localStorage.getItem("username") || "Guest",
-    qnumber: localStorage.getItem("qnumber") || "-1",
+    qnumber: localStorage.getItem("qnumber") || "0",
   });
 });
 

@@ -129,6 +129,7 @@ export default async function script(now, setNow) {
       // 何問目/全問題数を右上に表示
       document.getElementById("progress-number").textContent =
         word_num + 1 + "/" + questions.length + "問";
+
       if (key === questions[word_num][cnt]) {
         // 正答時
         answer += key;
@@ -141,9 +142,7 @@ export default async function script(now, setNow) {
         miss++;
         document.getElementById("miss").textContent = miss + "回";
       }
-      if (timeLimit - time <= 0) {
-        results(timeLimit - time, time, correct, miss);
-      }
+
       if (cnt == questions[word_num].length) {
         // 次の問題へ
         // if (qnumber === 1) addcode(questions[word_num]);
@@ -153,10 +152,22 @@ export default async function script(now, setNow) {
         correctSE.pause();
         correctSE.play();
 
+        // if (timeLimit - time <= 0 && isFinished === false) {
+        //   // 二重submitを防ぐflag
+        //   isFinished = true;
+        //   clearInterval(timerId);
+        //   // document.getElementById("question").textContent =
+        //   //   "キーを押して結果を表示";
+        //   // document.getElementById("answered").textContent = "";
+        //   results(time, word_num, correct, miss);
+        // }
+
         setNow(Math.round((word_num / questions.length) * 100));
         answer = "";
         cnt = 0;
-        if (word_num === questions.length) {
+        if (word_num === questions.length && isFinished === false) {
+          // 二重submitを防ぐflag
+          isFinished = true;
           clearInterval(timerId);
           results(time, word_num, correct, miss);
         }
@@ -188,11 +199,15 @@ export default async function script(now, setNow) {
           document.getElementById("time").textContent = time + "秒";
           document.getElementById("timeLeft").textContent =
             timeLimit - time + "秒";
-          if (timeLimit - time <= 0) {
+          if (timeLimit - time <= 0 && isFinished === false) {
+            // 二重submitを防ぐflag
+            isFinished = true;
             clearInterval(timerId);
-            document.getElementById("question").textContent =
-              "キーを押すと結果が出ます";
-            document.getElementById("answered").textContent = "";
+            // document.getElementById("question").textContent =
+            //   "キーを押して結果を表示";
+            // document.getElementById("answered").textContent = "";
+            alert("二回出てきます");
+            results(time, word_num, correct, miss);
           }
         }, 1000);
       }
@@ -215,8 +230,9 @@ export default async function script(now, setNow) {
   let miss = 0; // ミスタイプ数
   let cnt = 0; // 何文字目か
   let isStarted = false; // 始まったか
+  let isFinished = false; // 終わったか
   let time = 0; // 時間
-  let timeLimit = 30; // 制限時間
+  let timeLimit = 3; // 制限時間
 
   let content = document.getElementById("content").textContent;
 
@@ -228,7 +244,7 @@ export default async function script(now, setNow) {
   // Web開発追体験(learn.jsに移植したい)
   function addcode(question) {
     let rawcode = document.createElement("code");
-    q;
+
     rawcode.textContent = question;
     document.getElementById("rawcode").appendChild(rawcode);
     // document.getElementById("rawcode").textContent = question;
