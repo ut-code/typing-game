@@ -61,15 +61,17 @@ export default async function script(now, setNow) {
 
   async function results(time, word_num, correct, miss) {
     let score = calcScore(time, word_num, correct, miss);
-    const json = JSON.stringify({ time: time, score: score });
-    const response = await fetch(
-      `${import.meta.env.VITE_API_ENDPOINT}/results`,
-      {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: json,
-      }
-    );
+    if (score !== 0) {
+      const json = JSON.stringify({ time: time, score: score });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_ENDPOINT}/results`,
+        {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: json,
+        }
+      );
+    }
     window.location.href = "/result";
   }
 
@@ -152,23 +154,12 @@ export default async function script(now, setNow) {
         correctSE.pause();
         correctSE.play();
 
-        // if (timeLimit - time <= 0 && isFinished === false) {
-        //   // 二重submitを防ぐflag
-        //   isFinished = true;
-        //   clearInterval(timerId);
-        //   // document.getElementById("question").textContent =
-        //   //   "キーを押して結果を表示";
-        //   // document.getElementById("answered").textContent = "";
-        //   results(time, word_num, correct, miss);
-        // }
-
         setNow(Math.round((word_num / questions.length) * 100));
         answer = "";
         cnt = 0;
-        if (word_num === questions.length && isFinished === false) {
+        if (word_num === questions.length) {
           // 二重submitを防ぐflag
-          isFinished = true;
-          clearInterval(timerId);
+          // isFinished = true;
           results(time, word_num, correct, miss);
         }
       }
@@ -200,14 +191,12 @@ export default async function script(now, setNow) {
           document.getElementById("timeLeft").textContent =
             timeLimit - time + "秒";
           if (timeLimit - time <= 0 && isFinished === false) {
-            // 二重submitを防ぐflag
-            isFinished = true;
             clearInterval(timerId);
+            isFinished = true;
+            results(time, word_num, correct, miss);
             // document.getElementById("question").textContent =
             //   "キーを押して結果を表示";
             // document.getElementById("answered").textContent = "";
-            alert("二回出てきます");
-            results(time, word_num, correct, miss);
           }
         }, 1000);
       }
@@ -232,7 +221,7 @@ export default async function script(now, setNow) {
   let isStarted = false; // 始まったか
   let isFinished = false; // 終わったか
   let time = 0; // 時間
-  let timeLimit = 3; // 制限時間
+  let timeLimit = 30; // 制限時間
 
   let content = document.getElementById("content").textContent;
 
