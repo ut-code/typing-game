@@ -50,9 +50,8 @@ export default function Home() {
                 <option>23</option>
               </Form.Select>
               <Form.Text className="text-muted">
-                0: テスト用 1: javascript 11: ゲティスバーグ演説 20:
-                ロンドン橋落ちた 21: ハンプティダンプティ 22: きらきら星 23: Hey
-                Diddle Diddle
+                0: テスト用 1: ??? 11: ゲティスバーグ演説 20: ロンドン橋落ちた
+                21: ハンプティダンプティ 22: きらきら星 23: Hey Diddle Diddle
               </Form.Text>
             </Form.Group>
 

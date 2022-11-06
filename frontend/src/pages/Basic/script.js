@@ -186,7 +186,7 @@ export default async function script(now, setNow) {
         timerId = setInterval(() => {
           time++;
           document.getElementById("time").textContent = time + "秒";
-          document.getElementById("timeLeft").textContent =
+          document.getElementById("remaining-time").textContent =
             timeLimit - time + "秒";
           if (timeLimit - time <= 0 && isFinished === false) {
             clearInterval(timerId);
@@ -217,13 +217,15 @@ export default async function script(now, setNow) {
   let isFinished = false; // 終わったか
   let time = 0; // 時間
   let timeLimit = 30; // 制限時間
+  if (qnumber === 1) timeLimit *= 1000;
 
   let content = document.getElementById("content").textContent;
 
   document.getElementById("correct").textContent = correct + "回";
   document.getElementById("miss").textContent = miss + "回";
   document.getElementById("time").textContent = time + "秒";
-  document.getElementById("timeLeft").textContent = timeLimit - time + "秒";
+  document.getElementById("remaining-time").textContent =
+    timeLimit - time + "秒";
 
   // Web開発追体験(learn.jsに移植したい)
   function addcode(question) {
@@ -235,7 +237,7 @@ export default async function script(now, setNow) {
     // let code = document.createElement("script");
     // code.textContent = question;
     // document.getElementById("rawcode").appendChild(code);
-    document.getElementById("compilecode").innerHTML = question;
+    document.getElementById("preview-box").innerHTML = question;
   }
   // ここまで
 }
