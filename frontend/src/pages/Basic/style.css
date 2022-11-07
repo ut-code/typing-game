@@ -12,10 +12,6 @@ body {
   text-align: center;
   margin: 1vw auto;
 }
-#mondai {
-  font-size: 25px;
-  margin: 1vw auto;
-}
 #answered {
   font-size: 30px;
   color: rgb(208, 205, 214);
@@ -29,15 +25,13 @@ body {
   font-size: 20px;
   border-spacing: 1vw 1vw;
 }
-#your-answer {
-  font-size: 15px;
-}
 thead th {
   font-size: 20px;
 }
 #current {
   font-size: 20px;
   border-spacing: 4vw 0vw;
+  width: 20vw;
 }
 #current th {
   font-weight: bolder;
@@ -78,13 +72,14 @@ thead th {
   overflow: auto;
   border: 1px solid #cccccc;
   width: 30vw;
-  height: 10vw;
+  height: 15vw;
+  tab-size: 2;
 }
-#compilecode {
+#preview-box {
   overflow: auto;
   border: 1px solid #cccccc;
   width: 30vw;
-  height: 10vw;
+  height: 15vw;
 }
 footer {
   font-size: 13px;

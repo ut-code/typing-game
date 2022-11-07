@@ -1,4 +1,4 @@
-export default async function script(now, setNow) {
+export default async function script(now, setNow, code, setCode) {
   // ここから
   let questions = []; // 問題
   let timerId; //clearIntervalをするため 無視してOK
@@ -38,12 +38,12 @@ export default async function script(now, setNow) {
     let velocity = correct / time;
 
     // 重みをつけて算出
-    let w1 = 1;
+    let w1 = 1000;
     let w2 = 0.1;
     let w3 = 1;
     let w4 = 10;
     return Math.floor(
-      1000 * progress * (w2 * diff + w3 * correct_rate + w4 * velocity)
+      w1 * progress * (w2 * diff + w3 * correct_rate + w4 * velocity)
     );
   }
 
@@ -145,7 +145,7 @@ export default async function script(now, setNow) {
 
       if (cnt == questions[word_num].length) {
         // 次の問題へ
-        // if (qnumber === 1) addcode(questions[word_num]);
+        if (qnumber === 1) addcode();
         word_num++;
 
         // 正解音が鳴る。最後の問題だけちょっと切れている
@@ -186,7 +186,7 @@ export default async function script(now, setNow) {
         timerId = setInterval(() => {
           time++;
           document.getElementById("time").textContent = time + "秒";
-          document.getElementById("timeLeft").textContent =
+          document.getElementById("remaining-time").textContent =
             timeLimit - time + "秒";
           if (timeLimit - time <= 0 && isFinished === false) {
             clearInterval(timerId);
@@ -217,25 +217,31 @@ export default async function script(now, setNow) {
   let isFinished = false; // 終わったか
   let time = 0; // 時間
   let timeLimit = 30; // 制限時間
+  if (qnumber === 1) timeLimit *= 1000;
 
   let content = document.getElementById("content").textContent;
 
   document.getElementById("correct").textContent = correct + "回";
   document.getElementById("miss").textContent = miss + "回";
   document.getElementById("time").textContent = time + "秒";
-  document.getElementById("timeLeft").textContent = timeLimit - time + "秒";
+  document.getElementById("remaining-time").textContent =
+    timeLimit - time + "秒";
 
   // Web開発追体験(learn.jsに移植したい)
-  function addcode(question) {
-    let rawcode = document.createElement("code");
+  function addcode() {
+    if (word_num === 2) {
+      setCode("working");
+    }
+    document.getElementById("rawcode").textContent = code;
+    document.getElementById("preview-box").innerHTML = code;
 
-    rawcode.textContent = question;
-    document.getElementById("rawcode").appendChild(rawcode);
+    // rawcode.textContent = question;
+    // document.getElementById("rawcode").appendChild(rawcode);
     // document.getElementById("rawcode").textContent = question;
     // let code = document.createElement("script");
     // code.textContent = question;
     // document.getElementById("rawcode").appendChild(code);
-    document.getElementById("compilecode").innerHTML = question;
   }
+  if (qnumber === 1) addcode();
   // ここまで
 }
