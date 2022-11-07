@@ -46,15 +46,16 @@ export default function Basic() {
               </tr>
             </tbody>
           </table>
-
-          <div id="rawcode">
-            {/* <Editor
-              // height="20vh"
-              defaultLanguage="html"
-              defaultValue={code}
-              theme="vs-dark"
-            /> */}
-          </div>
+          <pre>
+            <div id="rawcode">
+              {/* <Editor
+                // height="20vh"
+                defaultLanguage="html"
+                defaultValue={code}
+                theme="vs-dark"
+              /> */}
+            </div>
+          </pre>
 
           <div id="preview-box">
             {/* addcodeを画面に表示したものを入れる */}

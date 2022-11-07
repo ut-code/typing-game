@@ -73,6 +73,7 @@ thead th {
   border: 1px solid #cccccc;
   width: 30vw;
   height: 15vw;
+  tab-size: 2;
 }
 #preview-box {
   overflow: auto;

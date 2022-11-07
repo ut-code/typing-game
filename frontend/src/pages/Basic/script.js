@@ -145,7 +145,7 @@ export default async function script(now, setNow, code, setCode) {
 
       if (cnt == questions[word_num].length) {
         // 次の問題へ
-        if (qnumber === 1) addcode(questions[word_num]);
+        if (qnumber === 1) addcode();
         word_num++;
 
         // 正解音が鳴る。最後の問題だけちょっと切れている
@@ -228,9 +228,9 @@ export default async function script(now, setNow, code, setCode) {
     timeLimit - time + "秒";
 
   // Web開発追体験(learn.jsに移植したい)
-  function addcode(question) {
+  function addcode() {
     if (word_num === 2) {
-      setCode("niomniomom");
+      setCode("working");
     }
     document.getElementById("rawcode").textContent = code;
     document.getElementById("preview-box").innerHTML = code;
@@ -242,5 +242,6 @@ export default async function script(now, setNow, code, setCode) {
     // code.textContent = question;
     // document.getElementById("rawcode").appendChild(code);
   }
+  if (qnumber === 1) addcode();
   // ここまで
 }
