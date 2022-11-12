@@ -145,14 +145,18 @@ export default async function script(now, setNow, code, setCode) {
 
       if (cnt == questions[word_num].length) {
         // 次の問題へ
-        if (qnumber === 1) addcode();
         word_num++;
 
         // 正解音が鳴る。最後の問題だけちょっと切れている
         correctSE.pause();
         correctSE.play();
 
+        // コードを書き換える
+        if (qnumber === 1) addcode();
+
+        // 進捗バーを増やす
         setNow(Math.round((word_num / questions.length) * 100));
+
         answer = "";
         cnt = 0;
         if (word_num === questions.length && isFinished === false) {
@@ -218,6 +222,17 @@ export default async function script(now, setNow, code, setCode) {
   let time = 0; // 時間
   let timeLimit = 30; // 制限時間
   if (qnumber === 1) timeLimit *= 1000;
+  let html = [
+    "<!DOCTYPE html>",
+    '\n<html lang="ja">',
+    "\n\t<head>",
+    '\n\t\t<meta charset="utf-8" />',
+    "\n\t</head>",
+    "\n\t<body>",
+    "\n\t</body>",
+    "\n</html>",
+  ];
+  let html2;
 
   let content = document.getElementById("content").textContent;
 
@@ -229,18 +244,87 @@ export default async function script(now, setNow, code, setCode) {
 
   // Web開発追体験(learn.jsに移植したい)
   function addcode() {
-    if (word_num === 2) {
-      setCode("working");
+    if (word_num === 0) {
+      // html2 = html.join("");
+      setCode(html2);
+    } else if (word_num === 1) {
+      html.splice(6, 0, '\n\t\t<div id="score-related">', "\n\t\t</div>");
+    } else if (word_num === 2) {
+      html.splice(
+        7,
+        0,
+        '\n\t\t\t<table id="current">',
+        "\n\t\t\t\t<tbody>",
+        "\n\t\t\t\t</tbody>",
+        "\n\t\t\t</table>"
+      );
+    } else if (word_num === 3) {
+      html.splice(
+        9,
+        0,
+        "\n\t\t\t\t\t<tr>",
+        "\n\t\t\t\t\t\t<th>Correct: </th>",
+        '\n\t\t\t\t\t\t<td id="correct"></td>',
+        "\n\t\t\t\t\t</tr>"
+      );
+    } else if (word_num === 4) {
+      html.splice(
+        13,
+        0,
+        "\n\t\t\t\t\t<tr>",
+        "\n\t\t\t\t\t\t<th>Miss: </th>",
+        '\n\t\t\t\t\t\t<td id="miss"></td>',
+        "\n\t\t\t\t\t</tr>"
+      );
+    } else if (word_num === 5) {
+      html.splice(
+        17,
+        0,
+        "\n\t\t\t\t\t<tr>",
+        "\n\t\t\t\t\t\t<th>Time: </th>",
+        '\n\t\t\t\t\t\t<td id="time"></td>',
+        "\n\t\t\t\t\t</tr>"
+      );
+    } else if (word_num === 6) {
+      html.splice(
+        21,
+        0,
+        "\n\t\t\t\t\t<tr>",
+        "\n\t\t\t\t\t\t<th>Remaining Time: </th>",
+        '\n\t\t\t\t\t\t<td id="remaining-time"></td>',
+        "\n\t\t\t\t\t</tr>"
+      );
+    } else if (word_num === 7) {
+      html.splice(27, 0, '\n\t\t\t<div id="progress-number"></div>');
+    } else if (word_num === 8) {
+      html.splice(
+        28,
+        0,
+        '\n\t\t\t<div className="pb-5" id="progress-bar"></div>'
+      );
+    } else if (word_num === 9) {
+      html.splice(30, 0, '\n\t\t<div id="elements">', "\n\t\t</div>");
+    } else if (word_num === 10) {
+      html.splice(31, 0, '\n\t\t\t\t<div id="answer"></div>');
+    } else if (word_num === 11) {
+      html.splice(32, 0, '\n\t\t\t\t<span id="answered"></span>');
+    } else if (word_num === 12) {
+      html.splice(
+        33,
+        0,
+        '\n\t\t\t\t<span id="question">Press [Space] to Play</span>'
+      );
+    } else if (word_num === 13) {
+      html.splice(
+        35,
+        0,
+        '\n\t\t\t<Button href="/" variant="secondary">Back</Button>'
+      );
     }
-    document.getElementById("rawcode").textContent = code;
-    document.getElementById("preview-box").innerHTML = code;
 
-    // rawcode.textContent = question;
-    // document.getElementById("rawcode").appendChild(rawcode);
-    // document.getElementById("rawcode").textContent = question;
-    // let code = document.createElement("script");
-    // code.textContent = question;
-    // document.getElementById("rawcode").appendChild(code);
+    html2 = html.join("");
+    document.getElementById("rawcode").textContent = html2;
+    document.getElementById("preview-box").innerHTML = html2;
   }
   if (qnumber === 1) addcode();
   // ここまで
