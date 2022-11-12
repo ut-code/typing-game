@@ -3,8 +3,8 @@ export default async function script(now, setNow, code, setCode) {
   let questions = []; // 問題
   let timerId; //clearIntervalをするため 無視してOK
 
-  let typeSE = new Audio("/typeSE.mp3");
-  let correctSE = new Audio("/correctSE.mp3");
+  const typeSE = new Audio("/typeSE.mp3");
+  const correctSE = new Audio("/correctSE.mp3");
 
   // 問題をquestionsに格納する関数
   async function getQuestions() {
