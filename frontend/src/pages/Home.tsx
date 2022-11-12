@@ -60,7 +60,7 @@ export default function Home() {
             <Button
               variant="secondary"
               id="play-button"
-              onClick={(e) => {
+              onClick={() => {
                 // ユーザーの入力情報を受け取る関数
                 async function postStorage() {
                   // JSON形式でmain.jsから受信
