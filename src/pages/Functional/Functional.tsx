@@ -29,14 +29,14 @@ export default function Functional(): JSX.Element {
   const [shift, setShift] = useState<boolean>(false);
   const [keys, setKeys] = useState<string[][]>([
     keyCodes.map(
-      // @ts-ignore
-      (keyCode) =>
-        functionalLayoutType[defaultFunctionalLayoutType].content[keyCode][0]
+      (
+        keyCode // @ts-ignore
+      ) => functionalLayoutType[defaultFunctionalLayoutType].content[keyCode][0]
     ),
     keyCodes.map(
-      // @ts-ignore
-      (keyCode) =>
-        functionalLayoutType[defaultFunctionalLayoutType].content[keyCode][1]
+      (
+        keyCode // @ts-ignore
+      ) => functionalLayoutType[defaultFunctionalLayoutType].content[keyCode][1]
     ),
   ]);
   const [fileName, setFileName] = useState<string>("");
