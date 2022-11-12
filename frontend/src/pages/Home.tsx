@@ -61,13 +61,12 @@ export default function Home() {
               onClick={(e) => {
                 // ユーザーの入力情報を受け取る関数
                 async function postStorage() {
-                  // JSON形式でmain.jsから受信
                   const json = JSON.stringify({
                     username: userName,
                     qnumber: qnumber,
                   });
                   const response = await fetch(
-                    `${import.meta.env.VITE_API_ENDPOINT}/localSave`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
+                    `${import.meta.env.VITE_API_ENDPOINT}/localSave`,
                     {
                       method: "post",
                       headers: { "Content-Type": "application/json" },
