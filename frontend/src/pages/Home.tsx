@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import "./style.css";
-// @ts-ignore
-import script from "./script.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Form, Stack, Accordion } from "react-bootstrap";
@@ -13,9 +12,6 @@ export default function Home() {
   const [userName, setUserName] = useState<string>("");
   const [qnumber, setQnumber] = useState<string>("");
   const navigation = useNavigate();
-  useEffect(() => {
-    script();
-  }, []);
   return (
     <>
       <Header />
@@ -58,7 +54,7 @@ export default function Home() {
             <Button
               variant="secondary"
               id="play-button"
-              onClick={(e) => {
+              onClick={() => {
                 // ユーザーの入力情報を受け取る関数
                 async function postStorage() {
                   // JSON形式でmain.jsから受信

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import React from "react";
 import { useEffect, useState } from "react";
 import Footer from "./../../components/Footer";
 import { Helmet } from "react-helmet";
