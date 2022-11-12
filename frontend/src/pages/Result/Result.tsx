@@ -21,13 +21,10 @@ export default function Result() {
   // RankingをfetchAPIしてくる
   useEffect(() => {
     (async () => {
-      await fetch(
-        `${import.meta.env.VITE_API_ENDPOINT}/fetchRanking`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
-        {
-          method: "post",
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRanking`, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+      })
         .then((response) => response.json())
         .then((data) => {
           setListItems(data);
@@ -38,7 +35,6 @@ export default function Result() {
   return (
     <>
       <Helmet>
-        {/* https://github.com/nfl/react-helmet */}
         <title>結果</title>
       </Helmet>
       <Stack gap={3}>
