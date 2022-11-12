@@ -1,34 +1,14 @@
-# typing-game
+# タイピングゲーム
 
 <img src="frontend/public/logo.png" width="300">
 
-駒場祭のタイピングゲーム
+第 73 回駒場祭企画 ウ タイピングゲーム
 
-## Node のインストール
+[https://typing-game.onrender.com/](https://typing-game.onrender.com/)
 
-[ut.code(); Learn](https://learn.utcode.net/docs/web-servers/node-js/)を参照
+## 環境構築
 
-### アップデート
-
-#### Node のアップデート
-
-```shell
-nvm install --lts
-```
-
-#### npm のアップデート
-
-```shell
-npm install -g npm
-```
-
-## Git と GitHub のセットアップ
-
-[ut.code(); Learn](https://learn.utcode.net/docs/web-servers/git-github/)を参照
-
-## セットアップ
-
-プロジェクトフォルダに移動
+Node.js のインストール
 
 ```shell
 git clone --recursive git@github.com:ut-code/typing-game.git
@@ -42,7 +22,7 @@ cd typing-game
 npm run setup:env
 ```
 
-`.env` ファイルに `DATABASE_URL="データベースのURL"` と書く。
+`.env` ファイルに `DATABASE_URL="データベースのURL"` となるように書く。
 
 ```shell
 npm run setup
@@ -56,7 +36,7 @@ npm run setup
 npm run backend:dev
 ```
 
-`Terminal` をもう一つ開く
+Terminal をもう一つ開く
 
 `typing-game` ディレクトリに移動
 
@@ -77,16 +57,23 @@ npm run autoupdate
 ## ディレクトリ構成
 
 - `/root`
+
   - `/frontend` フロントエンド関係
-    - `src`
-      - `pages`
-        - `Home`
-          - `Home.tsx` , `script.js` , `style.css` を編集する。
-          - `Basic`
-            - `Home.tsx` , `script.js` , `style.css` を編集する。
-    - `/dist` `$ npm run build` を実行すると、自動で作られる。編集はしない。
+
+    - `/src`
+
+      - `/pages`
+        ホームページ
+
+        - `/Basic`
+          タイピングゲームの本体
+
+        - `/Result`
+          結果ページ
+
+    - `/dist` ビルド時に自動で作られる。編集はしない。
+    - `/keyboard-layout-maker` サブモジュール
+
   - `/backend` バックエンド関係
     - `main.js` メイン
-    - `finished.ejs` 結果ページ
     - `/prisma` Prisma のファイル
-  - `/keyboard-layout-maker` サブモジュール これらのフォルダの中は別のリポジトリになっている。
