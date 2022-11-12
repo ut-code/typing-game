@@ -1,16 +1,30 @@
 services:
-  - name: web
-    type: web
+  - type: web
+    name: typing-game
     env: static
-    buildCommand: npm run frontend:install && cd frontend && npm run build
+    # rootDir: frontend
+    # buildCommand: npm install && npm run build
+    buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
-  - name: server
-    type: web
+    pullRequestPreviewsEnabled: true
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: sameorigin
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /
+  - type: web
+    name: typing-game-backend
     env: node
-    buildCommand: npm run backend:install
-    startCommand: cd backend && npm run start
     region: singapore
     plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm run start
     envVars:
       - key: PORT
         value: 3000
+      - key: DATABASE_URL
+        sync: false
