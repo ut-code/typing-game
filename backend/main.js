@@ -38,6 +38,9 @@ app.post("/questions", async (request, response) => {
     where: {
       qnumber: qnumber,
     },
+    orderBy: {
+      id: "asc",
+    },
   });
   // questionsに問題が配列の形で入っている。
   const questions = records.map((data) => data.question);
