@@ -23,7 +23,6 @@ export default function Basic() {
   if (cont !== null) cont.textContent = content;
   return (
     <>
-      {/* ここからHTMLファイル */}
       <div id="score-related">
         <Stack direction="horizontal" gap={3}>
           <table id="current">
@@ -73,7 +72,6 @@ export default function Basic() {
       <Button href="/" variant="secondary">
         Back
       </Button>
-      {/* ここまでHTMLファイル */}
       {/* 下のdivの中にReactがキーボードの入力結果をいい感じにして、出力している。これを、読み取って使えば良い。 */}
       <div id="content"></div>
       <Keyboard
