@@ -64,6 +64,7 @@ function keydown(
     "0",
     "Enter",
     "Space",
+    "/"
   ];
   if (
     // @ts-ignore
