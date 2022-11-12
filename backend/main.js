@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: process.env["WEB_ORIGIN"] }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
