@@ -1,22 +1,19 @@
 export default async function script(now, setNow, code, setCode) {
-  // ここから
   let questions = []; // 問題
-  let timerId; //clearIntervalをするため 無視してOK
+  let timerId; //clearIntervalをするため
 
   let typeSE = new Audio("../../../public/typeSE.mp3");
   let correctSE = new Audio("../../../public/correctSE.mp3");
 
   // 問題をquestionsに格納する関数
   async function getQuestions() {
-    // JSON形式でmain.jsから受信
     const response = await fetch(
-      `${import.meta.env.VITE_API_ENDPOINT}/questions`, // https://github.com/ut-code/typescript-react-node-template/blob/master/frontend/src/App.tsx を参照
+      `${import.meta.env.VITE_API_ENDPOINT}/questions`,
       {
         method: "post",
         headers: { "Content-Type": "application/json" },
       }
     );
-    // テキストを取り出し、objectに
     questions = JSON.parse(await response.text());
   }
 
@@ -111,8 +108,6 @@ export default async function script(now, setNow, code, setCode) {
     ];
     // キーボードの入力をReactがdivの中に出力しているので、その変更が行われたのを読み取っている。
     const observer = new MutationObserver(() => {
-      // https://developer.mozilla.org/ja/docs/Web/API/MutationObserver
-
       // タイプ音が鳴る。早すぎると間に合わない
       typeSE.pause();
       typeSE.play();
@@ -178,7 +173,6 @@ export default async function script(now, setNow, code, setCode) {
       ].slice(0, cnt);
       document.getElementById("question").textContent =
         questions[word_num].slice(cnt);
-      // document.getElementById("your-answer").textContent = answer;
       document.getElementById("miss").textContent = miss + "回";
       document.getElementById("correct").textContent = correct + "回";
 
@@ -205,7 +199,6 @@ export default async function script(now, setNow, code, setCode) {
       subtree: true,
     });
 
-    // 何かキーが押されたら、実行 https://developer.mozilla.org/ja/docs/Web/API/Element/keydown_event
     window.addEventListener("keydown", (e) => {
       if (e.key === " " && isStarted === false) {
         document.getElementById("question").textContent = questions[word_num];
@@ -350,5 +343,4 @@ export default async function script(now, setNow, code, setCode) {
     document.getElementById("preview-box").innerHTML = html2;
   }
   if (qnumber === 1) addcode();
-  // ここまで
 }
