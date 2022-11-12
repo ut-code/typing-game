@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import React from "react";
 import { useEffect, useState } from "react";
 import Keyboard from "./../../../keyboard-layout-creator/keyboard/src/App";
 import "./style.css";
