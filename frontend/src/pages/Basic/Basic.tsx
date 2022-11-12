@@ -12,9 +12,7 @@ import { Button, ProgressBar, Stack } from "react-bootstrap";
 export default function Basic() {
   const [content, setContent] = useState<string>("a");
   const [now, setNow] = useState<number>(0);
-  const [code, setCode] = useState<string>(
-    '<!DOCTYPE html>\n<html lang="ja">\n\t<head>\n\t\t<meta charset="utf-8" />\n\t\t<title>Title</title>\n\t</head>\n\t<body>\n\t\tHello <a href="https://www.google.com/"><strong>World</strong></a>!\n\t</body>\n</html>'
-  );
+  const [code, setCode] = useState<string>("a");
 
   useEffect(() => {
     script(now, setNow, code, setCode);
@@ -47,19 +45,9 @@ export default function Basic() {
             </tbody>
           </table>
           <pre>
-            <div id="rawcode">
-              {/* <Editor
-                // height="20vh"
-                defaultLanguage="html"
-                defaultValue={code}
-                theme="vs-dark"
-              /> */}
-            </div>
+            <div id="rawcode"></div>
           </pre>
-
-          <div id="preview-box">
-            {/* addcodeを画面に表示したものを入れる */}
-          </div>
+          <div id="preview-box"></div>
 
           <Stack gap={0} id="progress">
             <div id="progress-number"></div>

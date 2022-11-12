@@ -123,12 +123,13 @@ export default async function script(now, setNow, code, setCode) {
 
       if (content === previousContent) return;
 
-      document.getElementById("progress-number").textContent =
-        word_num + 1 + "/" + questions.length + "問";
-
       // 何問目/全問題数を右上に表示
       document.getElementById("progress-number").textContent =
         word_num + 1 + "/" + questions.length + "問";
+      if (qnumber === 1 && word_num >= 7) {
+        document.getElementById("progress-number2").textContent =
+          word_num + 1 + "/" + questions.length + "問";
+      }
 
       if (key === questions[word_num][cnt]) {
         // 正答時
@@ -136,11 +137,17 @@ export default async function script(now, setNow, code, setCode) {
         cnt++;
         correct++;
         document.getElementById("correct").textContent = correct + "回";
+        if (qnumber === 1 && word_num >= 3) {
+          document.getElementById("correct2").textContent = correct + "回";
+        }
       } else if (alphabet.includes(key.toLowerCase())) {
         // 間違えていたときでアルファベットであれば、不正解とする。
         // 不正解の時
         miss++;
         document.getElementById("miss").textContent = miss + "回";
+        if (qnumber === 1 && word_num >= 3) {
+          document.getElementById("miss2").textContent = miss + "回";
+        }
       }
 
       if (cnt == questions[word_num].length) {
@@ -171,9 +178,26 @@ export default async function script(now, setNow, code, setCode) {
       ].slice(0, cnt);
       document.getElementById("question").textContent =
         questions[word_num].slice(cnt);
-      document.getElementById("your-answer").textContent = answer;
+      // document.getElementById("your-answer").textContent = answer;
       document.getElementById("miss").textContent = miss + "回";
       document.getElementById("correct").textContent = correct + "回";
+
+      // qnumber === 1用
+      if (qnumber === 1 && word_num >= 3) {
+        document.getElementById("correct2").textContent = correct + "回";
+      }
+      if (qnumber === 1 && word_num >= 3) {
+        document.getElementById("miss2").textContent = miss + "回";
+      }
+      if (qnumber === 1 && word_num >= 11) {
+        document.getElementById("answered2").textContent = questions[
+          word_num
+        ].slice(0, cnt);
+      }
+      if (qnumber === 1 && word_num >= 12) {
+        document.getElementById("question2").textContent =
+          questions[word_num].slice(cnt);
+      }
     });
     observer.observe(document.getElementById("content"), {
       attributes: true,
@@ -185,13 +209,25 @@ export default async function script(now, setNow, code, setCode) {
     window.addEventListener("keydown", (e) => {
       if (e.key === " " && isStarted === false) {
         document.getElementById("question").textContent = questions[word_num];
+        if (qnumber === 1 && word_num >= 12) {
+          document.getElementById("question2").textContent =
+            questions[word_num];
+        }
         // スペースが押されたら、時間計測
         isStarted = true;
         timerId = setInterval(() => {
           time++;
           document.getElementById("time").textContent = time + "秒";
+          if (qnumber === 1 && word_num >= 5) {
+            document.getElementById("time2").textContent = time + "秒";
+          }
           document.getElementById("remaining-time").textContent =
             timeLimit - time + "秒";
+          if (qnumber === 1 && word_num >= 6) {
+            document.getElementById("remaining-time2").textContent =
+              timeLimit - time + "秒";
+          }
+
           if (timeLimit - time <= 0 && isFinished === false) {
             clearInterval(timerId);
             isFinished = true;
@@ -221,7 +257,8 @@ export default async function script(now, setNow, code, setCode) {
   let isFinished = false; // 終わったか
   let time = 0; // 時間
   let timeLimit = 30; // 制限時間
-  if (qnumber === 1) timeLimit *= 1000;
+  if (qnumber === 1) timeLimit = 300;
+  else if (qnumber === 11) timeLimit = 120;
   let html = [
     "<!DOCTYPE html>",
     '\n<html lang="ja">',
@@ -248,12 +285,12 @@ export default async function script(now, setNow, code, setCode) {
       // html2 = html.join("");
       setCode(html2);
     } else if (word_num === 1) {
-      html.splice(6, 0, '\n\t\t<div id="score-related">', "\n\t\t</div>");
+      html.splice(6, 0, '\n\t\t<div id="score-related2">', "\n\t\t</div>");
     } else if (word_num === 2) {
       html.splice(
         7,
         0,
-        '\n\t\t\t<table id="current">',
+        '\n\t\t\t<table id="current2">',
         "\n\t\t\t\t<tbody>",
         "\n\t\t\t\t</tbody>",
         "\n\t\t\t</table>"
@@ -264,7 +301,7 @@ export default async function script(now, setNow, code, setCode) {
         0,
         "\n\t\t\t\t\t<tr>",
         "\n\t\t\t\t\t\t<th>Correct: </th>",
-        '\n\t\t\t\t\t\t<td id="correct"></td>',
+        '\n\t\t\t\t\t\t<td id="correct2"></td>',
         "\n\t\t\t\t\t</tr>"
       );
     } else if (word_num === 4) {
@@ -273,7 +310,7 @@ export default async function script(now, setNow, code, setCode) {
         0,
         "\n\t\t\t\t\t<tr>",
         "\n\t\t\t\t\t\t<th>Miss: </th>",
-        '\n\t\t\t\t\t\t<td id="miss"></td>',
+        '\n\t\t\t\t\t\t<td id="miss2"></td>',
         "\n\t\t\t\t\t</tr>"
       );
     } else if (word_num === 5) {
@@ -282,7 +319,7 @@ export default async function script(now, setNow, code, setCode) {
         0,
         "\n\t\t\t\t\t<tr>",
         "\n\t\t\t\t\t\t<th>Time: </th>",
-        '\n\t\t\t\t\t\t<td id="time"></td>',
+        '\n\t\t\t\t\t\t<td id="time2"></td>',
         "\n\t\t\t\t\t</tr>"
       );
     } else if (word_num === 6) {
@@ -291,35 +328,21 @@ export default async function script(now, setNow, code, setCode) {
         0,
         "\n\t\t\t\t\t<tr>",
         "\n\t\t\t\t\t\t<th>Remaining Time: </th>",
-        '\n\t\t\t\t\t\t<td id="remaining-time"></td>',
+        '\n\t\t\t\t\t\t<td id="remaining-time2"></td>',
         "\n\t\t\t\t\t</tr>"
       );
     } else if (word_num === 7) {
-      html.splice(27, 0, '\n\t\t\t<div id="progress-number"></div>');
+      html.splice(27, 0, '\n\t\t\t<div id="progress-number2"></div>');
     } else if (word_num === 8) {
-      html.splice(
-        28,
-        0,
-        '\n\t\t\t<div className="pb-5" id="progress-bar"></div>'
-      );
+      html.splice(29, 0, '\n\t\t<div id="elements2">', "\n\t\t</div>");
     } else if (word_num === 9) {
-      html.splice(30, 0, '\n\t\t<div id="elements">', "\n\t\t</div>");
+      html.splice(30, 0, '\n\t\t\t\t<div id="answer2"></div>');
     } else if (word_num === 10) {
-      html.splice(31, 0, '\n\t\t\t\t<div id="answer"></div>');
+      html.splice(31, 0, '\n\t\t\t\t<span id="answered2"></span>');
     } else if (word_num === 11) {
-      html.splice(32, 0, '\n\t\t\t\t<span id="answered"></span>');
+      html.splice(32, 0, '\n\t\t\t\t<span id="question2"></span>');
     } else if (word_num === 12) {
-      html.splice(
-        33,
-        0,
-        '\n\t\t\t\t<span id="question">Press [Space] to Play</span>'
-      );
-    } else if (word_num === 13) {
-      html.splice(
-        35,
-        0,
-        '\n\t\t\t<Button href="/" variant="secondary">Back</Button>'
-      );
+      html.splice(34, 0, '\n\t\t<Button href="/">Back</Button>');
     }
 
     html2 = html.join("");

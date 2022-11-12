@@ -85,3 +85,80 @@ footer {
   font-size: 13px;
   padding: 2vw;
 }
+
+#elements2 {
+  background: #ffffff;
+  border: 0.2vw solid #cccccc;
+  width: 95vw;
+  height: 15vh;
+  border-radius: 5px;
+  padding: 1vw;
+  text-align: center;
+  margin: 1vw auto;
+}
+#answered2 {
+  font-size: 30px;
+  color: rgb(208, 205, 214);
+}
+#question2 {
+  width: 70vw;
+  font-size: 30px;
+  margin: 1vw auto;
+}
+#answer2 {
+  font-size: 20px;
+  border-spacing: 1vw 1vw;
+}
+#current2 {
+  font-size: 20px;
+  border-spacing: 4vw 0vw;
+  width: 20vw;
+}
+#current2 th {
+  font-weight: bolder;
+  text-align: right;
+}
+#current2 td {
+  text-align: right;
+  width: 5vw;
+}
+#content2 {
+  display: none;
+}
+#score-related2 {
+  justify-content: space-between;
+}
+#score-related #progress2 {
+  margin: 0 0 0 auto;
+  padding: 1vw;
+}
+#score-related #progress #progress-number2 {
+  font-size: 20px;
+  text-align: right;
+  height: 80px;
+}
+#score-related #progress #progress-bar2 {
+  margin: 0 0 0 auto;
+  width: 20vw;
+}
+#scoreTitle2 {
+  font-size: 2vw;
+}
+#score2 {
+  /* font-size: 3vw; */
+  /* color: rgb(68, 5, 102); */
+  margin: 0 0 0 auto;
+}
+#rawcode2 {
+  overflow: auto;
+  border: 1px solid #cccccc;
+  width: 30vw;
+  height: 15vw;
+  tab-size: 2;
+}
+#preview-box2 {
+  overflow: auto;
+  border: 1px solid #cccccc;
+  width: 30vw;
+  height: 15vw;
+}

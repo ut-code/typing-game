@@ -41,17 +41,17 @@ export default function Home() {
                   setQnumber(e.target.value);
                 }}
               >
-                <option>0</option>
+                <option>99</option>
                 <option>1</option>
-                <option>11</option>
                 <option>20</option>
                 <option>21</option>
                 <option>22</option>
                 <option>23</option>
               </Form.Select>
               <Form.Text className="text-muted">
-                0: テスト用 1: ??? 11: ゲティスバーグ演説 20: ロンドン橋落ちた
-                21: ハンプティダンプティ 22: きらきら星 23: Hey Diddle Diddle
+                1: htmlを書いてみよう 10: 手頃なやつ 20: ロンドン橋落ちた 21:
+                ハンプティダンプティ 22: きらきら星 23: Hey Diddle Diddle 99:
+                テスト用
               </Form.Text>
             </Form.Group>
 
