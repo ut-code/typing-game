@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import Footer from "./../../components/Footer";
 import { Helmet } from "react-helmet";
 import "./style.css";
-// @ts-ignore
-import script from "./script";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Table, Stack } from "react-bootstrap";
@@ -29,11 +27,11 @@ export default function Result() {
         }
       );
       // わざわざstringにしてからobjectにしている...
-      let tmp = await response.text();
-      let data = JSON.parse(tmp);
+      const tmp = await response.text();
+      const data = JSON.parse(tmp);
 
       let rank = 1;
-      for (let listItem of listItems) {
+      for (const listItem of listItems) {
         if (data.score == listItem.score) {
           break;
         } else {
