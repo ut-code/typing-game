@@ -9,7 +9,7 @@ export function keyup(
   setShift: (value: boolean) => void
 ): void {
   // @ts-ignore
-  const key = functionalLayoutType[functional].content[code][!shift?0:1];
+  const key = functionalLayoutType[functional].content[code][!shift ? 0 : 1];
   switch (key) {
     case "Shift":
       setShift(false);
@@ -30,7 +30,7 @@ export function convert(
   if (keys === undefined) {
     ans += "";
   } else {
-    const key=keys[!shift?0:1];
+    const key = keys[!shift ? 0 : 1];
     if (key.length === 1) {
       ans += key;
     } else {

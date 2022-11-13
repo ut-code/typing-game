@@ -27,13 +27,16 @@ function sumWidth(row: number, column: number): number {
   for (const keyCode of keyCodes) {
     if (
       // @ts-ignore
-      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].row === row &&
+      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].row ===
+        row &&
       // @ts-ignore
-      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].column < column
+      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].column <
+        column
     ) {
       sum += // @ts-ignore
         physicalLayoutType[physicalLayout].content.keyCodes[keyCode].width + // @ts-ignore
-        (physicalLayoutType[physicalLayout].content.keyCodes[keyCode].width === 0
+        (physicalLayoutType[physicalLayout].content.keyCodes[keyCode].width ===
+        0
           ? 0 // @ts-ignore
           : physicalLayoutType[physicalLayout].content.marginColumn);
       j++;
@@ -83,7 +86,7 @@ export default function Keyboard({
   physicalKeyLayout,
   isDefault,
   shift,
-  setShift
+  setShift,
 }: {
   functional: string;
   physical: string;
@@ -97,16 +100,16 @@ export default function Keyboard({
     setContent: (value: string) => void,
     functional: string,
     isDefault: boolean,
-    shift:boolean,
-    setShift:(value:boolean)=>void
+    shift: boolean,
+    setShift: (value: boolean) => void
   ) => void;
   content?: string;
   setContent?: (value: string) => void;
   keyLayout?: object;
   physicalKeyLayout?: object;
   isDefault: boolean;
-  shift:boolean;
-  setShift?:(value:boolean)=>void
+  shift: boolean;
+  setShift?: (value: boolean) => void;
 }): JSX.Element {
   const { width } = useWindowDimensions();
   const magnification = 5.8 * (width < 850 ? 1 : 850 / width);
@@ -129,7 +132,9 @@ export default function Keyboard({
                 id={keyCode}
                 className={`key ${fontSize(
                   // @ts-ignore
-                  functionalLayoutType[functionalLayout].content[keyCode][!shift?0:1]
+                  functionalLayoutType[functionalLayout].content[keyCode][
+                    !shift ? 0 : 1
+                  ]
                 )}`}
                 onClick={() =>
                   // @ts-ignore
@@ -154,18 +159,21 @@ export default function Keyboard({
                   top: `${
                     sumHeight(
                       // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.keyCodes[keyCode]
-                        .row
+                      physicalLayoutType[physicalLayout].content.keyCodes[
+                        keyCode
+                      ].row
                     ) * magnification
                   }vw`,
                   // @ts-ignore
                   left: `${
                     sumWidth(
                       // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.keyCodes[keyCode]
-                        .row, // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.keyCodes[keyCode]
-                        .column
+                      physicalLayoutType[physicalLayout].content.keyCodes[
+                        keyCode
+                      ].row, // @ts-ignore
+                      physicalLayoutType[physicalLayout].content.keyCodes[
+                        keyCode
+                      ].column
                     ) * magnification
                   }vw`,
                   width: `${
@@ -194,7 +202,11 @@ export default function Keyboard({
                 //   // }
               >
                 {/* @ts-ignore */}
-                {functionalLayoutType[functionalLayout].content[keyCode][!shift?0:1]}
+                {
+                  functionalLayoutType[functionalLayout].content[keyCode][
+                    !shift ? 0 : 1
+                  ]
+                }
               </div>
             )}
           </React.Fragment>

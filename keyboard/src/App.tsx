@@ -22,8 +22,8 @@ function keydown(
   setContent: (value: string) => void,
   functional: string,
   isDefault: boolean,
-  shift:boolean,
-  setShift:(value:boolean)=>void
+  shift: boolean,
+  setShift: (value: boolean) => void
 ): void {
   const prohibitedKey = [
     "A",
@@ -64,11 +64,13 @@ function keydown(
     "0",
     "Enter",
     "Space",
-    "/"
+    "/",
   ];
   if (
     // @ts-ignore
-    prohibitedKey.includes(functionalLayoutType[functional].content[e.code][1]) || // @ts-ignore
+    prohibitedKey.includes(
+      functionalLayoutType[functional].content[e.code][1]
+    ) || // @ts-ignore
     (functionalLayoutType[functional].content[e.code] === undefined &&
       e.code === "")
   ) {
@@ -78,7 +80,15 @@ function keydown(
   setContent(
     // @ts-ignore
     (content: string) =>
-      convert(e, functional, functionalLayoutType, content, isDefault,shift,setShift)
+      convert(
+        e,
+        functional,
+        functionalLayoutType,
+        content,
+        isDefault,
+        shift,
+        setShift
+      )
   );
   setKeyColors(
     keyCodes.map((tmp, i) =>
@@ -129,13 +139,15 @@ export default function App({
   setOutput?: (value: string) => void;
 }): JSX.Element {
   const [isDefault, setIsDefault] = useState<boolean>(true);
-  const [functional, setFunctional] = useState<string>(defaultFunctionalLayoutType);
+  const [functional, setFunctional] = useState<string>(
+    defaultFunctionalLayoutType
+  );
   const [physical, setPhysical] = useState<string>(defaultPhysicalLayoutType);
   const [keyColors, setKeyColors] = useState<string[]>(
     keyCodes.map(() => "rgba(0,0,0,0)")
   );
   const [content, setContent] = useState<string>("");
-  const [shift,setShift]=useState<boolean>(false);
+  const [shift, setShift] = useState<boolean>(false);
   useEffect(() => {
     function tmp(e: KeyboardEvent): void {
       keydown(
@@ -151,7 +163,7 @@ export default function App({
       );
     }
     function temp(e: KeyboardEvent): void {
-      keyup(e.code, functional, functionalLayoutType,shift,setShift);
+      keyup(e.code, functional, functionalLayoutType, shift, setShift);
     }
     window.addEventListener("keydown", tmp);
     window.addEventListener("keyup", temp);
@@ -159,7 +171,7 @@ export default function App({
       window.removeEventListener("keydown", tmp);
       window.removeEventListener("keyup", temp);
     };
-  }, [functional, isDefault,shift]);
+  }, [functional, isDefault, shift]);
   setOutput(content);
   return (
     <>
