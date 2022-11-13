@@ -3,7 +3,7 @@ export default function Home(): JSX.Element {
   return (
     <>
       <main>
-        <h2>Keyboard Layout Maker</h2>
+        <h2>Keyboard Layout Creator</h2>
         <p>
           駒場祭のタイピングゲームのキーボード配列を作成するためのプログラムです。
         </p>
