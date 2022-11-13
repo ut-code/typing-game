@@ -7,8 +7,10 @@ import keyCodes from "./components/data/keyCodes.json";
 import romantable from "./romantable.json";
 import ReadJSONFile from "./../../src/components/ReadJSONFile";
 import {
+  layoutType,
   functionalLayoutType,
   physicalLayoutType,
+  defaultlayoutType,
   defaultFunctionalLayoutType,
   defaultPhysicalLayoutType,
 } from "./components/data/keyboardSettings";
@@ -138,6 +140,7 @@ export default function App({
   setOutput?: (value: string) => void;
 }): JSX.Element {
   const [isDefault, setIsDefault] = useState<boolean>(true);
+  const [layout,setLayout]=useState<string>();
   const [functional, setFunctional] = useState<string>(
     defaultFunctionalLayoutType
   );
@@ -208,27 +211,20 @@ export default function App({
               ></ReadJSONFile>
               <br />
               <select
-                value={functional}
-                onChange={(e) => setFunctional(e.target.value)}
-              >
-                {Object.keys(functionalLayoutType).map((key, i) => (
+                value={layout}
+                onChange={(e) => {
+                  setLayout(e.target.value);
                   // @ts-ignore
-                  <option key={i} value={functionalLayoutType[key].id}>
-                    {" "}
-                    {/* @ts-ignore */}
-                    {functionalLayoutType[key].name}
-                  </option>
-                ))}
-              </select>
-              <select
-                value={physical}
-                onChange={(e) => setPhysical(e.target.value)}
-              >
-                {Object.keys(physicalLayoutType).map((key, i) => (
+                  setFunctional(layoutType[e.target.value].functionalLayoutType);
                   // @ts-ignore
-                  <option key={i} value={physicalLayoutType[key].id}>
+                  setPhysical(layoutType[e.target.value].physicalLayoutType);
+                }}
+              >
+                {Object.keys(layoutType).map((key, i) => (
+                  // @ts-ignore
+                  <option key={i} value={layoutType[key].id}>
                     {/* @ts-ignore */}
-                    {physicalLayoutType[key].name}
+                    {layoutType[key].name}
                   </option>
                 ))}
               </select>
