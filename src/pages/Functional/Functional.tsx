@@ -18,7 +18,9 @@ import "./functional.css";
 import "./../keyboard.css";
 
 function keyToObject(keys: string[][]): object {
+  const version = "1.0";
   const object = {};
+  Object.assign(object, { version });
   for (let i = 0; i < keyCodes.length; i++) {
     Object.assign(object, { [keyCodes[i]]: [keys[0][i], keys[1][i]] });
   }

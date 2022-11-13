@@ -26,8 +26,10 @@ function physicalKeyToObject(
   widths: number[],
   styles: string[]
 ): object {
+  const version = "1.0";
   const object = {};
   Object.assign(object, {
+    version,
     marginRow,
     marginColumn,
     height,
