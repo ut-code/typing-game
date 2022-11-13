@@ -4,21 +4,47 @@ import { useEffect, useState } from "react";
 import Footer from "./../../components/Footer";
 import { Helmet } from "react-helmet";
 import "./style.css";
-// @ts-ignore
-import script from "./script";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Table, Stack } from "react-bootstrap";
 
 export default function Result() {
   const [listItems, setListItems] = useState([
-    { record_id: 1, problem: 1, username: "reactmuzui", score: -100 },
+    { record_id: 1, problem: 1, username: "sample", score: -100 },
   ]);
+  const [userName, setUserName] = useState<string>("");
+  const [userRank, setUserRank] = useState<number>(0);
+  const [userTime, setUserTime] = useState<number>(0);
+  const [userScore, setUserScore] = useState<number>(0);
 
   // script.jsを読み込む
   useEffect(() => {
-    script(listItems);
-  }, []);
+    async function tmp() {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_ENDPOINT}/fetchScore`,
+        {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      const data = await response.json();
+
+      let cnt = 1;
+      for (const listItem of listItems) {
+        if (data.score == listItem.score) {
+          setUserRank(cnt);
+          break;
+        } else {
+          cnt++;
+        }
+      }
+
+      setUserName(data.username);
+      setUserTime(data.time);
+      setUserScore(data.score);
+    }
+    tmp();
+  }, [listItems]);
 
   // RankingをfetchAPIしてくる
   useEffect(() => {
@@ -41,10 +67,10 @@ export default function Result() {
       </Helmet>
       <Stack gap={3}>
         <div className="yourResults">
-          <p id="name"></p>
-          <p id="yourRank"></p>
-          <p id="time"></p>
-          <p id="score"></p>
+          <p>{userName}さんの結果</p>
+          <p>順位{userRank}位</p>
+          <p>時間{userTime}秒</p>
+          <p>スコア{userScore}点</p>
         </div>
         <div>
           <Button href="/" variant="secondary">
