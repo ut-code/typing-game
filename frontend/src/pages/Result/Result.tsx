@@ -16,6 +16,7 @@ export default function Result() {
   ]);
   const [userName, setUserName] = useState<string>("");
   const [userTime, setUserTime] = useState<number>(0);
+  const [userScore, setUserScore] = useState<number>(0);
 
   // script.jsを読み込む
   useEffect(() => {
@@ -43,8 +44,7 @@ export default function Result() {
       setUserName(data.username);
       document.getElementById("yourRank").textContent = "順位" + rank + "位";
       setUserTime(data.time);
-      document.getElementById("score").textContent =
-        "スコア" + data.score + "点";
+      setUserScore(data.score);
     }
     tmp();
   }, []);
@@ -73,7 +73,7 @@ export default function Result() {
           <p>{userName}さんの結果</p>
           <p id="yourRank"></p>
           <p>時間{userTime}秒</p>
-          <p id="score"></p>
+          <p>スコア{userScore}点</p>
         </div>
         <div>
           <Button href="/" variant="secondary">
