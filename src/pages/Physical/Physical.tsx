@@ -187,7 +187,7 @@ export default function Physical(): JSX.Element {
                   i={i}
                 ></GetManySettings>
               </td>
-              <td>
+              {/* <td>
                 <GetManySettings<string>
                   type="string"
                   className="style"
@@ -196,7 +196,7 @@ export default function Physical(): JSX.Element {
                   setItems={setStyles}
                   i={i}
                 ></GetManySettings>
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>
