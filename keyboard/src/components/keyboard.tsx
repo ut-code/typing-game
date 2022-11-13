@@ -201,8 +201,7 @@ export default function Keyboard({
                 //   //   dom.fontSize=dom.fontSize-1;
                 //   // }
               >
-                {/* @ts-ignore */}
-                {
+                {  // @ts-ignore
                   functionalLayoutType[functionalLayout].content[keyCode][
                     !shift ? 0 : 1
                   ]

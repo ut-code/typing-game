@@ -67,8 +67,7 @@ function keydown(
     "/",
   ];
   if (
-    // @ts-ignore
-    prohibitedKey.includes(
+    prohibitedKey.includes(  // @ts-ignore
       functionalLayoutType[functional].content[e.code][1]
     ) || // @ts-ignore
     (functionalLayoutType[functional].content[e.code] === undefined &&
