@@ -31,3 +31,5 @@ services:
         value: 3000
       - key: DATABASE_URL
         sync: false
+      - key: WEB_ORIGIN
+        value: https://typing-game.onrender.com
