@@ -10,7 +10,7 @@ import { Button, Table, Stack } from "react-bootstrap";
 
 export default function Result() {
   const [listItems, setListItems] = useState([
-    { record_id: 1, problem: 1, username: "reactmuzui", score: -100 },
+    { record_id: 1, problem: 1, username: "sample", score: -100 },
   ]);
   const [userName, setUserName] = useState<string>("");
   const [userRank, setUserRank] = useState<number>(0);
