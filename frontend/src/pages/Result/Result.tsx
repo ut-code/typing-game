@@ -27,9 +27,7 @@ export default function Result() {
           headers: { "Content-Type": "application/json" },
         }
       );
-      // わざわざstringにしてからobjectにしている...
-      const tmp = await response.text();
-      const data = JSON.parse(tmp);
+      const data = await response.json();
 
       let cnt = 1;
       for (const listItem of listItems) {
