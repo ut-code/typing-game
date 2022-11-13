@@ -68,7 +68,7 @@ function keydown(
   ];
   if (
     // @ts-ignore
-    prohibitedKey.includes(functionalLayoutType[functional].content[e.code]) || // @ts-ignore
+    prohibitedKey.includes(functionalLayoutType[functional].content[e.code][1]) || // @ts-ignore
     (functionalLayoutType[functional].content[e.code] === undefined &&
       e.code === "")
   ) {
