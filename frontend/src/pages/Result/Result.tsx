@@ -14,6 +14,7 @@ export default function Result() {
   const [listItems, setListItems] = useState([
     { record_id: 1, problem: 1, username: "reactmuzui", score: -100 },
   ]);
+  const [userName, setUserName] = useState<string>("");
 
   // script.jsを読み込む
   useEffect(() => {
@@ -38,8 +39,7 @@ export default function Result() {
         }
       }
 
-      document.getElementById("name").textContent =
-        data.username + "さんの結果";
+      setUserName(data.username);
       document.getElementById("yourRank").textContent = "順位" + rank + "位";
       document.getElementById("time").textContent = "時間" + data.time + "秒";
       document.getElementById("score").textContent =
@@ -69,7 +69,7 @@ export default function Result() {
       </Helmet>
       <Stack gap={3}>
         <div className="yourResults">
-          <p id="name"></p>
+          <p>{userName}さんの結果</p>
           <p id="yourRank"></p>
           <p id="time"></p>
           <p id="score"></p>
