@@ -58,7 +58,14 @@ export default async function script(now, setNow, code, setCode) {
 
   async function results(time, word_num, correct, miss) {
     let score = calcScore(time, word_num, correct, miss);
-    const json = JSON.stringify({ time: time, score: score });
+    let kpm = Math.floor((correct / time) * Math.pow(10, 2)) / Math.pow(10, 2);
+    const json = JSON.stringify({
+      time: time,
+      score: score,
+      kpm: kpm,
+      correct: correct,
+      miss: miss,
+    });
     const response = await fetch(
       `${import.meta.env.VITE_API_ENDPOINT}/results`,
       {
@@ -109,8 +116,8 @@ export default async function script(now, setNow, code, setCode) {
     // キーボードの入力をReactがdivの中に出力しているので、その変更が行われたのを読み取っている。
     const observer = new MutationObserver(() => {
       // タイプ音が鳴る。早すぎると間に合わない
-      typeSE.pause();
-      typeSE.play();
+      // typeSE.pause();
+      // typeSE.play();
 
       const previousContent = content;
       content = document.getElementById("content").textContent;

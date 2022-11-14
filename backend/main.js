@@ -73,7 +73,20 @@ app.post("/results", async (request, response) => {
   score = request.body.score;
   localStorage.setItem("score", score);
   await submitScore(username, score);
-  response.json({ time: time, score: score, username: username });
+  kpm = request.body.kpm;
+  localStorage.setItem("kpm", kpm);
+  correct = request.body.correct;
+  localStorage.setItem("correct", correct);
+  miss = request.body.miss;
+  localStorage.setItem("miss", miss);
+  response.json({
+    time: time,
+    score: score,
+    username: username,
+    kpm: kpm,
+    correct: correct,
+    miss: miss,
+  });
 });
 
 // localStorageから種々のデータを取ってくる
@@ -83,6 +96,9 @@ app.post("/fetchScore", (request, response) => {
     score: localStorage.getItem("score") || "-1",
     username: localStorage.getItem("username") || "Guest",
     qnumber: localStorage.getItem("qnumber") || "0",
+    kpm: localStorage.getItem("kpm") || "-1",
+    correct: localStorage.getItem("correct") || "-1",
+    miss: localStorage.getItem("miss") || "-1",
   });
 });
 
