@@ -75,13 +75,13 @@ export default function Result() {
         <Stack direction="horizontal" gap={3}>
           <div className="yourResults">
             <ListGroup variant="flush">
-              <ListGroup.Item>{userName}さんの結果</ListGroup.Item>
-              <ListGroup.Item>順位{userRank}位</ListGroup.Item>
-              <ListGroup.Item>同じ問題を解いた人の中での順位</ListGroup.Item>
-              <ListGroup.Item>時間{userTime}秒</ListGroup.Item>
-              <ListGroup.Item>スコア{userScore}点</ListGroup.Item>
+              <ListGroup.Item id="rowh">{userName}さんの結果</ListGroup.Item>
+              <ListGroup.Item id="roww">順位{userRank}位</ListGroup.Item>
+              <ListGroup.Item id="roww">同問題順位{}位</ListGroup.Item>
+              <ListGroup.Item id="roww">スコア{userScore}点</ListGroup.Item>
+              <ListGroup.Item id="roww">総合ランク{}</ListGroup.Item>
             </ListGroup>
-            <ListGroup horizontal>
+            <ListGroup horizontal id="roww">
               <ListGroup.Item>
                 正しいタイプ数<br></br>
                 {userCorrect}回
