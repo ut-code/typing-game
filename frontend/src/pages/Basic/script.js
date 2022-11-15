@@ -58,13 +58,29 @@ export default async function script(now, setNow, code, setCode) {
 
   async function results(time, word_num, correct, miss) {
     let score = calcScore(time, word_num, correct, miss);
-    let kpm = Math.floor((correct / time) * Math.pow(10, 2)) / Math.pow(10, 2);
+    let kpm = Math.floor((correct / time) * Math.pow(10, 2)) / Math.pow(10, 2); // kpmじゃなくてkpsだった...
+    let scorerank;
+    if (miss === 0 && kpm > 6 && word_num === questions.length)
+      scorerank = "SS";
+    else if (
+      correct / (correct + miss + 1) > 0.9 &&
+      kpm > 5 &&
+      word_num === questions.length
+    )
+      scorerank = "S";
+    else if (correct / (correct + miss + 1) > 0.8 && kpm > 4) scorerank = "A";
+    else if (correct / (correct + miss + 1) > 0.8 && kpm > 3) scorerank = "B";
+    else if (correct / (correct + miss + 1) < 0.5) scorerank = "E";
+    else if (correct / (correct + miss + 1) > 0.7 && kpm > 2) scorerank = "C";
+    else scorerank = "D";
+
     const json = JSON.stringify({
       time: time,
       score: score,
       kpm: kpm,
       correct: correct,
       miss: miss,
+      scorerank: scorerank,
     });
     const response = await fetch(
       `${import.meta.env.VITE_API_ENDPOINT}/results`,
@@ -128,7 +144,7 @@ export default async function script(now, setNow, code, setCode) {
       // 何問目/全問題数を右上に表示
       document.getElementById("progress-number").textContent =
         word_num + 1 + "/" + questions.length + "問";
-      if (qnumber === 1 && word_num >= 7) {
+      if (qnumber === 10 && word_num >= 7) {
         document.getElementById("progress-number2").textContent =
           word_num + 1 + "/" + questions.length + "問";
       }
@@ -139,7 +155,7 @@ export default async function script(now, setNow, code, setCode) {
         cnt++;
         correct++;
         document.getElementById("correct").textContent = correct + "回";
-        if (qnumber === 1 && word_num >= 3) {
+        if (qnumber === 10 && word_num >= 3) {
           document.getElementById("correct2").textContent = correct + "回";
         }
       } else if (alphabet.includes(key.toLowerCase())) {
@@ -147,7 +163,7 @@ export default async function script(now, setNow, code, setCode) {
         // 不正解の時
         miss++;
         document.getElementById("miss").textContent = miss + "回";
-        if (qnumber === 1 && word_num >= 3) {
+        if (qnumber === 10 && word_num >= 3) {
           document.getElementById("miss2").textContent = miss + "回";
         }
       }
@@ -161,7 +177,7 @@ export default async function script(now, setNow, code, setCode) {
         correctSE.play();
 
         // コードを書き換える
-        if (qnumber === 1) addcode();
+        if (qnumber === 10) addcode();
 
         // 進捗バーを増やす
         setNow(Math.round((word_num / questions.length) * 100));
@@ -183,19 +199,19 @@ export default async function script(now, setNow, code, setCode) {
       document.getElementById("miss").textContent = miss + "回";
       document.getElementById("correct").textContent = correct + "回";
 
-      // qnumber === 1用
-      if (qnumber === 1 && word_num >= 3) {
+      // qnumber === 10用
+      if (qnumber === 10 && word_num >= 3) {
         document.getElementById("correct2").textContent = correct + "回";
       }
-      if (qnumber === 1 && word_num >= 3) {
+      if (qnumber === 10 && word_num >= 3) {
         document.getElementById("miss2").textContent = miss + "回";
       }
-      if (qnumber === 1 && word_num >= 11) {
+      if (qnumber === 10 && word_num >= 11) {
         document.getElementById("answered2").textContent = questions[
           word_num
         ].slice(0, cnt);
       }
-      if (qnumber === 1 && word_num >= 12) {
+      if (qnumber === 10 && word_num >= 12) {
         document.getElementById("question2").textContent =
           questions[word_num].slice(cnt);
       }
@@ -209,7 +225,7 @@ export default async function script(now, setNow, code, setCode) {
     window.addEventListener("keydown", (e) => {
       if (e.key === " " && isStarted === false) {
         document.getElementById("question").textContent = questions[word_num];
-        if (qnumber === 1 && word_num >= 12) {
+        if (qnumber === 10 && word_num >= 12) {
           document.getElementById("question2").textContent =
             questions[word_num];
         }
@@ -218,12 +234,12 @@ export default async function script(now, setNow, code, setCode) {
         timerId = setInterval(() => {
           time++;
           document.getElementById("time").textContent = time + "秒";
-          if (qnumber === 1 && word_num >= 5) {
+          if (qnumber === 10 && word_num >= 5) {
             document.getElementById("time2").textContent = time + "秒";
           }
           document.getElementById("remaining-time").textContent =
             timeLimit - time + "秒";
-          if (qnumber === 1 && word_num >= 6) {
+          if (qnumber === 10 && word_num >= 6) {
             document.getElementById("remaining-time2").textContent =
               timeLimit - time + "秒";
           }
@@ -257,7 +273,9 @@ export default async function script(now, setNow, code, setCode) {
   let isFinished = false; // 終わったか
   let time = 0; // 時間
   let timeLimit = 30; // 制限時間
-  if (qnumber === 1) timeLimit = 300;
+  if (qnumber === 5) timeLimit = 60;
+  else if (qnumber === 10) timeLimit = 300;
+  else if (qnumber === 11) timeLimit = 120;
   else if (qnumber === 11) timeLimit = 120;
   let html = [
     "<!DOCTYPE html>",
@@ -336,11 +354,11 @@ export default async function script(now, setNow, code, setCode) {
     } else if (word_num === 8) {
       html.splice(29, 0, '\n\t\t<div id="elements2">', "\n\t\t</div>");
     } else if (word_num === 9) {
-      html.splice(30, 0, '\n\t\t\t\t<div id="answer2"></div>');
+      html.splice(30, 0, '\n\t\t\t\t<div id="answer2">', "\n\t\t\t\t</div>");
     } else if (word_num === 10) {
-      html.splice(31, 0, '\n\t\t\t\t<span id="answered2"></span>');
+      html.splice(31, 0, '\n\t\t\t\t\t<span id="answered2"></span>');
     } else if (word_num === 11) {
-      html.splice(32, 0, '\n\t\t\t\t<span id="question2"></span>');
+      html.splice(32, 0, '\n\t\t\t\t\t<span id="question2"></span>');
     } else if (word_num === 12) {
       html.splice(34, 0, '\n\t\t<Button href="/">Back</Button>');
     }
@@ -349,5 +367,5 @@ export default async function script(now, setNow, code, setCode) {
     document.getElementById("rawcode").textContent = html2;
     document.getElementById("preview-box").innerHTML = html2;
   }
-  if (qnumber === 1) addcode();
+  if (qnumber === 10) addcode();
 }

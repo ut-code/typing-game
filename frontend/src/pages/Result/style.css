@@ -13,18 +13,26 @@ body {
   /* margin: auto; */
   text-align: center;
 }
-.yourResults #rowh {
+.yourResults .rowh {
   height: 50px;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.yourResults #roww {
+.yourResults .roww {
   height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.yourResults .roww2 {
+  height: 80px;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
 }
 .rankBoard {
   background: #ffffff;

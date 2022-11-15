@@ -19,6 +19,12 @@ export default function Result() {
   const [userKpm, setUserKpm] = useState<number>(0);
   const [userCorrect, setUserCorrect] = useState<number>(0);
   const [userMiss, setUserMiss] = useState<number>(0);
+  const [userScoreRank, setUserScoreRank] = useState<string>("");
+
+  const [listItemsSame, setListItemsSame] = useState([
+    { record_id: 1, problem: 1, username: "samplesame", score: -100 },
+  ]);
+  const [userRankSame, setUserRankSame] = useState<number>(1213498765678909876);
 
   // script.jsを読み込む
   useEffect(() => {
@@ -37,9 +43,16 @@ export default function Result() {
         if (data.score == listItem.score) {
           setUserRank(cnt);
           break;
-        } else {
-          cnt++;
         }
+        cnt++;
+      }
+      let cnt2 = 1;
+      for (const listItemSame of listItemsSame) {
+        if (data.score == listItemSame.score) {
+          setUserRankSame(cnt2);
+          break;
+        }
+        cnt2++;
       }
 
       setUserName(data.username);
@@ -48,9 +61,10 @@ export default function Result() {
       setUserKpm(data.kpm);
       setUserCorrect(data.correct);
       setUserMiss(data.miss);
+      setUserScoreRank(data.scorerank);
     }
     tmp();
-  }, [listItems]);
+  }, [listItems, listItemsSame]);
 
   // RankingをfetchAPIしてくる
   useEffect(() => {
@@ -64,6 +78,17 @@ export default function Result() {
           setListItems(data);
         });
     })();
+    // 同問題順位用
+    (async () => {
+      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRankingSame`, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setListItemsSame(data);
+        });
+    })();
   }, []);
 
   return (
@@ -75,22 +100,30 @@ export default function Result() {
         <Stack direction="horizontal" gap={3}>
           <div className="yourResults">
             <ListGroup variant="flush">
-              <ListGroup.Item id="rowh">{userName}さんの結果</ListGroup.Item>
-              <ListGroup.Item id="roww">順位{userRank}位</ListGroup.Item>
-              <ListGroup.Item id="roww">同問題順位{}位</ListGroup.Item>
-              <ListGroup.Item id="roww">スコア{userScore}点</ListGroup.Item>
-              <ListGroup.Item id="roww">総合ランク{}</ListGroup.Item>
+              <ListGroup.Item className="rowh">
+                {userName}さんの結果
+              </ListGroup.Item>
+              <ListGroup.Item className="roww">順位{userRank}位</ListGroup.Item>
+              <ListGroup.Item className="roww">
+                同問題順位{userRankSame}位
+              </ListGroup.Item>
+              <ListGroup.Item className="roww">
+                スコア{userScore}点
+              </ListGroup.Item>
+              <ListGroup.Item className="roww">
+                総合ランク{userScoreRank}
+              </ListGroup.Item>
             </ListGroup>
-            <ListGroup horizontal id="roww">
-              <ListGroup.Item>
+            <ListGroup horizontal>
+              <ListGroup.Item className="roww2">
                 正しいタイプ数<br></br>
                 {userCorrect}回
               </ListGroup.Item>
-              <ListGroup.Item>
+              <ListGroup.Item className="roww2">
                 ミスタイプ数<br></br>
                 {userMiss}回
               </ListGroup.Item>
-              <ListGroup.Item>
+              <ListGroup.Item className="roww2">
                 平均タイプ数<br></br>
                 {userKpm}回/秒
               </ListGroup.Item>
