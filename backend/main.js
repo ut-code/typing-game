@@ -33,7 +33,7 @@ app.post("/localSave", (request, response) => {
 // データベースからPrismaで問題をとってくる
 app.post("/questions", async (request, response) => {
   // localStorageから問題番号を拾ってくる
-  let qnumber = Number(localStorage.getItem("qnumber")) || 0; // parseInt(request.cookies.qnumber) || 0;
+  let qnumber = Number(localStorage.getItem("qnumber")) || 0;
   const records = await prisma.questions.findMany({
     where: {
       qnumber: qnumber,
@@ -73,7 +73,23 @@ app.post("/results", async (request, response) => {
   score = request.body.score;
   localStorage.setItem("score", score);
   await submitScore(username, score);
-  response.json({ time: time, score: score, username: username });
+  kpm = request.body.kpm;
+  localStorage.setItem("kpm", kpm);
+  correct = request.body.correct;
+  localStorage.setItem("correct", correct);
+  miss = request.body.miss;
+  localStorage.setItem("miss", miss);
+  scorerank = request.body.scorerank;
+  localStorage.setItem("scorerank", scorerank);
+  response.json({
+    time: time,
+    score: score,
+    username: username,
+    kpm: kpm,
+    correct: correct,
+    miss: miss,
+    scorerank: scorerank,
+  });
 });
 
 // localStorageから種々のデータを取ってくる
@@ -83,12 +99,36 @@ app.post("/fetchScore", (request, response) => {
     score: localStorage.getItem("score") || "-1",
     username: localStorage.getItem("username") || "Guest",
     qnumber: localStorage.getItem("qnumber") || "0",
+    kpm: localStorage.getItem("kpm") || "-1",
+    correct: localStorage.getItem("correct") || "-1",
+    miss: localStorage.getItem("miss") || "-1",
+    scorerank: localStorage.getItem("scorerank") || "-",
   });
 });
 
 // /result表示用にrankingをデータベースから取ってくる
 app.post("/fetchRanking", async (request, response) => {
   const records = await getRanking();
+  // JSON形式でscript.jsに送信
+  response.json(records);
+});
+
+// データベースからPrismaでランキングをとってくる
+async function getRankingSame() {
+  qnumber = Number(localStorage.getItem("qnumber")) || 0;
+  const records = await prisma.ranking.findMany({
+    where: {
+      problem: qnumber,
+    },
+    orderBy: {
+      score: "desc",
+    },
+  });
+  return records;
+}
+// /result表示用にrankingをデータベースから取ってくる
+app.post("/fetchRankingSame", async (request, response) => {
+  const records = await getRankingSame();
   // JSON形式でscript.jsに送信
   response.json(records);
 });

@@ -19,13 +19,14 @@ export default function Home() {
         <div id="userinput">
           <Form>
             <Form.Group className="mb-3" controlId="username">
-              <Form.Label>ユーザーネーム</Form.Label>
+              <Form.Label>ユーザーネーム（20文字まで）</Form.Label>
               <Form.Control
                 placeholder="Guest"
                 value={userName}
                 onChange={(e) => {
                   setUserName(e.target.value);
                 }}
+                maxLength={20}
               />
             </Form.Group>
 
@@ -37,17 +38,19 @@ export default function Home() {
                   setQnumber(e.target.value);
                 }}
               >
-                <option>99</option>
-                <option>1</option>
+                <option>0</option>
+                <option>5</option>
+                <option>10</option>
                 <option>20</option>
                 <option>21</option>
                 <option>22</option>
                 <option>23</option>
+                <option>99</option>
               </Form.Select>
               <Form.Text className="text-muted">
-                1: htmlを書いてみよう 10: 手頃なやつ 20: ロンドン橋落ちた 21:
-                ハンプティダンプティ 22: きらきら星 23: Hey Diddle Diddle 99:
-                テスト用
+                0: 手頃なやつ 5: 長い英単語集 10: htmlを書いてみよう 11:
+                ゲティスバーグ演説 20: ロンドン橋落ちた 21: ハンプティダンプティ
+                22: きらきら星 23: Hey Diddle Diddle 99: テスト用
               </Form.Text>
             </Form.Group>
 

@@ -4,21 +4,47 @@ body {
   margin: auto;
 }
 .yourResults {
-  font-size: 30px;
+  font-size: 20px;
   /* background: scroll; */
-  background-color: rgb(100, 149, 65);
+  /* background-color: rgb(100, 149, 65); */
   border: 1px solid #cccccc;
   width: 500px;
-  /* margin: 0% 30%; */
+  height: 450px;
   /* margin: auto; */
   text-align: center;
+}
+.yourResults .rowh {
+  height: 50px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.yourResults .roww {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.yourResults .roww2 {
+  height: 80px;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
 }
 .rankBoard {
   background: #ffffff;
   width: 500px;
+  height: 450px;
+  overflow: auto;
   border: 1px solid #cccccc;
   /* margin: auto; */
   text-align: center;
+}
+.ListGroup {
+  width: 500px !important;
 }
 footer {
   font-size: 13px;
