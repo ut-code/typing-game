@@ -30,7 +30,7 @@ export default async function script(now, setNow, code, setCode) {
   function calcScore(time, word_num, correct, miss) {
     // 使う変数
     let progress = word_num / questions.length;
-    let diff = 2 ** questions.length;
+    let diff = 0;
     let correct_rate = correct ** 2 / (miss + correct + 1);
     let velocity = correct / time;
 
@@ -60,18 +60,18 @@ export default async function script(now, setNow, code, setCode) {
     let score = calcScore(time, word_num, correct, miss);
     let kpm = Math.floor((correct / time) * Math.pow(10, 2)) / Math.pow(10, 2); // kpmじゃなくてkpsだった...
     let scorerank;
-    if (miss === 0 && kpm > 6 && word_num === questions.length)
+    if (miss === 0 && kpm >= 5 && word_num === questions.length)
       scorerank = "SS";
     else if (
       correct / (correct + miss + 1) > 0.9 &&
-      kpm > 5 &&
+      kpm >= 5 &&
       word_num === questions.length
     )
       scorerank = "S";
-    else if (correct / (correct + miss + 1) > 0.8 && kpm > 4) scorerank = "A";
-    else if (correct / (correct + miss + 1) > 0.8 && kpm > 3) scorerank = "B";
+    else if (correct / (correct + miss + 1) > 0.8 && kpm >= 4) scorerank = "A";
+    else if (correct / (correct + miss + 1) > 0.8 && kpm >= 3) scorerank = "B";
     else if (correct / (correct + miss + 1) < 0.5) scorerank = "E";
-    else if (correct / (correct + miss + 1) > 0.7 && kpm > 2) scorerank = "C";
+    else if (correct / (correct + miss + 1) > 0.7 && kpm >= 2) scorerank = "C";
     else scorerank = "D";
 
     const json = JSON.stringify({
@@ -97,7 +97,7 @@ export default async function script(now, setNow, code, setCode) {
     //問題をとってくる
     await getQuestions();
     //シャッフルする、ただし順番が無関係な問題のみ
-    if (qnumber === 0) {
+    if (qnumber === 0 || qnumber === 4 || qnumber === 5 || qnumber === 6) {
       questions = shuffle(questions);
     }
 

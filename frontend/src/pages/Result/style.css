@@ -21,6 +21,7 @@ body {
   align-items: center;
 }
 .yourResults .roww {
+  font-size: 26px;
   height: 80px;
   display: flex;
   justify-content: center;
@@ -43,8 +44,15 @@ body {
   /* margin: auto; */
   text-align: center;
 }
-.ListGroup {
+.listgroup {
   width: 500px !important;
+}
+.accordion-button {
+  background-color: rgb(100, 149, 65) !important;
+  color: white !important;
+}
+.accordion {
+  width: 1019px;
 }
 footer {
   font-size: 13px;
