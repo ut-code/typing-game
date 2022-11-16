@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet";
 import "./style.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Table, Stack, ListGroup, Container } from "react-bootstrap";
+import { Button, Table, Stack, ListGroup, Accordion } from "react-bootstrap";
 
 export default function Result() {
   const [listItems, setListItems] = useState([
@@ -24,7 +24,7 @@ export default function Result() {
   const [listItemsSame, setListItemsSame] = useState([
     { record_id: 1, problem: 1, username: "samplesame", score: -100 },
   ]);
-  const [userRankSame, setUserRankSame] = useState<number>(1213498765678909876);
+  const [userRankSame, setUserRankSame] = useState<number>(-1);
 
   // script.jsを読み込む
   useEffect(() => {
@@ -103,29 +103,31 @@ export default function Result() {
               <ListGroup.Item className="rowh">
                 {userName}さんの結果
               </ListGroup.Item>
-              <ListGroup.Item className="roww">順位{userRank}位</ListGroup.Item>
               <ListGroup.Item className="roww">
-                同問題順位{userRankSame}位
+                順位 {userRank} 位
               </ListGroup.Item>
               <ListGroup.Item className="roww">
-                スコア{userScore}点
+                同問題順位 {userRankSame} 位
               </ListGroup.Item>
               <ListGroup.Item className="roww">
-                総合ランク{userScoreRank}
+                スコア {userScore} 点
+              </ListGroup.Item>
+              <ListGroup.Item className="roww">
+                総合ランク {userScoreRank}
               </ListGroup.Item>
             </ListGroup>
             <ListGroup horizontal>
               <ListGroup.Item className="roww2">
                 正しいタイプ数<br></br>
-                {userCorrect}回
+                {userCorrect} 回
               </ListGroup.Item>
               <ListGroup.Item className="roww2">
                 ミスタイプ数<br></br>
-                {userMiss}回
+                {userMiss} 回
               </ListGroup.Item>
               <ListGroup.Item className="roww2">
                 平均タイプ数<br></br>
-                {userKpm}回/秒
+                {userKpm} 回/秒
               </ListGroup.Item>
             </ListGroup>
           </div>
@@ -150,6 +152,28 @@ export default function Result() {
             </Table>
           </div>
         </Stack>
+
+        <Accordion defaultActiveKey="1">
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>総合ランクの基準</Accordion.Header>
+            <Accordion.Body>
+              SS: 平均タイプ数 5.00 回/秒以上 かつ ミスタイプ率 0% かつ 完答
+              <br></br>
+              S: 平均タイプ数 5.00 回/秒以上 かつ ミスタイプ率 10%未満 かつ 完答
+              <br></br>
+              A: 平均タイプ数 4.00 回/秒以上 かつ ミスタイプ率 20%未満
+              <br></br>
+              B: 平均タイプ数 3.00 回/秒以上 かつ ミスタイプ率 20%未満
+              <br></br>
+              C: 平均タイプ数 2.00 回/秒以上 かつ ミスタイプ率 30%未満
+              <br></br>
+              D: 平均タイプ数 2.00 回/秒未満 かつ ミスタイプ率 50%未満
+              <br></br>
+              E: ミスタイプ率 50%以上
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+
         <div>
           <Button href="/" variant="secondary">
             Back

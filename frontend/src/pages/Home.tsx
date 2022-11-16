@@ -19,7 +19,9 @@ export default function Home() {
         <div id="userinput">
           <Form>
             <Form.Group className="mb-3" controlId="username">
-              <Form.Label>ユーザーネーム（20文字まで）</Form.Label>
+              <Form.Label>
+                <b>ユーザーネーム（20文字まで）</b>
+              </Form.Label>
               <Form.Control
                 placeholder="Guest"
                 value={userName}
@@ -31,7 +33,9 @@ export default function Home() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="qnumber">
-              <Form.Label>問題番号</Form.Label>
+              <Form.Label>
+                <b>問題番号</b>
+              </Form.Label>
               <Form.Select
                 value={qnumber}
                 onChange={(e) => {
@@ -39,18 +43,28 @@ export default function Home() {
                 }}
               >
                 <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
                 <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
                 <option>10</option>
+                <option>11</option>
                 <option>20</option>
                 <option>21</option>
                 <option>22</option>
                 <option>23</option>
-                <option>99</option>
               </Form.Select>
               <Form.Text className="text-muted">
-                0: 手頃なやつ 5: 長い英単語集 10: htmlを書いてみよう 11:
-                ゲティスバーグ演説 20: ロンドン橋落ちた 21: ハンプティダンプティ
-                22: きらきら星 23: Hey Diddle Diddle 99: テスト用
+                0: お試し 1: マックのメニュー 2: 日本食 3: 惑星名 4:
+                短い英単語集 5: 長い英単語集 6: アクセス数の多いサイト 7: SDGs
+                8: MDGs 9: ??? 10: htmlを書いてみよう 11: ゲティスバーグ演説 20:
+                ロンドン橋落ちた 21: ハンプティダンプティ 22: きらきら星 23: Hey
+                Diddle Diddle
               </Form.Text>
             </Form.Group>
 
@@ -83,11 +97,11 @@ export default function Home() {
           </Form>
         </div>
 
-        <Accordion defaultActiveKey="0">
+        <Accordion defaultActiveKey="0" alwaysOpen>
           <Accordion.Item eventKey="0">
             <Accordion.Header>遊び方</Accordion.Header>
             <Accordion.Body>
-              ユーザーネームを入力し、問題番号を選択してPlayボタンを押します。スペースキーを押すと問題が表示され、ゲームがスタートします。
+              ユーザーネームと問題番号を決めたら、Playボタンを押します。スペースキーを押すと問題が表示され、ゲームがスタートします。
               <br></br>
               速く正確なタイピングで、高得点を目指して頑張りましょう！制限時間に気をつけて！
             </Accordion.Body>
