@@ -179,7 +179,6 @@ export default function App({
     <>
       <div id="wrapper">
         <div id="settings">
-          {element}
           {/* {content} */}
           {/* <div>{toJapanese(content)}</div> */}
           <div>
@@ -228,6 +227,7 @@ export default function App({
                   </option>
                 ))}
               </select>
+              {element}
             </>
           )}
         </div>
