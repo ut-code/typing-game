@@ -94,8 +94,8 @@ function keydown(
   setKeyColors(
     keyCodes.map((tmp, i) =>
       (!isDefault && tmp === e.code) ||
-      (isDefault && // @ts-ignore
-        functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
+        (isDefault && // @ts-ignore
+          functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
         e.key.toLowerCase()
         ? "orange"
         : keyColors[i]
@@ -105,8 +105,8 @@ function keydown(
     setKeyColors(
       keyCodes.map((tmp, i) =>
         (!isDefault && tmp === e.code) ||
-        (isDefault && // @ts-ignore
-          functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
+          (isDefault && // @ts-ignore
+            functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
           e.key.toLowerCase()
           ? "rgba(0,0,0,0)"
           : keyColors[i]
@@ -133,14 +133,14 @@ function toJapanese(content: string): string {
 export default function App({
   element = <></>,
   output = "",
-  setOutput = () => {},
+  setOutput = () => { },
 }: {
   element?: JSX.Element;
   output?: string;
   setOutput?: (value: string) => void;
 }): JSX.Element {
-  const [isDefault, setIsDefault] = useState<boolean>(true);
-  const [layout,setLayout]=useState<string>();
+  const [isCustom, setIsCustom] = useState<boolean>(false);
+  const [layout, setLayout] = useState<string>();
   const [functional, setFunctional] = useState<string>(
     defaultFunctionalLayoutType
   );
@@ -159,7 +159,7 @@ export default function App({
         content,
         setContent,
         functional,
-        isDefault,
+        isCustom,
         shift,
         setShift
       );
@@ -173,7 +173,7 @@ export default function App({
       window.removeEventListener("keydown", tmp);
       window.removeEventListener("keyup", temp);
     };
-  }, [functional, isDefault, shift]);
+  }, [functional, isCustom, shift]);
   setOutput(content);
   return (
     <>
@@ -184,14 +184,14 @@ export default function App({
           <div>
             <input
               type="checkbox"
-              checked={isDefault}
+              checked={isCustom}
               onChange={(e) => {
-                setIsDefault(e.target.checked);
+                setIsCustom(e.target.checked);
               }}
             />
-            <label>Default</label>
+            <label>カスタム</label>
           </div>
-          {!isDefault && (
+          {isCustom && (
             <>
               <span>論理配列</span>
               <ReadJSONFile
@@ -241,7 +241,7 @@ export default function App({
           setContent={setContent}
           keyLayout={functionalLayoutType.custom.content}
           physicalKeyLayout={physicalLayoutType.custom.content}
-          isDefault={isDefault}
+          isDefault={!isCustom}
           shift={shift}
           setShift={setShift}
         ></Keyboard>
