@@ -43,12 +43,14 @@ export default function Home() {
                 }}
               >
                 <option>0</option>
+                <option>1</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
                 <option>6</option>
                 <option>7</option>
+                <option>8</option>
                 <option>9</option>
                 <option>10</option>
                 <option>11</option>
@@ -58,9 +60,9 @@ export default function Home() {
                 <option>23</option>
               </Form.Select>
               <Form.Text className="text-muted">
-                0: お試し 1: 単語 2: 日本食 3: 惑星名 4: 短い英単語集 5:
-                長い英単語集 6: アクセス数の多いサイト 7: SDGs 8: MDGs 9: ???
-                10: htmlを書いてみよう 11: ゲティスバーグ演説 20:
+                0: お試し 1: マックのメニュー 2: 日本食 3: 惑星名 4:
+                短い英単語集 5: 長い英単語集 6: アクセス数の多いサイト 7: SDGs
+                8: MDGs 9: ??? 10: htmlを書いてみよう 11: ゲティスバーグ演説 20:
                 ロンドン橋落ちた 21: ハンプティダンプティ 22: きらきら星 23: Hey
                 Diddle Diddle
               </Form.Text>

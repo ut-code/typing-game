@@ -27,18 +27,18 @@ export default async function script(now, setNow, code, setCode) {
   }
 
   // scoreを計算する関数
-  function calcScore(time, word_num, correct, miss) {
+  function calcScore(time, word_num, correct, miss, velocity) {
     // 使う変数
     let progress = word_num / questions.length;
     let diff = 0;
-    let correct_rate = correct ** 2 / (miss + correct + 1);
-    let velocity = correct / time;
+    let correct_rate = correct ** 2 / (miss + correct + 1); // 問題文字数多いと有利！
+    if (velocity > 10) velocity = 10;
 
     // 重みをつけて算出
     let w1 = 1000;
     let w2 = 0.1;
     let w3 = 1;
-    let w4 = 10;
+    let w4 = 5;
     return Math.floor(
       w1 * progress * (w2 * diff + w3 * correct_rate + w4 * velocity)
     );
@@ -57,8 +57,11 @@ export default async function script(now, setNow, code, setCode) {
   let qnumber = Number(data.qnumber);
 
   async function results(time, word_num, correct, miss) {
-    let score = calcScore(time, word_num, correct, miss);
-    let kpm = Math.floor((correct / time) * Math.pow(10, 2)) / Math.pow(10, 2); // kpmじゃなくてkpsだった...
+    let velocity;
+    if (time === 0) velocity = 99.99;
+    else velocity = correct / time;
+    let score = calcScore(time, word_num, correct, miss, velocity);
+    let kpm = Math.floor(velocity * Math.pow(10, 2)) / Math.pow(10, 2); // kpmじゃなくてkpsだった...
     let scorerank;
     if (miss === 0 && kpm >= 5 && word_num === questions.length)
       scorerank = "SS";
@@ -97,7 +100,7 @@ export default async function script(now, setNow, code, setCode) {
     //問題をとってくる
     await getQuestions();
     //シャッフルする、ただし順番が無関係な問題のみ
-    if (qnumber === 0 || qnumber === 4 || qnumber === 5 || qnumber === 6) {
+    if (qnumber <= 5) {
       questions = shuffle(questions);
     }
 
@@ -274,6 +277,9 @@ export default async function script(now, setNow, code, setCode) {
   let time = 0; // 時間
   let timeLimit = 30; // 制限時間
   if (qnumber === 5) timeLimit = 60;
+  else if (qnumber === 6) timeLimit = 45;
+  else if (qnumber === 7) timeLimit = 60;
+  else if (qnumber === 8) timeLimit = 60;
   else if (qnumber === 10) timeLimit = 300;
   else if (qnumber === 11) timeLimit = 120;
   else if (qnumber === 11) timeLimit = 120;

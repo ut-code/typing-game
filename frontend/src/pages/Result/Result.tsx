@@ -24,7 +24,7 @@ export default function Result() {
   const [listItemsSame, setListItemsSame] = useState([
     { record_id: 1, problem: 1, username: "samplesame", score: -100 },
   ]);
-  const [userRankSame, setUserRankSame] = useState<number>(1213498765678909876);
+  const [userRankSame, setUserRankSame] = useState<number>(-1);
 
   // script.jsを読み込む
   useEffect(() => {
