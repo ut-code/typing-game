@@ -16,8 +16,8 @@ footer {
   padding: 2vw;
 }
 .accordion-button {
-  background-color: rgb(50, 50, 50) !important;
-  color: white !important;
+  background-color: #dddddd !important;
+  color: black !important;
 }
 .accordion {
   width: 40vw;

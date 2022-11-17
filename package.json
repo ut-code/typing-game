@@ -38,6 +38,7 @@
     "prettier": "2.7.1"
   },
   "dependencies": {
-    "eslint-config-standard-with-typescript": "^23.0.0"
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "highlight.js": "^11.6.0"
   }
 }
