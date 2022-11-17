@@ -20,7 +20,7 @@ export function convert(
   functional: string,
   functionalLayoutType: object,
   content: string,
-  isDefault: boolean,
+  isCustom: boolean,
   shift: boolean,
   setShift: (value: boolean) => void
 ): string {
@@ -50,5 +50,5 @@ export function convert(
       }
     }
   }
-  return isDefault ? content + (e.key.length === 1 ? e.key : "") : ans;
+  return isCustom ? ans : content + (e.key.length === 1 ? e.key : "");
 }
