@@ -131,11 +131,9 @@ function toJapanese(content: string): string {
 }
 
 export default function App({
-  element = <></>,
   output = "",
   setOutput = () => { },
 }: {
-  element?: JSX.Element;
   output?: string;
   setOutput?: (value: string) => void;
 }): JSX.Element {
@@ -189,25 +187,11 @@ export default function App({
                 setIsCustom(e.target.checked);
               }}
             />
-            <label>カスタム</label>
+            <label>キーボードをカスタマイズする</label>
           </div>
           {isCustom && (
             <>
-              <span>論理配列</span>
-              <ReadJSONFile
-                f={(x) => {
-                  // @ts-ignore
-                  functionalLayoutType.custom.content = x;
-                }}
-              ></ReadJSONFile>
-              <br />
-              <span>物理配列</span>
-              <ReadJSONFile
-                f={(x) => {
-                  // @ts-ignore
-                  physicalLayoutType.custom.content = x;
-                }}
-              ></ReadJSONFile>
+              次のボタンで使いたいキーボード配列を選んでください。Dvorakなどを選択してみると違いがよく分かるはずです。
               <br />
               <select
                 value={layout}
@@ -227,7 +211,32 @@ export default function App({
                   </option>
                 ))}
               </select>
-              {element}
+              <br />
+              <br />
+              <br />
+              キーボード配列を自分で作りたい人は、
+              <a href="https://keyboard-layout-creator.onrender.com/">
+                このリンク
+              </a>
+              に飛んでキーボード配列を作ってから、下記のボタンで選択してください。
+              <br />
+              <br />
+              <span>自作の論理配列を選択</span>
+              <ReadJSONFile
+                f={(x) => {
+                  // @ts-ignore
+                  functionalLayoutType.custom.content = x;
+                }}
+              ></ReadJSONFile>
+              <br />
+              <br />
+              <span>自作の物理配列を選択</span>
+              <ReadJSONFile
+                f={(x) => {
+                  // @ts-ignore
+                  physicalLayoutType.custom.content = x;
+                }}
+              ></ReadJSONFile>
             </>
           )}
         </div>
