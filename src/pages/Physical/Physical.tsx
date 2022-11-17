@@ -87,7 +87,7 @@ export default function Physical(): JSX.Element {
           widths,
           styles
         )}
-        isDefault={true}
+        isCustom={false}
         shift={false}
       ></Keyboard>
       <div className="box"></div>
