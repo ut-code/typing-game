@@ -1,4 +1,9 @@
 /* 画面が十分大きい時 */
+.content {
+  /* 仮置き */
+  width: 470px;
+}
+
 th {
   font-size: 15px;
   text-align: left;

@@ -91,6 +91,10 @@ export default function Physical(): JSX.Element {
         shift={false}
       ></Keyboard>
       <div className="box"></div>
+
+      <div className="content">
+        すでに作成したデータを読み込んでそれを編集したい場合は、ここからファイルを読み込んでください。はじめての場合は、無視してください。
+      </div>
       <ReadJSONFile
         f={(x: object) => {
           // @ts-ignore
@@ -109,6 +113,17 @@ export default function Physical(): JSX.Element {
           setStyles(keyCodes.map((keyCode) => x.keyCodes[keyCode].style));
         }}
       ></ReadJSONFile>
+
+      <br />
+      <br />
+      <div className="content">
+        margin-row：列の間隔
+        <br />
+        margin-column：行の間隔
+        <br />
+        height：キーの高さ
+        <br />
+      </div>
       <table>
         <tbody>
           <tr>
@@ -149,6 +164,11 @@ export default function Physical(): JSX.Element {
           </tr>
         </tbody>
       </table>
+      <br />
+      <div className="content">
+        左に行、右に列の番号を入力すると、キーがそこに表示されます。基本は変えなくて良いでしょう。
+        一番右には、キーの横幅を入力することができます。
+      </div>
       <table>
         <tbody>
           {keyCodes.map((keyCode, i) => (
@@ -201,6 +221,11 @@ export default function Physical(): JSX.Element {
           ))}
         </tbody>
       </table>
+
+      <br />
+      <div className="content">
+        拡張子を除いたファイル名を入力して、確定ボタンを押してください。今作ったデータがダウンロードされます。
+      </div>
       <GetFileName fileName={fileName} setFileName={setFileName}></GetFileName>
       <ConfirmButton
         f={() => {
