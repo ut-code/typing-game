@@ -1,6 +1,6 @@
 import jis_qwerty from "./jis_qwerty.json";
 import us_qwerty from "./us_qwerty.json";
-import us_dvorak from "./dvorak.json";
+import dvorak from "./dvorak.json";
 import azerty from "./azerty.json";
 import qwertz from "./qwertz.json";
 import us_default from "./us_default.json";
@@ -9,7 +9,7 @@ import jis109 from "./jis109.json";
 export const functionalLayoutType = {
   jis_qwerty: { content: jis_qwerty },
   us_qwerty: { content: us_qwerty },
-  us_dvorak: { content: us_dvorak },
+  dvorak: { content: dvorak },
   azerty: { content: azerty },
   qwertz: { content: qwertz },
   custom: { content: jis_qwerty },
