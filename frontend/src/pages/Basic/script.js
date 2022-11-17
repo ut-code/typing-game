@@ -282,7 +282,10 @@ export default async function script(now, setNow, code, setCode) {
   else if (qnumber === 8) timeLimit = 60;
   else if (qnumber === 10) timeLimit = 300;
   else if (qnumber === 11) timeLimit = 120;
-  else if (qnumber === 11) timeLimit = 120;
+  else if (qnumber === 20) timeLimit = 60;
+  else if (qnumber === 21) timeLimit = 30;
+  else if (qnumber === 22) timeLimit = 45;
+  else if (qnumber === 23) timeLimit = 30;
   let html = [
     "<!DOCTYPE html>",
     '\n<html lang="ja">',
