@@ -74,19 +74,7 @@ export default function Basic() {
       </div>
       {/* 下のdivの中にReactがキーボードの入力結果をいい感じにして、出力している。これを、読み取って使えば良い。 */}
       <div id="content"></div>
-      <Keyboard
-        element={
-          <>
-            キーボード配列を自分で作りたい人は、
-            <a href="https://keyboard-layout-creator.onrender.com/">
-              このリンク
-            </a>
-            に飛んでください。
-          </>
-        }
-        output={content}
-        setOutput={setContent}
-      />
+      <Keyboard output={content} setOutput={setContent} />
     </>
   );
 }
