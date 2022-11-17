@@ -70,14 +70,14 @@ thead th {
 }
 #rawcode {
   overflow: auto;
-  border: 1px solid #cccccc;
+/*   border: 1px solid #cccccc; */
   width: 30vw;
   height: 15vw;
   tab-size: 2;
 }
 #preview-box {
   overflow: auto;
-  border: 1px solid #cccccc;
+/*   border: 1px solid #cccccc; */
   width: 30vw;
   height: 15vw;
 }
@@ -151,17 +151,20 @@ footer {
 }
 #rawcode2 {
   overflow: auto;
-/*   border: 1px solid #cccccc; */
+  border: 1px solid #cccccc;
   width: 30vw;
   height: 13vw;
   tab-size: 2;
 }
 #preview-box2 {
   overflow: auto;
-/*   border: 1px solid #cccccc; */
+  border: 1px solid #cccccc;
   width: 30vw;
   height: 13vw;
 }
 #backbutton {
   width: 10vw;
+}
+#score-related #progress #progress-number {
+  font-size: 30px;
 }
