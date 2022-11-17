@@ -69,7 +69,7 @@
   "IntlRo": ["", ""],
   "ShiftRight": ["Shift", "Shift"],
   "ControlLeft": ["Ctrl", "Ctrl"],
-  "AAA": ["Win", "Win"],
+  "SuperLeft": ["Win", "Win"],
   "AltLeft": ["Alt", "Alt"],
   "NonConvert": ["無変換", "無変換"],
   "Space": ["Space", "Space"],
