@@ -1,4 +1,5 @@
 import React, { Link } from "react-router-dom";
+import "./Home.css";
 export default function Home(): JSX.Element {
   return (
     <>
@@ -6,6 +7,16 @@ export default function Home(): JSX.Element {
         <h2>Keyboard Layout Creator</h2>
         <p>
           駒場祭のタイピングゲームのキーボード配列を作成するためのプログラムです。
+        </p>
+        <p>
+          論理配列と物理配列をそれぞれ自分で作成して、
+          <a href="https://typing-game.onrender.com/">
+            駒場祭のタイピングゲーム
+          </a>
+          でそれを使用することができます。自分にあったキーボード配列を作ってタイピング速度を上げてみてください。
+        </p>
+        <p>
+          基本的には、論理配列の方を編集すればよいでしょう。ここで、キーを交換することなどが自由にできます。どうしても、キーボードの物理的な配列を変えたいときには、物理配列の方を編集してみてください。
         </p>
       </main>
       <nav>
