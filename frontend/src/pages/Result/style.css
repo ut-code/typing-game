@@ -3,6 +3,9 @@ body {
   padding: 2vw;
   margin: auto;
 }
+#result-elements {
+  margin: auto;
+}
 .yourResults {
   font-size: 20px;
   /* background: scroll; */
@@ -47,12 +50,9 @@ body {
 .listgroup {
   width: 500px !important;
 }
-.accordion-button {
-  background-color: rgb(100, 149, 65) !important;
-  color: white !important;
-}
 .accordion {
   width: 1017px;
+  margin: auto;
 }
 footer {
   font-size: 13px;

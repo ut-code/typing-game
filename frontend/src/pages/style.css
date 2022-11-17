@@ -4,20 +4,29 @@ body {
 }
 #userinput {
   width: 40vw;
+  margin: auto;
 }
-header {
+#header {
   font-size: 30px;
   padding: 2vw;
+  margin: auto;
 }
 footer {
   font-size: 13px;
   padding: 2vw;
 }
 .accordion-button {
-  background-color: rgb(100, 149, 65) !important;
-  color: white !important;
+  background-color: #dddddd !important;
+  color: black !important;
 }
-/* .accordion {
-  width: 1140px;
-} */
+.accordion {
+  width: 40vw;
+}
+#play-button {
+  width: 40vw;
+}
+#how-to-play {
+  width: 40vw;
+  margin: auto;
+}
 /* 矢印も白にしたい */

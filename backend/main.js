@@ -23,7 +23,9 @@ var LocalStorage = require("node-localstorage").LocalStorage,
 // Homeでユーザーが入力した情報をlocalStorageに保存
 app.post("/localSave", (request, response) => {
   localStorage.setItem("username", request.body.username);
-  localStorage.setItem("qnumber", request.body.qnumber);
+  qnumber = request.body.qnumber;
+  let idx = qnumber.indexOf(":");
+  localStorage.setItem("qnumber", qnumber.slice(0, idx));
   response.json({
     // username: username,
     // qnumber: qnumber,

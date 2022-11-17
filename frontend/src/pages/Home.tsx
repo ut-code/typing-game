@@ -42,30 +42,23 @@ export default function Home() {
                   setQnumber(e.target.value);
                 }}
               >
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-                <option>11</option>
-                <option>20</option>
-                <option>21</option>
-                <option>22</option>
-                <option>23</option>
+                <option>0: お試し</option>
+                <option>1: マックのメニュー</option>
+                <option>2: 日本食</option>
+                <option>3: 惑星名</option>
+                <option>4: 短い英単語集</option>
+                <option>5: 長い英単語集</option>
+                <option>6: アクセス数の多いサイト</option>
+                <option>7: SDGs</option>
+                <option>8: MDGs</option>
+                <option>9: キーボード配列</option>
+                <option>10: htmlを書いてみよう</option>
+                <option>11: ゲティスバーグ演説</option>
+                <option>20: ロンドン橋落ちた</option>
+                <option>21: ハンプティダンプティ</option>
+                <option>22: きらきら星</option>
+                <option>23: Hey Diddle Diddle</option>
               </Form.Select>
-              <Form.Text className="text-muted">
-                0: お試し 1: マックのメニュー 2: 日本食 3: 惑星名 4:
-                短い英単語集 5: 長い英単語集 6: アクセス数の多いサイト 7: SDGs
-                8: MDGs 9: ??? 10: htmlを書いてみよう 11: ゲティスバーグ演説 20:
-                ロンドン橋落ちた 21: ハンプティダンプティ 22: きらきら星 23: Hey
-                Diddle Diddle
-              </Form.Text>
             </Form.Group>
 
             <Button
@@ -97,13 +90,15 @@ export default function Home() {
           </Form>
         </div>
 
-        <Accordion defaultActiveKey="0" alwaysOpen>
+        <Accordion defaultActiveKey="0" alwaysOpen id="how-to-play">
           <Accordion.Item eventKey="0">
             <Accordion.Header>遊び方</Accordion.Header>
             <Accordion.Body>
-              ユーザーネームと問題番号を決めたら、Playボタンを押します。スペースキーを押すと問題が表示され、ゲームがスタートします。
+              ユーザーネームと問題番号を決めたら、Playボタンを押します。
               <br></br>
-              速く正確なタイピングで、高得点を目指して頑張りましょう！制限時間に気をつけて！
+              スペースキーを押すと問題が表示され、ゲームがスタートします。
+              <br></br>
+              速く正確なタイピングで、制限時間内に高得点を目指して頑張りましょう！
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

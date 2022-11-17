@@ -153,12 +153,15 @@ footer {
   overflow: auto;
   border: 1px solid #cccccc;
   width: 30vw;
-  height: 15vw;
+  height: 13vw;
   tab-size: 2;
 }
 #preview-box2 {
   overflow: auto;
   border: 1px solid #cccccc;
   width: 30vw;
-  height: 15vw;
+  height: 13vw;
+}
+#backbutton {
+  width: 10vw;
 }

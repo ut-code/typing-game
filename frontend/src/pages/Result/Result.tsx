@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from "react";
 import { useEffect, useState } from "react";
+import Header from "../../components/Header";
 import Footer from "./../../components/Footer";
 import { Helmet } from "react-helmet";
 import "./style.css";
@@ -80,65 +81,71 @@ export default function Result() {
 
   return (
     <>
+      <Header />
       <Helmet>
         <title>結果</title>
       </Helmet>
       <Stack gap={3}>
-        <Stack direction="horizontal" gap={3}>
-          <div className="yourResults">
-            <ListGroup variant="flush">
-              <ListGroup.Item className="rowh">
-                {userName}さんの結果
-              </ListGroup.Item>
-              <ListGroup.Item className="roww">
-                順位 {userRank} 位
-              </ListGroup.Item>
-              <ListGroup.Item className="roww">
-                同問題順位 {userRankSame} 位
-              </ListGroup.Item>
-              <ListGroup.Item className="roww">
-                スコア {userScore} 点
-              </ListGroup.Item>
-              <ListGroup.Item className="roww">
-                総合ランク {userScoreRank}
-              </ListGroup.Item>
-            </ListGroup>
-            <ListGroup horizontal>
-              <ListGroup.Item className="roww2">
-                正しいタイプ数<br></br>
-                {userCorrect} 回
-              </ListGroup.Item>
-              <ListGroup.Item className="roww2">
-                ミスタイプ数<br></br>
-                {userMiss} 回
-              </ListGroup.Item>
-              <ListGroup.Item className="roww2">
-                平均タイプ数<br></br>
-                {userKpm} 回/秒
-              </ListGroup.Item>
-            </ListGroup>
-          </div>
-          <div className="rankBoard">
-            <Table striped id="ranking">
-              <thead id="ranking-head">
-                <tr>
-                  <th>順位</th>
-                  <th>ユーザ</th>
-                  <th>得点</th>
-                </tr>
-              </thead>
-              <tbody>
-                {listItems.map((listItem, i) => (
-                  <tr key={listItem.record_id}>
-                    <th>{i + 1}</th>
-                    <th>{listItem.username}</th>
-                    <th>{listItem.score}</th>
+        <div id="result-elements">
+          <Button href="/" variant="secondary" id="backbutton">
+            Back
+          </Button>
+          <Stack direction="horizontal" gap={3}>
+            <div className="yourResults">
+              <ListGroup variant="flush">
+                <ListGroup.Item className="rowh">
+                  {userName}さんの結果
+                </ListGroup.Item>
+                <ListGroup.Item className="roww">
+                  順位 {userRank} 位
+                </ListGroup.Item>
+                <ListGroup.Item className="roww">
+                  同問題順位 {userRankSame} 位
+                </ListGroup.Item>
+                <ListGroup.Item className="roww">
+                  スコア {userScore} 点
+                </ListGroup.Item>
+                <ListGroup.Item className="roww">
+                  総合ランク {userScoreRank}
+                </ListGroup.Item>
+              </ListGroup>
+              <ListGroup horizontal>
+                <ListGroup.Item className="roww2">
+                  正しいタイプ数<br></br>
+                  {userCorrect} 回
+                </ListGroup.Item>
+                <ListGroup.Item className="roww2">
+                  ミスタイプ数<br></br>
+                  {userMiss} 回
+                </ListGroup.Item>
+                <ListGroup.Item className="roww2">
+                  平均タイプ数<br></br>
+                  {userKpm} 回/秒
+                </ListGroup.Item>
+              </ListGroup>
+            </div>
+            <div className="rankBoard">
+              <Table striped id="ranking">
+                <thead id="ranking-head">
+                  <tr>
+                    <th>順位</th>
+                    <th>ユーザ</th>
+                    <th>得点</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
-          </div>
-        </Stack>
+                </thead>
+                <tbody>
+                  {listItems.map((listItem, i) => (
+                    <tr key={listItem.record_id}>
+                      <th>{i + 1}</th>
+                      <th>{listItem.username}</th>
+                      <th>{listItem.score}</th>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
+          </Stack>
+        </div>
 
         <Accordion defaultActiveKey="1">
           <Accordion.Item eventKey="0">
@@ -160,12 +167,6 @@ export default function Result() {
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
-
-        <div>
-          <Button href="/" variant="secondary">
-            Back
-          </Button>
-        </div>
       </Stack>
       <Footer />
     </>
