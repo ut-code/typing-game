@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from "react";
 import { useEffect, useState } from "react";
+import Header from "../../components/Header";
 import Footer from "./../../components/Footer";
 import { Helmet } from "react-helmet";
 import "./style.css";
@@ -80,10 +81,14 @@ export default function Result() {
 
   return (
     <>
+      <Header />
       <Helmet>
         <title>結果</title>
       </Helmet>
       <Stack gap={3}>
+        <Button href="/" variant="secondary" id="backbutton">
+          Back
+        </Button>
         <Stack direction="horizontal" gap={3}>
           <div className="yourResults">
             <ListGroup variant="flush">
@@ -160,12 +165,6 @@ export default function Result() {
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
-
-        <div>
-          <Button href="/" variant="secondary">
-            Back
-          </Button>
-        </div>
       </Stack>
       <Footer />
     </>

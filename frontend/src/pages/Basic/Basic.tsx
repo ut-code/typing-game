@@ -23,6 +23,9 @@ export default function Basic() {
   if (cont !== null) cont.textContent = content;
   return (
     <>
+      <Button href="/" variant="secondary" id="backbutton">
+        Back
+      </Button>
       <div id="score-related">
         <Stack direction="horizontal" gap={3}>
           <table id="current">
@@ -69,9 +72,6 @@ export default function Basic() {
           <span id="question">[Space]を押して開始</span>
         </div>
       </div>
-      <Button href="/" variant="secondary">
-        Back
-      </Button>
       {/* 下のdivの中にReactがキーボードの入力結果をいい感じにして、出力している。これを、読み取って使えば良い。 */}
       <div id="content"></div>
       <Keyboard
