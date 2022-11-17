@@ -14,17 +14,13 @@ export default function Result() {
   ]);
   const [userName, setUserName] = useState<string>("");
   const [userRank, setUserRank] = useState<number>(0);
+  const [userRankSame, setUserRankSame] = useState<number>(0);
   const [userTime, setUserTime] = useState<number>(0);
   const [userScore, setUserScore] = useState<number>(0);
   const [userKpm, setUserKpm] = useState<number>(0);
   const [userCorrect, setUserCorrect] = useState<number>(0);
   const [userMiss, setUserMiss] = useState<number>(0);
   const [userScoreRank, setUserScoreRank] = useState<string>("");
-
-  const [listItemsSame, setListItemsSame] = useState([
-    { record_id: 1, problem: 1, username: "samplesame", score: -100 },
-  ]);
-  const [userRankSame, setUserRankSame] = useState<number>(-1);
 
   // script.jsを読み込む
   useEffect(() => {
@@ -46,9 +42,11 @@ export default function Result() {
         }
         cnt++;
       }
+
       let cnt2 = 1;
-      for (const listItemSame of listItemsSame) {
-        if (data.score == listItemSame.score) {
+      for (const listItem of listItems) {
+        if (data.qnumber != listItem.problem) continue;
+        if (data.score == listItem.score) {
           setUserRankSame(cnt2);
           break;
         }
@@ -64,7 +62,7 @@ export default function Result() {
       setUserScoreRank(data.scorerank);
     }
     tmp();
-  }, [listItems, listItemsSame]);
+  }, [listItems]);
 
   // RankingをfetchAPIしてくる
   useEffect(() => {
@@ -76,17 +74,6 @@ export default function Result() {
         .then((response) => response.json())
         .then((data) => {
           setListItems(data);
-        });
-    })();
-    // 同問題順位用
-    (async () => {
-      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRankingSame`, {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setListItemsSame(data);
         });
     })();
   }, []);
