@@ -1,3 +1,4 @@
+import jis_qwerty from "./jis_qwerty.json";
 import us_qwerty from "./us_qwerty.json";
 import us_dvorak from "./us_dvorak.json";
 import azerty from "./azerty.json";
@@ -15,6 +16,7 @@ export const layoutType = {
 };
 
 export const functionalLayoutType = {
+  jis_qwerty: { name: "JIS_QWERTY", id: "jis_qwerty", content: jis_qwerty },
   us_qwerty: { name: "US_QWERTY", id: "us_qwerty", content: us_qwerty },
   us_dvorak: { name: "US_Dvorak", id: "us_dvorak", content: us_dvorak },
   azerty: { name: "AZERTY", id: "azerty", content: azerty },
@@ -27,8 +29,8 @@ export const physicalLayoutType = {
   custom: { name: "Custom", id: "custom", content: us_default },
 };
 
-export const defaultlayoutType = "us_qwerty";
+export const defaultlayoutType = "jis_qwerty";
 
-export const defaultFunctionalLayoutType = "us_qwerty";
+export const defaultFunctionalLayoutType = "jis_qwerty";
 
-export const defaultPhysicalLayoutType = "us_default";
+export const defaultPhysicalLayoutType = "jis109";
