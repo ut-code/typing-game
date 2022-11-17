@@ -77,6 +77,6 @@
   "KanaMode": ["かたかなひらがな", "かたかなひらがな"],
   "AltRight": ["Alt", "Alt"],
   "BBB": ["Win", "Win"],
-  "CCC": ["App.", "App."],
+  "App": ["App.", "App."],
   "CtrlRight": ["Ctrl", "Ctrl"]
 }
