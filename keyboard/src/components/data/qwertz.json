@@ -76,7 +76,7 @@
   "Convert": ["変換", "変換"],
   "KanaMode": ["カタカナひらがな", "カタカナひらがな"],
   "AltRight": ["Alt", "Alt"],
-  "BBB": ["Win", "Win"],
+  "Super": ["Win", "Win"],
   "App": ["App.", "App."],
   "CtrlRight": ["Ctrl", "Ctrl"]
 }
