@@ -151,14 +151,14 @@ footer {
 }
 #rawcode2 {
   overflow: auto;
-  border: 1px solid #cccccc;
+/*   border: 1px solid #cccccc; */
   width: 30vw;
   height: 13vw;
   tab-size: 2;
 }
 #preview-box2 {
   overflow: auto;
-  border: 1px solid #cccccc;
+/*   border: 1px solid #cccccc; */
   width: 30vw;
   height: 13vw;
 }
