@@ -52,7 +52,9 @@ export default function Functional(): JSX.Element {
             setShift(e.target.checked);
           }}
         />
-        <label>Shift</label>
+        <label>
+          チェックボックスをクリックして、Shiftキーを押した状態を再現
+        </label>
       </div>
       <Keyboard
         functional="custom"
@@ -62,6 +64,10 @@ export default function Functional(): JSX.Element {
         shift={shift}
       ></Keyboard>
       <div className="box"></div>
+      <br />
+      <div className="content">
+        すでに作成したデータを読み込んでそれを編集したい場合は、ここからファイルを読み込んでください。はじめての場合は、無視してください。
+      </div>
       <ReadJSONFile
         f={(x: object) => {
           setKeys([
@@ -71,6 +77,11 @@ export default function Functional(): JSX.Element {
           ]);
         }}
       ></ReadJSONFile>
+      <br />
+      <br />
+      <div className="content">
+        左に通常時に入力したいキーを、右にシフトキーを押した状態で入力したいキーを入力してください。編集すると、右のプレビューが変化するはずです。
+      </div>
       <table>
         <tbody>
           {keyCodes.map((keyCode, i) => (
@@ -102,6 +113,10 @@ export default function Functional(): JSX.Element {
           ))}
         </tbody>
       </table>
+      <br />
+      <div className="content">
+        拡張子を除いたファイル名を入力して、確定ボタンを押してください。今作ったデータがダウンロードされます。
+      </div>
       <GetFileName fileName={fileName} setFileName={setFileName}></GetFileName>
       <ConfirmButton
         f={() => {
