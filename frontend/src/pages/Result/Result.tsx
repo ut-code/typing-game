@@ -87,9 +87,11 @@ export default function Result() {
       </Helmet>
       <Stack gap={3}>
         <div id="result-elements">
-          <Button href="/" variant="secondary" id="backbutton">
-            Back
-          </Button>
+          <div id="back">
+            <Button href="/" variant="secondary" id="backbutton">
+              Back
+            </Button>
+          </div>
           <Stack direction="horizontal" gap={3}>
             <div className="yourResults">
               <ListGroup variant="flush">

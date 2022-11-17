@@ -52,7 +52,7 @@ export default function Home() {
                 <option>7: SDGs</option>
                 <option>8: MDGs</option>
                 <option>9: キーボード配列</option>
-                <option>10: htmlを書いてみよう</option>
+                {/* <option>10: htmlを書いてみよう</option> */}
                 <option>11: ゲティスバーグ演説</option>
                 <option>20: ロンドン橋落ちた</option>
                 <option>21: ハンプティダンプティ</option>
