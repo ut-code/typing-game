@@ -22,6 +22,7 @@ export const physicalLayoutType = {
 
 export const layoutType = {
   jis_qwerty: { name: "JIS QWERTY", id: "jis_qwerty", functionalLayoutType: "jis_qwerty", physicalLayoutType: "jis109" },
+  mac_jis_qwerty: { name: "Mac JIS QWERTY", id: "mac_jis_qwerty", functionalLayoutType: "mac_jis_qwerty", physicalLayoutType: "jis109" },
   us_qwerty: { name: "US QWERTY", id: "us_qwerty", functionalLayoutType: "us_qwerty", physicalLayoutType: "us_default" },
   dvorak: { name: "Dvorak", id: "dvorak", functionalLayoutType: "dvorak", physicalLayoutType: "jis109" },
   azerty: { name: "AZERTY", id: "azerty", functionalLayoutType: "azerty", physicalLayoutType: "jis109" },
