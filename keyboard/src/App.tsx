@@ -241,7 +241,7 @@ export default function App({
           setContent={setContent}
           keyLayout={functionalLayoutType.custom.content}
           physicalKeyLayout={physicalLayoutType.custom.content}
-          isDefault={!isCustom}
+          isCustom={isCustom}
           shift={shift}
           setShift={setShift}
         ></Keyboard>
