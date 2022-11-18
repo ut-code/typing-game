@@ -42,7 +42,7 @@ export default function Home() {
                   setQnumber(e.target.value);
                 }}
               >
-                <option>0: お試し</option>
+                <option>0: 関東地方(かんとう地方)</option>
                 <option>1: マックのメニュー</option>
                 <option>2: 日本食</option>
                 <option>3: 惑星名</option>
