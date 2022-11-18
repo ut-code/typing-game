@@ -225,7 +225,7 @@ export default async function script(now, setNow, code, setCode) {
       subtree: true,
     });
 
-    window.addEventListener("keydown", (e) => {
+    window.addEventListener("keydown", () => {
       if (isStarted === false) {
         document.getElementById("question").textContent = questions[word_num];
         if (qnumber === 10 && word_num >= 12) {
