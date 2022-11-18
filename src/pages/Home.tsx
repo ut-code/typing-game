@@ -1,4 +1,5 @@
 import React, { Link } from "react-router-dom";
+import howToUse from "./how_to_use.mp4";
 import "./Home.css";
 export default function Home(): JSX.Element {
   return (
@@ -18,6 +19,8 @@ export default function Home(): JSX.Element {
         <p>
           基本的には、論理配列の方を編集すればよいでしょう。ここで、キーを交換することなどが自由にできます。どうしても、キーボードの物理的な配列を変えたいときには、物理配列の方を編集してみてください。
         </p>
+
+        <video controls muted src={howToUse} width="700px" />
       </main>
       <nav>
         <Link to="/functional">論理配列</Link>
