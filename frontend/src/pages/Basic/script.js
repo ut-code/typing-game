@@ -168,7 +168,7 @@ export default async function script(now, setNow, code, setCode) {
       // タイプ音が鳴る。早すぎると間に合わない
       // typeSE.pause();
       // typeSE.play();
-
+      start();
       const previousContent = content;
       content = document.getElementById("content").textContent;
       const key = content[content.length - 1]; // 追加された文字すなわち一番最後の文字を取り出す。
