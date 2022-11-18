@@ -132,12 +132,43 @@ export default async function script(now, setNow, code, setCode) {
       "y",
       "z",
     ];
+    function start() {
+      if (isStarted === false) {
+        document.getElementById("question").textContent = questions[word_num];
+        if (qnumber === 10 && word_num >= 12) {
+          document.getElementById("question2").textContent =
+            questions[word_num];
+        }
+        // スペースが押されたら、時間計測
+        isStarted = true;
+        timerId = setInterval(() => {
+          time++;
+          document.getElementById("time").textContent = time + "秒";
+          if (qnumber === 10 && word_num >= 5) {
+            document.getElementById("time2").textContent = time + "秒";
+          }
+          document.getElementById("remaining-time").textContent =
+            timeLimit - time + "秒";
+          if (qnumber === 10 && word_num >= 6) {
+            document.getElementById("remaining-time2").textContent =
+              timeLimit - time + "秒";
+          }
+
+          if (timeLimit - time <= 0 && isFinished === false) {
+            clearInterval(timerId);
+            isFinished = true;
+            results(time, word_num, correct, miss);
+          }
+        }, 1000);
+      }
+    }
+
     // キーボードの入力をReactがdivの中に出力しているので、その変更が行われたのを読み取っている。
     const observer = new MutationObserver(() => {
       // タイプ音が鳴る。早すぎると間に合わない
       // typeSE.pause();
       // typeSE.play();
-
+      start();
       const previousContent = content;
       content = document.getElementById("content").textContent;
       const key = content[content.length - 1]; // 追加された文字すなわち一番最後の文字を取り出す。
@@ -225,35 +256,8 @@ export default async function script(now, setNow, code, setCode) {
       subtree: true,
     });
 
-    window.addEventListener("keydown", (e) => {
-      if (isStarted === false) {
-        document.getElementById("question").textContent = questions[word_num];
-        if (qnumber === 10 && word_num >= 12) {
-          document.getElementById("question2").textContent =
-            questions[word_num];
-        }
-        // スペースが押されたら、時間計測
-        isStarted = true;
-        timerId = setInterval(() => {
-          time++;
-          document.getElementById("time").textContent = time + "秒";
-          if (qnumber === 10 && word_num >= 5) {
-            document.getElementById("time2").textContent = time + "秒";
-          }
-          document.getElementById("remaining-time").textContent =
-            timeLimit - time + "秒";
-          if (qnumber === 10 && word_num >= 6) {
-            document.getElementById("remaining-time2").textContent =
-              timeLimit - time + "秒";
-          }
-
-          if (timeLimit - time <= 0 && isFinished === false) {
-            clearInterval(timerId);
-            isFinished = true;
-            results(time, word_num, correct, miss);
-          }
-        }, 1000);
-      }
+    window.addEventListener("keydown", () => {
+      start();
     });
   }
   main();
