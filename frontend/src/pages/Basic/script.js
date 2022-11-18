@@ -275,17 +275,8 @@ export default async function script(now, setNow, code, setCode) {
   let isStarted = false; // 始まったか
   let isFinished = false; // 終わったか
   let time = 0; // 時間
-  let timeLimit = 30; // 制限時間
-  if (qnumber === 5) timeLimit = 60;
-  else if (qnumber === 6) timeLimit = 45;
-  else if (qnumber === 7) timeLimit = 60;
-  else if (qnumber === 8) timeLimit = 60;
-  else if (qnumber === 10) timeLimit = 300;
-  else if (qnumber === 11) timeLimit = 120;
-  else if (qnumber === 20) timeLimit = 60;
-  else if (qnumber === 21) timeLimit = 30;
-  else if (qnumber === 22) timeLimit = 45;
-  else if (qnumber === 23) timeLimit = 30;
+  let timeLimit = 120; // 制限時間
+
   let html = [
     "<!DOCTYPE html>",
     '\n<html lang="ja">',
