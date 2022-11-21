@@ -60,6 +60,15 @@ async function getRanking() {
   return records;
 }
 
+async function getRankingKf73() {
+  const records = await prisma.ranking_kf73.findMany({
+    orderBy: {
+      score: "desc",
+    },
+  });
+  return records;
+}
+
 // submit時のデータベースとのやり取りを関数化しただけ
 async function submitScore(username, score) {
   qnumber = Number(localStorage.getItem("qnumber")) || 0;
@@ -112,6 +121,12 @@ app.post("/fetchScore", (request, response) => {
 // /result表示用にrankingをデータベースから取ってくる
 app.post("/fetchRanking", async (request, response) => {
   const records = await getRanking();
+  // JSON形式でscript.jsに送信
+  response.json(records);
+});
+
+app.post("/fetchRankingKf73", async (request, response) => {
+  const records = await getRankingKf73();
   // JSON形式でscript.jsに送信
   response.json(records);
 });

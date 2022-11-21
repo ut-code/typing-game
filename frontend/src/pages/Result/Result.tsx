@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "./../../components/Footer";
 import { Helmet } from "react-helmet";
+import { Tab, Tabs } from "react-bootstrap";
 import "./style.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,6 +12,9 @@ import { Button, Table, Stack, ListGroup, Accordion } from "react-bootstrap";
 
 export default function Result() {
   const [listItems, setListItems] = useState([
+    { record_id: 1, problem: 1, username: "sample", score: -100 },
+  ]);
+  const [listItemsKf73, setListItemsKf73] = useState([
     { record_id: 1, problem: 1, username: "sample", score: -100 },
   ]);
   const [userName, setUserName] = useState<string>("");
@@ -79,6 +83,19 @@ export default function Result() {
     })();
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRankingKf73`, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setListItemsKf73(data);
+        });
+    })();
+  }, []);
+
   return (
     <>
       <Header />
@@ -127,24 +144,48 @@ export default function Result() {
               </ListGroup>
             </div>
             <div className="rankBoard">
-              <Table striped id="ranking">
-                <thead id="ranking-head">
-                  <tr>
-                    <th>順位</th>
-                    <th>ユーザ</th>
-                    <th>得点</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {listItems.map((listItem, i) => (
-                    <tr key={listItem.record_id}>
-                      <th>{i + 1}</th>
-                      <th>{listItem.username}</th>
-                      <th>{listItem.score}</th>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
+              <Tabs defaultActiveKey="now">
+                <Tab eventKey="now" title="Now">
+                  <Table striped id="ranking">
+                    <thead id="ranking-head">
+                      <tr>
+                        <th>順位</th>
+                        <th>ユーザ</th>
+                        <th>得点</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {listItems.map((listItem, i) => (
+                        <tr key={listItem.record_id}>
+                          <th>{i + 1}</th>
+                          <th>{listItem.username}</th>
+                          <th>{listItem.score}</th>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </Tab>
+                <Tab eventKey="kf73" title="第73回駒場祭">
+                  <Table striped id="ranking">
+                    <thead id="ranking-head">
+                      <tr>
+                        <th>順位</th>
+                        <th>ユーザ</th>
+                        <th>得点</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {listItemsKf73.map((listItemKf73, i) => (
+                        <tr key={listItemKf73.record_id}>
+                          <th>{i + 1}</th>
+                          <th>{listItemKf73.username}</th>
+                          <th>{listItemKf73.score}</th>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </Tab>
+              </Tabs>
             </div>
           </Stack>
         </div>
