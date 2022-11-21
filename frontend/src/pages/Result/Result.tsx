@@ -13,6 +13,9 @@ export default function Result() {
   const [listItems, setListItems] = useState([
     { record_id: 1, problem: 1, username: "sample", score: -100 },
   ]);
+  const [listItemsKf73, setListItemsKf73] = useState([
+    { record_id: 1, problem: 1, username: "sample", score: -100 },
+  ]);
   const [userName, setUserName] = useState<string>("");
   const [userRank, setUserRank] = useState<number>(0);
   const [userRankSame, setUserRankSame] = useState<number>(0);
@@ -75,6 +78,19 @@ export default function Result() {
         .then((response) => response.json())
         .then((data) => {
           setListItems(data);
+        });
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRankingKf73`, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setListItemsKf73(data);
         });
     })();
   }, []);
