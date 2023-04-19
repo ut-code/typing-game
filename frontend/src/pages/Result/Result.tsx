@@ -1,100 +1,93 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React from "react";
-import { useEffect, useState } from "react";
-import Header from "../../components/Header";
-import Footer from "./../../components/Footer";
-import { Helmet } from "react-helmet";
-import { Tab, Tabs } from "react-bootstrap";
-import "./style.css";
+import React from "react"
+import { useEffect, useState } from "react"
+import Header from "../../components/Header"
+import Footer from "./../../components/Footer"
+import { Helmet } from "react-helmet"
+import { Tab, Tabs } from "react-bootstrap"
+import "./style.css"
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Table, Stack, ListGroup, Accordion } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css"
+import { Button, Table, Stack, ListGroup, Accordion } from "react-bootstrap"
 
 export default function Result() {
-  const [listItems, setListItems] = useState([
-    { record_id: 1, problem: 1, username: "sample", score: -100 },
-  ]);
-  const [listItemsKf73, setListItemsKf73] = useState([
-    { record_id: 1, problem: 1, username: "sample", score: -100 },
-  ]);
-  const [userName, setUserName] = useState<string>("");
-  const [userRank, setUserRank] = useState<number>(0);
-  const [userRankSame, setUserRankSame] = useState<number>(0);
-  const [userTime, setUserTime] = useState<number>(0);
-  const [userScore, setUserScore] = useState<number>(0);
-  const [userKpm, setUserKpm] = useState<number>(0);
-  const [userCorrect, setUserCorrect] = useState<number>(0);
-  const [userMiss, setUserMiss] = useState<number>(0);
-  const [userScoreRank, setUserScoreRank] = useState<string>("");
+  const [listItems, setListItems] = useState([{ record_id: 1, problem: 1, username: "sample", score: -100 }])
+  const [listItemsKf73, setListItemsKf73] = useState([{ record_id: 1, problem: 1, username: "sample", score: -100 }])
+  const [userName, setUserName] = useState<string>("")
+  const [userRank, setUserRank] = useState<number>(0)
+  const [userRankSame, setUserRankSame] = useState<number>(0)
+  const [userTime, setUserTime] = useState<number>(0)
+  const [userScore, setUserScore] = useState<number>(0)
+  const [userKpm, setUserKpm] = useState<number>(0)
+  const [userCorrect, setUserCorrect] = useState<number>(0)
+  const [userMiss, setUserMiss] = useState<number>(0)
+  const [userScoreRank, setUserScoreRank] = useState<string>("")
 
   // script.jsを読み込む
   useEffect(() => {
     async function tmp() {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_ENDPOINT}/fetchScore`,
-        {
-          method: "post",
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      const data = await response.json();
+      const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchScore`, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+      })
+      const data = await response.json()
 
-      let cnt = 1;
+      let cnt = 1
       for (const listItem of listItems) {
         if (data.score == listItem.score) {
-          setUserRank(cnt);
-          break;
+          setUserRank(cnt)
+          break
         }
-        cnt++;
+        cnt++
       }
 
-      let cnt2 = 1;
+      let cnt2 = 1
       for (const listItem of listItems) {
-        if (data.qnumber != listItem.problem) continue;
+        if (data.qnumber != listItem.problem) continue
         if (data.score == listItem.score) {
-          setUserRankSame(cnt2);
-          break;
+          setUserRankSame(cnt2)
+          break
         }
-        cnt2++;
+        cnt2++
       }
 
-      setUserName(data.username);
-      setUserTime(data.time);
-      setUserScore(data.score);
-      setUserKpm(data.kpm);
-      setUserCorrect(data.correct);
-      setUserMiss(data.miss);
-      setUserScoreRank(data.scorerank);
+      setUserName(data.username)
+      setUserTime(data.time)
+      setUserScore(data.score)
+      setUserKpm(data.kpm)
+      setUserCorrect(data.correct)
+      setUserMiss(data.miss)
+      setUserScoreRank(data.scorerank)
     }
-    tmp();
-  }, [listItems]);
+    tmp()
+  }, [listItems])
 
   // RankingをfetchAPIしてくる
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRanking`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
       })
         .then((response) => response.json())
         .then((data) => {
-          setListItems(data);
-        });
-    })();
-  }, []);
+          setListItems(data)
+        })
+    })()
+  }, [])
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRankingKf73`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
       })
         .then((response) => response.json())
         .then((data) => {
-          setListItemsKf73(data);
-        });
-    })();
-  }, []);
+          setListItemsKf73(data)
+        })
+    })()
+  }, [])
 
   return (
     <>
@@ -112,21 +105,11 @@ export default function Result() {
           <Stack direction="horizontal" gap={3}>
             <div className="yourResults">
               <ListGroup variant="flush">
-                <ListGroup.Item className="rowh">
-                  {userName}さんの結果
-                </ListGroup.Item>
-                <ListGroup.Item className="roww">
-                  順位 {userRank} 位
-                </ListGroup.Item>
-                <ListGroup.Item className="roww">
-                  同問題順位 {userRankSame} 位
-                </ListGroup.Item>
-                <ListGroup.Item className="roww">
-                  スコア {userScore} 点
-                </ListGroup.Item>
-                <ListGroup.Item className="roww">
-                  総合ランク {userScoreRank}
-                </ListGroup.Item>
+                <ListGroup.Item className="rowh">{userName}さんの結果</ListGroup.Item>
+                <ListGroup.Item className="roww">順位 {userRank} 位</ListGroup.Item>
+                <ListGroup.Item className="roww">同問題順位 {userRankSame} 位</ListGroup.Item>
+                <ListGroup.Item className="roww">スコア {userScore} 点</ListGroup.Item>
+                <ListGroup.Item className="roww">総合ランク {userScoreRank}</ListGroup.Item>
               </ListGroup>
               <ListGroup horizontal>
                 <ListGroup.Item className="roww2">
@@ -213,5 +196,5 @@ export default function Result() {
       </Stack>
       <Footer />
     </>
-  );
+  )
 }

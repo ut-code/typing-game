@@ -1,17 +1,17 @@
-import React from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Header from "./../components/Header";
-import Footer from "./../components/Footer";
-import "./style.css";
+import React from "react"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import Header from "./../components/Header"
+import Footer from "./../components/Footer"
+import "./style.css"
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Form, Stack, Accordion } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css"
+import { Button, Form, Stack, Accordion } from "react-bootstrap"
 
 export default function Home() {
-  const [userName, setUserName] = useState<string>("");
-  const [qnumber, setQnumber] = useState<string>("");
-  const navigation = useNavigate();
+  const [userName, setUserName] = useState<string>("")
+  const [qnumber, setQnumber] = useState<string>("")
+  const navigation = useNavigate()
   return (
     <>
       <Header />
@@ -26,7 +26,7 @@ export default function Home() {
                 placeholder="Guest"
                 value={userName}
                 onChange={(e) => {
-                  setUserName(e.target.value);
+                  setUserName(e.target.value)
                 }}
                 maxLength={20}
               />
@@ -39,7 +39,7 @@ export default function Home() {
               <Form.Select
                 value={qnumber}
                 onChange={(e) => {
-                  setQnumber(e.target.value);
+                  setQnumber(e.target.value)
                 }}
               >
                 <option>0: 関東地方(かんとう地方)</option>
@@ -70,19 +70,16 @@ export default function Home() {
                   const json = JSON.stringify({
                     username: userName,
                     qnumber: qnumber,
-                  });
-                  const response = await fetch(
-                    `${import.meta.env.VITE_API_ENDPOINT}/localSave`,
-                    {
-                      method: "post",
-                      headers: { "Content-Type": "application/json" },
-                      body: json,
-                    }
-                  );
+                  })
+                  const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/localSave`, {
+                    method: "post",
+                    headers: { "Content-Type": "application/json" },
+                    body: json,
+                  })
                   // fetchAPI後に別ページへ遷移
-                  navigation("basic");
+                  navigation("basic")
                 }
-                postStorage();
+                postStorage()
               }}
             >
               Play
@@ -105,5 +102,5 @@ export default function Home() {
       </Stack>
       <Footer />
     </>
-  );
+  )
 }

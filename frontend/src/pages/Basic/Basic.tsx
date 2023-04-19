@@ -1,26 +1,26 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React from "react";
-import { useEffect, useState } from "react";
-import Keyboard from "./../../../keyboard-layout-creator/keyboard/src/App";
-import "./style.css";
+import React from "react"
+import { useEffect, useState } from "react"
+import Keyboard from "./../../../keyboard-layout-creator/keyboard/src/App"
+import "./style.css"
 // @ts-ignore
-import script from "./script";
+import script from "./script"
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, ProgressBar, Stack } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css"
+import { Button, ProgressBar, Stack } from "react-bootstrap"
 
 // import Editor from "@monaco-editor/react";
 
 export default function Basic() {
-  const [content, setContent] = useState<string>("a");
-  const [now, setNow] = useState<number>(0);
-  const [code, setCode] = useState<string>("a");
+  const [content, setContent] = useState<string>("a")
+  const [now, setNow] = useState<number>(0)
+  const [code, setCode] = useState<string>("a")
 
   useEffect(() => {
-    script(now, setNow, code, setCode);
-  }, []);
-  const cont = document.getElementById("content");
-  if (cont !== null) cont.textContent = content;
+    script(now, setNow, code, setCode)
+  }, [])
+  const cont = document.getElementById("content")
+  if (cont !== null) cont.textContent = content
   return (
     <>
       <Button href="/" variant="secondary" id="backbutton">
@@ -56,12 +56,7 @@ export default function Basic() {
           <Stack gap={0} id="progress">
             <div id="progress-number"></div>
             <div className="pb-5" id="progress-bar">
-              <ProgressBar
-                variant="success"
-                animated
-                now={now}
-                label={`${now}%`}
-              />
+              <ProgressBar variant="success" animated now={now} label={`${now}%`} />
             </div>
           </Stack>
         </Stack>
@@ -76,5 +71,5 @@ export default function Basic() {
       <div id="content"></div>
       <Keyboard output={content} setOutput={setContent} />
     </>
-  );
+  )
 }
