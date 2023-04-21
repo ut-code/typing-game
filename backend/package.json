@@ -1,6 +1,7 @@
 {
   "name": "backend",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "dev": "node-dev main.js",
     "build": "",
