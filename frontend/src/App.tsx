@@ -1,8 +1,8 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Basic from "./pages/Basic/Basic";
-import Result from "./pages/Result/Result";
+import React from "react"
+import { Routes, Route } from "react-router-dom"
+import Home from "./pages/Home"
+import Basic from "./pages/Basic/Basic"
+import Result from "./pages/Result/Result"
 export default function App() {
   return (
     <>
@@ -12,5 +12,5 @@ export default function App() {
         <Route path="/result" element={<Result />}></Route>
       </Routes>
     </>
-  );
+  )
 }
