@@ -1,19 +1,19 @@
-const express = require("express")
-const cors = require("cors")
-// Prisma関係
-const { PrismaClient } = require("@prisma/client")
-const prisma = new PrismaClient()
+import express from "express"
+import cors from "cors"
+import { PrismaClient } from "@prisma/client"
 
+const client = new PrismaClient()
 const app = express()
 
+// eslint-disable-next-line
 app.use(cors({ origin: process.env["WEB_ORIGIN"] }))
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-// データベースからPrismaで問題をとってくる
+// データベースから問題をとってくる
 app.post("/questions", async (request, response) => {
-  const records = await prisma.questions.findMany({
+  const records = await client.questions.findMany({
     where: {
       qnumber: Number(request.body.qnumber),
     },
@@ -27,9 +27,9 @@ app.post("/questions", async (request, response) => {
   response.json(questions)
 })
 
-// データベースからPrismaでランキングをとってくる
+// データベースからランキングをとってくる
 async function getRanking() {
-  const records = await prisma.ranking.findMany({
+  const records = await client.ranking.findMany({
     orderBy: {
       score: "desc",
     },
@@ -38,7 +38,7 @@ async function getRanking() {
 }
 
 async function getRankingKf73() {
-  const records = await prisma.ranking_kf73.findMany({
+  const records = await client.ranking_kf73.findMany({
     orderBy: {
       score: "desc",
     },
@@ -48,10 +48,10 @@ async function getRankingKf73() {
 
 // submit時のデータベースとのやり取り
 app.post("/submitScore", async (request, response) => {
-  qnumber = Number(request.body.qnumber) || -1
-  username = request.body.username || "Not working"
-  score = request.body.score || -1
-  await prisma.ranking.create({
+  const qnumber = Number(request.body.qnumber) || -1
+  const username = request.body.username || "Not working"
+  const score = request.body.score || -1
+  await client.ranking.create({
     data: { problem: qnumber, username: username, score: score },
   })
   response.json()
