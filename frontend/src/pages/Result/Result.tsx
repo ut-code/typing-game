@@ -23,18 +23,27 @@ export default function Result() {
   const [userMiss, setUserMiss] = useState<number>(0)
   const [userScoreRank, setUserScoreRank] = useState<string>("")
 
-  // script.jsを読み込む
   useEffect(() => {
     async function tmp() {
-      const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchScore`, {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-      })
-      const data = await response.json()
+      const qnumber = Number(localStorage.getItem("qnumber"))
+      const username = localStorage.getItem("username") || "Guest"
+      const time = Number(localStorage.getItem("time"))
+      const score = Number(localStorage.getItem("score"))
+      const kpm = Number(localStorage.getItem("kpm"))
+      const correct = Number(localStorage.getItem("correct"))
+      const miss = Number(localStorage.getItem("miss"))
+      const scorerank = localStorage.getItem("scorerank") || "?"
+      setUserName(username)
+      setUserTime(time)
+      setUserScore(score)
+      setUserKpm(kpm)
+      setUserCorrect(correct)
+      setUserMiss(miss)
+      setUserScoreRank(scorerank)
 
       let cnt = 1
       for (const listItem of listItems) {
-        if (data.score == listItem.score) {
+        if (score == listItem.score) {
           setUserRank(cnt)
           break
         }
@@ -43,21 +52,13 @@ export default function Result() {
 
       let cnt2 = 1
       for (const listItem of listItems) {
-        if (data.qnumber != listItem.problem) continue
-        if (data.score == listItem.score) {
+        if (qnumber != listItem.problem) continue
+        if (score == listItem.score) {
           setUserRankSame(cnt2)
           break
         }
         cnt2++
       }
-
-      setUserName(data.username)
-      setUserTime(data.time)
-      setUserScore(data.score)
-      setUserKpm(data.kpm)
-      setUserCorrect(data.correct)
-      setUserMiss(data.miss)
-      setUserScoreRank(data.scorerank)
     }
     tmp()
   }, [listItems])
