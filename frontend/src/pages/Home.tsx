@@ -9,8 +9,19 @@ import { Button, Form, Stack, Accordion } from "react-bootstrap"
 
 export default function Home() {
   const [userName, setUserName] = useState<string>("")
-  const [qnumber, setQnumber] = useState<string>("")
-  const navigation = useNavigate()
+  const [qnumber, setQnumber] = useState<string>("0: 関東地方")
+  // useNavigate を Navigate に変化させる呪文
+  const Navigate = useNavigate()
+
+  // ユーザーの入力情報を受け取る関数
+  const postStorage = () => {
+    localStorage.setItem("username", userName || "Guest")
+    const idx = qnumber.indexOf(":")
+    localStorage.setItem("qnumber", qnumber.slice(0, idx))
+    // fetchAPI後に別ページへ遷移
+    Navigate("basic")
+  }
+
   return (
     <>
       <Header />
@@ -41,7 +52,7 @@ export default function Home() {
                   setQnumber(e.target.value)
                 }}
               >
-                <option>0: 関東地方(かんとう地方)</option>
+                <option>0: 関東地方</option>
                 <option>1: マックのメニュー</option>
                 <option>2: 日本食</option>
                 <option>3: 惑星名</option>
@@ -60,27 +71,7 @@ export default function Home() {
               </Form.Select>
             </Form.Group>
 
-            <Button
-              variant="secondary"
-              id="play-button"
-              onClick={() => {
-                // ユーザーの入力情報を受け取る関数
-                async function postStorage() {
-                  const json = JSON.stringify({
-                    username: userName,
-                    qnumber: qnumber,
-                  })
-                  const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/localSave`, {
-                    method: "post",
-                    headers: { "Content-Type": "application/json" },
-                    body: json,
-                  })
-                  // fetchAPI後に別ページへ遷移
-                  navigation("basic")
-                }
-                postStorage()
-              }}
-            >
+            <Button variant="secondary" id="play-button" onClick={postStorage}>
               Play
             </Button>
           </Form>

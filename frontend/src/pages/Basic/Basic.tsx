@@ -9,18 +9,16 @@ import script from "./script"
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Button, ProgressBar, Stack } from "react-bootstrap"
 
-// import Editor from "@monaco-editor/react";
-
 export default function Basic() {
   const [content, setContent] = useState<string>("a")
   const [now, setNow] = useState<number>(0)
-  const [code, setCode] = useState<string>("a")
 
   useEffect(() => {
-    script(now, setNow, code, setCode)
+    script(now, setNow)
   }, [])
   const cont = document.getElementById("content")
   if (cont !== null) cont.textContent = content
+
   return (
     <>
       <Button href="/" variant="secondary" id="backbutton">

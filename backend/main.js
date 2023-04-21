@@ -1,52 +1,35 @@
-const express = require("express")
-const cors = require("cors")
-// Prisma関係
-const { PrismaClient } = require("@prisma/client")
-const prisma = new PrismaClient()
+import express from "express"
+import cors from "cors"
+import { PrismaClient } from "@prisma/client"
 
+const client = new PrismaClient()
 const app = express()
 
+// eslint-disable-next-line
 app.use(cors({ origin: process.env["WEB_ORIGIN"] }))
+
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-// Cookieの代替案としてlocalStorage(node.js版)
-var LocalStorage = require("node-localstorage").LocalStorage,
-  localStorage = new LocalStorage("./scratch")
-
-// Homeでユーザーが入力した情報をlocalStorageに保存
-app.post("/localSave", (request, response) => {
-  localStorage.setItem("username", request.body.username)
-  qnumber = request.body.qnumber
-  let idx = qnumber.indexOf(":")
-  localStorage.setItem("qnumber", qnumber.slice(0, idx))
-  response.json({
-    // username: username,
-    // qnumber: qnumber,
-  })
-})
-
-// データベースからPrismaで問題をとってくる
+// データベースから問題をとってくる
 app.post("/questions", async (request, response) => {
-  // localStorageから問題番号を拾ってくる
-  let qnumber = Number(localStorage.getItem("qnumber")) || 0
-  const records = await prisma.questions.findMany({
+  const records = await client.questions.findMany({
     where: {
-      qnumber: qnumber,
+      qnumber: Number(request.body.qnumber),
     },
     orderBy: {
       id: "asc",
     },
   })
-  // questionsに問題が配列の形で入っている。
+  // questionsに問題が配列の形で入っている
   const questions = records.map((data) => data.question)
   // JSON形式でscript.jsに送信
   response.json(questions)
 })
 
-// データベースからPrismaでランキングをとってくる
+// データベースからランキングをとってくる
 async function getRanking() {
-  const records = await prisma.ranking.findMany({
+  const records = await client.ranking.findMany({
     orderBy: {
       score: "desc",
     },
@@ -55,7 +38,7 @@ async function getRanking() {
 }
 
 async function getRankingKf73() {
-  const records = await prisma.ranking_kf73.findMany({
+  const records = await client.ranking_kf73.findMany({
     orderBy: {
       score: "desc",
     },
@@ -63,53 +46,15 @@ async function getRankingKf73() {
   return records
 }
 
-// submit時のデータベースとのやり取りを関数化しただけ
-async function submitScore(username, score) {
-  qnumber = Number(localStorage.getItem("qnumber")) || 0
-  const submission = await prisma.ranking.create({
+// submit時のデータベースとのやり取り
+app.post("/submitScore", async (request, response) => {
+  const qnumber = Number(request.body.qnumber) || -1
+  const username = request.body.username || "Not working"
+  const score = request.body.score || -1
+  await client.ranking.create({
     data: { problem: qnumber, username: username, score: score },
   })
-  return submission
-}
-
-app.post("/results", async (request, response) => {
-  time = request.body.time
-  localStorage.setItem("time", time)
-  username = localStorage.getItem("username") || "Guest"
-  score = request.body.score
-  localStorage.setItem("score", score)
-  await submitScore(username, score)
-  kpm = request.body.kpm
-  localStorage.setItem("kpm", kpm)
-  correct = request.body.correct
-  localStorage.setItem("correct", correct)
-  miss = request.body.miss
-  localStorage.setItem("miss", miss)
-  scorerank = request.body.scorerank
-  localStorage.setItem("scorerank", scorerank)
-  response.json({
-    time: time,
-    score: score,
-    username: username,
-    kpm: kpm,
-    correct: correct,
-    miss: miss,
-    scorerank: scorerank,
-  })
-})
-
-// localStorageから種々のデータを取ってくる
-app.post("/fetchScore", (request, response) => {
-  response.json({
-    time: localStorage.getItem("time") || "-1",
-    score: localStorage.getItem("score") || "-1",
-    username: localStorage.getItem("username") || "Guest",
-    qnumber: localStorage.getItem("qnumber") || "0",
-    kpm: localStorage.getItem("kpm") || "-1",
-    correct: localStorage.getItem("correct") || "-1",
-    miss: localStorage.getItem("miss") || "-1",
-    scorerank: localStorage.getItem("scorerank") || "-",
-  })
+  response.json()
 })
 
 // /result表示用にrankingをデータベースから取ってくる
