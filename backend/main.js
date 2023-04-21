@@ -1,6 +1,4 @@
 const express = require("express")
-const ejs = require("ejs")
-const fs = require("fs")
 const cors = require("cors")
 // Prisma関係
 const { PrismaClient } = require("@prisma/client")
@@ -11,10 +9,6 @@ const app = express()
 app.use(cors({ origin: process.env["WEB_ORIGIN"] }))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-
-// ExpressでCookieを使用するのに必要
-const cookieParser = require("cookie-parser")
-app.use(cookieParser())
 
 // Cookieの代替案としてlocalStorage(node.js版)
 var LocalStorage = require("node-localstorage").LocalStorage,
