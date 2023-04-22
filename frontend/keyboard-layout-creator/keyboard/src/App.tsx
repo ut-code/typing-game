@@ -200,7 +200,7 @@ export default function App({
                   setLayout(e.target.value);
                   // @ts-ignore
                   setFunctional(
-                    layoutType[e.target.value].functionalLayoutType
+                    layoutType[e.target.value as "jis_qwerty"| "mac_jis_qwerty"|"mac_us_qwerty"|"dvorak"|"azerty"|"qwertz"|"custom"].functionalLayoutType
                   );
                   // @ts-ignore
                   setPhysical(layoutType[e.target.value].physicalLayoutType);
