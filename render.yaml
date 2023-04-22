@@ -5,6 +5,7 @@ services:
     rootDir: frontend
     buildCommand: npm ci && npm run build
     staticPublishPath: dist
+    pullRequestPreviewsEnabled: true
     headers:
       - path: /*
         name: X-Frame-Options
