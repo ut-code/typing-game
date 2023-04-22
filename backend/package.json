@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "main": "main.js",
-  "type": "module",
   "scripts": {
     "dev": "ts-node main.ts",
     "build": "tsc",
