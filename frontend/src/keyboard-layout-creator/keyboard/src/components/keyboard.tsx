@@ -28,15 +28,15 @@ function sumWidth(row: number, column: number): number {
     if (
       // @ts-ignore
       physicalLayoutType[physicalLayout].content.keyCodes[keyCode].row ===
-      row &&
+        row &&
       // @ts-ignore
       physicalLayoutType[physicalLayout].content.keyCodes[keyCode].column <
-      column
+        column
     ) {
       sum += // @ts-ignore
         physicalLayoutType[physicalLayout].content.keyCodes[keyCode].width + // @ts-ignore
         (physicalLayoutType[physicalLayout].content.keyCodes[keyCode].width ===
-          0
+        0
           ? 0 // @ts-ignore
           : physicalLayoutType[physicalLayout].content.marginColumn);
       j++;
@@ -57,7 +57,7 @@ function sumHeight(row: number): number {
     physicalLayoutType[physicalLayout].content.marginRow + // @ts-ignore
     (physicalLayoutType[physicalLayout].content.height + // @ts-ignore
       physicalLayoutType[physicalLayout].content.marginRow) *
-    (row - 1)
+      (row - 1)
   );
 }
 
@@ -78,10 +78,10 @@ export default function Keyboard({
   functional,
   physical,
   keyColors = [],
-  setKeyColors = (value: string[]) => { },
-  keydown = () => { },
+  setKeyColors = (value: string[]) => {},
+  keydown = () => {},
   content = "",
-  setContent = (value: string) => { },
+  setContent = (value: string) => {},
   keyLayout = functionalLayoutType[defaultFunctionalLayoutType].content,
   physicalKeyLayout,
   isCustom,
@@ -128,43 +128,45 @@ export default function Keyboard({
             {/* @ts-ignore */}
             {physicalLayoutType[physicalLayout].content.keyCodes[keyCode]
               .width !== 0 && (
-                <div
-                  id={keyCode}
-                  className={`key ${fontSize(
-                    // @ts-ignore
-                    functionalLayoutType[functionalLayout].content[keyCode][
+              <div
+                id={keyCode}
+                className={`key ${fontSize(
+                  // @ts-ignore
+                  functionalLayoutType[functionalLayout].content[keyCode][
                     !shift ? 0 : 1
-                    ]
-                  )}`}
-                  onClick={() =>
+                  ]
+                )}`}
+                onClick={() =>
+                  // @ts-ignore
+                  keydown(
                     // @ts-ignore
-                    keydown(
-                      // @ts-ignore
-                      keyColors,
-                      setKeyColors,
-                      new KeyboardEvent("keydown", { code: keyCode }),
-                      content,
-                      setContent,
-                      functional,
-                      isCustom,
-                      shift,
-                      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                      setShift!
-                    )
-                  }
-                  style={{
-                    position: "absolute",
-                    // @ts-ignore
-                    backgroundColor: keyColors[i],
-                    top: `${sumHeight(
+                    keyColors,
+                    setKeyColors,
+                    new KeyboardEvent("keydown", { code: keyCode }),
+                    content,
+                    setContent,
+                    functional,
+                    isCustom,
+                    shift,
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                    setShift!
+                  )
+                }
+                style={{
+                  position: "absolute",
+                  // @ts-ignore
+                  backgroundColor: keyColors[i],
+                  top: `${
+                    sumHeight(
                       // @ts-ignore
                       physicalLayoutType[physicalLayout].content.keyCodes[
                         keyCode
                       ].row
                     ) * magnification
-                      }vw`,
-                    // @ts-ignore
-                    left: `${sumWidth(
+                  }vw`,
+                  // @ts-ignore
+                  left: `${
+                    sumWidth(
                       // @ts-ignore
                       physicalLayoutType[physicalLayout].content.keyCodes[
                         keyCode
@@ -173,18 +175,18 @@ export default function Keyboard({
                         keyCode
                       ].column
                     ) * magnification
-                      }vw`,
-                    width: `${
-                      // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.keyCodes[keyCode]
-                        .width * magnification
-                      }vw`,
-                    height: `${
-                      // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.height *
-                      magnification
-                      }vw`,
-                  }}
+                  }vw`,
+                  width: `${
+                    // @ts-ignore
+                    physicalLayoutType[physicalLayout].content.keyCodes[keyCode]
+                      .width * magnification
+                  }vw`,
+                  height: `${
+                    // @ts-ignore
+                    physicalLayoutType[physicalLayout].content.height *
+                    magnification
+                  }vw`,
+                }}
                 // ref={dom=>{
                 //   let fontSizePx=window.innerWidth*fontSize;
                 //   const widthPx=physicalLayoutType[physicalLayout].content.keyCodes[keyCode].width * magnification* window.innerWidth*0.01;// func
@@ -198,14 +200,15 @@ export default function Keyboard({
                 // // while(dom?.scrollWidth>=dom.width){
                 //   //   dom.fontSize=dom.fontSize-1;
                 //   // }
-                >
-                  {  // @ts-ignore
-                    functionalLayoutType[functionalLayout].content[keyCode][
+              >
+                {
+                  // @ts-ignore
+                  functionalLayoutType[functionalLayout].content[keyCode][
                     !shift ? 0 : 1
-                    ]
-                  }
-                </div>
-              )}
+                  ]
+                }
+              </div>
+            )}
           </React.Fragment>
         ))}
       </div>

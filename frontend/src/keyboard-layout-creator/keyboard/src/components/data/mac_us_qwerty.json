@@ -1,319 +1,82 @@
 {
-    "version": "1.0",
-    "Esc": [
-        "Esc",
-        "Esc"
-    ],
-    "F1": [
-        "F1",
-        "F1"
-    ],
-    "F2": [
-        "F2",
-        "F2"
-    ],
-    "F3": [
-        "F3",
-        "F3"
-    ],
-    "F4": [
-        "F4",
-        "F4"
-    ],
-    "F5": [
-        "F5",
-        "F5"
-    ],
-    "F6": [
-        "F6",
-        "F6"
-    ],
-    "F7": [
-        "F7",
-        "F7"
-    ],
-    "F8": [
-        "F8",
-        "F8"
-    ],
-    "F9": [
-        "F9",
-        "F9"
-    ],
-    "F10": [
-        "F10",
-        "F10"
-    ],
-    "F11": [
-        "F11",
-        "F11"
-    ],
-    "F12": [
-        "F12",
-        "F12"
-    ],
-    "Backquote": [
-        "`",
-        "~"
-    ],
-    "Digit1": [
-        "1",
-        "!"
-    ],
-    "Digit2": [
-        "2",
-        "@"
-    ],
-    "Digit3": [
-        "3",
-        "#"
-    ],
-    "Digit4": [
-        "4",
-        "$"
-    ],
-    "Digit5": [
-        "5",
-        "%"
-    ],
-    "Digit6": [
-        "6",
-        "^"
-    ],
-    "Digit7": [
-        "7",
-        "&"
-    ],
-    "Digit8": [
-        "8",
-        "*"
-    ],
-    "Digit9": [
-        "9",
-        "("
-    ],
-    "Digit0": [
-        "0",
-        ")"
-    ],
-    "Minus": [
-        "-",
-        "-"
-    ],
-    "Equal": [
-        "=",
-        "+"
-    ],
-    "IntlYen": [
-        "",
-        ""
-    ],
-    "Backspace": [
-        "delete",
-        "delete"
-    ],
-    "Tab": [
-        "tab",
-        "tab"
-    ],
-    "KeyQ": [
-        "q",
-        "Q"
-    ],
-    "KeyW": [
-        "w",
-        "W"
-    ],
-    "KeyE": [
-        "e",
-        "E"
-    ],
-    "KeyR": [
-        "r",
-        "R"
-    ],
-    "KeyT": [
-        "t",
-        "T"
-    ],
-    "KeyY": [
-        "y",
-        "Y"
-    ],
-    "KeyU": [
-        "u",
-        "U"
-    ],
-    "KeyI": [
-        "i",
-        "I"
-    ],
-    "KeyO": [
-        "o",
-        "O"
-    ],
-    "KeyP": [
-        "p",
-        "P"
-    ],
-    "BracketLeft": [
-        "[",
-        "{"
-    ],
-    "BracketRight": [
-        "]",
-        "}"
-    ],
-    "Enter": [
-        "return",
-        "return"
-    ],
-    "CapsLock": [
-        "caps lock",
-        "caps lock"
-    ],
-    "KeyA": [
-        "a",
-        "A"
-    ],
-    "KeyS": [
-        "s",
-        "S"
-    ],
-    "KeyD": [
-        "d",
-        "D"
-    ],
-    "KeyF": [
-        "f",
-        "F"
-    ],
-    "KeyG": [
-        "g",
-        "G"
-    ],
-    "KeyH": [
-        "h",
-        "H"
-    ],
-    "KeyJ": [
-        "j",
-        "J"
-    ],
-    "KeyK": [
-        "k",
-        "K"
-    ],
-    "KeyL": [
-        "l",
-        "L"
-    ],
-    "Semicolon": [
-        ";",
-        ":"
-    ],
-    "Quote": [
-        "'",
-        "\""
-    ],
-    "Backslash": [
-        "\\",
-        "|"
-    ],
-    "ShiftLeft": [
-        "Shift",
-        "Shift"
-    ],
-    "KeyZ": [
-        "z",
-        "Z"
-    ],
-    "KeyX": [
-        "x",
-        "X"
-    ],
-    "KeyC": [
-        "c",
-        "C"
-    ],
-    "KeyV": [
-        "v",
-        "V"
-    ],
-    "KeyB": [
-        "b",
-        "B"
-    ],
-    "KeyN": [
-        "n",
-        "N"
-    ],
-    "KeyM": [
-        "m",
-        "M"
-    ],
-    "Comma": [
-        ",",
-        "<"
-    ],
-    "Period": [
-        ".",
-        ">"
-    ],
-    "Slash": [
-        "/",
-        "?"
-    ],
-    "IntlRo": [
-        "",
-        ""
-    ],
-    "ShiftRight": [
-        "shift",
-        "shift"
-    ],
-    "ControlLeft": [
-        "control",
-        "control"
-    ],
-    "SuperLeft": [
-        "command",
-        "command"
-    ],
-    "AltLeft": [
-        "option",
-        "option"
-    ],
-    "NonConvert": [
-        "無変換",
-        "無変換"
-    ],
-    "Space": [
-        "space",
-        "space"
-    ],
-    "Convert": [
-        "変換",
-        "変換"
-    ],
-    "KanaMode": [
-        "カタカナひらがな",
-        "カタカナひらがな"
-    ],
-    "AltRight": [
-        "option",
-        "option"
-    ],
-    "SuperRight": [
-        "command",
-        "command"
-    ],
-    "App": [
-        "",
-        ""
-    ],
-    "CtrlRight": [
-        "fn",
-        "fn"
-    ]
+  "version": "1.0",
+  "Esc": ["Esc", "Esc"],
+  "F1": ["F1", "F1"],
+  "F2": ["F2", "F2"],
+  "F3": ["F3", "F3"],
+  "F4": ["F4", "F4"],
+  "F5": ["F5", "F5"],
+  "F6": ["F6", "F6"],
+  "F7": ["F7", "F7"],
+  "F8": ["F8", "F8"],
+  "F9": ["F9", "F9"],
+  "F10": ["F10", "F10"],
+  "F11": ["F11", "F11"],
+  "F12": ["F12", "F12"],
+  "Backquote": ["`", "~"],
+  "Digit1": ["1", "!"],
+  "Digit2": ["2", "@"],
+  "Digit3": ["3", "#"],
+  "Digit4": ["4", "$"],
+  "Digit5": ["5", "%"],
+  "Digit6": ["6", "^"],
+  "Digit7": ["7", "&"],
+  "Digit8": ["8", "*"],
+  "Digit9": ["9", "("],
+  "Digit0": ["0", ")"],
+  "Minus": ["-", "-"],
+  "Equal": ["=", "+"],
+  "IntlYen": ["", ""],
+  "Backspace": ["delete", "delete"],
+  "Tab": ["tab", "tab"],
+  "KeyQ": ["q", "Q"],
+  "KeyW": ["w", "W"],
+  "KeyE": ["e", "E"],
+  "KeyR": ["r", "R"],
+  "KeyT": ["t", "T"],
+  "KeyY": ["y", "Y"],
+  "KeyU": ["u", "U"],
+  "KeyI": ["i", "I"],
+  "KeyO": ["o", "O"],
+  "KeyP": ["p", "P"],
+  "BracketLeft": ["[", "{"],
+  "BracketRight": ["]", "}"],
+  "Enter": ["return", "return"],
+  "CapsLock": ["caps lock", "caps lock"],
+  "KeyA": ["a", "A"],
+  "KeyS": ["s", "S"],
+  "KeyD": ["d", "D"],
+  "KeyF": ["f", "F"],
+  "KeyG": ["g", "G"],
+  "KeyH": ["h", "H"],
+  "KeyJ": ["j", "J"],
+  "KeyK": ["k", "K"],
+  "KeyL": ["l", "L"],
+  "Semicolon": [";", ":"],
+  "Quote": ["'", "\""],
+  "Backslash": ["\\", "|"],
+  "ShiftLeft": ["Shift", "Shift"],
+  "KeyZ": ["z", "Z"],
+  "KeyX": ["x", "X"],
+  "KeyC": ["c", "C"],
+  "KeyV": ["v", "V"],
+  "KeyB": ["b", "B"],
+  "KeyN": ["n", "N"],
+  "KeyM": ["m", "M"],
+  "Comma": [",", "<"],
+  "Period": [".", ">"],
+  "Slash": ["/", "?"],
+  "IntlRo": ["", ""],
+  "ShiftRight": ["shift", "shift"],
+  "ControlLeft": ["control", "control"],
+  "SuperLeft": ["command", "command"],
+  "AltLeft": ["option", "option"],
+  "NonConvert": ["無変換", "無変換"],
+  "Space": ["space", "space"],
+  "Convert": ["変換", "変換"],
+  "KanaMode": ["カタカナひらがな", "カタカナひらがな"],
+  "AltRight": ["option", "option"],
+  "SuperRight": ["command", "command"],
+  "App": ["", ""],
+  "CtrlRight": ["fn", "fn"]
 }

@@ -29,13 +29,48 @@ export const physicalLayoutType = {
 };
 
 export const layoutType = {
-  jis_qwerty: { name: "JIS QWERTY", id: "jis_qwerty", functionalLayoutType: "jis_qwerty", physicalLayoutType: "jis109" },
-  mac_jis_qwerty: { name: "Mac JIS QWERTY", id: "mac_jis_qwerty", functionalLayoutType: "mac_jis_qwerty", physicalLayoutType: "jis109" },
-  mac_us_qwerty: { name: "Mac US QWERTY", id: "mac_us_qwerty", functionalLayoutType: "mac_us_qwerty", physicalLayoutType: "us_default" },
-  dvorak: { name: "Dvorak", id: "dvorak", functionalLayoutType: "dvorak", physicalLayoutType: "dvorak_jis" },
-  azerty: { name: "AZERTY", id: "azerty", functionalLayoutType: "azerty", physicalLayoutType: "azerty_jis" },
-  qwertz: { name: "QWERTZ", id: "qwertz", functionalLayoutType: "qwertz", physicalLayoutType: "qwertz_jis" },
-  custom: { name: "Custom", id: "custom", functionalLayoutType: "custom", physicalLayoutType: "custom" },
+  jis_qwerty: {
+    name: "JIS QWERTY",
+    id: "jis_qwerty",
+    functionalLayoutType: "jis_qwerty",
+    physicalLayoutType: "jis109",
+  },
+  mac_jis_qwerty: {
+    name: "Mac JIS QWERTY",
+    id: "mac_jis_qwerty",
+    functionalLayoutType: "mac_jis_qwerty",
+    physicalLayoutType: "jis109",
+  },
+  mac_us_qwerty: {
+    name: "Mac US QWERTY",
+    id: "mac_us_qwerty",
+    functionalLayoutType: "mac_us_qwerty",
+    physicalLayoutType: "us_default",
+  },
+  dvorak: {
+    name: "Dvorak",
+    id: "dvorak",
+    functionalLayoutType: "dvorak",
+    physicalLayoutType: "dvorak_jis",
+  },
+  azerty: {
+    name: "AZERTY",
+    id: "azerty",
+    functionalLayoutType: "azerty",
+    physicalLayoutType: "azerty_jis",
+  },
+  qwertz: {
+    name: "QWERTZ",
+    id: "qwertz",
+    functionalLayoutType: "qwertz",
+    physicalLayoutType: "qwertz_jis",
+  },
+  custom: {
+    name: "Custom",
+    id: "custom",
+    functionalLayoutType: "custom",
+    physicalLayoutType: "custom",
+  },
 };
 
 export const defaultFunctionalLayoutType = "jis_qwerty";

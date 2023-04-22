@@ -69,7 +69,8 @@ function keydown(
     "/",
   ];
   if (
-    prohibitedKey.includes(  // @ts-ignore
+    prohibitedKey.includes(
+      // @ts-ignore
       functionalLayoutType[functional].content[e.code][1]
     ) || // @ts-ignore
     (functionalLayoutType[functional].content[e.code] === undefined &&
@@ -94,8 +95,8 @@ function keydown(
   setKeyColors(
     keyCodes.map((tmp, i) =>
       (!isDefault && tmp === e.code) ||
-        (isDefault && // @ts-ignore
-          functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
+      (isDefault && // @ts-ignore
+        functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
         e.key.toLowerCase()
         ? "orange"
         : keyColors[i]
@@ -105,8 +106,8 @@ function keydown(
     setKeyColors(
       keyCodes.map((tmp, i) =>
         (!isDefault && tmp === e.code) ||
-          (isDefault && // @ts-ignore
-            functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
+        (isDefault && // @ts-ignore
+          functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
           e.key.toLowerCase()
           ? "rgba(0,0,0,0)"
           : keyColors[i]
@@ -132,7 +133,7 @@ function toJapanese(content: string): string {
 
 export default function App({
   output = "",
-  setOutput = () => { },
+  setOutput = () => {},
 }: {
   output?: string;
   setOutput?: (value: string) => void;
@@ -198,7 +199,9 @@ export default function App({
                 onChange={(e) => {
                   setLayout(e.target.value);
                   // @ts-ignore
-                  setFunctional(layoutType[e.target.value].functionalLayoutType);
+                  setFunctional(
+                    layoutType[e.target.value].functionalLayoutType
+                  );
                   // @ts-ignore
                   setPhysical(layoutType[e.target.value].physicalLayoutType);
                 }}
