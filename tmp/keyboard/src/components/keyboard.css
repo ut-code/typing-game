@@ -1,0 +1,49 @@
+.key {
+  border: 1px solid black;
+  border-radius: 0.2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 1,2,4,6,inf */
+.one {
+  font-size: 4vw;
+}
+.three {
+  font-size: 3vw;
+}
+.four {
+  font-size: 2.5vw;
+}
+.six {
+  font-size: 1.8vw;
+}
+.inf {
+  font-size: 1.4vw;
+}
+
+@media (min-width: 850px) {
+  /* 850以上はそのまま固定 */
+  .key {
+    border-radius: calc(850px * 0.002);
+  }
+  .one {
+    font-size: calc(850px * 0.04);
+  }
+  .three {
+    font-size: calc(850px * 0.03);
+  }
+  .four {
+    font-size: calc(850px * 0.025);
+  }
+  .six {
+    font-size: calc(850px * 0.018);
+  }
+  .inf {
+    font-size: calc(850px * 0.014);
+  }
+}
+
+#keyboard {
+  position: relative;
+}
