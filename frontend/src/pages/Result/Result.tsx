@@ -16,7 +16,7 @@ export default function Result() {
   const [userName, setUserName] = useState<string>("")
   const [userRank, setUserRank] = useState<number>(0)
   const [userRankSame, setUserRankSame] = useState<number>(0)
-  const [userTime, setUserTime] = useState<number>(0)
+  const [, setUserTime] = useState<number>(0)
   const [userScore, setUserScore] = useState<number>(0)
   const [userKpm, setUserKpm] = useState<number>(0)
   const [userCorrect, setUserCorrect] = useState<number>(0)
