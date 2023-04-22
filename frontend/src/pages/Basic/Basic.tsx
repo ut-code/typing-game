@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom"
 import Keyboard from "./../../../keyboard-layout-creator/keyboard/src/App"
 import "./style.css"
 
+import useInterval from "../../useInterval"
+
 // Audioファイルの読み込み
 const correctSE = new Audio("/correctSE.mp3")
 
@@ -43,10 +45,8 @@ const alphabet = [
 export default function Basic() {
   const [content, setContent] = useState<string>("a")
   const [questions, setQuestions] = useState<string[]>([])
-  const [now, setNow] = useState<number>(0)
   const [isStarted, setIsStarted] = useState<boolean>(false)
   const [isFinished, setIsFinished] = useState<boolean>(false)
-  const [currentQuestion, setCurrentQuestion] = useState<string>("")
   const [wordnum, setWordnum] = useState<number>(0)
   const [time, setTime] = useState<number>(0)
   const [correct, setCorrect] = useState<number>(0)
@@ -139,17 +139,18 @@ export default function Basic() {
   const start = () => {
     if (isStarted) return
     setIsStarted(true)
-    setCurrentQuestion(questions[wordnum])
-
-    // タイマーを開始する
-    const timerId = setInterval(() => {
-      setTime((prev) => prev + 1)
-      if (timeLimit - time <= 0 && isFinished === false) {
-        clearInterval(timerId)
-        setIsFinished(true)
-        results()
-      }
-    }, 1000)
+    // // タイマーを開始する
+    // const timerId = setInterval(() => {
+    //   setTime((prev) => prev + 1)
+    //   if (timeLimit - time <= 0 && isFinished === false) {
+    //     clearInterval(timerId)
+    //     setIsFinished(true)
+    //     results()
+    //   }
+    // }, 1000)
+    // useInterval(() => {
+    //   setTime((prev) => prev + 1)
+    // }, (timeLimit - time > 0 || isFinished === true) ? 1000 : null)
   }
 
   // キーボードの入力をReactがdivの中に出力しているので、その変更が行われたのを読み取っている。
@@ -180,9 +181,6 @@ export default function Basic() {
       // 正解音が鳴る。最後の問題だけちょっと切れている
       correctSE.pause()
       correctSE.play()
-
-      // 進捗バーを増やす
-      setNow(Math.round((wordnum / questions.length) * 100))
 
       setAnswer("")
       setCount(0)
@@ -224,9 +222,6 @@ export default function Basic() {
   }
   console.log(content)*/
 
-  // useEffect(() => {
-  //   script(now, setNow)
-  // }, [])
   const cont = document.getElementById("content")
   if (cont !== null) cont.textContent = content
 
