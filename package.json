@@ -14,7 +14,7 @@
     "backend:install": "cd backend && npm install",
     "frontend:dev": "cd frontend && npm run dev",
     "backend:dev": "cd backend && npm run dev",
-    "autoupdate": "git submodule update && npm run frontend:install && npm run backend:install && npm run setup:db_push"
+    "autoupdate": "git submodule update && npm install && npm run frontend:install && npm run backend:install && npm run setup:db_push"
   },
   "repository": {
     "type": "git",
