@@ -2,7 +2,7 @@
 import React from "react"
 import { useEffect, useState } from "react"
 import Header from "../../components/Header"
-import Footer from "./../../components/Footer"
+import Footer from "../../components/Footer"
 import { Helmet } from "react-helmet"
 import { Tab, Tabs } from "react-bootstrap"
 import "./style.css"
