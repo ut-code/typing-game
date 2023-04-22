@@ -19,22 +19,19 @@
   },
   "homepage": "https://github.com/ut-code/typing-game#readme",
   "dependencies": {
-    "@monaco-editor/react": "^4.4.6",
-    "bootstrap": "^5.2.2",
-    "monaco-editor": "^0.34.1",
+    "bootstrap": "^5.2.3",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.6.0",
+    "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-iframe": "^1.8.5",
-    "react-router-dom": "^6.4.3"
+    "react-router-dom": "^6.10.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.25",
-    "@types/react-dom": "^18.0.8",
-    "@types/react-helmet": "^6.1.5",
-    "@vitejs/plugin-react": "^2.2.0",
-    "typescript": "^4.6.4",
-    "vite": "^3.2.3"
+    "@types/react": "^18.0.38",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-helmet": "^6.1.6",
+    "@vitejs/plugin-react": "^4.0.0",
+    "typescript": "^5.0.4",
+    "vite": "^4.3.1"
   }
 }
