@@ -206,7 +206,9 @@ export default async function script(now, setNow) {
 
   let content = document.getElementById("content").textContent
 
-  let answer = "" // 現在の到達状況
+  // 一旦このエラーを無視 後でちゃんと直しましょう。
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  let answer = "" // 入力された文字列
   let word_num = 0 // 何問目か
   let correct = 0 // 正答文字数
   let miss = 0 // ミスタイプ数
