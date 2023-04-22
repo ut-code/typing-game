@@ -1,3 +1,0 @@
-[submodule "frontend/keyboard-layout-creator"]
-	path = frontend/keyboard-layout-creator
-	url = git@github.com:chvmvd/keyboard-layout-creator.git

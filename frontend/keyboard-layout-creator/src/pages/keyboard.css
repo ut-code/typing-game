@@ -1,0 +1,29 @@
+/* 画面が十分大きい時 */
+#keyboard {
+  left: 510px;
+  position: fixed;
+}
+
+/* キーボードを上側に表示 */
+@media (max-width: 1340px) {
+  #keyboard {
+    top: 0;
+    left: 0;
+    background-color: white;
+    width: 100vw;
+    height: 330px;
+  }
+  .box {
+    height: 340px;
+  }
+}
+
+/* キーボードの大きさが小さくなり始めた時 */
+@media (max-width: 850px) {
+  #keyboard {
+    height: 39vw;
+  }
+  .box {
+    height: 40vw;
+  }
+}

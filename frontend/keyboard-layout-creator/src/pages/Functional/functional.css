@@ -1,0 +1,23 @@
+/* 画面が十分大きい時 */
+.content {
+  /* 仮置き */
+  width: 470px;
+}
+
+th {
+  text-align: left;
+}
+
+.input {
+  width: 180px;
+}
+
+/* input要素が収まらない時、 */
+@media (max-width: 450px) {
+  th {
+    display: block;
+  }
+  td {
+    display: block;
+  }
+}
