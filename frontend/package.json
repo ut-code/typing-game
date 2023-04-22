@@ -19,11 +19,11 @@
   },
   "homepage": "https://github.com/ut-code/typing-game#readme",
   "dependencies": {
+    "bootstrap": "^5.2.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-iframe": "^1.8.5",
     "react-router-dom": "^6.10.0"
   },
   "devDependencies": {
