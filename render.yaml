@@ -2,10 +2,9 @@ services:
   - type: web
     name: typing-game
     env: static
-    # rootDir: frontend
-    # buildCommand: npm install && npm run build
-    buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: frontend/dist
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
     pullRequestPreviewsEnabled: true
     headers:
       - path: /*
