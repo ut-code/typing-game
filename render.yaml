@@ -3,7 +3,7 @@ services:
     name: typing-game
     env: static
     rootDir: frontend
-    buildCommand: npm install && npm run build
+    buildCommand: npm ci && npm run build
     staticPublishPath: dist
     pullRequestPreviewsEnabled: true
     headers:
@@ -23,7 +23,7 @@ services:
     region: singapore
     plan: free
     rootDir: backend
-    buildCommand: npm install && npm run build
+    buildCommand: npm ci && npm run build
     startCommand: npm run start
     envVars:
       - key: PORT
