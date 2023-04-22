@@ -44,7 +44,7 @@ Terminal をもう一つ開く
 npm run frontend:dev
 ```
 
-ブラウザで [`http://127.0.0.1:5173/`](http://127.0.0.1:5173/) にアクセスすると、表示されるはずです。
+ブラウザで [`http://localhost:5173/`](http://localhost:5173/) にアクセスすると、表示されるはずです。
 
 ## 最新の状態に更新
 
@@ -75,5 +75,5 @@ npm run autoupdate
     - `/keyboard-layout-maker` サブモジュール
 
   - `/backend` バックエンド関係
-    - `main.js` メイン
+    - `main.ts` メイン
     - `/prisma` Prisma のファイル
