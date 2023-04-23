@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
-import React from "react";
+import React from "react"
 /**
  * `i` 番目を入力させるinputタグ
  */
@@ -12,13 +12,13 @@ export default function GetManySettings<T extends string | number>({
   min,
   placeholder,
 }: {
-  type: "string" | "number";
-  items: T[];
-  setItems: (value: T[]) => void;
-  i: number;
-  className?: string;
-  min?: number;
-  placeholder?: string;
+  type: "string" | "number"
+  items: T[]
+  setItems: (value: T[]) => void
+  i: number
+  className?: string
+  min?: number
+  placeholder?: string
 }): JSX.Element {
   return (
     <input
@@ -30,15 +30,9 @@ export default function GetManySettings<T extends string | number>({
       onChange={(e) => {
         setItems(
           // @ts-ignore
-          items.map((item, j) =>
-            i !== j
-              ? item
-              : type === "string"
-              ? e.target.value
-              : e.target.valueAsNumber
-          )
-        );
+          items.map((item, j) => (i !== j ? item : type === "string" ? e.target.value : e.target.valueAsNumber))
+        )
       }}
     />
-  );
+  )
 }

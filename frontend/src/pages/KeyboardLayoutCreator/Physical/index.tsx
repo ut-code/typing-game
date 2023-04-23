@@ -8,12 +8,12 @@ import {
   defaultPhysicalLayoutType,
 } from "../../../../keyboard-layout-creator/keyboard/src/components/data/keyboardSettings"
 import Keyboard from "../../../../keyboard-layout-creator/keyboard/src/components/keyboard"
-import ReadJSONFile from "../../../../keyboard-layout-creator/src/components/ReadJSONFile"
-import GetManySettings from "../../../../keyboard-layout-creator/src/components/GetManySettings"
-import GetFileName from "../../../../keyboard-layout-creator/src/components/GetFileName"
-import makeJSONFile from "../../../../keyboard-layout-creator/src/components/makeJSONFile"
-import ConfirmButton from "../../../../keyboard-layout-creator/src/components/ConfirmButton"
-import BackToHome from "../../../../keyboard-layout-creator/src/components/BackToHome"
+import ReadJSONFile from "../../../components/keyboard-layout-creator/ReadJSONFile"
+import GetManySettings from "../../../components/keyboard-layout-creator/GetManySettings"
+import GetFileName from "../../../components/keyboard-layout-creator/GetFileName"
+import makeJSONFile from "../../../components/keyboard-layout-creator/makeJSONFile"
+import ConfirmButton from "../../../components/keyboard-layout-creator/ConfirmButton"
+import BackToHome from "../../../components/keyboard-layout-creator/BackToHome"
 import "./style.css"
 import "./../keyboard.css"
 
