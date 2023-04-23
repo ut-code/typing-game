@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react"
 import Keyboard from "../../../../keyboard-layout-creator/keyboard/src/components/keyboard"
 import { keyup, convert } from "../../../../keyboard-layout-creator/keyboard/src/components/convert"
 import keyCodes from "../../../../keyboard-layout-creator/keyboard/src/components/data/keyCodes.json"
-import romantable from "../../../../keyboard-layout-creator/keyboard/src/romantable.json"
+import romantable from "./romantable.json"
 import ReadJSONFile from "../../../components/keyboard-layout-creator/ReadJSONFile"
 import {
   layoutType,
