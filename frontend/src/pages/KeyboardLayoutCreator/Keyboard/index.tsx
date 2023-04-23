@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React, { useState, useEffect } from "react"
-import Keyboard from "../../../../keyboard-layout-creator/keyboard/src/components/keyboard"
-import { keyup, convert } from "../../../../keyboard-layout-creator/keyboard/src/components/convert"
-import keyCodes from "../../../../keyboard-layout-creator/keyboard/src/components/data/keyCodes.json"
+import Keyboard from "../../../components/keyboard-layout-creator/keyboard/keyboard"
+import { keyup, convert } from "../../../components/keyboard-layout-creator/keyboard/convert"
+import keyCodes from "../../../components/keyboard-layout-creator/keyboard/data/keyCodes.json"
 import romantable from "./romantable.json"
 import ReadJSONFile from "../../../components/keyboard-layout-creator/ReadJSONFile"
 import {
@@ -13,7 +13,7 @@ import {
   defaultlayoutType,
   defaultFunctionalLayoutType,
   defaultPhysicalLayoutType,
-} from "../../../../keyboard-layout-creator/keyboard/src/components/data/keyboardSettings"
+} from "../../../components/keyboard-layout-creator/keyboard/data/keyboardSettings"
 import "./style.css"
 
 function keydown(

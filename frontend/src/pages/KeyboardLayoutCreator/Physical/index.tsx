@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React, { useState } from "react"
 // import keyCodes from "./../../../../keyboard/src/components/data/keyCodes";
-import keyCodes from "../../../../keyboard-layout-creator/keyboard/src/components/data/keyCodes.json"
+import keyCodes from "../../../components/keyboard-layout-creator/keyboard/data/keyCodes.json"
 import {
   physicalLayoutType,
   defaultFunctionalLayoutType,
   defaultPhysicalLayoutType,
-} from "../../../../keyboard-layout-creator/keyboard/src/components/data/keyboardSettings"
-import Keyboard from "../../../../keyboard-layout-creator/keyboard/src/components/keyboard"
+} from "../../../components/keyboard-layout-creator/keyboard/data/keyboardSettings"
+import Keyboard from "../../../components/keyboard-layout-creator/keyboard/keyboard"
 import ReadJSONFile from "../../../components/keyboard-layout-creator/ReadJSONFile"
 import GetManySettings from "../../../components/keyboard-layout-creator/GetManySettings"
 import GetFileName from "../../../components/keyboard-layout-creator/GetFileName"
