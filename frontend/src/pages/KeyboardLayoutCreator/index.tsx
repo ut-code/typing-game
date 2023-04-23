@@ -9,7 +9,7 @@ export default function Home(): JSX.Element {
         <p>駒場祭のタイピングゲームのキーボード配列を作成するためのプログラムです。</p>
         <p>
           論理配列と物理配列をそれぞれ自分で作成して、
-          <a href="https://typing-game.onrender.com/">駒場祭のタイピングゲーム</a>
+          <Link to="/">駒場祭のタイピングゲーム</Link>
           でそれを使用することができます。自分にあったキーボード配列を作ってタイピング速度を上げてみてください。
         </p>
         <p>
