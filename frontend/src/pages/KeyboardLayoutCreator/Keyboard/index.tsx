@@ -14,7 +14,7 @@ import {
   defaultFunctionalLayoutType,
   defaultPhysicalLayoutType,
 } from "../../../../keyboard-layout-creator/keyboard/src/components/data/keyboardSettings"
-import "./App.css"
+import "./style.css"
 
 function keydown(
   keyColors: string[],

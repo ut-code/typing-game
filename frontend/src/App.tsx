@@ -6,7 +6,7 @@ import Result from "./pages/Result"
 import KeyboardLayoutCreatorHome from "./pages/KeyboardLayoutCreator"
 import KeyboardLayoutCreatorPhysical from "./pages/KeyboardLayoutCreator/Physical"
 import KeyboardLayoutCreatorFunctional from "./pages/KeyboardLayoutCreator/Functional"
-import Keyboard from "./pages/KeyboardLayoutCreator/Keyboard/App"
+import Keyboard from "./pages/KeyboardLayoutCreator/Keyboard"
 export default function App() {
   return (
     <>

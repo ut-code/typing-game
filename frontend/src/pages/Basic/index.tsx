@@ -1,6 +1,6 @@
 import React from "react"
 import { useEffect, useState, Dispatch, SetStateAction } from "react"
-import Keyboard from "../KeyboardLayoutCreator/Keyboard/App"
+import Keyboard from "../KeyboardLayoutCreator/Keyboard"
 import "./style.css"
 
 import "bootstrap/dist/css/bootstrap.min.css"
