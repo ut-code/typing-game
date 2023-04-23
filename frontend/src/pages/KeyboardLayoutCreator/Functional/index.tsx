@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React, { useState } from "react"
 // import keyCodes from "./../../../../keyboard/src/components/data/keyCodes";

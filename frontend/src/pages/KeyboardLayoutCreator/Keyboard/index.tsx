@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React, { useState, useEffect } from "react"
@@ -10,7 +13,6 @@ import {
   layoutType,
   functionalLayoutType,
   physicalLayoutType,
-  defaultlayoutType,
   defaultFunctionalLayoutType,
   defaultPhysicalLayoutType,
 } from "../../../components/keyboard-layout-creator/keyboard/data/keyboardSettings"
