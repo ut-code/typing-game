@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 import Keyboard from "../../../components/keyboard-layout-creator/keyboard/keyboard"
 import { keyup, convert } from "../../../components/keyboard-layout-creator/keyboard/convert"
 import keyCodes from "../../../components/keyboard-layout-creator/keyboard/data/keyCodes.json"
@@ -203,7 +204,7 @@ export default function App({
               <br />
               <br />
               キーボード配列を自分で作りたい人は、
-              <a href="https://keyboard-layout-creator.onrender.com/">このリンク</a>
+              <Link to="/keyboard-layout-creator">このリンク</Link>
               に飛んでキーボード配列を作ってから、下記のボタンで選択してください。
               <br />
               <br />
