@@ -4,7 +4,7 @@ import Home from "./pages"
 import Basic from "./pages/Basic"
 import Result from "./pages/Result"
 import KeyboardLayoutCreatorHome from "./pages/KeyboardLayoutCreator"
-import KeyboardLayoutCreatorPhysical from "./pages/KeyboardLayoutCreator/Physical/Physical"
+import KeyboardLayoutCreatorPhysical from "./pages/KeyboardLayoutCreator/Physical"
 export default function App() {
   return (
     <>

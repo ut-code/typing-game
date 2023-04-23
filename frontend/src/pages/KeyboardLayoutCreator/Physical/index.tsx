@@ -14,7 +14,7 @@ import GetFileName from "../../../../keyboard-layout-creator/src/components/GetF
 import makeJSONFile from "../../../../keyboard-layout-creator/src/components/makeJSONFile"
 import ConfirmButton from "../../../../keyboard-layout-creator/src/components/ConfirmButton"
 import BackToHome from "../../../../keyboard-layout-creator/src/components/BackToHome"
-import "./physical.css"
+import "./style.css"
 import "./../keyboard.css"
 
 function physicalKeyToObject(
