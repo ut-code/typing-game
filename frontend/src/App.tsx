@@ -6,6 +6,7 @@ import Result from "./pages/Result"
 import KeyboardLayoutCreatorHome from "./pages/KeyboardLayoutCreator"
 import KeyboardLayoutCreatorPhysical from "./pages/KeyboardLayoutCreator/Physical"
 import KeyboardLayoutCreatorFunctional from "./pages/KeyboardLayoutCreator/Functional"
+import Keyboard from "./pages/KeyboardLayoutCreator/Keyboard/App"
 export default function App() {
   return (
     <>
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/keyboard-layout-creator" element={<KeyboardLayoutCreatorHome />}></Route>
         <Route path="/keyboard-layout-creator/physical" element={<KeyboardLayoutCreatorPhysical />}></Route>
         <Route path="/keyboard-layout-creator/functional" element={<KeyboardLayoutCreatorFunctional />}></Route>
+        <Route path="/keyboard-layout-creator/test" element={<Keyboard />}></Route>
       </Routes>
     </>
   )
