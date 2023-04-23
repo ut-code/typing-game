@@ -14,7 +14,7 @@ import GetFileName from "../../../../keyboard-layout-creator/src/components/GetF
 import ConfirmButton from "../../../../keyboard-layout-creator/src/components/ConfirmButton"
 import makeJSONFile from "../../../../keyboard-layout-creator/src/components/makeJSONFile"
 import BackToHome from "../../../../keyboard-layout-creator/src/components/BackToHome"
-import "./functional.css"
+import "./style.css"
 import "./../keyboard.css"
 
 function keyToObject(keys: string[][]): object {
