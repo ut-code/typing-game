@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom"
 import Home from "./pages"
 import Basic from "./pages/Basic"
 import Result from "./pages/Result"
-import KeyboardLayoutCreatorHome from "./pages/KeyboardLayoutCreator/Home"
+import KeyboardLayoutCreatorHome from "./pages/KeyboardLayoutCreator"
 export default function App() {
   return (
     <>
