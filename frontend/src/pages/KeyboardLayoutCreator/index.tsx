@@ -18,11 +18,11 @@ export default function Home(): JSX.Element {
 
         <video controls muted src={howToUse} width="700px" />
       </main>
-      {/* <nav>
-        <Link to="/functional">論理配列</Link>
+      <nav>
+        <Link to="/keyboard-layout-creator/functional">論理配列</Link>
         <br />
-        <Link to="/physical">物理配列</Link>
-      </nav> */}
+        <Link to="/keyboard-layout-creator/physical">物理配列</Link>
+      </nav>
     </>
   )
 }
