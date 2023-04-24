@@ -3,8 +3,8 @@
   "description": "駒場祭のタイピングゲーム",
   "scripts": {
     "prepare": "husky install",
-    "lint": "eslint --fix 'frontend/src/*.{ts,tsx,js,jsx,css}' && eslint --fix 'frontend/src/**/*.{ts,tsx,js,jsx}' && eslint --fix 'backend/*.{ts,tsx,js,jsx}'",
-    "format": "prettier --write .",
+    "lint": "eslint --fix 'frontend/src/*.{ts,tsx,js,jsx,css}' && eslint --fix 'backend/*.{ts,tsx,js,jsx}'",
+    "format": "npx prettier --write .",
     "fix": "npm run lint && npm run format",
     "setup": "npm run setup:install",
     "setup:env": "cp frontend/.env.sample frontend/.env && cp backend/.env.sample backend/.env",
