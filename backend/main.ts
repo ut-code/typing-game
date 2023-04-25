@@ -15,7 +15,7 @@ app.use(express.json())
 app.post("/questions", async (request, response) => {
   const records = await client.questions.findMany({
     where: {
-      qnumber: Number(request.body.qnumber),
+      qnumber: request.body.qnumber,
     },
     orderBy: {
       id: "asc",
@@ -48,9 +48,9 @@ async function getRankingKf73() {
 
 // submit時のデータベースとのやり取り
 app.post("/submitScore", async (request, response) => {
-  const qnumber = Number(request.body.qnumber) || -1
-  const username = request.body.username || "Not working"
-  const score = request.body.score || -1
+  const qnumber: number = request.body.qnumber || -1
+  const username: string = request.body.username || "Not working"
+  const score: number = request.body.score || -1
   await client.ranking.create({
     data: { problem: qnumber, username: username, score: score },
   })

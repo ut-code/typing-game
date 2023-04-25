@@ -12,6 +12,9 @@ export default function Basic() {
   // const [wordnum, setWordnum] = useState<number>(0)
   const [questions, setQuestions] = useState<string[]>([])
 
+  const correctSE = new Audio("/correctSE.mp3")
+  const qnumber: number = Number(localStorage.getItem("qnumber")) || 0
+
   const Navigate = useNavigate()
 
   // 配列をシャッフルする関数
@@ -23,15 +26,62 @@ export default function Basic() {
     return array
   }
 
-  const correctSE = new Audio("/correctSE.mp3")
-  const qnumber = Number(localStorage.getItem("qnumber") || 0)
-  // let questions: string[] = [] // 問題
-  // 問題をquestionsに格納する
+  // scoreを計算する関数
+  const calcScore = (time: number, wordnum: number, correct: number, miss: number, velocity: number) => {
+    // 使う変数
+    const progress = wordnum / questions.length
+    const diff = 0
+    const correct_rate = correct ** 2 / (miss + correct + 1) // 問題文字数多いと有利！
+    if (velocity > 10) velocity = 10
+
+    // 重みをつけて算出
+    const w1: number = 1000
+    const w2: number = 0 // 難易度は未実装
+    const w3: number = 1
+    const w4: number = 5
+    return Math.floor(w1 * progress * (w2 * diff + w3 * correct_rate + w4 * velocity))
+  }
+
+  async function results(time: number, wordnum: number, correct: number, miss: number) {
+    let velocity
+    if (time === 0) velocity = 99.99
+    else velocity = correct / time
+    const score = calcScore(time, wordnum, correct, miss, velocity)
+    const kpm = Math.floor(velocity * Math.pow(10, 2)) / Math.pow(10, 2) // kpmじゃなくてkpsだった...
+    let scorerank
+    if (miss === 0 && kpm >= 5 && wordnum === questions.length) scorerank = "SS"
+    else if (correct / (correct + miss + 1) > 0.9 && kpm >= 5 && wordnum === questions.length) scorerank = "S"
+    else if (correct / (correct + miss + 1) > 0.8 && kpm >= 4) scorerank = "A"
+    else if (correct / (correct + miss + 1) > 0.8 && kpm >= 3) scorerank = "B"
+    else if (correct / (correct + miss + 1) < 0.5) scorerank = "E"
+    else if (correct / (correct + miss + 1) > 0.7 && kpm >= 2) scorerank = "C"
+    else scorerank = "D"
+
+    const json = JSON.stringify({
+      qnumber: qnumber,
+      username: localStorage.getItem("username") || "Guest",
+      score: score,
+    })
+    await fetch(`${import.meta.env.VITE_API_ENDPOINT}/submitScore`, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: json,
+    })
+
+    localStorage.setItem("time", time.toString())
+    localStorage.setItem("score", score.toString())
+    localStorage.setItem("kpm", kpm.toString())
+    localStorage.setItem("correct", correct.toString())
+    localStorage.setItem("miss", miss.toString())
+    localStorage.setItem("scorerank", scorerank)
+    Navigate("/result")
+  }
+
+  // 問題をquestionsに格納する関数
   useEffect(() => {
-    // 問題をquestionsに格納する関数
     const getQuestions = async () => {
       const json = JSON.stringify({
-        qnumber: localStorage.getItem("qnumber") || 0,
+        qnumber: qnumber,
       })
       const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/questions`, {
         method: "post",
@@ -39,74 +89,16 @@ export default function Basic() {
         body: json,
       })
       const data: string[] = JSON.parse(await response.text())
-      setQuestions(data)
+      if (qnumber <= 5) setQuestions(shuffle(data)) // 順番が無関係な問題のみシャッフル
+      else setQuestions(data)
     }
     getQuestions()
   }, [])
 
   useEffect(() => {
-    console.log(questions)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let timerId: any //clearIntervalをするため
-
-    // scoreを計算する関数
-    const calcScore = (time: number, wordnum: number, correct: number, miss: number, velocity: number) => {
-      // 使う変数
-      const progress = wordnum / questions.length
-      const diff = 0
-      const correct_rate = correct ** 2 / (miss + correct + 1) // 問題文字数多いと有利！
-      if (velocity > 10) velocity = 10
-
-      // 重みをつけて算出
-      const w1: number = 1000,
-        w2: number = 0.1,
-        w3: number = 1,
-        w4: number = 5
-      return Math.floor(w1 * progress * (w2 * diff + w3 * correct_rate + w4 * velocity))
-    }
-
-    async function results(time: number, wordnum: number, correct: number, miss: number) {
-      let velocity
-      if (time === 0) velocity = 99.99
-      else velocity = correct / time
-      const score = calcScore(time, wordnum, correct, miss, velocity)
-      const kpm = Math.floor(velocity * Math.pow(10, 2)) / Math.pow(10, 2) // kpmじゃなくてkpsだった...
-      let scorerank
-      if (miss === 0 && kpm >= 5 && wordnum === questions.length) scorerank = "SS"
-      else if (correct / (correct + miss + 1) > 0.9 && kpm >= 5 && wordnum === questions.length) scorerank = "S"
-      else if (correct / (correct + miss + 1) > 0.8 && kpm >= 4) scorerank = "A"
-      else if (correct / (correct + miss + 1) > 0.8 && kpm >= 3) scorerank = "B"
-      else if (correct / (correct + miss + 1) < 0.5) scorerank = "E"
-      else if (correct / (correct + miss + 1) > 0.7 && kpm >= 2) scorerank = "C"
-      else scorerank = "D"
-
-      const json = JSON.stringify({
-        qnumber: qnumber,
-        username: localStorage.getItem("username") || "Guest",
-        score: score,
-      })
-      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/submitScore`, {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: json,
-      })
-
-      localStorage.setItem("time", time.toString())
-      localStorage.setItem("score", score.toString())
-      localStorage.setItem("kpm", kpm.toString())
-      localStorage.setItem("correct", correct.toString())
-      localStorage.setItem("miss", miss.toString())
-      localStorage.setItem("scorerank", scorerank)
-      Navigate("/result")
-    }
+    let timerId: number //clearIntervalをするため
 
     async function main() {
-      // 問題をとってくる
-      // await getQuestions()
-      // シャッフルする、ただし順番が無関係な問題のみ
-      if (qnumber <= 5) {
-        setQuestions(shuffle(questions))
-      }
       const alphabet = [
         "a",
         "b",
@@ -201,6 +193,7 @@ export default function Basic() {
             answer = ""
             cnt = 0
             if (wordnum === questions.length && isFinished === false) {
+              clearInterval(timerId)
               // 二重submitを防ぐflag
               isFinished = true
               results(time, wordnum, correct, miss)
@@ -294,10 +287,6 @@ export default function Basic() {
               </tr>
             </tbody>
           </table>
-          <pre>
-            <div id="rawcode"></div>
-          </pre>
-          <div id="preview-box"></div>
 
           <Stack gap={0} id="progress">
             <div id="progress-number"></div>

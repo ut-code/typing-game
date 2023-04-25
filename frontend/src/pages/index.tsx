@@ -19,7 +19,7 @@ export default function Home() {
     const idx = qnumber.indexOf(":")
     localStorage.setItem("qnumber", qnumber.slice(0, idx))
     // fetchAPI後に別ページへ遷移
-    Navigate("basic")
+    Navigate("/basic")
   }
 
   return (
