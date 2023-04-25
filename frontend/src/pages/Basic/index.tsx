@@ -9,6 +9,7 @@ import { Button, ProgressBar, Stack } from "react-bootstrap"
 export default function Basic() {
   const [content, setContent] = useState<string>("a")
   const [now, setNow] = useState<number>(0)
+  // const [wordnum, setWordnum] = useState<number>(0)
 
   const Navigate = useNavigate()
 
@@ -42,9 +43,9 @@ export default function Basic() {
     }
 
     // scoreを計算する関数
-    const calcScore = (time: number, word_num: number, correct: number, miss: number, velocity: number) => {
+    const calcScore = (time: number, wordnum: number, correct: number, miss: number, velocity: number) => {
       // 使う変数
-      const progress = word_num / questions.length
+      const progress = wordnum / questions.length
       const diff = 0
       const correct_rate = correct ** 2 / (miss + correct + 1) // 問題文字数多いと有利！
       if (velocity > 10) velocity = 10
@@ -59,15 +60,15 @@ export default function Basic() {
 
     const qnumber = Number(localStorage.getItem("qnumber") || 0)
 
-    async function results(time: number, word_num: number, correct: number, miss: number) {
+    async function results(time: number, wordnum: number, correct: number, miss: number) {
       let velocity
       if (time === 0) velocity = 99.99
       else velocity = correct / time
-      const score = calcScore(time, word_num, correct, miss, velocity)
+      const score = calcScore(time, wordnum, correct, miss, velocity)
       const kpm = Math.floor(velocity * Math.pow(10, 2)) / Math.pow(10, 2) // kpmじゃなくてkpsだった...
       let scorerank
-      if (miss === 0 && kpm >= 5 && word_num === questions.length) scorerank = "SS"
-      else if (correct / (correct + miss + 1) > 0.9 && kpm >= 5 && word_num === questions.length) scorerank = "S"
+      if (miss === 0 && kpm >= 5 && wordnum === questions.length) scorerank = "SS"
+      else if (correct / (correct + miss + 1) > 0.9 && kpm >= 5 && wordnum === questions.length) scorerank = "S"
       else if (correct / (correct + miss + 1) > 0.8 && kpm >= 4) scorerank = "A"
       else if (correct / (correct + miss + 1) > 0.8 && kpm >= 3) scorerank = "B"
       else if (correct / (correct + miss + 1) < 0.5) scorerank = "E"
@@ -132,7 +133,7 @@ export default function Basic() {
       const start = () => {
         if (isStarted === false) {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          document.getElementById("question")!.textContent = questions[word_num]
+          document.getElementById("question")!.textContent = questions[wordnum]
           // スペースが押されたら、時間計測
           isStarted = true
           timerId = setInterval(() => {
@@ -145,7 +146,7 @@ export default function Basic() {
             if (timeLimit - time <= 0 && isFinished === false) {
               clearInterval(timerId)
               isFinished = true
-              results(time, word_num, correct, miss)
+              results(time, wordnum, correct, miss)
             }
           }, 1000)
         }
@@ -164,9 +165,9 @@ export default function Basic() {
 
           // 何問目/全問題数を右上に表示
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          document.getElementById("progress-number")!.textContent = word_num + 1 + "/" + questions.length + "問"
+          document.getElementById("progress-number")!.textContent = wordnum + 1 + "/" + questions.length + "問"
 
-          if (key === questions[word_num][cnt]) {
+          if (key === questions[wordnum][cnt]) {
             // 正答時
             answer += key
             cnt++
@@ -181,30 +182,30 @@ export default function Basic() {
             document.getElementById("miss")!.textContent = miss + "回"
           }
 
-          if (cnt == questions[word_num].length) {
+          if (cnt == questions[wordnum].length) {
             // 次の問題へ
-            word_num++
+            wordnum++
 
             // 正解音が鳴る。最後の問題だけちょっと切れている
             correctSE.pause()
             correctSE.play()
 
             // 進捗バーを増やす
-            setNow(Math.round((word_num / questions.length) * 100))
+            setNow(Math.round((wordnum / questions.length) * 100))
 
             answer = ""
             cnt = 0
-            if (word_num === questions.length && isFinished === false) {
+            if (wordnum === questions.length && isFinished === false) {
               // 二重submitを防ぐflag
               isFinished = true
-              results(time, word_num, correct, miss)
+              results(time, wordnum, correct, miss)
             }
           }
 
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          document.getElementById("answered")!.textContent = questions[word_num].slice(0, cnt)
+          document.getElementById("answered")!.textContent = questions[wordnum].slice(0, cnt)
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          document.getElementById("question")!.textContent = questions[word_num].slice(cnt)
+          document.getElementById("question")!.textContent = questions[wordnum].slice(cnt)
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           document.getElementById("miss")!.textContent = miss + "回"
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -239,7 +240,7 @@ export default function Basic() {
     // 一旦このエラーを無視 後でちゃんと直しましょう。
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let answer = "" // 入力された文字列
-    let word_num = 0 // 何問目か
+    let wordnum = 0 // 何問目か
     let correct = 0 // 正答文字数
     let miss = 0 // ミスタイプ数
     let cnt = 0 // 何文字目か
