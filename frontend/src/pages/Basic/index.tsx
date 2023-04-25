@@ -10,6 +10,7 @@ export default function Basic() {
   const [content, setContent] = useState<string>("a")
   const [now, setNow] = useState<number>(0)
   // const [wordnum, setWordnum] = useState<number>(0)
+  const [questions, setQuestions] = useState<string[]>([])
 
   const Navigate = useNavigate()
 
@@ -22,13 +23,11 @@ export default function Basic() {
     return array
   }
 
+  const correctSE = new Audio("/correctSE.mp3")
+  const qnumber = Number(localStorage.getItem("qnumber") || 0)
+  // let questions: string[] = [] // 問題
+  // 問題をquestionsに格納する
   useEffect(() => {
-    let questions: string[] = [] // 問題
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let timerId: any //clearIntervalをするため
-
-    const correctSE = new Audio("/correctSE.mp3")
-
     // 問題をquestionsに格納する関数
     const getQuestions = async () => {
       const json = JSON.stringify({
@@ -39,8 +38,16 @@ export default function Basic() {
         headers: { "Content-Type": "application/json" },
         body: json,
       })
-      questions = JSON.parse(await response.text())
+      const data: string[] = JSON.parse(await response.text())
+      setQuestions(data)
     }
+    getQuestions()
+  }, [])
+
+  useEffect(() => {
+    console.log(questions)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let timerId: any //clearIntervalをするため
 
     // scoreを計算する関数
     const calcScore = (time: number, wordnum: number, correct: number, miss: number, velocity: number) => {
@@ -51,14 +58,12 @@ export default function Basic() {
       if (velocity > 10) velocity = 10
 
       // 重みをつけて算出
-      const w1 = 1000
-      const w2 = 0.1
-      const w3 = 1
-      const w4 = 5
+      const w1: number = 1000,
+        w2: number = 0.1,
+        w3: number = 1,
+        w4: number = 5
       return Math.floor(w1 * progress * (w2 * diff + w3 * correct_rate + w4 * velocity))
     }
-
-    const qnumber = Number(localStorage.getItem("qnumber") || 0)
 
     async function results(time: number, wordnum: number, correct: number, miss: number) {
       let velocity
@@ -97,10 +102,10 @@ export default function Basic() {
 
     async function main() {
       // 問題をとってくる
-      await getQuestions()
+      // await getQuestions()
       // シャッフルする、ただし順番が無関係な問題のみ
       if (qnumber <= 5) {
-        questions = shuffle(questions)
+        setQuestions(shuffle(questions))
       }
       const alphabet = [
         "a",
@@ -257,7 +262,7 @@ export default function Basic() {
     document.getElementById("time")!.textContent = time + "秒"
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("remaining-time")!.textContent = timeLimit - time + "秒"
-  }, [])
+  }, [questions])
 
   const cont = document.getElementById("content")
   if (cont !== null) cont.textContent = content
