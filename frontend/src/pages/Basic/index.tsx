@@ -1,4 +1,4 @@
-import { useEffect, useState, Dispatch, SetStateAction } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Keyboard from "../KeyboardLayoutCreator/Keyboard"
 import "./style.css"
@@ -11,6 +11,15 @@ export default function Basic() {
   const [now, setNow] = useState<number>(0)
 
   const Navigate = useNavigate()
+
+  // 配列をシャッフルする関数
+  const shuffle = (array: string[]) => {
+    for (let i = 0; i < array.length; i++) {
+      const j = Math.floor(Math.random() * array.length)
+      ;[array[i], array[j]] = [array[j], array[i]]
+    }
+    return array
+  }
 
   useEffect(() => {
     let questions: string[] = [] // 問題
@@ -30,16 +39,6 @@ export default function Basic() {
         body: json,
       })
       questions = JSON.parse(await response.text())
-    }
-
-    // 配列をシャッフルする関数
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const shuffle = (array: any[]) => {
-      for (let i = 0; i < array.length; i++) {
-        const j = Math.floor(Math.random() * array.length)
-        ;[array[i], array[j]] = [array[j], array[i]]
-      }
-      return array
     }
 
     // scoreを計算する関数
@@ -130,7 +129,7 @@ export default function Basic() {
         "y",
         "z",
       ]
-      function start() {
+      const start = () => {
         if (isStarted === false) {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           document.getElementById("question")!.textContent = questions[word_num]
@@ -226,13 +225,13 @@ export default function Basic() {
     main()
 
     /*const content = document.getElementById("content");
-  if (content != null) {
-    const content = content.textContent;
-  }
-  if (content.length > 2) {
-    content = content.slice(content.length-11,content.length-1);
-  }
-  console.log(content)*/
+    if (content != null) {
+      const content = content.textContent;
+    }
+    if (content.length > 2) {
+      content = content.slice(content.length-11,content.length-1);
+    }
+    console.log(content)*/
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     let content = document.getElementById("content")!.textContent
