@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
@@ -21,6 +21,14 @@ export default function Home() {
     // fetchAPI後に別ページへ遷移
     Navigate("/basic")
   }
+
+  // localStorageをリセットする
+  let unmounted = false
+  useEffect(() => {
+    if (unmounted) return
+    unmounted = true
+    localStorage.clear()
+  }, [])
 
   return (
     <>
