@@ -10,10 +10,11 @@ export default function Basic() {
   const [content, setContent] = useState<string>("a")
   const [now, setNow] = useState<number>(0)
   // const [wordnum, setWordnum] = useState<number>(0)
-  const [questions, setQuestions] = useState<string[]>([])
+  // const [questions, setQuestions] = useState<string[]>([])
 
   const correctSE = new Audio("/correctSE.mp3")
   const qnumber: number = Number(localStorage.getItem("qnumber")) || 0
+  let questions: string[] = []
 
   const Navigate = useNavigate()
 
@@ -78,27 +79,26 @@ export default function Basic() {
   }
 
   // 問題をquestionsに格納する関数
-  useEffect(() => {
-    const getQuestions = async () => {
-      const json = JSON.stringify({
-        qnumber: qnumber,
-      })
-      const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/questions`, {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: json,
-      })
-      const data: string[] = JSON.parse(await response.text())
-      if (qnumber <= 5) setQuestions(shuffle(data)) // 順番が無関係な問題のみシャッフル
-      else setQuestions(data)
-    }
-    getQuestions()
-  }, [])
+  const getQuestions = async () => {
+    const json = JSON.stringify({
+      qnumber: qnumber,
+    })
+    const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/questions`, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: json,
+    })
+    const data: string[] = JSON.parse(await response.text())
+    if (qnumber <= 5) questions = shuffle(data) // 順番が無関係な問題のみシャッフル
+    else questions = data
+  }
 
   useEffect(() => {
     let timerId: number //clearIntervalをするため
 
     async function main() {
+      await getQuestions()
+
       const alphabet = [
         "a",
         "b",
@@ -255,7 +255,7 @@ export default function Basic() {
     document.getElementById("time")!.textContent = time + "秒"
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("remaining-time")!.textContent = timeLimit - time + "秒"
-  }, [questions])
+  }, [])
 
   const cont = document.getElementById("content")
   if (cont !== null) cont.textContent = content
