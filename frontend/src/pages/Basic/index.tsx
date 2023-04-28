@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import Keyboard from "../KeyboardLayoutCreator/Keyboard"
 import "./style.css"
@@ -11,6 +11,18 @@ export default function Basic() {
   const [now, setNow] = useState<number>(0)
   // const [wordnum, setWordnum] = useState<number>(0)
   // const [questions, setQuestions] = useState<string[]>([])
+
+  const keyRef = useRef<HTMLDivElement>(null)
+
+  // 一旦このエラーを無視 後でちゃんと直しましょう。
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  let wordnum = 0 // 何問目か
+  let correct = 0 // 正答文字数
+  let miss = 0 // ミスタイプ数
+  let cnt = 0 // 何文字目か
+  let isStarted = false // 始まったか
+  let isFinished = false // 終わったか
+  let time = 0 // 時間
 
   const correctSE: HTMLAudioElement = new Audio("/correctSE.mp3")
   const qnumber: number = Number(localStorage.getItem("qnumber")) || 0
@@ -79,34 +91,32 @@ export default function Basic() {
     Navigate("/result")
   }
 
-  // 問題をquestionsに格納する関数
-  const getQuestions = async () => {
-    const json = JSON.stringify({
-      qnumber: qnumber,
-    })
-    const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/questions`, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: json,
-    })
-    const data: string[] = JSON.parse(await response.text())
-    if (qnumber <= 5) questions = shuffle(data) // 順番が無関係な問題のみシャッフル
-    else questions = data
-  }
-
-  let timerId: number //clearIntervalをするため
+  useEffect(() => {
+    // 問題をquestionsに格納する
+    ;(async () => {
+      const json = JSON.stringify({
+        qnumber: qnumber,
+      })
+      const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/questions`, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: json,
+      })
+      const data: string[] = JSON.parse(await response.text())
+      if (qnumber <= 5) questions = shuffle(data) // 順番が無関係な問題のみシャッフル
+      else questions = data
+    })()
+  }, [])
 
   useEffect(() => {
     async function main() {
-      await getQuestions()
-
       const start = () => {
         if (isStarted === false) {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           document.getElementById("question")!.textContent = questions[wordnum]
           // スペースが押されたら、時間計測
           isStarted = true
-          timerId = setInterval(() => {
+          const timerId = setInterval(() => {
             time++
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             document.getElementById("time")!.textContent = time + "秒"
@@ -163,7 +173,7 @@ export default function Basic() {
 
           cnt = 0
           if (wordnum === questions.length && isFinished === false) {
-            clearInterval(timerId)
+            // clearInterval(timerId)
             // 二重submitを防ぐflag
             isFinished = true
             results(time, wordnum, correct, miss)
@@ -202,16 +212,6 @@ export default function Basic() {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     let content = document.getElementById("content")!.textContent
 
-    // 一旦このエラーを無視 後でちゃんと直しましょう。
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    let wordnum = 0 // 何問目か
-    let correct = 0 // 正答文字数
-    let miss = 0 // ミスタイプ数
-    let cnt = 0 // 何文字目か
-    let isStarted = false // 始まったか
-    let isFinished = false // 終わったか
-    let time = 0 // 時間
-
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("correct")!.textContent = correct + "回"
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -226,7 +226,7 @@ export default function Basic() {
   if (cont !== null) cont.textContent = content
 
   const onClickBack = () => {
-    clearInterval(timerId)
+    // clearInterval(timerId)
     Navigate("/")
   }
 
@@ -273,7 +273,7 @@ export default function Basic() {
         </div>
       </div>
       {/* 下のdivの中にReactがキーボードの入力結果をいい感じにして、出力している。これを、読み取って使えば良い。 */}
-      <div id="content"></div>
+      <div id="content" ref={keyRef}></div>
       <Keyboard output={content} setOutput={setContent} />
     </>
   )
