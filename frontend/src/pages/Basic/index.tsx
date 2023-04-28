@@ -124,6 +124,7 @@ export default function Basic() {
   }
 
   let timerId: number //clearIntervalをするため
+
   useEffect(() => {
     async function main() {
       await getQuestions()
@@ -156,60 +157,57 @@ export default function Basic() {
         const previousContent = content
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         content = document.getElementById("content")!.textContent
-        if (content !== null) {
-          const key = content[content.length - 1] // 追加された文字すなわち一番最後の文字を取り出す。
+        if (content === null) return
+        const key = content[content.length - 1] // 追加された文字すなわち一番最後の文字を取り出す。
 
-          if (content === previousContent) return
+        if (content === previousContent) return
 
-          // 何問目/全問題数を右上に表示
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          document.getElementById("progress-number")!.textContent = wordnum + 1 + "/" + questions.length + "問"
+        // 何問目/全問題数を右上に表示
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        document.getElementById("progress-number")!.textContent = wordnum + 1 + "/" + questions.length + "問"
 
-          if (key === questions[wordnum][cnt]) {
-            // 正答時
-            answer += key
-            cnt++
-            correct++
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            document.getElementById("correct")!.textContent = correct + "回"
-          } else if (alphabet.includes(key.toLowerCase())) {
-            // 間違えていたときでアルファベットであれば、不正解とする。
-            // 不正解の時
-            miss++
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            document.getElementById("miss")!.textContent = miss + "回"
-          }
-
-          if (cnt == questions[wordnum].length) {
-            // 次の問題へ
-            wordnum++
-
-            // 正解音が鳴る。最後の問題だけちょっと切れている
-            correctSE.pause()
-            correctSE.play()
-
-            // 進捗バーを増やす
-            setNow(Math.round((wordnum / questions.length) * 100))
-
-            answer = ""
-            cnt = 0
-            if (wordnum === questions.length && isFinished === false) {
-              clearInterval(timerId)
-              // 二重submitを防ぐflag
-              isFinished = true
-              results(time, wordnum, correct, miss)
-            }
-          }
-
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          document.getElementById("answered")!.textContent = questions[wordnum].slice(0, cnt)
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          document.getElementById("question")!.textContent = questions[wordnum].slice(cnt)
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          document.getElementById("miss")!.textContent = miss + "回"
+        if (key === questions[wordnum][cnt]) {
+          // 正答時
+          cnt++
+          correct++
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           document.getElementById("correct")!.textContent = correct + "回"
+        } else if (alphabet.includes(key.toLowerCase())) {
+          // 間違えていたときでアルファベットであれば、不正解とする。
+          // 不正解の時
+          miss++
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          document.getElementById("miss")!.textContent = miss + "回"
         }
+
+        if (cnt == questions[wordnum].length) {
+          // 次の問題へ
+          wordnum++
+
+          // 正解音が鳴る。最後の問題だけちょっと切れている
+          correctSE.pause()
+          correctSE.play()
+
+          // 進捗バーを増やす
+          setNow(Math.round((wordnum / questions.length) * 100))
+
+          cnt = 0
+          if (wordnum === questions.length && isFinished === false) {
+            clearInterval(timerId)
+            // 二重submitを防ぐflag
+            isFinished = true
+            results(time, wordnum, correct, miss)
+          }
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        document.getElementById("answered")!.textContent = questions[wordnum].slice(0, cnt)
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        document.getElementById("question")!.textContent = questions[wordnum].slice(cnt)
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        document.getElementById("miss")!.textContent = miss + "回"
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        document.getElementById("correct")!.textContent = correct + "回"
       })
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       observer.observe(document.getElementById("content")!, {
@@ -218,9 +216,7 @@ export default function Basic() {
         subtree: true,
       })
 
-      window.addEventListener("keydown", () => {
-        start()
-      })
+      window.addEventListener("keydown", start)
     }
     main()
 
@@ -238,7 +234,6 @@ export default function Basic() {
 
     // 一旦このエラーを無視 後でちゃんと直しましょう。
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    let answer = "" // 入力された文字列
     let wordnum = 0 // 何問目か
     let correct = 0 // 正答文字数
     let miss = 0 // ミスタイプ数
