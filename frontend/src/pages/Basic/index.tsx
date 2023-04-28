@@ -12,39 +12,10 @@ export default function Basic() {
   // const [wordnum, setWordnum] = useState<number>(0)
   // const [questions, setQuestions] = useState<string[]>([])
 
-  const correctSE = new Audio("/correctSE.mp3")
+  const correctSE: HTMLAudioElement = new Audio("/correctSE.mp3")
   const qnumber: number = Number(localStorage.getItem("qnumber")) || 0
   let questions: string[] = []
   const timeLimit: number = 120 // 制限時間
-
-  const alphabet = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-  ]
 
   const Navigate = useNavigate()
 
@@ -157,22 +128,21 @@ export default function Basic() {
         const previousContent = content
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         content = document.getElementById("content")!.textContent
-        if (content === null) return
-        const key = content[content.length - 1] // 追加された文字すなわち一番最後の文字を取り出す。
+        if (content === null || content === previousContent) return
 
-        if (content === previousContent) return
+        const keyInput = content[content.length - 1] // 追加された文字すなわち一番最後の文字を取り出す。
 
         // 何問目/全問題数を右上に表示
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         document.getElementById("progress-number")!.textContent = wordnum + 1 + "/" + questions.length + "問"
 
-        if (key === questions[wordnum][cnt]) {
+        if (keyInput === questions[wordnum][cnt]) {
           // 正答時
           cnt++
           correct++
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           document.getElementById("correct")!.textContent = correct + "回"
-        } else if (alphabet.includes(key.toLowerCase())) {
+        } else if (keyInput.match(/[a-zA-Z]/)) {
           // 間違えていたときでアルファベットであれば、不正解とする。
           // 不正解の時
           miss++
@@ -180,7 +150,7 @@ export default function Basic() {
           document.getElementById("miss")!.textContent = miss + "回"
         }
 
-        if (cnt == questions[wordnum].length) {
+        if (cnt === questions[wordnum].length) {
           // 次の問題へ
           wordnum++
 
