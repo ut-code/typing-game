@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate, Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Keyboard from "../KeyboardLayoutCreator/Keyboard"
 import "./style.css"
 
@@ -15,7 +15,7 @@ export default function Basic() {
   const correctSE = new Audio("/correctSE.mp3")
   const qnumber: number = Number(localStorage.getItem("qnumber")) || 0
   let questions: string[] = []
-  const timeLimit = 120 // 制限時間
+  const timeLimit: number = 120 // 制限時間
 
   const alphabet = [
     "a",
@@ -123,9 +123,8 @@ export default function Basic() {
     else questions = data
   }
 
+  let timerId: number //clearIntervalをするため
   useEffect(() => {
-    let timerId: number //clearIntervalをするため
-
     async function main() {
       await getQuestions()
 
@@ -261,13 +260,16 @@ export default function Basic() {
   const cont = document.getElementById("content")
   if (cont !== null) cont.textContent = content
 
+  const onClickBack = () => {
+    clearInterval(timerId)
+    Navigate("/")
+  }
+
   return (
     <>
-      <Link to="/">
-        <Button variant="secondary" id="backbutton">
-          Back
-        </Button>
-      </Link>
+      <Button variant="secondary" id="backbutton" onClick={onClickBack}>
+        Back
+      </Button>
       <div id="score-related">
         <Stack direction="horizontal" gap={3}>
           <table id="current">
