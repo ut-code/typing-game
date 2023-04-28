@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import Keyboard from "../KeyboardLayoutCreator/Keyboard"
 import "./style.css"
 
@@ -15,6 +15,36 @@ export default function Basic() {
   const correctSE = new Audio("/correctSE.mp3")
   const qnumber: number = Number(localStorage.getItem("qnumber")) || 0
   let questions: string[] = []
+  const timeLimit = 120 // 制限時間
+
+  const alphabet = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+  ]
 
   const Navigate = useNavigate()
 
@@ -99,34 +129,6 @@ export default function Basic() {
     async function main() {
       await getQuestions()
 
-      const alphabet = [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e",
-        "f",
-        "g",
-        "h",
-        "i",
-        "j",
-        "k",
-        "l",
-        "m",
-        "n",
-        "o",
-        "p",
-        "q",
-        "r",
-        "s",
-        "t",
-        "u",
-        "v",
-        "w",
-        "x",
-        "y",
-        "z",
-      ]
       const start = () => {
         if (isStarted === false) {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -245,7 +247,6 @@ export default function Basic() {
     let isStarted = false // 始まったか
     let isFinished = false // 終わったか
     let time = 0 // 時間
-    const timeLimit = 120 // 制限時間
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("correct")!.textContent = correct + "回"
@@ -262,9 +263,11 @@ export default function Basic() {
 
   return (
     <>
-      <Button href="/" variant="secondary" id="backbutton">
-        Back
-      </Button>
+      <Link to="/">
+        <Button variant="secondary" id="backbutton">
+          Back
+        </Button>
+      </Link>
       <div id="score-related">
         <Stack direction="horizontal" gap={3}>
           <table id="current">
