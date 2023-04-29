@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import Keyboard from "../KeyboardLayoutCreator/Keyboard"
 import "./style.css"
 
@@ -12,29 +12,25 @@ export default function Basic() {
   // const [wordnum, setWordnum] = useState<number>(0)
   // const [questions, setQuestions] = useState<string[]>([])
   const [isStarted, setIsStarted] = useState<boolean>(false)
-  const [time, setTime] = useState(0)
+  const [time, setTime] = useState(0) // 現在の時間
+  const [timeLimit] = useState(12) // 制限時間
 
   const keyRef = useRef<HTMLDivElement>(null)
 
-  // 一旦このエラーを無視 後でちゃんと直しましょう。
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let wordnum = 0 // 何問目か
   let correct = 0 // 正答文字数
   let miss = 0 // ミスタイプ数
   let cnt = 0 // 何文字目か
-  // let isStarted = false // 始まったか
   let isFinished = false // 終わったか
-  // let time = 0 // 時間
 
   const correctSE: HTMLAudioElement = new Audio("/correctSE.mp3")
   const qnumber: number = Number(localStorage.getItem("qnumber")) || 0
   let questions: string[] = []
-  const timeLimit: number = 120 // 制限時間
 
   const Navigate = useNavigate()
 
   // 配列をシャッフルする関数
-  const shuffle = (array: string[]) => {
+  const shuffle = (array: string[]): string[] => {
     for (let i = 0; i < array.length; i++) {
       const j = Math.floor(Math.random() * array.length)
       ;[array[i], array[j]] = [array[j], array[i]]
@@ -110,58 +106,35 @@ export default function Basic() {
     })()
   }, [])
 
-  let timerId: any
+  let timerId: NodeJS.Timeout | any
   const updateTime = () => {
+    console.log(typeof timerId)
     timerId =
       !timerId &&
       setInterval(() => {
         setTime((prev) => prev + 1)
       }, 1000)
 
-    if (timeLimit - time <= 0 && isFinished === false) {
+    if (timeLimit - time <= 0 && !isFinished) {
+      console.log(typeof timerId)
       clearInterval(timerId)
       isFinished = true
       results(time, wordnum, correct, miss)
     }
   }
 
+  // 初回はisStartedが変更されたら実行。その後はtimeが変更されたら実行。
   useEffect(() => {
-    console.log(time)
-    if (isStarted === false) return
+    if (!isStarted) return
     updateTime()
 
     return () => clearInterval(timerId)
   }, [isStarted, time])
 
-  const start = () => {
-    if (isStarted === false) {
-      // isStarted = true
-      setIsStarted(true)
-
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      document.getElementById("question")!.textContent = questions[wordnum].slice(cnt)
-      // const timerId = setInterval(() => {
-      //   time++
-      //   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      //   document.getElementById("time")!.textContent = time + "秒"
-      //   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      //   document.getElementById("remaining-time")!.textContent = timeLimit - time + "秒"
-
-      //   if (timeLimit - time <= 0 && isFinished === false) {
-      //     // clearInterval(timerId)
-      //     isFinished = true
-      //     results(time, wordnum, correct, miss)
-      //   }
-      // }, 1000)
-      // return () => clearInterval(timerId)
-    }
-  }
-
   useEffect(() => {
     async function main() {
       // キーボードの入力をReactがdivの中に出力しているので、その変更が行われたのを読み取っている。
       const observer = new MutationObserver(() => {
-        // start()
         const previousContent = content
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         content = document.getElementById("content")!.textContent
@@ -223,7 +196,10 @@ export default function Basic() {
         subtree: true,
       })
 
-      window.addEventListener("keydown", start)
+      // 開始キーを押したら開始
+      window.addEventListener("keydown", () => {
+        if (!isStarted) setIsStarted(true)
+      })
     }
     main()
 
@@ -243,25 +219,18 @@ export default function Basic() {
     document.getElementById("correct")!.textContent = correct + "回"
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("miss")!.textContent = miss + "回"
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    // document.getElementById("time")!.textContent = time + "秒"
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    document.getElementById("remaining-time")!.textContent = timeLimit - time + "秒"
   }, [])
 
   const cont = document.getElementById("content")
   if (cont !== null) cont.textContent = content
 
-  const onClickBack = () => {
-    // clearInterval(timerId)
-    Navigate("/")
-  }
-
   return (
     <>
-      <Button variant="secondary" id="backbutton" onClick={onClickBack}>
-        Back
-      </Button>
+      <Link to="/">
+        <Button variant="secondary" id="backbutton">
+          Back
+        </Button>
+      </Link>
       <div id="score-related">
         <Stack direction="horizontal" gap={3}>
           <table id="current">
@@ -280,7 +249,7 @@ export default function Basic() {
               </tr>
               <tr>
                 <th>残り時間：</th>
-                <td id="remaining-time"></td>
+                <td id="remaining-time">{timeLimit - time}秒</td>
               </tr>
             </tbody>
           </table>
