@@ -6,6 +6,24 @@ import "./style.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Button, ProgressBar, Stack } from "react-bootstrap"
 
+// https://zenn.dev/kakaka/articles/41f22d2dcc9720
+const useIntervalBy1s = (callback: () => void) => {
+  const callbackRef = useRef<() => void>(callback)
+  useEffect(() => {
+    callbackRef.current = callback // 新しいcallbackをrefに格納
+  }, [callback])
+
+  useEffect(() => {
+    const tick = () => {
+      callbackRef.current()
+    }
+    const timerId = setInterval(tick, 1000)
+    return () => {
+      clearInterval(timerId)
+    }
+  }, []) //refはミュータブルなので依存配列に含めなくてもよい
+}
+
 export default function Basic() {
   const [content, setContent] = useState<string>("a")
   const [now, setNow] = useState<number>(0)
@@ -108,33 +126,44 @@ export default function Basic() {
     })()
   }, [])
 
+  const [seconds, setSeconds] = useState<number>(0)
+  useIntervalBy1s(() => {
+    setSeconds((prev) => prev + 1)
+  })
+
+  const start = () => {
+    if (isStarted === false) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      document.getElementById("question")!.textContent = questions[wordnum]
+      // スペースが押されたら、時間計測
+      isStarted = true
+      const timerId = setInterval(() => {
+        time++
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        document.getElementById("time")!.textContent = time + "秒"
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        document.getElementById("remaining-time")!.textContent = timeLimit - time + "秒"
+
+        if (timeLimit - time <= 0 && isFinished === false) {
+          clearInterval(timerId)
+          isFinished = true
+          results(time, wordnum, correct, miss)
+        }
+      }, 1000)
+    }
+  }
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setSeconds((prev) => prev + 1)
+  //   }, 1000)
+  //   return () => clearInterval(interval)
+  // }, [])
+
   useEffect(() => {
     async function main() {
-      const start = () => {
-        if (isStarted === false) {
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          document.getElementById("question")!.textContent = questions[wordnum]
-          // スペースが押されたら、時間計測
-          isStarted = true
-          const timerId = setInterval(() => {
-            time++
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            document.getElementById("time")!.textContent = time + "秒"
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            document.getElementById("remaining-time")!.textContent = timeLimit - time + "秒"
-
-            if (timeLimit - time <= 0 && isFinished === false) {
-              clearInterval(timerId)
-              isFinished = true
-              results(time, wordnum, correct, miss)
-            }
-          }, 1000)
-        }
-      }
-
       // キーボードの入力をReactがdivの中に出力しているので、その変更が行われたのを読み取っている。
       const observer = new MutationObserver(() => {
-        start()
+        // start()
         const previousContent = content
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         content = document.getElementById("content")!.textContent
@@ -235,6 +264,7 @@ export default function Basic() {
       <Button variant="secondary" id="backbutton" onClick={onClickBack}>
         Back
       </Button>
+      <div>{seconds}</div>
       <div id="score-related">
         <Stack direction="horizontal" gap={3}>
           <table id="current">
