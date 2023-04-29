@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import React from "react"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import Header from "../../components/Header"
 import Footer from "../../components/Footer"
 import { Helmet } from "react-helmet"
@@ -99,9 +98,11 @@ export default function Result() {
       <Stack gap={3}>
         <div id="result-elements">
           <div id="back">
-            <Button href="/" variant="secondary" id="backbutton">
-              Back
-            </Button>
+            <Link to="/">
+              <Button variant="secondary" id="backbutton">
+                Back
+              </Button>
+            </Link>
           </div>
           <Stack direction="horizontal" gap={3}>
             <div className="yourResults">
