@@ -47,10 +47,10 @@ export default function Basic() {
     if (velocity > 10) velocity = 10
 
     // 重みをつけて算出
-    const w1: number = 1000
-    const w2: number = 0 // 難易度は未実装
-    const w3: number = 1
-    const w4: number = 5
+    const w1 = 1000
+    const w2 = 0 // 難易度は未実装
+    const w3 = 1
+    const w4 = 5
     return Math.floor(w1 * progress * (w2 * diff + w3 * correct_rate + w4 * velocity))
   }
 
