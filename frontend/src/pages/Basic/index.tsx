@@ -16,8 +16,8 @@ export default function Basic() {
   const [timeLimit] = useState(12) // 制限時間
   const [correct, setCorrect] = useState<number>(0) // 正答文字数
   const [miss, setMiss] = useState<number>(0) // ミスタイプ数
+  const [cnt, setCnt] = useState<number>(0) // 何文字目か
 
-  let cnt = 0 // 何文字目か
   let isFinished = false // 終わったか
 
   const correctSE: HTMLAudioElement = new Audio("/correctSE.mp3")
@@ -148,7 +148,7 @@ export default function Basic() {
 
       if (keyInput === questions[wordNum][cnt]) {
         // 正答時
-        cnt++
+        setCnt((prev) => prev + 1)
         setCorrect((prev) => prev + 1)
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         document.getElementById("correct")!.textContent = correct + "回"
@@ -171,7 +171,7 @@ export default function Basic() {
         // 進捗バーを増やす
         setNow(Math.round((wordNum / questions.length) * 100))
 
-        cnt = 0
+        setCnt(0)
         if (wordNum === questions.length && isFinished === false) {
           // clearInterval(timerId)
           // 二重submitを防ぐflag
@@ -209,7 +209,7 @@ export default function Basic() {
     document.getElementById("correct")!.textContent = correct + "回"
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("miss")!.textContent = miss + "回"
-  }, [content, questions, wordNum, correct, miss])
+  }, [content, questions, wordNum, correct, miss, cnt])
 
   return (
     <>
