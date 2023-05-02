@@ -9,13 +9,12 @@ import { Button, ProgressBar, Stack } from "react-bootstrap"
 export default function Basic() {
   const [content, setContent] = useState<string>("a")
   const [now, setNow] = useState<number>(0)
-  // const [wordnum, setWordnum] = useState<number>(0)
+  const [wordNum, setWordNum] = useState<number>(0) // 何問目か
   const [questions, setQuestions] = useState<string[]>([])
   const [isStarted, setIsStarted] = useState<boolean>(false)
   const [time, setTime] = useState(0) // 現在の時間
   const [timeLimit] = useState(12) // 制限時間
 
-  let wordnum = 0 // 何問目か
   let correct = 0 // 正答文字数
   let miss = 0 // ミスタイプ数
   let cnt = 0 // 何文字目か
@@ -38,14 +37,14 @@ export default function Basic() {
   // scoreを計算する関数
   const calcScore = (
     time: number,
-    wordnum: number,
+    wordNum: number,
     correct: number,
     miss: number,
     velocity: number,
     questions: string[]
   ) => {
     // 使う変数
-    const progress = wordnum / questions.length
+    const progress = wordNum / questions.length
     const diff = 0
     const correct_rate = correct ** 2 / (miss + correct + 1) // 問題文字数多いと有利！
     if (velocity > 10) velocity = 10
@@ -58,15 +57,15 @@ export default function Basic() {
     return Math.floor(w1 * progress * (w2 * diff + w3 * correct_rate + w4 * velocity))
   }
 
-  async function results(time: number, wordnum: number, correct: number, miss: number, questions: string[]) {
+  async function results(time: number, wordNum: number, correct: number, miss: number, questions: string[]) {
     let velocity
     if (time === 0) velocity = 99.99
     else velocity = correct / time
-    const score = calcScore(time, wordnum, correct, miss, velocity, questions)
+    const score = calcScore(time, wordNum, correct, miss, velocity, questions)
     const kpm = Math.floor(velocity * Math.pow(10, 2)) / Math.pow(10, 2) // kpmじゃなくてkpsだった...
     let scorerank
-    if (miss === 0 && kpm >= 5 && wordnum === questions.length) scorerank = "SS"
-    else if (correct / (correct + miss + 1) > 0.9 && kpm >= 5 && wordnum === questions.length) scorerank = "S"
+    if (miss === 0 && kpm >= 5 && wordNum === questions.length) scorerank = "SS"
+    else if (correct / (correct + miss + 1) > 0.9 && kpm >= 5 && wordNum === questions.length) scorerank = "S"
     else if (correct / (correct + miss + 1) > 0.8 && kpm >= 4) scorerank = "A"
     else if (correct / (correct + miss + 1) > 0.8 && kpm >= 3) scorerank = "B"
     else if (correct / (correct + miss + 1) < 0.5) scorerank = "E"
@@ -123,7 +122,7 @@ export default function Basic() {
       console.log(typeof timerId)
       clearInterval(timerId)
       isFinished = true
-      results(time, wordnum, correct, miss, questions)
+      results(time, wordNum, correct, miss, questions)
     }
   }
 
@@ -145,9 +144,9 @@ export default function Basic() {
 
       // 何問目/全問題数を右上に表示
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      document.getElementById("progress-number")!.textContent = wordnum + 1 + "/" + questions.length + "問"
+      document.getElementById("progress-number")!.textContent = wordNum + 1 + "/" + questions.length + "問"
 
-      if (keyInput === questions[wordnum][cnt]) {
+      if (keyInput === questions[wordNum][cnt]) {
         // 正答時
         cnt++
         correct++
@@ -161,30 +160,30 @@ export default function Basic() {
         document.getElementById("miss")!.textContent = miss + "回"
       }
 
-      if (cnt === questions[wordnum].length) {
+      if (cnt === questions[wordNum].length) {
         // 次の問題へ
-        wordnum++
+        setWordNum((prev) => prev + 1)
 
         // 正解音が鳴る。最後の問題だけちょっと切れている
         correctSE.pause()
         correctSE.play()
 
         // 進捗バーを増やす
-        setNow(Math.round((wordnum / questions.length) * 100))
+        setNow(Math.round((wordNum / questions.length) * 100))
 
         cnt = 0
-        if (wordnum === questions.length && isFinished === false) {
+        if (wordNum === questions.length && isFinished === false) {
           // clearInterval(timerId)
           // 二重submitを防ぐflag
           isFinished = true
-          results(time, wordnum, correct, miss, questions)
+          results(time, wordNum, correct, miss, questions)
         }
       }
 
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      document.getElementById("answered")!.textContent = questions[wordnum].slice(0, cnt)
+      document.getElementById("answered")!.textContent = questions[wordNum].slice(0, cnt)
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      document.getElementById("question")!.textContent = questions[wordnum].slice(cnt)
+      document.getElementById("question")!.textContent = questions[wordNum].slice(cnt)
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       document.getElementById("miss")!.textContent = miss + "回"
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -210,7 +209,7 @@ export default function Basic() {
     document.getElementById("correct")!.textContent = correct + "回"
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("miss")!.textContent = miss + "回"
-  }, [content, questions])
+  }, [content, questions, wordNum])
 
   return (
     <>
