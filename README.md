@@ -28,20 +28,12 @@ npm run setup:env
 npm run setup
 ```
 
-## サーバの起動(ビルドも自動実行)
+## サーバの起動
 
 `typing-game` ディレクトリに移動
 
 ```shell
-npm run backend:dev
-```
-
-Terminal をもう一つ開く
-
-`typing-game` ディレクトリに移動
-
-```shell
-npm run frontend:dev
+npm run dev
 ```
 
 ブラウザで [`http://localhost:5173/`](http://localhost:5173/) にアクセスすると、表示されるはずです。
