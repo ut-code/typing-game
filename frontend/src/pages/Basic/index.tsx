@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import Keyboard from "../KeyboardLayoutCreator/Keyboard"
 import "./style.css"
@@ -14,8 +14,6 @@ export default function Basic() {
   const [isStarted, setIsStarted] = useState<boolean>(false)
   const [time, setTime] = useState(0) // 現在の時間
   const [timeLimit] = useState(12) // 制限時間
-
-  const keyRef = useRef<HTMLDivElement>(null)
 
   let wordnum = 0 // 何問目か
   let correct = 0 // 正答文字数
@@ -133,68 +131,54 @@ export default function Basic() {
 
   useEffect(() => {
     async function main() {
-      // キーボードの入力をReactがdivの中に出力しているので、その変更が行われたのを読み取っている。
-      const observer = new MutationObserver(() => {
-        const previousContent = content
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        content = document.getElementById("content")!.textContent
-        if (content === null || content === previousContent) return
+      const keyInput = content[content.length - 1] // 追加された文字すなわち一番最後の文字を取り出す。
 
-        const keyInput = content[content.length - 1] // 追加された文字すなわち一番最後の文字を取り出す。
+      // 何問目/全問題数を右上に表示
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      document.getElementById("progress-number")!.textContent = wordnum + 1 + "/" + questions.length + "問"
 
-        // 何問目/全問題数を右上に表示
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        document.getElementById("progress-number")!.textContent = wordnum + 1 + "/" + questions.length + "問"
-
-        if (keyInput === questions[wordnum][cnt]) {
-          // 正答時
-          cnt++
-          correct++
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          document.getElementById("correct")!.textContent = correct + "回"
-        } else if (keyInput.match(/[a-zA-Z]/)) {
-          // 間違えていたときでアルファベットであれば、不正解とする。
-          // 不正解の時
-          miss++
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          document.getElementById("miss")!.textContent = miss + "回"
-        }
-
-        if (cnt === questions[wordnum].length) {
-          // 次の問題へ
-          wordnum++
-
-          // 正解音が鳴る。最後の問題だけちょっと切れている
-          correctSE.pause()
-          correctSE.play()
-
-          // 進捗バーを増やす
-          setNow(Math.round((wordnum / questions.length) * 100))
-
-          cnt = 0
-          if (wordnum === questions.length && isFinished === false) {
-            // clearInterval(timerId)
-            // 二重submitを防ぐflag
-            isFinished = true
-            results(time, wordnum, correct, miss)
-          }
-        }
-
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        document.getElementById("answered")!.textContent = questions[wordnum].slice(0, cnt)
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        document.getElementById("question")!.textContent = questions[wordnum].slice(cnt)
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        document.getElementById("miss")!.textContent = miss + "回"
+      if (keyInput === questions[wordnum][cnt]) {
+        // 正答時
+        cnt++
+        correct++
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         document.getElementById("correct")!.textContent = correct + "回"
-      })
+      } else if (keyInput.match(/[a-zA-Z]/)) {
+        // 間違えていたときでアルファベットであれば、不正解とする。
+        // 不正解の時
+        miss++
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        document.getElementById("miss")!.textContent = miss + "回"
+      }
+
+      if (cnt === questions[wordnum].length) {
+        // 次の問題へ
+        wordnum++
+
+        // 正解音が鳴る。最後の問題だけちょっと切れている
+        correctSE.pause()
+        correctSE.play()
+
+        // 進捗バーを増やす
+        setNow(Math.round((wordnum / questions.length) * 100))
+
+        cnt = 0
+        if (wordnum === questions.length && isFinished === false) {
+          // clearInterval(timerId)
+          // 二重submitを防ぐflag
+          isFinished = true
+          results(time, wordnum, correct, miss)
+        }
+      }
+
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      observer.observe(document.getElementById("content")!, {
-        attributes: true,
-        childList: true,
-        subtree: true,
-      })
+      document.getElementById("answered")!.textContent = questions[wordnum].slice(0, cnt)
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      document.getElementById("question")!.textContent = questions[wordnum].slice(cnt)
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      document.getElementById("miss")!.textContent = miss + "回"
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      document.getElementById("correct")!.textContent = correct + "回"
 
       // 開始キーを押したら開始
       window.addEventListener("keydown", () => {
@@ -213,16 +197,10 @@ export default function Basic() {
     console.log(content)*/
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    let content = document.getElementById("content")!.textContent
-
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("correct")!.textContent = correct + "回"
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("miss")!.textContent = miss + "回"
-  }, [])
-
-  const cont = document.getElementById("content")
-  if (cont !== null) cont.textContent = content
+  }, [content])
 
   return (
     <>
@@ -268,8 +246,6 @@ export default function Basic() {
           <span id="question">[Space]を押して開始</span>
         </div>
       </div>
-      {/* 下のdivの中にReactがキーボードの入力結果をいい感じにして、出力している。これを、読み取って使えば良い。 */}
-      <div id="content" ref={keyRef}></div>
       <Keyboard output={content} setOutput={setContent} />
     </>
   )
