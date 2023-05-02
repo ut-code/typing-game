@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
 // import keyCodes from "./../../../../keyboard/src/components/data/keyCodes";
 import keyCodes from "../../../components/keyboard-layout-creator/keyboard/data/keyCodes.json"
 import {
@@ -14,7 +15,6 @@ import GetManySettings from "../../../components/keyboard-layout-creator/GetMany
 import GetFileName from "../../../components/keyboard-layout-creator/GetFileName"
 import makeJSONFile from "../../../components/keyboard-layout-creator/makeJSONFile"
 import ConfirmButton from "../../../components/keyboard-layout-creator/ConfirmButton"
-import BackToHome from "../../../components/keyboard-layout-creator/BackToHome"
 import "./style.css"
 import "./../keyboard.css"
 
@@ -223,7 +223,9 @@ export default function Physical(): JSX.Element {
           makeJSONFile(physicalKeyToObject(marginRow, marginColumn, height, rows, columns, widths, styles), fileName)
         }}
       ></ConfirmButton>
-      <BackToHome></BackToHome>
+      <nav>
+        <Link to="/keyboard-layout-creator">Homeへ戻る</Link>
+      </nav>
     </>
   )
 }
