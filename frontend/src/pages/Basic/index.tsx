@@ -10,7 +10,7 @@ export default function Basic() {
   const [content, setContent] = useState<string>("a")
   const [now, setNow] = useState<number>(0)
   // const [wordnum, setWordnum] = useState<number>(0)
-  // const [questions, setQuestions] = useState<string[]>([])
+  const [questions, setQuestions] = useState<string[]>([])
   const [isStarted, setIsStarted] = useState<boolean>(false)
   const [time, setTime] = useState(0) // 現在の時間
   const [timeLimit] = useState(12) // 制限時間
@@ -23,7 +23,6 @@ export default function Basic() {
 
   const correctSE: HTMLAudioElement = new Audio("/correctSE.mp3")
   const qnumber: number = Number(localStorage.getItem("qnumber")) || 0
-  let questions: string[] = []
 
   const Navigate = useNavigate()
 
@@ -37,7 +36,14 @@ export default function Basic() {
   }
 
   // scoreを計算する関数
-  const calcScore = (time: number, wordnum: number, correct: number, miss: number, velocity: number) => {
+  const calcScore = (
+    time: number,
+    wordnum: number,
+    correct: number,
+    miss: number,
+    velocity: number,
+    questions: string[]
+  ) => {
     // 使う変数
     const progress = wordnum / questions.length
     const diff = 0
@@ -52,11 +58,11 @@ export default function Basic() {
     return Math.floor(w1 * progress * (w2 * diff + w3 * correct_rate + w4 * velocity))
   }
 
-  async function results(time: number, wordnum: number, correct: number, miss: number) {
+  async function results(time: number, wordnum: number, correct: number, miss: number, questions: string[]) {
     let velocity
     if (time === 0) velocity = 99.99
     else velocity = correct / time
-    const score = calcScore(time, wordnum, correct, miss, velocity)
+    const score = calcScore(time, wordnum, correct, miss, velocity, questions)
     const kpm = Math.floor(velocity * Math.pow(10, 2)) / Math.pow(10, 2) // kpmじゃなくてkpsだった...
     let scorerank
     if (miss === 0 && kpm >= 5 && wordnum === questions.length) scorerank = "SS"
@@ -99,8 +105,8 @@ export default function Basic() {
         body: json,
       })
       const data: string[] = JSON.parse(await response.text())
-      if (qnumber <= 5) questions = shuffle(data) // 順番が無関係な問題のみシャッフル
-      else questions = data
+      if (qnumber <= 5) setQuestions(shuffle(data)) // 順番が無関係な問題のみシャッフル
+      else setQuestions(data)
     })()
   }, [])
 
@@ -117,7 +123,7 @@ export default function Basic() {
       console.log(typeof timerId)
       clearInterval(timerId)
       isFinished = true
-      results(time, wordnum, correct, miss)
+      results(time, wordnum, correct, miss, questions)
     }
   }
 
@@ -129,8 +135,12 @@ export default function Basic() {
     return () => clearInterval(timerId)
   }, [isStarted, time])
 
+  const [previousContent, setPreviousContent] = useState(content)
+
   useEffect(() => {
     async function main() {
+      if (content === previousContent) return
+      setPreviousContent(content)
       const keyInput = content[content.length - 1] // 追加された文字すなわち一番最後の文字を取り出す。
 
       // 何問目/全問題数を右上に表示
@@ -167,7 +177,7 @@ export default function Basic() {
           // clearInterval(timerId)
           // 二重submitを防ぐflag
           isFinished = true
-          results(time, wordnum, correct, miss)
+          results(time, wordnum, correct, miss, questions)
         }
       }
 
@@ -200,7 +210,7 @@ export default function Basic() {
     document.getElementById("correct")!.textContent = correct + "回"
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("miss")!.textContent = miss + "回"
-  }, [content])
+  }, [content, questions])
 
   return (
     <>
