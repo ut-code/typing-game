@@ -17,8 +17,7 @@ export default function Basic() {
   const [correct, setCorrect] = useState<number>(0) // 正答文字数
   const [miss, setMiss] = useState<number>(0) // ミスタイプ数
   const [cnt, setCnt] = useState<number>(0) // 何文字目か
-
-  let isFinished = false // 終わったか
+  const [isFinished, setIsFinished] = useState<boolean>(false) // 終わったか
 
   const correctSE: HTMLAudioElement = new Audio("/correctSE.mp3")
   const qnumber: number = Number(localStorage.getItem("qnumber")) || 0
@@ -121,7 +120,7 @@ export default function Basic() {
     if (timeLimit - time <= 0 && !isFinished) {
       console.log(typeof timerId)
       clearInterval(timerId)
-      isFinished = true
+      setIsFinished(true)
       results(time, wordNum, correct, miss, questions)
     }
   }
@@ -175,7 +174,7 @@ export default function Basic() {
         if (wordNum === questions.length && isFinished === false) {
           // clearInterval(timerId)
           // 二重submitを防ぐflag
-          isFinished = true
+          setIsFinished(true)
           results(time, wordNum, correct, miss, questions)
         }
       }
@@ -209,7 +208,7 @@ export default function Basic() {
     document.getElementById("correct")!.textContent = correct + "回"
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("miss")!.textContent = miss + "回"
-  }, [content, questions, wordNum, correct, miss, cnt])
+  }, [content, questions, wordNum, correct, miss, cnt, isFinished])
 
   return (
     <>
