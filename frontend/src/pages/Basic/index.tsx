@@ -14,8 +14,8 @@ export default function Basic() {
   const [isStarted, setIsStarted] = useState<boolean>(false)
   const [time, setTime] = useState(0) // 現在の時間
   const [timeLimit] = useState(12) // 制限時間
+  const [correct, setCorrect] = useState<number>(0) // 正答文字数
 
-  let correct = 0 // 正答文字数
   let miss = 0 // ミスタイプ数
   let cnt = 0 // 何文字目か
   let isFinished = false // 終わったか
@@ -149,7 +149,7 @@ export default function Basic() {
       if (keyInput === questions[wordNum][cnt]) {
         // 正答時
         cnt++
-        correct++
+        setCorrect((prev) => prev + 1)
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         document.getElementById("correct")!.textContent = correct + "回"
       } else if (keyInput.match(/[a-zA-Z]/)) {
@@ -209,7 +209,7 @@ export default function Basic() {
     document.getElementById("correct")!.textContent = correct + "回"
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("miss")!.textContent = miss + "回"
-  }, [content, questions, wordNum])
+  }, [content, questions, wordNum, correct])
 
   return (
     <>
