@@ -15,8 +15,8 @@ export default function Basic() {
   const [time, setTime] = useState(0) // 現在の時間
   const [timeLimit] = useState(12) // 制限時間
   const [correct, setCorrect] = useState<number>(0) // 正答文字数
+  const [miss, setMiss] = useState<number>(0) // ミスタイプ数
 
-  let miss = 0 // ミスタイプ数
   let cnt = 0 // 何文字目か
   let isFinished = false // 終わったか
 
@@ -155,7 +155,7 @@ export default function Basic() {
       } else if (keyInput.match(/[a-zA-Z]/)) {
         // 間違えていたときでアルファベットであれば、不正解とする。
         // 不正解の時
-        miss++
+        setMiss((prev) => prev + 1)
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         document.getElementById("miss")!.textContent = miss + "回"
       }
@@ -209,7 +209,7 @@ export default function Basic() {
     document.getElementById("correct")!.textContent = correct + "回"
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("miss")!.textContent = miss + "回"
-  }, [content, questions, wordNum, correct])
+  }, [content, questions, wordNum, correct, miss])
 
   return (
     <>
