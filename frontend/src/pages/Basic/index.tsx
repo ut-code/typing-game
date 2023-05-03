@@ -13,7 +13,7 @@ import calculateScoreRank from "./calculateScoreRank"
 export default function Basic() {
   const [content, setContent] = useState<string>("a")
   const [now, setNow] = useState<number>(0)
-  const [wordNum, setWordNum] = useState<number>(0) // 何問目か
+  const [problemSolved, setProblemSolved] = useState<number>(0) // 何問目か
   const [questions, setQuestions] = useState<string[]>([])
   const [isStarted, setIsStarted] = useState<boolean>(false)
   const [time, setTime] = useState(0) // 現在の時間
@@ -83,7 +83,7 @@ export default function Basic() {
       console.log(typeof timerId)
       clearInterval(timerId)
       setIsFinished(true)
-      results(time, wordNum, correct, miss, questions)
+      results(time, problemSolved, correct, miss, questions)
     }
   }
 
@@ -103,7 +103,7 @@ export default function Basic() {
       setPreviousContent(content)
       const keyInput = content[content.length - 1] // 追加された文字すなわち一番最後の文字を取り出す。
 
-      if (keyInput === questions[wordNum][cnt]) {
+      if (keyInput === questions[problemSolved][cnt]) {
         // 正答時
         setCnt((prev) => prev + 1)
         setCorrect((prev) => prev + 1)
@@ -113,23 +113,23 @@ export default function Basic() {
         setMiss((prev) => prev + 1)
       }
 
-      if (cnt === questions[wordNum].length) {
+      if (cnt === questions[problemSolved].length) {
         // 次の問題へ
-        setWordNum((prev) => prev + 1)
+        setProblemSolved((prev) => prev + 1)
 
         // 正解音が鳴る。最後の問題だけちょっと切れている
         correctSE.pause()
         correctSE.play()
 
         // 進捗バーを増やす
-        setNow(Math.round((wordNum / questions.length) * 100))
+        setNow(Math.round((problemSolved / questions.length) * 100))
 
         setCnt(0)
-        if (wordNum === questions.length && isFinished === false) {
+        if (problemSolved === questions.length && isFinished === false) {
           // clearInterval(timerId)
           // 二重submitを防ぐflag
           setIsFinished(true)
-          results(time, wordNum, correct, miss, questions)
+          results(time, problemSolved, correct, miss, questions)
         }
       }
 
@@ -139,7 +139,7 @@ export default function Basic() {
       })
     }
     main()
-  }, [content, questions, wordNum, correct, miss, cnt, isFinished])
+  }, [content, questions, problemSolved, correct, miss, cnt, isFinished])
 
   return (
     <>
@@ -173,7 +173,7 @@ export default function Basic() {
 
           <Stack gap={0} id="progress">
             {/* 何問目/全問題数 */}
-            <div id="progress-number">{wordNum + 1 + "/" + questions.length + "問"}</div>
+            <div id="progress-number">{problemSolved + 1 + "/" + questions.length + "問"}</div>
             <div className="pb-5" id="progress-bar">
               <ProgressBar variant="success" animated now={now} label={`${now}%`} />
             </div>
@@ -182,8 +182,8 @@ export default function Basic() {
       </div>
       <div id="elements">
         <div id="answer">
-          <span id="answered">{isStarted ? questions[wordNum].slice(0, cnt) : ""}</span>
-          <span id="question">{isStarted ? questions[wordNum].slice(cnt) : "[Space]を押して開始"}</span>
+          <span id="answered">{isStarted ? questions[problemSolved].slice(0, cnt) : ""}</span>
+          <span id="question">{isStarted ? questions[problemSolved].slice(cnt) : "[Space]を押して開始"}</span>
         </div>
       </div>
       <Keyboard output={content} setOutput={setContent} />
