@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import { Button, ProgressBar, Stack } from "react-bootstrap"
 import shuffle from "./shuffle"
 import calculateScore from "./calculateScore"
+import calculateKps from "./calculateKps"
 
 export default function Basic() {
   const [content, setContent] = useState<string>("a")
@@ -27,16 +28,15 @@ export default function Basic() {
   const Navigate = useNavigate()
 
   async function results(time: number, wordNum: number, correct: number, miss: number, questions: string[]) {
-    const typingSpeed: number = time === 0 ? 99.99 : correct / time
     const score = calculateScore(time, wordNum, correct, miss, questions.length)
-    const kpm = Math.floor(typingSpeed * Math.pow(10, 2)) / Math.pow(10, 2) // kpmじゃなくてkpsだった...
+    const kps = calculateKps(time, correct)
     let scorerank
-    if (miss === 0 && kpm >= 5 && wordNum === questions.length) scorerank = "SS"
-    else if (correct / (correct + miss + 1) > 0.9 && kpm >= 5 && wordNum === questions.length) scorerank = "S"
-    else if (correct / (correct + miss + 1) > 0.8 && kpm >= 4) scorerank = "A"
-    else if (correct / (correct + miss + 1) > 0.8 && kpm >= 3) scorerank = "B"
+    if (miss === 0 && kps >= 5 && wordNum === questions.length) scorerank = "SS"
+    else if (correct / (correct + miss + 1) > 0.9 && kps >= 5 && wordNum === questions.length) scorerank = "S"
+    else if (correct / (correct + miss + 1) > 0.8 && kps >= 4) scorerank = "A"
+    else if (correct / (correct + miss + 1) > 0.8 && kps >= 3) scorerank = "B"
     else if (correct / (correct + miss + 1) < 0.5) scorerank = "E"
-    else if (correct / (correct + miss + 1) > 0.7 && kpm >= 2) scorerank = "C"
+    else if (correct / (correct + miss + 1) > 0.7 && kps >= 2) scorerank = "C"
     else scorerank = "D"
 
     const json = JSON.stringify({
@@ -52,7 +52,7 @@ export default function Basic() {
 
     localStorage.setItem("time", time.toString())
     localStorage.setItem("score", score.toString())
-    localStorage.setItem("kpm", kpm.toString())
+    localStorage.setItem("kpm", kps.toString())
     localStorage.setItem("correct", correct.toString())
     localStorage.setItem("miss", miss.toString())
     localStorage.setItem("scorerank", scorerank)
