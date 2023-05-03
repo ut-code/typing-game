@@ -24,7 +24,7 @@ export default function Basic() {
   const [isFinished, setIsFinished] = useState<boolean>(false) // 終わったか
 
   const correctSE: HTMLAudioElement = new Audio("/correctSE.mp3")
-  const qnumber: number = Number(localStorage.getItem("qnumber")) || 0
+  const questionNumber: number = Number(localStorage.getItem("questionNumber")) || 0
 
   const Navigate = useNavigate()
 
@@ -34,7 +34,7 @@ export default function Basic() {
     const scoreRank = calculateScoreRank(wordNum, correct, miss, kps, questions.length)
 
     const json = JSON.stringify({
-      qnumber: qnumber,
+      qnumber: questionNumber,
       username: localStorage.getItem("username") || "Guest",
       score: score,
     })
@@ -57,7 +57,7 @@ export default function Basic() {
     // 問題をquestionsに格納する
     ;(async () => {
       const json = JSON.stringify({
-        qnumber: qnumber,
+        qnumber: questionNumber,
       })
       const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/questions`, {
         method: "post",
@@ -65,7 +65,7 @@ export default function Basic() {
         body: json,
       })
       const data: string[] = JSON.parse(await response.text())
-      if (qnumber <= 5) setQuestions(shuffle(data)) // 順番が無関係な問題のみシャッフル
+      if (questionNumber <= 5) setQuestions(shuffle(data)) // 順番が無関係な問題のみシャッフル
       else setQuestions(data)
     })()
   }, [])
