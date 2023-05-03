@@ -24,14 +24,14 @@ export default function Result() {
 
   useEffect(() => {
     async function tmp() {
-      const qnumber = Number(localStorage.getItem("qnumber"))
+      const qnumber = Number(localStorage.getItem("questionNumber"))
       const username = localStorage.getItem("username") || "Guest"
       const time = Number(localStorage.getItem("time"))
       const score = Number(localStorage.getItem("score"))
       const kpm = Number(localStorage.getItem("kpm"))
-      const correct = Number(localStorage.getItem("correct"))
-      const miss = Number(localStorage.getItem("miss"))
-      const scorerank = localStorage.getItem("scorerank") || "?"
+      const correct = Number(localStorage.getItem("correctInputCount"))
+      const miss = Number(localStorage.getItem("incorrectInputCount"))
+      const scorerank = localStorage.getItem("scoreRank") || "?"
       setUserName(username)
       setUserTime(time)
       setUserScore(score)
