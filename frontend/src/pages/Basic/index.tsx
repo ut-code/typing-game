@@ -5,6 +5,7 @@ import "./style.css"
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Button, ProgressBar, Stack } from "react-bootstrap"
+import shuffle from "./shuffle"
 
 export default function Basic() {
   const [content, setContent] = useState<string>("a")
@@ -23,15 +24,6 @@ export default function Basic() {
   const qnumber: number = Number(localStorage.getItem("qnumber")) || 0
 
   const Navigate = useNavigate()
-
-  // 配列をシャッフルする関数
-  const shuffle = (array: string[]): string[] => {
-    for (let i = 0; i < array.length; i++) {
-      const j = Math.floor(Math.random() * array.length)
-      ;[array[i], array[j]] = [array[j], array[i]]
-    }
-    return array
-  }
 
   // scoreを計算する関数
   const calcScore = (
