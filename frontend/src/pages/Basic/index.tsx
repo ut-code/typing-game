@@ -149,8 +149,6 @@ export default function Basic() {
         // 間違えていたときでアルファベットであれば、不正解とする。
         // 不正解の時
         setMiss((prev) => prev + 1)
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        document.getElementById("miss")!.textContent = miss + "回"
       }
 
       if (cnt === questions[wordNum].length) {
@@ -177,8 +175,6 @@ export default function Basic() {
       document.getElementById("answered")!.textContent = questions[wordNum].slice(0, cnt)
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       document.getElementById("question")!.textContent = questions[wordNum].slice(cnt)
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      document.getElementById("miss")!.textContent = miss + "回"
 
       // 開始キーを押したら開始
       window.addEventListener("keydown", () => {
@@ -195,9 +191,6 @@ export default function Basic() {
       content = content.slice(content.length-11,content.length-1);
     }
     console.log(content)*/
-
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    document.getElementById("miss")!.textContent = miss + "回"
   }, [content, questions, wordNum, correct, miss, cnt, isFinished])
 
   return (
@@ -217,7 +210,7 @@ export default function Basic() {
               </tr>
               <tr>
                 <th>ミスタイプ数：</th>
-                <td id="miss"></td>
+                <td id="miss">{miss}回</td>
               </tr>
               <tr>
                 <th>経過時間：</th>
