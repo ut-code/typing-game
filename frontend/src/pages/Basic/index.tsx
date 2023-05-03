@@ -19,7 +19,7 @@ export default function Basic() {
   const [time, setTime] = useState(0) // 現在の時間
   const [timeLimit] = useState(12) // 制限時間
   const [correctInputCount, setCorrectInputCount] = useState<number>(0) // 正答文字数
-  const [miss, setMiss] = useState<number>(0) // ミスタイプ数
+  const [incorrectInputCount, setIncorrectInputCount] = useState<number>(0) // ミスタイプ数
   const [cnt, setCnt] = useState<number>(0) // 何文字目か
   const [isFinished, setIsFinished] = useState<boolean>(false) // 終わったか
 
@@ -83,7 +83,7 @@ export default function Basic() {
       console.log(typeof timerId)
       clearInterval(timerId)
       setIsFinished(true)
-      results(time, problemSolved, correctInputCount, miss, questions)
+      results(time, problemSolved, correctInputCount, incorrectInputCount, questions)
     }
   }
 
@@ -110,7 +110,7 @@ export default function Basic() {
       } else if (keyInput.match(/[a-zA-Z]/)) {
         // 間違えていたときでアルファベットであれば、不正解とする。
         // 不正解の時
-        setMiss((prev) => prev + 1)
+        setIncorrectInputCount((prev) => prev + 1)
       }
 
       if (cnt === questions[problemSolved].length) {
@@ -129,7 +129,7 @@ export default function Basic() {
           // clearInterval(timerId)
           // 二重submitを防ぐflag
           setIsFinished(true)
-          results(time, problemSolved, correctInputCount, miss, questions)
+          results(time, problemSolved, correctInputCount, incorrectInputCount, questions)
         }
       }
 
@@ -139,7 +139,7 @@ export default function Basic() {
       })
     }
     main()
-  }, [content, questions, problemSolved, correctInputCount, miss, cnt, isFinished])
+  }, [content, questions, problemSolved, correctInputCount, incorrectInputCount, cnt, isFinished])
 
   return (
     <>
@@ -158,7 +158,7 @@ export default function Basic() {
               </tr>
               <tr>
                 <th>ミスタイプ数：</th>
-                <td id="miss">{miss}回</td>
+                <td id="miss">{incorrectInputCount}回</td>
               </tr>
               <tr>
                 <th>経過時間：</th>
