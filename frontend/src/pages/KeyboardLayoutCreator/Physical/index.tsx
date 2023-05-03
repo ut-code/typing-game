@@ -13,7 +13,7 @@ import Keyboard from "../../../components/keyboard-layout-creator/keyboard/keybo
 import ReadJSONFile from "../../../components/keyboard-layout-creator/ReadJSONFile"
 import GetManySettings from "../../../components/keyboard-layout-creator/GetManySettings"
 import GetFileName from "../../../components/keyboard-layout-creator/GetFileName"
-import makeJSONFile from "../../../components/keyboard-layout-creator/makeJSONFile"
+import makeJSONFile from "../../../utils/makeJSONFile"
 import ConfirmButton from "../../../components/keyboard-layout-creator/ConfirmButton"
 import "./style.css"
 import "./../keyboard.css"
