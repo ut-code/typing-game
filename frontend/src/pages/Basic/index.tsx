@@ -141,10 +141,6 @@ export default function Basic() {
       setPreviousContent(content)
       const keyInput = content[content.length - 1] // 追加された文字すなわち一番最後の文字を取り出す。
 
-      // 何問目/全問題数を右上に表示
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      document.getElementById("progress-number")!.textContent = wordNum + 1 + "/" + questions.length + "問"
-
       if (keyInput === questions[wordNum][cnt]) {
         // 正答時
         setCnt((prev) => prev + 1)
@@ -241,7 +237,8 @@ export default function Basic() {
           </table>
 
           <Stack gap={0} id="progress">
-            <div id="progress-number"></div>
+            {/* 何問目/全問題数を右上に表示 */}
+            <div id="progress-number">{wordNum + 1 + "/" + questions.length + "問"}</div>
             <div className="pb-5" id="progress-bar">
               <ProgressBar variant="success" animated now={now} label={`${now}%`} />
             </div>
