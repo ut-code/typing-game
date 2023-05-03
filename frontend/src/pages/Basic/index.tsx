@@ -126,7 +126,7 @@ export default function Basic() {
         setIncorrectInputCount((prev) => prev + 1)
       }
 
-      if (currentIndex === questions[problemSolved].length) {
+      if (currentIndex === questions[problemSolved].length - 1) {
         // 次の問題へ
         setProblemSolved((prev) => prev + 1)
 
