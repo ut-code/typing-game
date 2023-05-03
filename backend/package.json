@@ -2,7 +2,7 @@
   "name": "backend",
   "main": "main.ts",
   "scripts": {
-    "dev": "ts-node main.ts",
+    "dev": "ts-node src/main.ts",
     "build": "tsc",
     "start": "node dist/main.js"
   },
