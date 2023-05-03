@@ -8,6 +8,7 @@ import { Button, ProgressBar, Stack } from "react-bootstrap"
 import shuffle from "./shuffle"
 import calculateScore from "./calculateScore"
 import calculateKps from "./calculateKps"
+import calculateScoreRank from "./calculateScoreRank"
 
 export default function Basic() {
   const [content, setContent] = useState<string>("a")
@@ -30,14 +31,7 @@ export default function Basic() {
   async function results(time: number, wordNum: number, correct: number, miss: number, questions: string[]) {
     const score = calculateScore(time, wordNum, correct, miss, questions.length)
     const kps = calculateKps(time, correct)
-    let scorerank
-    if (miss === 0 && kps >= 5 && wordNum === questions.length) scorerank = "SS"
-    else if (correct / (correct + miss + 1) > 0.9 && kps >= 5 && wordNum === questions.length) scorerank = "S"
-    else if (correct / (correct + miss + 1) > 0.8 && kps >= 4) scorerank = "A"
-    else if (correct / (correct + miss + 1) > 0.8 && kps >= 3) scorerank = "B"
-    else if (correct / (correct + miss + 1) < 0.5) scorerank = "E"
-    else if (correct / (correct + miss + 1) > 0.7 && kps >= 2) scorerank = "C"
-    else scorerank = "D"
+    const scoreRank = calculateScoreRank(wordNum, correct, miss, kps, questions.length)
 
     const json = JSON.stringify({
       qnumber: qnumber,
@@ -55,7 +49,7 @@ export default function Basic() {
     localStorage.setItem("kpm", kps.toString())
     localStorage.setItem("correct", correct.toString())
     localStorage.setItem("miss", miss.toString())
-    localStorage.setItem("scorerank", scorerank)
+    localStorage.setItem("scorerank", scoreRank)
     Navigate("/result")
   }
 
