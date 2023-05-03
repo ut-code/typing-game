@@ -27,11 +27,9 @@ export default function Basic() {
   const Navigate = useNavigate()
 
   async function results(time: number, wordNum: number, correct: number, miss: number, questions: string[]) {
-    let velocity
-    if (time === 0) velocity = 99.99
-    else velocity = correct / time
+    const typingSpeed: number = time === 0 ? 99.99 : correct / time
     const score = calculateScore(time, wordNum, correct, miss, questions.length)
-    const kpm = Math.floor(velocity * Math.pow(10, 2)) / Math.pow(10, 2) // kpmじゃなくてkpsだった...
+    const kpm = Math.floor(typingSpeed * Math.pow(10, 2)) / Math.pow(10, 2) // kpmじゃなくてkpsだった...
     let scorerank
     if (miss === 0 && kpm >= 5 && wordNum === questions.length) scorerank = "SS"
     else if (correct / (correct + miss + 1) > 0.9 && kpm >= 5 && wordNum === questions.length) scorerank = "S"
