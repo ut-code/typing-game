@@ -18,7 +18,7 @@ export default function Basic() {
   const [isStarted, setIsStarted] = useState<boolean>(false)
   const [time, setTime] = useState(0) // 現在の時間
   const [timeLimit] = useState(12) // 制限時間
-  const [correct, setCorrect] = useState<number>(0) // 正答文字数
+  const [correctInputCount, setCorrectInputCount] = useState<number>(0) // 正答文字数
   const [miss, setMiss] = useState<number>(0) // ミスタイプ数
   const [cnt, setCnt] = useState<number>(0) // 何文字目か
   const [isFinished, setIsFinished] = useState<boolean>(false) // 終わったか
@@ -83,7 +83,7 @@ export default function Basic() {
       console.log(typeof timerId)
       clearInterval(timerId)
       setIsFinished(true)
-      results(time, problemSolved, correct, miss, questions)
+      results(time, problemSolved, correctInputCount, miss, questions)
     }
   }
 
@@ -106,7 +106,7 @@ export default function Basic() {
       if (keyInput === questions[problemSolved][cnt]) {
         // 正答時
         setCnt((prev) => prev + 1)
-        setCorrect((prev) => prev + 1)
+        setCorrectInputCount((prev) => prev + 1)
       } else if (keyInput.match(/[a-zA-Z]/)) {
         // 間違えていたときでアルファベットであれば、不正解とする。
         // 不正解の時
@@ -129,7 +129,7 @@ export default function Basic() {
           // clearInterval(timerId)
           // 二重submitを防ぐflag
           setIsFinished(true)
-          results(time, problemSolved, correct, miss, questions)
+          results(time, problemSolved, correctInputCount, miss, questions)
         }
       }
 
@@ -139,7 +139,7 @@ export default function Basic() {
       })
     }
     main()
-  }, [content, questions, problemSolved, correct, miss, cnt, isFinished])
+  }, [content, questions, problemSolved, correctInputCount, miss, cnt, isFinished])
 
   return (
     <>
@@ -154,7 +154,7 @@ export default function Basic() {
             <tbody>
               <tr>
                 <th>正しいタイプ数：</th>
-                <td id="correct">{correct}回</td>
+                <td id="correct">{correctInputCount}回</td>
               </tr>
               <tr>
                 <th>ミスタイプ数：</th>
