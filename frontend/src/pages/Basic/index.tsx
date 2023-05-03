@@ -54,6 +54,38 @@ export default function Basic() {
   }
 
   useEffect(() => {
+    // 開始キーを押したら開始
+    window.addEventListener("keydown", () => {
+      if (!isStarted) setIsStarted(true)
+    })
+
+    return () => {
+      window.removeEventListener("keydown", () => {
+        if (!isStarted) setIsStarted(true)
+      })
+    }
+  }, [])
+
+  // isStarted が変更されたら実行。
+  useEffect(() => {
+    if (!isStarted) return
+    const timerId = setInterval(() => {
+      setTime((prev) => prev + 1)
+    }, 1000)
+
+    return () => {
+      clearInterval(timerId)
+    }
+  }, [isStarted, setTime])
+
+  useEffect(() => {
+    if (timeLimit - time <= 0 && !isFinished) {
+      setIsFinished(true)
+      results(time, problemSolved, correctInputCount, incorrectInputCount, questions)
+    }
+  }, [timeLimit, time, problemSolved, correctInputCount, incorrectInputCount, questions])
+
+  useEffect(() => {
     // 問題をquestionsに格納する
     ;(async () => {
       const json = JSON.stringify({
@@ -69,31 +101,6 @@ export default function Basic() {
       else setQuestions(data)
     })()
   }, [])
-
-  let timerId: NodeJS.Timeout | any
-  const updateTime = () => {
-    console.log(typeof timerId)
-    timerId =
-      !timerId &&
-      setInterval(() => {
-        setTime((prev) => prev + 1)
-      }, 1000)
-
-    if (timeLimit - time <= 0 && !isFinished) {
-      console.log(typeof timerId)
-      clearInterval(timerId)
-      setIsFinished(true)
-      results(time, problemSolved, correctInputCount, incorrectInputCount, questions)
-    }
-  }
-
-  // 初回はisStartedが変更されたら実行。その後はtimeが変更されたら実行。
-  useEffect(() => {
-    if (!isStarted) return
-    updateTime()
-
-    return () => clearInterval(timerId)
-  }, [isStarted, time])
 
   const [previousContent, setPreviousContent] = useState(content)
 
@@ -132,11 +139,6 @@ export default function Basic() {
           results(time, problemSolved, correctInputCount, incorrectInputCount, questions)
         }
       }
-
-      // 開始キーを押したら開始
-      window.addEventListener("keydown", () => {
-        if (!isStarted) setIsStarted(true)
-      })
     }
     main()
   }, [content, questions, problemSolved, correctInputCount, incorrectInputCount, currentIndex, isFinished])
