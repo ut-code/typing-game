@@ -20,7 +20,7 @@ export default function Basic() {
   const [timeLimit] = useState(12) // 制限時間
   const [correctInputCount, setCorrectInputCount] = useState<number>(0) // 正答文字数
   const [incorrectInputCount, setIncorrectInputCount] = useState<number>(0) // ミスタイプ数
-  const [cnt, setCnt] = useState<number>(0) // 何文字目か
+  const [currentIndex, setCurrentIndex] = useState<number>(0) // 何文字目か
   const [isFinished, setIsFinished] = useState<boolean>(false) // 終わったか
 
   const correctSE: HTMLAudioElement = new Audio("/correctSE.mp3")
@@ -103,9 +103,9 @@ export default function Basic() {
       setPreviousContent(content)
       const keyInput = content[content.length - 1] // 追加された文字すなわち一番最後の文字を取り出す。
 
-      if (keyInput === questions[problemSolved][cnt]) {
+      if (keyInput === questions[problemSolved][currentIndex]) {
         // 正答時
-        setCnt((prev) => prev + 1)
+        setCurrentIndex((prev) => prev + 1)
         setCorrectInputCount((prev) => prev + 1)
       } else if (keyInput.match(/[a-zA-Z]/)) {
         // 間違えていたときでアルファベットであれば、不正解とする。
@@ -113,7 +113,7 @@ export default function Basic() {
         setIncorrectInputCount((prev) => prev + 1)
       }
 
-      if (cnt === questions[problemSolved].length) {
+      if (currentIndex === questions[problemSolved].length) {
         // 次の問題へ
         setProblemSolved((prev) => prev + 1)
 
@@ -124,7 +124,7 @@ export default function Basic() {
         // 進捗バーを増やす
         setNow(Math.round((problemSolved / questions.length) * 100))
 
-        setCnt(0)
+        setCurrentIndex(0)
         if (problemSolved === questions.length && isFinished === false) {
           // clearInterval(timerId)
           // 二重submitを防ぐflag
@@ -139,7 +139,7 @@ export default function Basic() {
       })
     }
     main()
-  }, [content, questions, problemSolved, correctInputCount, incorrectInputCount, cnt, isFinished])
+  }, [content, questions, problemSolved, correctInputCount, incorrectInputCount, currentIndex, isFinished])
 
   return (
     <>
@@ -182,8 +182,8 @@ export default function Basic() {
       </div>
       <div id="elements">
         <div id="answer">
-          <span id="answered">{isStarted ? questions[problemSolved].slice(0, cnt) : ""}</span>
-          <span id="question">{isStarted ? questions[problemSolved].slice(cnt) : "[Space]を押して開始"}</span>
+          <span id="answered">{isStarted ? questions[problemSolved].slice(0, currentIndex) : ""}</span>
+          <span id="question">{isStarted ? questions[problemSolved].slice(currentIndex) : "[Space]を押して開始"}</span>
         </div>
       </div>
       <Keyboard output={content} setOutput={setContent} />
