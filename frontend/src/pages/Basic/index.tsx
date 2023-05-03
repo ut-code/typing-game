@@ -173,8 +173,6 @@ export default function Basic() {
 
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       document.getElementById("answered")!.textContent = questions[wordNum].slice(0, cnt)
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      document.getElementById("question")!.textContent = questions[wordNum].slice(cnt)
 
       // 開始キーを押したら開始
       window.addEventListener("keydown", () => {
@@ -235,7 +233,7 @@ export default function Basic() {
       <div id="elements">
         <div id="answer">
           <span id="answered"></span>
-          <span id="question">[Space]を押して開始</span>
+          <span id="question">{isStarted ? questions[wordNum].slice(cnt) : "[Space]を押して開始"}</span>
         </div>
       </div>
       <Keyboard output={content} setOutput={setContent} />
