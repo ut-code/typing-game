@@ -177,15 +177,6 @@ export default function Basic() {
       })
     }
     main()
-
-    /*const content = document.getElementById("content");
-    if (content != null) {
-      const content = content.textContent;
-    }
-    if (content.length > 2) {
-      content = content.slice(content.length-11,content.length-1);
-    }
-    console.log(content)*/
   }, [content, questions, wordNum, correct, miss, cnt, isFinished])
 
   return (
@@ -219,7 +210,7 @@ export default function Basic() {
           </table>
 
           <Stack gap={0} id="progress">
-            {/* 何問目/全問題数を右上に表示 */}
+            {/* 何問目/全問題数 */}
             <div id="progress-number">{wordNum + 1 + "/" + questions.length + "問"}</div>
             <div className="pb-5" id="progress-bar">
               <ProgressBar variant="success" animated now={now} label={`${now}%`} />
