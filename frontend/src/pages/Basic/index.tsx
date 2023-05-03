@@ -145,8 +145,6 @@ export default function Basic() {
         // 正答時
         setCnt((prev) => prev + 1)
         setCorrect((prev) => prev + 1)
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        document.getElementById("correct")!.textContent = correct + "回"
       } else if (keyInput.match(/[a-zA-Z]/)) {
         // 間違えていたときでアルファベットであれば、不正解とする。
         // 不正解の時
@@ -181,8 +179,6 @@ export default function Basic() {
       document.getElementById("question")!.textContent = questions[wordNum].slice(cnt)
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       document.getElementById("miss")!.textContent = miss + "回"
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      document.getElementById("correct")!.textContent = correct + "回"
 
       // 開始キーを押したら開始
       window.addEventListener("keydown", () => {
@@ -201,8 +197,6 @@ export default function Basic() {
     console.log(content)*/
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    document.getElementById("correct")!.textContent = correct + "回"
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("miss")!.textContent = miss + "回"
   }, [content, questions, wordNum, correct, miss, cnt, isFinished])
 
@@ -219,7 +213,7 @@ export default function Basic() {
             <tbody>
               <tr>
                 <th>正しいタイプ数：</th>
-                <td id="correct"></td>
+                <td id="correct">{correct}回</td>
               </tr>
               <tr>
                 <th>ミスタイプ数：</th>
