@@ -28,10 +28,16 @@ export default function Basic() {
 
   const Navigate = useNavigate()
 
-  async function results(time: number, wordNum: number, correct: number, miss: number, questions: string[]) {
-    const score = calculateScore(time, wordNum, correct, miss, questions.length)
-    const kps = calculateKps(time, correct)
-    const scoreRank = calculateScoreRank(wordNum, correct, miss, kps, questions.length)
+  async function saveResults(
+    time: number,
+    problemSolved: number,
+    correctInputCount: number,
+    incorrectInputCount: number,
+    questionsLength: number
+  ) {
+    const score = calculateScore(time, problemSolved, correctInputCount, incorrectInputCount, questionsLength)
+    const kps = calculateKps(time, correctInputCount)
+    const scoreRank = calculateScoreRank(problemSolved, correctInputCount, incorrectInputCount, kps, questionsLength)
 
     const json = JSON.stringify({
       qnumber: questionNumber,
@@ -47,9 +53,9 @@ export default function Basic() {
     localStorage.setItem("time", time.toString())
     localStorage.setItem("score", score.toString())
     localStorage.setItem("kpm", kps.toString())
-    localStorage.setItem("correct", correct.toString())
-    localStorage.setItem("miss", miss.toString())
-    localStorage.setItem("scorerank", scoreRank)
+    localStorage.setItem("correctInputCount", correctInputCount.toString())
+    localStorage.setItem("incorrectInputCount", incorrectInputCount.toString())
+    localStorage.setItem("scoreRank", scoreRank)
     Navigate("/result")
   }
 
@@ -81,7 +87,7 @@ export default function Basic() {
   useEffect(() => {
     if (timeLimit - time <= 0 && !isFinished) {
       setIsFinished(true)
-      results(time, problemSolved, correctInputCount, incorrectInputCount, questions)
+      saveResults(time, problemSolved, correctInputCount, incorrectInputCount, questions.length)
     }
   }, [timeLimit, time, problemSolved, correctInputCount, incorrectInputCount, questions])
 
@@ -136,7 +142,7 @@ export default function Basic() {
           // clearInterval(timerId)
           // 二重submitを防ぐflag
           setIsFinished(true)
-          results(time, problemSolved, correctInputCount, incorrectInputCount, questions)
+          saveResults(time, problemSolved, correctInputCount, incorrectInputCount, questions.length)
         }
       }
     }
