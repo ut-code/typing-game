@@ -6,6 +6,7 @@ import "./style.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Button, ProgressBar, Stack } from "react-bootstrap"
 import shuffle from "./shuffle"
+import calculateScore from "./calculateScore"
 
 export default function Basic() {
   const [content, setContent] = useState<string>("a")
@@ -25,34 +26,11 @@ export default function Basic() {
 
   const Navigate = useNavigate()
 
-  // scoreを計算する関数
-  const calcScore = (
-    time: number,
-    wordNum: number,
-    correct: number,
-    miss: number,
-    velocity: number,
-    questions: string[]
-  ) => {
-    // 使う変数
-    const progress = wordNum / questions.length
-    const diff = 0
-    const correct_rate = correct ** 2 / (miss + correct + 1) // 問題文字数多いと有利！
-    if (velocity > 10) velocity = 10
-
-    // 重みをつけて算出
-    const w1 = 1000
-    const w2 = 0 // 難易度は未実装
-    const w3 = 1
-    const w4 = 5
-    return Math.floor(w1 * progress * (w2 * diff + w3 * correct_rate + w4 * velocity))
-  }
-
   async function results(time: number, wordNum: number, correct: number, miss: number, questions: string[]) {
     let velocity
     if (time === 0) velocity = 99.99
     else velocity = correct / time
-    const score = calcScore(time, wordNum, correct, miss, velocity, questions)
+    const score = calculateScore(time, wordNum, correct, miss, questions.length)
     const kpm = Math.floor(velocity * Math.pow(10, 2)) / Math.pow(10, 2) // kpmじゃなくてkpsだった...
     let scorerank
     if (miss === 0 && kpm >= 5 && wordNum === questions.length) scorerank = "SS"
