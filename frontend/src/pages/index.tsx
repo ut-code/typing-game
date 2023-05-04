@@ -17,7 +17,7 @@ export default function Home() {
   const postStorage = () => {
     localStorage.setItem("username", userName || "Guest")
     const idx = qnumber.indexOf(":")
-    localStorage.setItem("qnumber", qnumber.slice(0, idx))
+    localStorage.setItem("questionNumber", qnumber.slice(0, idx))
     // fetchAPI後に別ページへ遷移
     Navigate("/basic")
   }
