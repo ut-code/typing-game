@@ -123,18 +123,17 @@ function toJapanese(content: string): string {
 }
 
 export default function App({
-  output = "",
-  setOutput = () => {},
+  content = "",
+  setContent = () => {},
 }: {
-  output?: string
-  setOutput?: (value: string) => void
+  content?: string
+  setContent?: (value: string) => void
 }): JSX.Element {
   const [isCustom, setIsCustom] = useState<boolean>(false)
   const [layout, setLayout] = useState<string>()
   const [functional, setFunctional] = useState<string>(defaultFunctionalLayoutType)
   const [physical, setPhysical] = useState<string>(defaultPhysicalLayoutType)
   const [keyColors, setKeyColors] = useState<string[]>(keyCodes.map(() => "rgba(0,0,0,0)"))
-  const [content, setContent] = useState<string>("")
   const [shift, setShift] = useState<boolean>(false)
   useEffect(() => {
     function tmp(e: KeyboardEvent): void {
@@ -150,7 +149,7 @@ export default function App({
       window.removeEventListener("keyup", temp)
     }
   }, [functional, isCustom, shift])
-  setOutput(content)
+  setContent(content)
   return (
     <>
       <div id="wrapper">

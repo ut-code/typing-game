@@ -11,7 +11,7 @@ import calculateKps from "./calculateKps"
 import calculateScoreRank from "./calculateScoreRank"
 
 export default function Basic() {
-  const [content, setContent] = useState<string>("a")
+  const [content, setContent] = useState<string>("")
   const [now, setNow] = useState<number>(0)
   const [problemSolved, setProblemSolved] = useState<number>(0) // 何問目か
   const [questions, setQuestions] = useState<string[]>([])
@@ -128,7 +128,9 @@ export default function Basic() {
 
       if (currentIndex === questions[problemSolved].length - 1) {
         // 次の問題へ
-        setProblemSolved((prev) => prev + 1)
+        if (problemSolved < questions.length - 1) {
+          setProblemSolved((prev) => prev + 1)
+        }
 
         // 正解音が鳴る。最後の問題だけちょっと切れている
         correctSE.pause()
@@ -194,7 +196,7 @@ export default function Basic() {
           <span id="question">{isStarted ? questions[problemSolved].slice(currentIndex) : "[Space]を押して開始"}</span>
         </div>
       </div>
-      <Keyboard output={content} setOutput={setContent} />
+      <Keyboard content={content} setContent={setContent} />
     </>
   )
 }
