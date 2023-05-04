@@ -11,22 +11,30 @@ import calculateKps from "./calculateKps"
 import calculateScoreRank from "./calculateScoreRank"
 
 export default function Basic() {
+  // キー入力
   const [content, setContent] = useState<string>("")
+  const [previousContent, setPreviousContent] = useState(content)
+  // 問題
+  const questionNumber: number = Number(localStorage.getItem("questionNumber")) || 0
   const [problemSolved, setProblemSolved] = useState<number>(0) // 何問目か
   const [questions, setQuestions] = useState<string[]>(["sample"])
-  const [isStarted, setIsStarted] = useState<boolean>(false)
-  const [time, setTime] = useState(0) // 現在の時間
-  const [timeLimit] = useState(12) // 制限時間
   const [correctInputCount, setCorrectInputCount] = useState<number>(0) // 正答文字数
   const [incorrectInputCount, setIncorrectInputCount] = useState<number>(0) // ミスタイプ数
   const [currentIndex, setCurrentIndex] = useState<number>(0) // 何文字目か
+  // 時間
+  const [time, setTime] = useState(0) // 現在の時間
+  const [timeLimit] = useState(12) // 制限時間
+  // 開始・終了判定
+  const [isStarted, setIsStarted] = useState<boolean>(false) // 始まったか
   const [isFinished, setIsFinished] = useState<boolean>(false) // 終わったか
 
+  // 正解音
   const correctSE: HTMLAudioElement = new Audio("/correctSE.mp3")
-  const questionNumber: number = Number(localStorage.getItem("questionNumber")) || 0
 
+  // 画面遷移用
   const Navigate = useNavigate()
 
+  // 終了時の処理
   async function saveResults(
     time: number,
     problemSolved: number,
@@ -38,6 +46,7 @@ export default function Basic() {
     const kps = calculateKps(time, correctInputCount)
     const scoreRank = calculateScoreRank(problemSolved, correctInputCount, incorrectInputCount, kps, questionsLength)
 
+    // submit処理
     const json = JSON.stringify({
       qnumber: questionNumber,
       username: localStorage.getItem("username") || "Guest",
@@ -49,15 +58,19 @@ export default function Basic() {
       body: json,
     })
 
+    // ローカルストレージに保存
     localStorage.setItem("time", time.toString())
     localStorage.setItem("score", score.toString())
     localStorage.setItem("kpm", kps.toString())
     localStorage.setItem("correctInputCount", correctInputCount.toString())
     localStorage.setItem("incorrectInputCount", incorrectInputCount.toString())
     localStorage.setItem("scoreRank", scoreRank)
+
+    // 画面遷移
     Navigate("/result")
   }
 
+  // キーを押したら開始
   useEffect(() => {
     // 開始キーを押したら開始
     window.addEventListener("keydown", () => {
@@ -71,7 +84,7 @@ export default function Basic() {
     }
   }, [])
 
-  // isStarted が変更されたら実行。
+  // isStarted が変更されたらタイマーを開始
   useEffect(() => {
     if (!isStarted) return
     const timerId = setInterval(() => {
@@ -83,6 +96,7 @@ export default function Basic() {
     }
   }, [isStarted, setTime])
 
+  // タイマーが変更されるたびに終了判定
   useEffect(() => {
     if (timeLimit - time <= 0 && !isFinished) {
       setIsFinished(true)
@@ -90,8 +104,8 @@ export default function Basic() {
     }
   }, [timeLimit, time, problemSolved, correctInputCount, incorrectInputCount, questions])
 
+  // 問題を questions に格納
   useEffect(() => {
-    // 問題をquestionsに格納する
     ;(async () => {
       const json = JSON.stringify({
         qnumber: questionNumber,
@@ -107,8 +121,7 @@ export default function Basic() {
     })()
   }, [])
 
-  const [previousContent, setPreviousContent] = useState(content)
-
+  // キー入力のメイン処理
   useEffect(() => {
     async function main() {
       if (content === previousContent) return
@@ -116,12 +129,12 @@ export default function Basic() {
       const keyInput = content[content.length - 1] // 追加された文字すなわち一番最後の文字を取り出す。
 
       if (keyInput === questions[problemSolved][currentIndex]) {
-        // 正答時
+        // 正答
         setCurrentIndex((prev) => prev + 1)
         setCorrectInputCount((prev) => prev + 1)
       } else if (keyInput.match(/[a-zA-Z]/)) {
-        // 間違えていたときでアルファベットであれば、不正解とする。
-        // 不正解の時
+        // アルファベットであればミスとする
+        // 誤答
         setIncorrectInputCount((prev) => prev + 1)
       }
 
