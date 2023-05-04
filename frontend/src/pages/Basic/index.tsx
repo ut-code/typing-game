@@ -12,7 +12,6 @@ import calculateScoreRank from "./calculateScoreRank"
 
 export default function Basic() {
   const [content, setContent] = useState<string>("")
-  const [now, setNow] = useState<number>(0)
   const [problemSolved, setProblemSolved] = useState<number>(0) // 何問目か
   const [questions, setQuestions] = useState<string[]>(["sample"])
   const [isStarted, setIsStarted] = useState<boolean>(false)
@@ -127,24 +126,18 @@ export default function Basic() {
       }
 
       if (currentIndex === questions[problemSolved].length - 1) {
-        // 次の問題へ
-        if (problemSolved < questions.length - 1) {
-          setProblemSolved((prev) => prev + 1)
-        }
-
         // 正解音が鳴る。最後の問題だけちょっと切れている
         correctSE.pause()
         correctSE.play()
 
-        // 進捗バーを増やす
-        setNow(Math.round((problemSolved / questions.length) * 100))
-
-        setCurrentIndex(0)
-        if (problemSolved === questions.length && isFinished === false) {
-          // clearInterval(timerId)
-          // 二重submitを防ぐflag
-          setIsFinished(true)
+        if (problemSolved === questions.length - 1 && isFinished === false) {
+          // 終了処理
+          setIsFinished(true) // 二重submitを防ぐflag
           saveResults(time, problemSolved, correctInputCount, incorrectInputCount, questions.length)
+        } else {
+          // 次の問題へ
+          setProblemSolved((prev) => prev + 1)
+          setCurrentIndex(0)
         }
       }
     }
@@ -185,7 +178,12 @@ export default function Basic() {
             {/* 何問目/全問題数 */}
             <div id="progress-number">{problemSolved + 1 + "/" + questions.length + "問"}</div>
             <div className="pb-5" id="progress-bar">
-              <ProgressBar variant="success" animated now={now} label={`${now}%`} />
+              <ProgressBar
+                variant="success"
+                animated
+                now={Math.round((problemSolved / questions.length) * 100)}
+                label={`${Math.round((problemSolved / questions.length) * 100)}%`}
+              />
             </div>
           </Stack>
         </Stack>
