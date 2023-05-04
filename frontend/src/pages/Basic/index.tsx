@@ -128,7 +128,9 @@ export default function Basic() {
 
       if (currentIndex === questions[problemSolved].length - 1) {
         // 次の問題へ
-        setProblemSolved((prev) => prev + 1)
+        if (problemSolved < questions.length - 1) {
+          setProblemSolved((prev) => prev + 1)
+        }
 
         // 正解音が鳴る。最後の問題だけちょっと切れている
         correctSE.pause()
