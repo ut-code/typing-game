@@ -6,6 +6,8 @@ services:
     buildCommand: npm ci && npm run build
     staticPublishPath: dist
     pullRequestPreviewsEnabled: true
+    domains:
+      - typing.ut-code.net
     headers:
       - path: /*
         name: X-Frame-Options
@@ -16,7 +18,7 @@ services:
         destination: /
     envVars:
       - key: VITE_API_ENDPOINT
-        value: https://typing-game-backend.onrender.com
+        value: https://api.typing.utcode.net
   - type: web
     name: typing-game-backend
     env: node
@@ -25,10 +27,12 @@ services:
     rootDir: backend
     buildCommand: npm ci && npm run build
     startCommand: npm run start
+    domains:
+      - api.typing.ut-code.net
     envVars:
       - key: PORT
         value: 3000
       - key: DATABASE_URL
         sync: false
       - key: WEB_ORIGIN
-        value: https://typing-game.onrender.com
+        value: https://typing.utcode.net
