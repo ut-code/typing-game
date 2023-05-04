@@ -14,7 +14,7 @@ export default function Basic() {
   const [content, setContent] = useState<string>("")
   const [now, setNow] = useState<number>(0)
   const [problemSolved, setProblemSolved] = useState<number>(0) // 何問目か
-  const [questions, setQuestions] = useState<string[]>([])
+  const [questions, setQuestions] = useState<string[]>(["sample"])
   const [isStarted, setIsStarted] = useState<boolean>(false)
   const [time, setTime] = useState(0) // 現在の時間
   const [timeLimit] = useState(12) // 制限時間
