@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import Keyboard from "../KeyboardLayoutCreator/Keyboard"
 import "./style.css"
+import "../../components/css/global.css"
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Button, ProgressBar, Stack } from "react-bootstrap"

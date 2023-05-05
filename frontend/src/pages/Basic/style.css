@@ -1,7 +1,3 @@
-body {
-  background-color: #eeeeee;
-  padding: 2vw;
-}
 #elements {
   background: #ffffff;
   border: 0.2vw solid #cccccc;
@@ -80,10 +76,6 @@ thead th {
   /*   border: 1px solid #cccccc; */
   width: 30vw;
   height: 15vw;
-}
-footer {
-  font-size: 13px;
-  padding: 2vw;
 }
 
 #elements2 {

@@ -5,6 +5,7 @@ import Footer from "../../components/Footer"
 import { Helmet } from "react-helmet"
 import { Tab, Tabs } from "react-bootstrap"
 import "./style.css"
+import "../../components/css/global.css"
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Button, Table, Stack, ListGroup, Accordion } from "react-bootstrap"

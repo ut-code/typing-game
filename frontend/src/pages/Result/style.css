@@ -1,6 +1,4 @@
 body {
-  background-color: #eeeeee;
-  padding: 2vw;
   margin: auto;
 }
 #result-elements {
@@ -58,8 +56,4 @@ body {
 }
 #back {
   padding: 1vw 0 1vw;
-}
-footer {
-  font-size: 13px;
-  padding: 2vw;
 }
