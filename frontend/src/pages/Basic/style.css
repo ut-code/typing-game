@@ -1,13 +1,18 @@
 .question-box {
-  background: #ffffff;
-  border: 0.2vw solid #cccccc;
-  width: 95vw;
-  height: 15vh;
-  border-radius: 5px;
+  /* layout */
+  margin: 1vw 0;
   padding: 1vw;
+
+  /* box */
+  height: 15vh;
+  background: var(--White);
+  border: 0.2vw solid var(--Gray);
+  border-radius: 5px;
+
+  /* text */
   text-align: center;
-  margin: 1vw auto;
 }
+
 #answered {
   font-size: 30px;
   color: rgb(208, 205, 214);
