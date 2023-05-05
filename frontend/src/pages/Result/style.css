@@ -44,7 +44,9 @@ body {
   height: 450px;
   overflow: auto;
   border: 1px solid #cccccc;
-  /* margin: auto; */
+}
+.table td,
+.table th {
   text-align: center;
 }
 .listgroup {
