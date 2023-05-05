@@ -202,11 +202,9 @@ export default function Basic() {
           </Stack>
         </Stack>
       </div>
-      <div id="elements">
-        <div id="answer">
-          <span id="answered">{isStarted ? questions[problemSolved].slice(0, currentIndex) : ""}</span>
-          <span id="question">{isStarted ? questions[problemSolved].slice(currentIndex) : "[Space]を押して開始"}</span>
-        </div>
+      <div className="question-box">
+        <span id="answered">{isStarted ? questions[problemSolved].slice(0, currentIndex) : ""}</span>
+        <span id="question">{isStarted ? questions[problemSolved].slice(currentIndex) : "[Space]を押して開始"}</span>
       </div>
       <Keyboard content={content} setContent={setContent} />
     </>

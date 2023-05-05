@@ -1,4 +1,4 @@
-#elements {
+.question-box {
   background: #ffffff;
   border: 0.2vw solid #cccccc;
   width: 95vw;
@@ -16,10 +16,6 @@
   width: 70vw;
   font-size: 30px;
   margin: 1vw auto;
-}
-#answer {
-  font-size: 20px;
-  border-spacing: 1vw 1vw;
 }
 thead th {
   font-size: 20px;
