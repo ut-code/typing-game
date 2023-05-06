@@ -7,7 +7,7 @@ services:
     staticPublishPath: dist
     pullRequestPreviewsEnabled: true
     domains:
-      - typing.ut-code.net
+      - typing.utcode.net
     headers:
       - path: /*
         name: X-Frame-Options
@@ -28,7 +28,7 @@ services:
     buildCommand: npm ci && npm run build
     startCommand: npm run start
     domains:
-      - api.typing.ut-code.net
+      - api.typing.utcode.net
     envVars:
       - key: PORT
         value: 3000
