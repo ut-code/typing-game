@@ -1,14 +1,14 @@
 /* 画面が十分大きい時 */
-#keyboard {
+/* #keyboard {
   left: 510px;
-  /* position: fixed; */
-}
+  position: fixed;
+} */
 
 /* キーボードを上側に表示 */
 @media (max-width: 1340px) {
   #keyboard {
-    top: 0;
-    left: 0;
+    /* top: 0;
+    left: 0; */
     /* background-color: white; */
     width: 100vw;
     height: 330px;
