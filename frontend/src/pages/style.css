@@ -1,7 +1,3 @@
-body {
-  background-color: #eeeeee;
-  padding: 2vw;
-}
 #userinput {
   width: 40vw;
   margin: auto;
@@ -10,10 +6,6 @@ body {
   font-size: 30px;
   padding: 2vw;
   margin: auto;
-}
-footer {
-  font-size: 13px;
-  padding: 2vw;
 }
 .accordion-button {
   background-color: #dddddd !important;

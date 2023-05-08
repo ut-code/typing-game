@@ -1,6 +1,4 @@
 body {
-  background-color: #eeeeee;
-  padding: 2vw;
   margin: auto;
 }
 #result-elements {
@@ -44,7 +42,9 @@ body {
   height: 450px;
   overflow: auto;
   border: 1px solid #cccccc;
-  /* margin: auto; */
+}
+.table td,
+.table th {
   text-align: center;
 }
 .listgroup {
@@ -56,8 +56,4 @@ body {
 }
 #back {
   padding: 1vw 0 1vw;
-}
-footer {
-  font-size: 13px;
-  padding: 2vw;
 }

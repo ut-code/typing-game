@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import "./style.css"
+import "../components/css/global.css"
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Button, Form, Stack, Accordion } from "react-bootstrap"

@@ -5,6 +5,7 @@ import Footer from "../../components/Footer"
 import { Helmet } from "react-helmet"
 import { Tab, Tabs } from "react-bootstrap"
 import "./style.css"
+import "../../components/css/global.css"
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Button, Table, Stack, ListGroup, Accordion } from "react-bootstrap"
@@ -131,8 +132,8 @@ export default function Result() {
             <div className="rankBoard">
               <Tabs defaultActiveKey="now">
                 <Tab eventKey="now" title="Now">
-                  <Table striped id="ranking">
-                    <thead id="ranking-head">
+                  <Table striped bordered id="ranking">
+                    <thead>
                       <tr>
                         <th>順位</th>
                         <th>ユーザ</th>
@@ -142,17 +143,17 @@ export default function Result() {
                     <tbody>
                       {listItems.map((listItem, i) => (
                         <tr key={listItem.record_id}>
-                          <th>{i + 1}</th>
-                          <th>{listItem.username}</th>
-                          <th>{listItem.score}</th>
+                          <td>{i + 1}</td>
+                          <td>{listItem.username}</td>
+                          <td>{listItem.score}</td>
                         </tr>
                       ))}
                     </tbody>
                   </Table>
                 </Tab>
                 <Tab eventKey="kf73" title="第73回駒場祭">
-                  <Table striped id="ranking">
-                    <thead id="ranking-head">
+                  <Table striped bordered id="ranking">
+                    <thead>
                       <tr>
                         <th>順位</th>
                         <th>ユーザ</th>
@@ -162,9 +163,9 @@ export default function Result() {
                     <tbody>
                       {listItemsKf73.map((listItemKf73, i) => (
                         <tr key={listItemKf73.record_id}>
-                          <th>{i + 1}</th>
-                          <th>{listItemKf73.username}</th>
-                          <th>{listItemKf73.score}</th>
+                          <td>{i + 1}</td>
+                          <td>{listItemKf73.username}</td>
+                          <td>{listItemKf73.score}</td>
                         </tr>
                       ))}
                     </tbody>

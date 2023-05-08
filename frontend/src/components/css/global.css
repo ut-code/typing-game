@@ -1,0 +1,32 @@
+/*--- 全ページ共通のスタイル ---*/
+
+/*----------------------------------------------------------------
+	CSS変数代入について
+	:rootで変数を定義
+	変数名の前に"--"は必須
+	var(--変数名)で使える
+----------------------------------------------------------------*/
+:root {
+  --Gray: #cccccc;
+  --LightGray: #eeeeee;
+  --Black: #000000;
+  --White: #ffffff;
+
+  --Font: "Noto Sans JP", sans-serif;
+}
+
+html {
+  /* text */
+  font-family: var(--Font);
+  color: var(--Black);
+}
+
+body {
+  background-color: var(--LightGray);
+  padding: 2vw;
+}
+
+footer {
+  font-size: 13px;
+  padding: 2vw;
+}
