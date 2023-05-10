@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import { Button, Form, Stack, Accordion } from "react-bootstrap"
 
 export default function Home() {
-  const [userName, setUserName] = useState<string>("")
+  const [userName, setUserName] = useState<string>(localStorage.getItem("username") || "")
   const [qnumber, setQnumber] = useState<string>("0: 関東地方")
   // useNavigate を Navigate に変化させる呪文
   const Navigate = useNavigate()
@@ -28,7 +28,10 @@ export default function Home() {
   useEffect(() => {
     if (unmounted) return
     unmounted = true
-    localStorage.clear()
+    const toRemove = ["questionNumber", "time", "score", "kpm", "correctInputCount", "incorrectInputCount", "scoreRank"]
+    toRemove.forEach((key) => {
+      localStorage.removeItem(key)
+    })
   }, [])
 
   return (
