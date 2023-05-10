@@ -28,9 +28,8 @@ export default function Home() {
   useEffect(() => {
     if (unmounted) return
     unmounted = true
-    const toRemove = ["questionNumber", "time", "score", "kpm", "correctInputCount", "incorrectInputCount", "scoreRank"]
-    toRemove.forEach((key) => {
-      localStorage.removeItem(key)
+    Object.keys(localStorage).forEach((key) => {
+      if (key !== "username") localStorage.removeItem(key)
     })
   }, [])
 
