@@ -23,7 +23,11 @@ export default function Result() {
   const [userMiss, setUserMiss] = useState<number>(0)
   const [userScoreRank, setUserScoreRank] = useState<string>("")
 
+  let unmounted = false
   useEffect(() => {
+    if (unmounted) return
+    unmounted = true
+
     async function tmp() {
       const qnumber = Number(localStorage.getItem("questionNumber"))
       const username = localStorage.getItem("username") || "Guest"
@@ -43,21 +47,22 @@ export default function Result() {
 
       let cnt = 1
       for (const listItem of listItems) {
-        if (score == listItem.score) {
+        if (score === listItem.score) {
           setUserRank(cnt)
           break
         }
         cnt++
       }
 
-      let cnt2 = 1
+      cnt = 1
       for (const listItem of listItems) {
-        if (qnumber != listItem.problem) continue
-        if (score == listItem.score) {
-          setUserRankSame(cnt2)
-          break
+        if (qnumber === listItem.problem) {
+          if (score === listItem.score) {
+            setUserRankSame(cnt)
+            break
+          }
+          cnt++
         }
-        cnt2++
       }
     }
     tmp()
