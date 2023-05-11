@@ -1,59 +1,62 @@
-body {
+/* 全体 */
+.result-elements {
   margin: auto;
 }
-#result-elements {
-  margin: auto;
-}
-.yourResults {
-  font-size: 20px;
-  /* background: scroll; */
-  /* background-color: rgb(100, 149, 65); */
-  border: 1px solid #cccccc;
+
+/* XXXさんの結果 */
+.stats {
+  /* box */
+  border: 1px solid var(--LightGray);
   width: 500px;
   height: 450px;
-  /* margin: auto; */
-  text-align: center;
 }
-.yourResults .rowh {
-  height: 50px;
-  font-weight: bold;
+.list-group-item {
+  /* box */
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.yourResults .roww {
+
+  /* text */
   font-size: 26px;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
-.yourResults .roww2 {
+.title {
+  /* text */
+  font-weight: bold;
+  font-size: 20px;
+}
+.normal-text {
+  /* box */
+  height: 80px;
+}
+.small-text {
+  /* box */
   height: 80px;
   width: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+  /* text */
   font-size: 18px;
+  text-align: center;
 }
-.rankBoard {
-  background: #ffffff;
+
+/* ランキング */
+.ranking-board {
+  /* box */
   width: 500px;
   height: 450px;
   overflow: auto;
-  border: 1px solid #cccccc;
+  background: var(--White);
+  border: 1px solid var(--LightGray);
 }
 .table td,
 .table th {
   text-align: center;
 }
-.listgroup {
-  width: 500px !important;
-}
+
+/* 総合ランクの基準 */
 .accordion {
-  width: 1017px;
-  margin: auto;
-}
-#back {
-  padding: 1vw 0 1vw;
+  /* layout */
+  margin: 1em 0;
+
+  /* box */
+  width: 100%;
 }

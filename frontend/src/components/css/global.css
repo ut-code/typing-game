@@ -22,11 +22,16 @@ html {
 }
 
 body {
-  background-color: var(--LightGray);
+  background-color: var(--LightGray) !important;
   padding: 2vw;
 }
 
 footer {
   font-size: 13px;
   padding: 2vw;
+}
+
+.backbutton {
+  width: 10vw;
+  margin: 1em 0;
 }

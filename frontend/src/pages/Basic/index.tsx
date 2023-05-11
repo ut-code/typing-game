@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react"
-import { useNavigate, Link } from "react-router-dom"
-import Keyboard from "../KeyboardLayoutCreator/Keyboard"
+import { useNavigate } from "react-router-dom"
+
+// CSS関連
 import "./style.css"
 import "../../components/css/global.css"
-
 import "bootstrap/dist/css/bootstrap.min.css"
-import { Button, ProgressBar, Stack } from "react-bootstrap"
+import { ProgressBar, Stack, Spinner } from "react-bootstrap"
+
+// 関数
 import shuffle from "./shuffle"
 import calculateScore from "./calculateScore"
 import calculateKps from "./calculateKps"
 import calculateScoreRank from "./calculateScoreRank"
+// コンポーネント
+import Keyboard from "../KeyboardLayoutCreator/Keyboard"
+import BackButton from "../../components/BackButton"
 
 export default function Basic() {
   // キー入力
@@ -24,8 +29,9 @@ export default function Basic() {
   const [currentIndex, setCurrentIndex] = useState<number>(0) // 何文字目か
   // 時間
   const [time, setTime] = useState(0) // 現在の時間
-  const [timeLimit] = useState(12) // 制限時間
+  const [timeLimit] = useState(120) // 制限時間
   // 開始・終了判定
+  const [isSpinning, setIsSpinning] = useState<boolean>(true) // スピナーが回っているか
   const [isStarted, setIsStarted] = useState<boolean>(false) // 始まったか
   const [isFinished, setIsFinished] = useState<boolean>(false) // 終わったか
 
@@ -122,6 +128,11 @@ export default function Basic() {
     })()
   }, [])
 
+  // 問題が格納されるまでスピナーは回る
+  useEffect(() => {
+    if (questions.length > 1) setIsSpinning(false)
+  }, [questions])
+
   // キー入力のメイン処理
   useEffect(() => {
     async function main() {
@@ -160,51 +171,55 @@ export default function Basic() {
 
   return (
     <>
-      <Link to="/">
-        <Button variant="secondary" id="backbutton">
-          Back
-        </Button>
-      </Link>
-      <div id="score-related">
-        <Stack direction="horizontal" gap={3}>
-          <table id="current">
-            <tbody>
-              <tr>
-                <th>正しいタイプ数：</th>
-                <td id="correct">{correctInputCount}回</td>
-              </tr>
-              <tr>
-                <th>ミスタイプ数：</th>
-                <td id="miss">{incorrectInputCount}回</td>
-              </tr>
-              <tr>
-                <th>経過時間：</th>
-                <td id="time">{time}秒</td>
-              </tr>
-              <tr>
-                <th>残り時間：</th>
-                <td id="remaining-time">{timeLimit - time}秒</td>
-              </tr>
-            </tbody>
-          </table>
+      <BackButton />
 
-          <Stack gap={0} id="progress">
-            {/* 何問目/全問題数 */}
-            <div id="progress-number">{problemSolved + 1 + "/" + questions.length + "問"}</div>
-            <div className="pb-5" id="progress-bar">
-              <ProgressBar
-                variant="success"
-                animated
-                now={Math.round((problemSolved / questions.length) * 100)}
-                label={`${Math.round((problemSolved / questions.length) * 100)}%`}
-              />
-            </div>
-          </Stack>
-        </Stack>
-      </div>
+      <Stack direction="horizontal" className="stat-section">
+        <table className="stat-table">
+          <tbody>
+            <tr>
+              <th>正しいタイプ数：</th>
+              <td>{correctInputCount}回</td>
+            </tr>
+            <tr>
+              <th>ミスタイプ数：</th>
+              <td>{incorrectInputCount}回</td>
+            </tr>
+            <tr>
+              <th>経過時間：</th>
+              <td>{time}秒</td>
+            </tr>
+            <tr>
+              <th>残り時間：</th>
+              <td>{timeLimit - time}秒</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div className="stat-progress">
+          {/* 何問目/全問題数 */}
+          <div className="progress-number">{problemSolved + 1 + "/" + questions.length + "問"}</div>
+          <div className="progress-bar">
+            <ProgressBar
+              variant="success"
+              animated
+              now={Math.round((problemSolved / questions.length) * 100)}
+              label={`${Math.round((problemSolved / questions.length) * 100)}%`}
+            />
+          </div>
+        </div>
+      </Stack>
+
       <div className="question-box">
-        <span id="answered">{isStarted ? questions[problemSolved].slice(0, currentIndex) : ""}</span>
-        <span id="question">{isStarted ? questions[problemSolved].slice(currentIndex) : "[Space]を押して開始"}</span>
+        {isSpinning ? (
+          <Spinner animation="border" role="status" className="spinner" />
+        ) : (
+          <div>
+            <span className="answered-text">{isStarted ? questions[problemSolved].slice(0, currentIndex) : ""}</span>
+            <span className="question-text">
+              {isStarted ? questions[problemSolved].slice(currentIndex) : "[Space]を押して開始"}
+            </span>
+          </div>
+        )}
       </div>
       <Keyboard content={content} setContent={setContent} />
     </>

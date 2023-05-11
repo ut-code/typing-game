@@ -1,86 +1,74 @@
+/* 画面上部の統計情報 */
+.stat-section {
+  /* layout */
+  margin: 0 0 1em 0; /* 下だけ */
+}
+/* 左の表 */
+.stat-table {
+  /* text */
+  font-size: 20px;
+}
+.stat-table th {
+  /* text */
+  text-align: right;
+  font-weight: bolder;
+}
+.stat-table td {
+  /* box */
+  width: 4em;
+
+  /* text */
+  text-align: right; /* デフォルトだとleftなので必須 */
+}
+
+.stat-progress {
+  /* layout */
+  margin: 0 0 0 auto; /* 右寄せ */
+}
+.progress-number {
+  /* layout */
+  margin: 1em 0;
+
+  /* text */
+  font-size: 30px;
+  text-align: right;
+}
+.progress-bar {
+  /* layout */
+  margin: 0 auto 0 0; /* 左寄せ */
+
+  /* box */
+  width: 20vw;
+  border: 0.1em solid var(--Gray);
+  border-radius: 5px;
+}
+
+/* 白枠内 */
 .question-box {
   /* layout */
   margin: 1vw 0;
   padding: 1vw;
 
   /* box */
-  height: 15vh;
+  height: 4em;
   background: var(--White);
   border: 0.2vw solid var(--Gray);
   border-radius: 5px;
 
   /* text */
   text-align: center;
-}
-
-#answered {
   font-size: 30px;
+}
+.answered-text {
+  /* text */
   color: rgb(208, 205, 214);
 }
-#question {
-  width: 70vw;
-  font-size: 30px;
-  margin: 1vw auto;
+.spinner {
+  width: 3vw;
+  height: 3vw;
 }
-thead th {
-  font-size: 20px;
-}
-#current {
-  font-size: 20px;
-  border-spacing: 4vw 0vw;
-  width: 20vw;
-}
-#current th {
-  font-weight: bolder;
-  text-align: right;
-}
-#current td {
-  text-align: right;
-  width: 5vw;
-}
+
+/* キーボード関連 */
 #content {
   display: none;
-}
-#score-related {
-  justify-content: space-between;
-}
-#score-related #progress {
-  margin: 0 0 0 auto;
-  padding: 1vw;
-}
-#score-related #progress #progress-number {
-  font-size: 20px;
-  text-align: right;
-  height: 80px;
-}
-#score-related #progress #progress-bar {
-  margin: 0 0 0 auto;
-  width: 20vw;
-}
-#scoreTitle {
-  font-size: 2vw;
-}
-#score {
-  /* font-size: 3vw; */
-  /* color: rgb(68, 5, 102); */
-  margin: 0 0 0 auto;
-}
-#rawcode {
-  overflow: auto;
-  /*   border: 1px solid #cccccc; */
-  width: 30vw;
-  height: 15vw;
-  tab-size: 2;
-}
-#preview-box {
-  overflow: auto;
-  /*   border: 1px solid #cccccc; */
-  width: 30vw;
-  height: 15vw;
-}
-#backbutton {
-  width: 10vw;
-}
-#score-related #progress #progress-number {
-  font-size: 30px;
 }
