@@ -30,20 +30,14 @@ app.post("/questions", async (request, response) => {
 // データベースからランキングをとってくる
 async function getRanking() {
   const records = await client.ranking.findMany({
-    orderBy: {
-      score: "desc",
-      record_id: "asc",
-    },
+    orderBy: [{ score: "desc" }, { record_id: "desc" }],
   })
   return records
 }
 
 async function getRankingKf73() {
   const records = await client.ranking_kf73.findMany({
-    orderBy: {
-      score: "desc",
-      record_id: "asc",
-    },
+    orderBy: [{ score: "desc" }, { record_id: "desc" }],
   })
   return records
 }
