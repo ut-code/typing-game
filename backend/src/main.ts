@@ -30,27 +30,23 @@ app.post("/questions", async (request, response) => {
 // データベースからランキングをとってくる
 async function getRanking() {
   const records = await client.ranking.findMany({
-    orderBy: {
-      score: "desc",
-    },
+    orderBy: [{ score: "desc" }, { record_id: "desc" }],
   })
   return records
 }
 
 async function getRankingKf73() {
   const records = await client.ranking_kf73.findMany({
-    orderBy: {
-      score: "desc",
-    },
+    orderBy: [{ score: "desc" }, { record_id: "desc" }],
   })
   return records
 }
 
 // submit時のデータベースとのやり取り
 app.post("/submitScore", async (request, response) => {
-  const qnumber: number = request.body.qnumber || -1
+  const qnumber: number = request.body.qnumber || 0
   const username: string = request.body.username || "Not working"
-  const score: number = request.body.score || -1
+  const score: number = request.body.score || 0
   await client.ranking.create({
     data: { problem: qnumber, username: username, score: score },
   })
