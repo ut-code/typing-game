@@ -5,7 +5,7 @@ import "./style.css"
 import "../../components/css/global.css"
 
 import "bootstrap/dist/css/bootstrap.min.css"
-import { Button, ProgressBar, Stack } from "react-bootstrap"
+import { Button, ProgressBar, Stack, Spinner } from "react-bootstrap"
 import shuffle from "./shuffle"
 import calculateScore from "./calculateScore"
 import calculateKps from "./calculateKps"
@@ -26,6 +26,7 @@ export default function Basic() {
   const [time, setTime] = useState(0) // 現在の時間
   const [timeLimit] = useState(12) // 制限時間
   // 開始・終了判定
+  const [isSpinning, setIsSpinning] = useState<boolean>(true) // スピナーが回っているか
   const [isStarted, setIsStarted] = useState<boolean>(false) // 始まったか
   const [isFinished, setIsFinished] = useState<boolean>(false) // 終わったか
 
@@ -122,6 +123,11 @@ export default function Basic() {
     })()
   }, [])
 
+  // 問題が格納されるまでスピナーは回る
+  useEffect(() => {
+    if (questions.length > 1) setIsSpinning(false)
+  }, [questions])
+
   // キー入力のメイン処理
   useEffect(() => {
     async function main() {
@@ -203,8 +209,16 @@ export default function Basic() {
         </Stack>
       </div>
       <div className="question-box">
-        <span id="answered">{isStarted ? questions[problemSolved].slice(0, currentIndex) : ""}</span>
-        <span id="question">{isStarted ? questions[problemSolved].slice(currentIndex) : "[Space]を押して開始"}</span>
+        {isSpinning ? (
+          <Spinner animation="border" role="status" className="spinner" />
+        ) : (
+          <div>
+            <span id="answered">{isStarted ? questions[problemSolved].slice(0, currentIndex) : ""}</span>
+            <span id="question">
+              {isStarted ? questions[problemSolved].slice(currentIndex) : "[Space]を押して開始"}
+            </span>
+          </div>
+        )}
       </div>
       <Keyboard content={content} setContent={setContent} />
     </>

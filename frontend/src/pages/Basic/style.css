@@ -84,3 +84,8 @@ thead th {
 #score-related #progress #progress-number {
   font-size: 30px;
 }
+
+.spinner {
+  width: 3vw;
+  height: 3vw;
+}
