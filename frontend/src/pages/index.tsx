@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import Header from "../components/Header"
-import Footer from "../components/Footer"
+
+// CSS関連
 import "./style.css"
 import "../components/css/global.css"
-
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Button, Form, Stack, Accordion } from "react-bootstrap"
+
+// コンポーネント
+import Header from "../components/Header"
+import Footer from "../components/Footer"
 
 export default function Home() {
   const [userName, setUserName] = useState<string>(localStorage.getItem("username") || "")

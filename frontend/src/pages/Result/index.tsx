@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+
+// CSS関連
+import "./style.css"
+import "../../components/css/global.css"
+import "bootstrap/dist/css/bootstrap.min.css"
+import { Table, Stack, ListGroup, Accordion, Tab, Tabs } from "react-bootstrap"
+
+// コンポーネント
 import Header from "../../components/Header"
 import Footer from "../../components/Footer"
 import BackButton from "../../components/BackButton"
-import { Helmet } from "react-helmet"
-import { Tab, Tabs } from "react-bootstrap"
-import "./style.css"
-import "../../components/css/global.css"
-
-import "bootstrap/dist/css/bootstrap.min.css"
-import { Button, Table, Stack, ListGroup, Accordion } from "react-bootstrap"
 
 export default function Result() {
   const [listItems, setListItems] = useState([{ record_id: 1, problem: 1, username: "sample", score: -100 }])
@@ -99,9 +99,6 @@ export default function Result() {
   return (
     <>
       <Header />
-      <Helmet>
-        <title>結果</title>
-      </Helmet>
       <Stack gap={3}>
         <div id="result-elements">
           <BackButton />

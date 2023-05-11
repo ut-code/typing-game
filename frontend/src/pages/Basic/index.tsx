@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react"
-import { useNavigate, Link } from "react-router-dom"
-import Keyboard from "../KeyboardLayoutCreator/Keyboard"
-import BackButton from "../../components/BackButton"
+import { useNavigate } from "react-router-dom"
+
+// CSS関連
 import "./style.css"
 import "../../components/css/global.css"
-
 import "bootstrap/dist/css/bootstrap.min.css"
-import { Button, ProgressBar, Stack, Spinner } from "react-bootstrap"
+import { ProgressBar, Stack, Spinner } from "react-bootstrap"
+
+// 関数
 import shuffle from "./shuffle"
 import calculateScore from "./calculateScore"
 import calculateKps from "./calculateKps"
 import calculateScoreRank from "./calculateScoreRank"
+// コンポーネント
+import Keyboard from "../KeyboardLayoutCreator/Keyboard"
+import BackButton from "../../components/BackButton"
 
 export default function Basic() {
   // キー入力
