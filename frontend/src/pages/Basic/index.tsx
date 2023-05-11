@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import Keyboard from "../KeyboardLayoutCreator/Keyboard"
+import BackButton from "../../components/BackButton"
 import "./style.css"
 import "../../components/css/global.css"
 
@@ -166,11 +167,7 @@ export default function Basic() {
 
   return (
     <>
-      <Link to="/">
-        <Button variant="secondary" id="backbutton">
-          Back
-        </Button>
-      </Link>
+      <BackButton />
 
       <Stack direction="horizontal" className="stat-section">
         <table className="stat-table">

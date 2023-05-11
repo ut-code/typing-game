@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Header from "../../components/Header"
 import Footer from "../../components/Footer"
+import BackButton from "../../components/BackButton"
 import { Helmet } from "react-helmet"
 import { Tab, Tabs } from "react-bootstrap"
 import "./style.css"
@@ -103,13 +104,8 @@ export default function Result() {
       </Helmet>
       <Stack gap={3}>
         <div id="result-elements">
-          <div id="back">
-            <Link to="/">
-              <Button variant="secondary" id="backbutton">
-                Back
-              </Button>
-            </Link>
-          </div>
+          <BackButton />
+
           <Stack direction="horizontal" gap={3}>
             <div className="yourResults">
               <ListGroup variant="flush">

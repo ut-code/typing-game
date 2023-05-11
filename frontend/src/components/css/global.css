@@ -30,3 +30,8 @@ footer {
   font-size: 13px;
   padding: 2vw;
 }
+
+.backbutton {
+  width: 10vw;
+  margin: 1em 0;
+}

@@ -1,7 +1,7 @@
 /* 画面上部の統計情報 */
 .stat-section {
   /* layout */
-  margin: 1em 0;
+  margin: 0 0 1em 0; /* 下だけ */
 }
 /* 左の表 */
 .stat-table {
@@ -41,9 +41,6 @@
   width: 20vw;
   border: 0.1em solid var(--Gray);
   border-radius: 5px;
-}
-#backbutton {
-  width: 10vw;
 }
 
 /* 白枠内 */
