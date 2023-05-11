@@ -22,7 +22,7 @@ html {
 }
 
 body {
-  background-color: var(--LightGray);
+  background-color: var(--LightGray) !important;
   padding: 2vw;
 }
 

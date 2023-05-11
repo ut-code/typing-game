@@ -100,37 +100,37 @@ export default function Result() {
     <>
       <Header />
       <Stack gap={3}>
-        <div id="result-elements">
+        <div className="result-elements">
           <BackButton />
 
           <Stack direction="horizontal" gap={3}>
-            <div className="yourResults">
+            <div className="stats">
               <ListGroup variant="flush">
-                <ListGroup.Item className="rowh">{userName}さんの結果</ListGroup.Item>
-                <ListGroup.Item className="roww">順位 {userRank} 位</ListGroup.Item>
-                <ListGroup.Item className="roww">同問題順位 {userRankSame} 位</ListGroup.Item>
-                <ListGroup.Item className="roww">スコア {userScore} 点</ListGroup.Item>
-                <ListGroup.Item className="roww">総合ランク {userScoreRank}</ListGroup.Item>
+                <ListGroup.Item className="title">{userName}さんの結果</ListGroup.Item>
+                <ListGroup.Item className="normal-text">順位 {userRank} 位</ListGroup.Item>
+                <ListGroup.Item className="normal-text">同問題順位 {userRankSame} 位</ListGroup.Item>
+                <ListGroup.Item className="normal-text">スコア {userScore} 点</ListGroup.Item>
+                <ListGroup.Item className="normal-text">総合ランク {userScoreRank}</ListGroup.Item>
               </ListGroup>
               <ListGroup horizontal>
-                <ListGroup.Item className="roww2">
+                <ListGroup.Item className="small-text">
                   正しいタイプ数<br></br>
                   {userCorrect} 回
                 </ListGroup.Item>
-                <ListGroup.Item className="roww2">
+                <ListGroup.Item className="small-text">
                   ミスタイプ数<br></br>
                   {userMiss} 回
                 </ListGroup.Item>
-                <ListGroup.Item className="roww2">
+                <ListGroup.Item className="small-text">
                   平均タイプ数<br></br>
                   {userKpm} 回/秒
                 </ListGroup.Item>
               </ListGroup>
             </div>
-            <div className="rankBoard">
+            <div className="ranking-board">
               <Tabs defaultActiveKey="now">
-                <Tab eventKey="now" title="Now">
-                  <Table striped bordered id="ranking">
+                <Tab eventKey="now" title="第96回五月祭">
+                  <Table striped bordered>
                     <thead>
                       <tr>
                         <th>順位</th>
@@ -150,7 +150,7 @@ export default function Result() {
                   </Table>
                 </Tab>
                 <Tab eventKey="kf73" title="第73回駒場祭">
-                  <Table striped bordered id="ranking">
+                  <Table striped bordered>
                     <thead>
                       <tr>
                         <th>順位</th>
@@ -172,28 +172,28 @@ export default function Result() {
               </Tabs>
             </div>
           </Stack>
-        </div>
 
-        <Accordion defaultActiveKey="1">
-          <Accordion.Item eventKey="0">
-            <Accordion.Header>総合ランクの基準</Accordion.Header>
-            <Accordion.Body>
-              SS: 平均タイプ数 5.00 回/秒以上 かつ ミスタイプ率 0% かつ 完答
-              <br></br>
-              S: 平均タイプ数 5.00 回/秒以上 かつ ミスタイプ率 10%未満 かつ 完答
-              <br></br>
-              A: 平均タイプ数 4.00 回/秒以上 かつ ミスタイプ率 20%未満
-              <br></br>
-              B: 平均タイプ数 3.00 回/秒以上 かつ ミスタイプ率 20%未満
-              <br></br>
-              C: 平均タイプ数 2.00 回/秒以上 かつ ミスタイプ率 30%未満
-              <br></br>
-              D: 平均タイプ数 2.00 回/秒未満 かつ ミスタイプ率 50%未満
-              <br></br>
-              E: ミスタイプ率 50%以上
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
+          <Accordion defaultActiveKey="1">
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>総合ランクの基準</Accordion.Header>
+              <Accordion.Body>
+                SS: 平均タイプ数 5.00 回/秒以上 かつ ミスタイプ率 0% かつ 完答
+                <br></br>
+                S: 平均タイプ数 5.00 回/秒以上 かつ ミスタイプ率 10%未満 かつ 完答
+                <br></br>
+                A: 平均タイプ数 4.00 回/秒以上 かつ ミスタイプ率 20%未満
+                <br></br>
+                B: 平均タイプ数 3.00 回/秒以上 かつ ミスタイプ率 20%未満
+                <br></br>
+                C: 平均タイプ数 2.00 回/秒以上 かつ ミスタイプ率 30%未満
+                <br></br>
+                D: 平均タイプ数 2.00 回/秒未満 かつ ミスタイプ率 50%未満
+                <br></br>
+                E: ミスタイプ率 50%以上
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </div>
       </Stack>
       <Footer />
     </>
