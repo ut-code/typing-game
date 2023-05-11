@@ -24,7 +24,7 @@ export default function Basic() {
   const [currentIndex, setCurrentIndex] = useState<number>(0) // 何文字目か
   // 時間
   const [time, setTime] = useState(0) // 現在の時間
-  const [timeLimit] = useState(12) // 制限時間
+  const [timeLimit] = useState(120) // 制限時間
   // 開始・終了判定
   const [isSpinning, setIsSpinning] = useState<boolean>(true) // スピナーが回っているか
   const [isStarted, setIsStarted] = useState<boolean>(false) // 始まったか
@@ -171,50 +171,50 @@ export default function Basic() {
           Back
         </Button>
       </Link>
-      <div id="score-related">
-        <Stack direction="horizontal" gap={3}>
-          <table id="current">
-            <tbody>
-              <tr>
-                <th>正しいタイプ数：</th>
-                <td id="correct">{correctInputCount}回</td>
-              </tr>
-              <tr>
-                <th>ミスタイプ数：</th>
-                <td id="miss">{incorrectInputCount}回</td>
-              </tr>
-              <tr>
-                <th>経過時間：</th>
-                <td id="time">{time}秒</td>
-              </tr>
-              <tr>
-                <th>残り時間：</th>
-                <td id="remaining-time">{timeLimit - time}秒</td>
-              </tr>
-            </tbody>
-          </table>
 
-          <Stack gap={0} id="progress">
-            {/* 何問目/全問題数 */}
-            <div id="progress-number">{problemSolved + 1 + "/" + questions.length + "問"}</div>
-            <div className="pb-5" id="progress-bar">
-              <ProgressBar
-                variant="success"
-                animated
-                now={Math.round((problemSolved / questions.length) * 100)}
-                label={`${Math.round((problemSolved / questions.length) * 100)}%`}
-              />
-            </div>
-          </Stack>
-        </Stack>
-      </div>
+      <Stack direction="horizontal" className="stat-section">
+        <table className="stat-table">
+          <tbody>
+            <tr>
+              <th>正しいタイプ数：</th>
+              <td>{correctInputCount}回</td>
+            </tr>
+            <tr>
+              <th>ミスタイプ数：</th>
+              <td>{incorrectInputCount}回</td>
+            </tr>
+            <tr>
+              <th>経過時間：</th>
+              <td>{time}秒</td>
+            </tr>
+            <tr>
+              <th>残り時間：</th>
+              <td>{timeLimit - time}秒</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div className="stat-progress">
+          {/* 何問目/全問題数 */}
+          <div className="progress-number">{problemSolved + 1 + "/" + questions.length + "問"}</div>
+          <div className="progress-bar">
+            <ProgressBar
+              variant="success"
+              animated
+              now={Math.round((problemSolved / questions.length) * 100)}
+              label={`${Math.round((problemSolved / questions.length) * 100)}%`}
+            />
+          </div>
+        </div>
+      </Stack>
+
       <div className="question-box">
         {isSpinning ? (
           <Spinner animation="border" role="status" className="spinner" />
         ) : (
           <div>
-            <span id="answered">{isStarted ? questions[problemSolved].slice(0, currentIndex) : ""}</span>
-            <span id="question">
+            <span className="answered-text">{isStarted ? questions[problemSolved].slice(0, currentIndex) : ""}</span>
+            <span className="question-text">
               {isStarted ? questions[problemSolved].slice(currentIndex) : "[Space]を押して開始"}
             </span>
           </div>
