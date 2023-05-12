@@ -48,7 +48,7 @@ export default function Result() {
       setUserScoreRank(scorerank)
 
       let cnt = 1
-      for (const listItem of listItems) {
+      for (const listItem of listItemsMf96) {
         if (score === listItem.score) {
           setUserRank(cnt)
           break
@@ -57,7 +57,7 @@ export default function Result() {
       }
 
       cnt = 1
-      for (const listItem of listItems) {
+      for (const listItem of listItemsMf96) {
         if (qnumber === listItem.problem) {
           if (score === listItem.score) {
             setUserRankSame(cnt)
@@ -68,7 +68,7 @@ export default function Result() {
       }
     }
     tmp()
-  }, [listItems])
+  }, [listItemsMf96])
 
   // RankingをfetchAPIしてくる
   useEffect(() => {
