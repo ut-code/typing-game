@@ -72,7 +72,7 @@ export default function Result() {
   // RankingをfetchAPIしてくる
   useEffect(() => {
     ;(async () => {
-      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRanking`, {
+      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRankingMf96`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
       })
