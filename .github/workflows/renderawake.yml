@@ -16,5 +16,5 @@ jobs:
         shell: bash
 
       - name: Access to Render
-        run: curl --silent --show-error https://typing-game.onrender.com/
+        run: curl --silent --show-error https://api.typing.utcode.net
         shell: bash
