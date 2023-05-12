@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import "./style.css"
 import "../components/css/global.css"
 import "bootstrap/dist/css/bootstrap.min.css"
-import { Button, Form, Stack, Accordion } from "react-bootstrap"
+import { Button, Form, Accordion } from "react-bootstrap"
 
 // コンポーネント
 import Header from "../components/Header"
