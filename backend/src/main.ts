@@ -42,12 +42,19 @@ async function getRankingKf73() {
   return records
 }
 
+async function getRankingMf96() {
+  const records = await client.ranking_mf96.findMany({
+    orderBy: [{ score: "desc" }, { record_id: "desc" }],
+  })
+  return records
+}
+
 // submit時のデータベースとのやり取り
 app.post("/submitScore", async (request, response) => {
   const qnumber: number = request.body.qnumber || 0
   const username: string = request.body.username || "Not working"
   const score: number = request.body.score || 0
-  await client.ranking.create({
+  await client.ranking_mf96.create({
     data: { problem: qnumber, username: username, score: score },
   })
   response.json()
@@ -62,6 +69,12 @@ app.post("/fetchRanking", async (request, response) => {
 
 app.post("/fetchRankingKf73", async (request, response) => {
   const records = await getRankingKf73()
+  // JSON形式でscript.jsに送信
+  response.json(records)
+})
+
+app.post("/fetchRankingMf96", async (request, response) => {
+  const records = await getRankingMf96()
   // JSON形式でscript.jsに送信
   response.json(records)
 })

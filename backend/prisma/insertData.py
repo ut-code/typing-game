@@ -25,7 +25,12 @@ for table_name in ["questions", "ranking", "ranking_kf73"]:
     # 普通にPythonじゃなくてもできると思います（学習コストかかりそうですが…）
     # print(data)    
     # Supabaseにデータを挿入
-    # for row in data:
-    #     response = supabase.table(table_name).insert(row).execute()
+    for row in data:
+        row2 = {"record_id": int(row[0]), "problem": int(row[1]), "username": row[2], "score": int(row[3])}
+        try:
+            supabase.table(table_name).insert(row2).execute()
+        except Exception as e:
+            print(e)
+            print(row2)
 
             
