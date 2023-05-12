@@ -85,7 +85,7 @@ export default function Result() {
 
   useEffect(() => {
     ;(async () => {
-      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRanking`, {
+      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRankingKf73`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
       })
@@ -128,7 +128,7 @@ export default function Result() {
               </ListGroup>
             </div>
             <div className="ranking-board">
-              <Tabs defaultActiveKey="mf96">
+              <Tabs defaultActiveKey="mf96" justify>
                 <Tab eventKey="mf96" title="第96回五月祭">
                   <Table striped bordered>
                     <thead>
