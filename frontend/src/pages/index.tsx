@@ -67,8 +67,10 @@ export default function Home() {
               }}
             >
               <option>0: 関東地方</option>
+              <option>1: 東京23区</option>
               <option>2: 日本食</option>
               <option>3: 惑星名</option>
+              <option>4: プログラミング言語</option>
               <option>5: 長い英単語集</option>
               <option>6: アクセス数の多いサイト</option>
               <option>7: SDGs</option>
