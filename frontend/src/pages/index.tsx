@@ -67,21 +67,12 @@ export default function Home() {
               }}
             >
               <option>0: 関東地方</option>
-              <option>1: マックのメニュー</option>
               <option>2: 日本食</option>
               <option>3: 惑星名</option>
-              <option>4: 短い英単語集</option>
               <option>5: 長い英単語集</option>
               <option>6: アクセス数の多いサイト</option>
               <option>7: SDGs</option>
               <option>8: MDGs</option>
-              <option>9: キーボード配列</option>
-              {/* <option>10: htmlを書いてみよう</option> */}
-              <option>11: ゲティスバーグ演説</option>
-              <option>20: ロンドン橋落ちた</option>
-              <option>21: ハンプティダンプティ</option>
-              <option>22: きらきら星</option>
-              <option>23: Hey Diddle Diddle</option>
             </Form.Select>
           </Form.Group>
 
