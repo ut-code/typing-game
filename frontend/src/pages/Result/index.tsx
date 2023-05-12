@@ -14,6 +14,7 @@ import BackButton from "../../components/BackButton"
 export default function Result() {
   const [listItems, setListItems] = useState([{ record_id: 1, problem: 1, username: "sample", score: -100 }])
   const [listItemsKf73, setListItemsKf73] = useState([{ record_id: 1, problem: 1, username: "sample", score: -100 }])
+  const [listItemsMf96, setListItemsMf96] = useState([{ record_id: 1, problem: 1, username: "sample", score: -100 }])
   const [userName, setUserName] = useState<string>("")
   const [userRank, setUserRank] = useState<number>(0)
   const [userRankSame, setUserRankSame] = useState<number>(0)
@@ -96,6 +97,20 @@ export default function Result() {
     })()
   }, [])
 
+  // RankingをfetchAPIしてくる
+  useEffect(() => {
+    ;(async () => {
+      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRankingMf96`, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setListItemsMf96(data)
+        })
+    })()
+  }, [])
+
   return (
     <>
       <Header />
@@ -164,6 +179,26 @@ export default function Result() {
                           <td>{i + 1}</td>
                           <td>{listItemKf73.username}</td>
                           <td>{listItemKf73.score}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </Tab>
+                <Tab eventKey="mf96" title="第96回五月祭">
+                  <Table striped bordered>
+                    <thead>
+                      <tr>
+                        <th>順位</th>
+                        <th>ユーザ</th>
+                        <th>得点</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {listItemsMf96.map((listItemMf96, i) => (
+                        <tr key={listItemMf96.record_id}>
+                          <td>{i + 1}</td>
+                          <td>{listItemMf96.username}</td>
+                          <td>{listItemMf96.score}</td>
                         </tr>
                       ))}
                     </tbody>
