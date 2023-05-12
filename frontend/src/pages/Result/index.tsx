@@ -72,7 +72,7 @@ export default function Result() {
   // RankingをfetchAPIしてくる
   useEffect(() => {
     ;(async () => {
-      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRanking`, {
+      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRankingMf96`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
       })
@@ -85,7 +85,7 @@ export default function Result() {
 
   useEffect(() => {
     ;(async () => {
-      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRankingKf73`, {
+      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRanking`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
       })
@@ -128,8 +128,8 @@ export default function Result() {
               </ListGroup>
             </div>
             <div className="ranking-board">
-              <Tabs defaultActiveKey="now">
-                <Tab eventKey="now" title="第96回五月祭">
+              <Tabs defaultActiveKey="mf96">
+                <Tab eventKey="mf96" title="第96回五月祭">
                   <Table striped bordered>
                     <thead>
                       <tr>
