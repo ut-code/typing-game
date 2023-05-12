@@ -1,5 +1,5 @@
 .elements {
-  width: 40vw;
+  width: 40em;
   margin: auto;
 }
 
@@ -9,7 +9,7 @@
 }
 
 #play-button {
-  width: 40vw;
+  width: 40em;
 }
 
 #how-to-play {
