@@ -23,5 +23,5 @@ jobs:
         shell: bash
 
       - name: Run format
-        run: npm run format
+        run: npm run format:check
         shell: bash
