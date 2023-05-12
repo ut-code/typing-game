@@ -23,5 +23,5 @@ jobs:
         shell: bash
 
       - name: Run lint
-        run: npm run lint
+        run: npm run lint:check
         shell: bash
