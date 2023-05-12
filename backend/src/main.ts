@@ -57,6 +57,9 @@ app.post("/submitScore", async (request, response) => {
   await client.ranking_mf96.create({
     data: { problem: qnumber, username: username, score: score },
   })
+  await client.ranking.create({
+    data: { problem: qnumber, username: username, score: score },
+  })
   response.json()
 })
 
