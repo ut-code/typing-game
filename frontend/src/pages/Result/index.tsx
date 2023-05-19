@@ -143,7 +143,7 @@ export default function Result() {
               </ListGroup>
             </div>
             <div className="ranking-board">
-              <Tabs defaultActiveKey="mf96" justify>
+              <Tabs defaultActiveKey="overall" justify>
                 <Tab eventKey="overall" title="全体のランキング">
                   <Table striped bordered>
                     <thead>
