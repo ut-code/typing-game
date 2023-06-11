@@ -13,7 +13,8 @@ services:
       - node_modules_backend:/app/backend/node_modules
     ports:
       - 3000:3000
-    command: npm run dev
+    restart: always
+    command: bash -c "npx prisma db push && npm run dev"
     depends_on:
       - database
 
