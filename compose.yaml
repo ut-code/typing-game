@@ -3,7 +3,19 @@ services:
     image: postgres
     environment:
       - POSTGRES_PASSWORD=mysecretpassword
-    ports:
-      - 5432:5432
     volumes:
       - ./database/data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/app/backend
+      - node_modules_backend:/app/backend/node_modules
+    ports:
+      - 3000:3000
+    command: npm run dev
+    depends_on:
+      - database
+
+volumes:
+  node_modules_backend:
