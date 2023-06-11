@@ -17,5 +17,18 @@ services:
     depends_on:
       - database
 
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend:/app/frontend
+      - node_modules_frontend:/app/frontend/node_modules
+    ports:
+      - 5173:5173
+    command: npm run dev -- --host
+    depends_on:
+      - database
+      - backend
+
 volumes:
   node_modules_backend:
+  node_modules_frontend:
