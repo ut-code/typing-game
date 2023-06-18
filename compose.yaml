@@ -14,7 +14,7 @@ services:
     ports:
       - 3000:3000
     restart: always
-    command: bash -c "npx prisma db push && npm run dev"
+    command: npm run dev
     depends_on:
       - database
 
