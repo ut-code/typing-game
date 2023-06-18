@@ -1,3 +1,7 @@
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
+
 type QuestionSet = { questionSetNumber: number; questions: string[] }
 const questionSets: QuestionSet[] = [
   { questionSetNumber: 0, questions: ["kanagawa"] },
@@ -114,3 +118,24 @@ const questionSets: QuestionSet[] = [
     ],
   },
 ]
+
+async function main() {
+  for (const questionSet of questionSets) {
+    for (const question of questionSet.questions) {
+      await prisma.questions.create({ data: { qnumber: questionSet.questionSetNumber, question: question } })
+    }
+  }
+}
+
+main()
+  .then(async () => {
+    await prisma.$disconnect()
+  })
+
+  .catch(async (e) => {
+    console.error(e)
+
+    await prisma.$disconnect()
+
+    process.exit(1)
+  })
