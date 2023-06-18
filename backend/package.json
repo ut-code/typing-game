@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "ts-node src/main.ts",
     "build": "tsc",
-    "start": "node dist/main.js"
+    "start": "node dist/main.js",
+    "seed:develop": "ts-node prisma/seed.ts"
   },
   "repository": {
     "type": "git",
