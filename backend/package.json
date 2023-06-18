@@ -5,7 +5,7 @@
     "dev": "ts-node src/main.ts",
     "build": "tsc",
     "start": "node dist/main.js",
-    "prisma:push": "prisma db push",
+    "db-push": "prisma db push",
     "seed:develop": "ts-node prisma/seed.ts"
   },
   "repository": {
