@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 
 type QuestionSet = { questionSetNumber: number; questions: string[] }
 const questionSets: QuestionSet[] = [
-  { questionSetNumber: 0, questions: ["kanagawa"] },
+  { questionSetNumber: 0, questions: ["kanagawa", "kanagawa"] },
   {
     questionSetNumber: 1,
     questions: [
