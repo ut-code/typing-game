@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 
 type QuestionSet = { questionSetNumber: number; questions: string[] }
 const questionSets: QuestionSet[] = [
-  { questionSetNumber: 0, questions: ["kanagawa"] },
+  { questionSetNumber: 0, questions: ["kanagawa", "kanagawa"] },
   {
     questionSetNumber: 1,
     questions: [
@@ -146,43 +146,49 @@ async function main() {
   // Seed question sets
   for (const questionSet of questionSets) {
     for (const question of questionSet.questions) {
-      await prisma.questions.create({ data: { qnumber: questionSet.questionSetNumber, question: question } })
+      const createdQuestion = await prisma.questions.create({
+        data: { qnumber: questionSet.questionSetNumber, question: question },
+      })
+      console.log(createdQuestion)
     }
   }
 
   // Seed whole ranking
   for (const typingResult of typingResults) {
-    await prisma.ranking.create({
+    const createdTypingResult = await prisma.ranking.create({
       data: {
         problem: typingResult.questionNumber,
         username: typingResult.userName,
         score: typingResult.score,
       },
     })
+    console.log(createdTypingResult)
   }
 
   // Seed ranking for KF73
   for (let i = 3; i < 6; i += 1) {
     const typingResult = typingResults[i]
-    await prisma.ranking_kf73.create({
+    const createdTypingResult = await prisma.ranking_kf73.create({
       data: {
         problem: typingResult.questionNumber,
         username: typingResult.userName,
         score: typingResult.score,
       },
     })
+    console.log(createdTypingResult)
   }
 
   // Seed ranking for MF96
   for (let i = 6; i < 16; i += 1) {
     const typingResult = typingResults[i]
-    await prisma.ranking_mf96.create({
+    const createdTypingResult = await prisma.ranking_mf96.create({
       data: {
         problem: typingResult.questionNumber,
         username: typingResult.userName,
         score: typingResult.score,
       },
     })
+    console.log(createdTypingResult)
   }
 }
 
