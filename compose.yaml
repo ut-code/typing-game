@@ -1,4 +1,11 @@
 services:
+  devtools:
+    build: .
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    command: tail -f /dev/null
+
   database:
     image: postgres
     environment:
@@ -30,5 +37,6 @@ services:
       - backend
 
 volumes:
+  node_modules:
   node_modules_backend:
   node_modules_frontend:
