@@ -16,8 +16,8 @@ services:
   backend:
     build: ./backend
     volumes:
-      - ./backend:/app/backend
-      - node_modules_backend:/app/backend/node_modules
+      - ./backend:/backend
+      - node_modules_backend:/backend/node_modules
     ports:
       - 3000:3000
     command: npm run dev
@@ -27,8 +27,8 @@ services:
   frontend:
     build: ./frontend
     volumes:
-      - ./frontend:/app/frontend
-      - node_modules_frontend:/app/frontend/node_modules
+      - ./frontend:/frontend
+      - node_modules_frontend:/frontend/node_modules
     ports:
       - 5173:5173
     command: npm run dev -- --host
