@@ -1,0 +1,14 @@
+{
+  "name": "Typing Game",
+  "dockerComposeFile": "compose.yaml",
+  "service": "devtools",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint"],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      }
+    }
+  }
+}
