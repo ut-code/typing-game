@@ -32,9 +32,6 @@ services:
     ports:
       - 5173:5173
     command: npm run dev -- --host
-    depends_on:
-      - database
-      - backend
 
 volumes:
   node_modules:
