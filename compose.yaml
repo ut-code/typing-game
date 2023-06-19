@@ -1,34 +1,45 @@
 services:
+  devtools:
+    build: .
+    volumes:
+      - .:/workspace
+      - node_modules:/workspace/node_modules
+      - node_modules_backend:/workspace/backend/node_modules
+      - node_modules_frontend:/workspace/frontend/node_modules
+    restart: always
+    command: tail -f /dev/null
+
   database:
     image: postgres
     environment:
       - POSTGRES_PASSWORD=mysecretpassword
     volumes:
       - ./database/data:/var/lib/postgresql/data
+    restart: always
 
   backend:
     build: ./backend
     volumes:
-      - ./backend:/app/backend
-      - node_modules_backend:/app/backend/node_modules
+      - ./backend:/backend
+      - node_modules_backend:/backend/node_modules
     ports:
       - 3000:3000
-    command: npm run dev
+    restart: always
+    command: bash -c "npm run db-push && npm run dev"
     depends_on:
       - database
 
   frontend:
     build: ./frontend
     volumes:
-      - ./frontend:/app/frontend
-      - node_modules_frontend:/app/frontend/node_modules
+      - ./frontend:/frontend
+      - node_modules_frontend:/frontend/node_modules
     ports:
       - 5173:5173
+    restart: always
     command: npm run dev -- --host
-    depends_on:
-      - database
-      - backend
 
 volumes:
+  node_modules:
   node_modules_backend:
   node_modules_frontend:
