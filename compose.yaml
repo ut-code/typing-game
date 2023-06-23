@@ -25,7 +25,7 @@ services:
     ports:
       - 3000:3000
     restart: always
-    command: bash -c "npm run db-push && npm run dev"
+    command: bash -c 'if [ ! -f ".env" ]; then cp ".env.sample" ".env"; fi && npm run db-push && npm run dev'
     depends_on:
       - database
 
