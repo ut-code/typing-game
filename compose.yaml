@@ -7,7 +7,7 @@ services:
       - node_modules_backend:/workspace/backend/node_modules
       - node_modules_frontend:/workspace/frontend/node_modules
     restart: always
-    command: tail -f /dev/null
+    tty: true
 
   database:
     image: postgres
