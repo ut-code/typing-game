@@ -35,6 +35,8 @@
 
 - コマンドパレットから、`Dev Containers: Reopen in Container` を選択してください。そうすると、Docker コンテナが起動して、開発環境が構築されます。初回は、コンテナのビルドにしばらく時間がかかります。
 
+- 初回は、コンテナ上から `backend` ディレクトリに移動して、`npm run seed:develop` を実行してください。そうすると、初期データがデータベースに挿入されます。
+
 - [http://localhost:5173/](http://localhost:5173/) でアプリケーションにアクセスできます。
 
 ### その他の開発環境での開発
@@ -50,6 +52,8 @@
 - `docker compose build` を実行してください。そうすると、Docker コンテナがビルドされます。初回は、コンテナのビルドにしばらく時間がかかります。
 
 - `docker compose up` を実行してください。そうすると、Docker コンテナが起動して、開発環境が構築されます。
+
+- 初回は、`docker compose exec backend npm run seed:develop` を実行してください。そうすると、初期データがデータベースに挿入されます。
 
 - [http://localhost:5173/](http://localhost:5173/) でアプリケーションにアクセスできます。
 
