@@ -1,0 +1,132 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  build-backend:
+    name: Build Backend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+          cache: npm
+
+      - name: Install Node Packages
+        run: cd backend && npm ci
+        shell: bash
+
+      - name: Build
+        run: cd backend && npm run build
+        shell: bash
+
+  build-frontend:
+    name: Build Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+          cache: npm
+
+      - name: Install Node Packages
+        run: cd frontend && npm ci
+        shell: bash
+
+      - name: Build
+        run: cd frontend && npm run build
+        shell: bash
+
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+          cache: npm
+
+      - name: Install Node Packages
+        run: npm ci
+        shell: bash
+
+      - name: Run ESLint
+        run: npx eslint --max-warnings 0 .
+
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+          cache: npm
+
+      - name: Install Node Packages
+        run: npm ci
+        shell: bash
+
+      - name: Prettier
+        run: npx prettier --check .
+        shell: bash
+
+  type-check-backend:
+    name: Type Check Backend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+          cache: npm
+
+      - name: Install Node Packages
+        run: cd backend && npm ci
+        shell: bash
+
+      - name: Type Check
+        run: cd backend && npm run type-check
+        shell: bash
+
+  type-check-frontend:
+    name: Type Check Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+          cache: npm
+
+      - name: Install Node Packages
+        run: cd frontend && npm ci
+        shell: bash
+
+      - name: Type Check
+        run: cd frontend && npm run type-check
+        shell: bash
