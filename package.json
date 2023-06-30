@@ -3,9 +3,9 @@
   "description": "駒場祭のタイピングゲーム",
   "scripts": {
     "prepare": "husky install",
-    "lint": "eslint frontend/src && eslint backend/src",
-    "lint:fix": "eslint --fix frontend/src && eslint --fix backend/src",
-    "lint:check": "eslint --max-warnings 0 frontend/src && eslint --max-warnings 0 backend/src",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "lint:check": "eslint --max-warnings 0 .",
     "format": "npx prettier --write .",
     "format:check": "npx prettier --check .",
     "fix": "npm run lint:fix && npm run format"
