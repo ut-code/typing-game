@@ -1,4 +1,3 @@
----
 name: Render Awake
 
 on:
@@ -11,7 +10,7 @@ jobs:
     name: Render Awake
     runs-on: ubuntu-latest
     steps:
-      - name: Install curl
+      - name: Install cURL
         run: sudo apt install curl
         shell: bash
 
