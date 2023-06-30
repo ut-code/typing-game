@@ -3,22 +3,15 @@
   "description": "駒場祭のタイピングゲーム",
   "scripts": {
     "prepare": "husky install",
-    "lint": "eslint frontend/src && eslint backend/src",
-    "lint:fix": "eslint --fix frontend/src && eslint --fix backend/src",
-    "lint:check": "eslint --max-warnings 0 frontend/src && eslint --max-warnings 0 backend/src",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "lint:check": "eslint --max-warnings 0 .",
     "format": "npx prettier --write .",
     "format:check": "npx prettier --check .",
     "fix": "npm run lint:fix && npm run format",
-    "setup": "npm run setup:install",
-    "setup:env": "cp frontend/.env.sample frontend/.env && cp backend/.env.sample backend/.env",
-    "setup:db_push": "cd backend && npx prisma db push",
-    "setup:install": "npm ci && npm run frontend:ci && npm run backend:ci && npm run setup:db_push",
-    "frontend:ci": "cd frontend && npm ci",
-    "backend:ci": "cd backend && npm ci",
-    "dev": "npm run frontend:dev & npm run backend:dev",
-    "frontend:dev": "cd frontend && npm run dev",
-    "backend:dev": "cd backend && npm run dev",
-    "autoupdate": "git submodule update && npm ci && npm run frontend:ci && npm run backend:ci && npm run setup:db_push"
+    "type-check": "npm run type-check:frontend && npm run type-check:backend",
+    "type-check:frontend": "cd frontend && npm run type-check",
+    "type-check:backend": "cd backend && npm run type-check"
   },
   "repository": {
     "type": "git",
