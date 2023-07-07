@@ -1,8 +1,9 @@
 name: Render Awake
 
 on:
-  schedule:
-    - cron: "*/14 * * * *"
+  # Disable scheduled workflow until deploy is implemented
+  # schedule:
+  #   - cron: "*/14 * * * *"
   workflow_dispatch:
 
 jobs:
