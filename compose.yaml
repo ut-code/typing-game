@@ -2,10 +2,10 @@ services:
   devtools:
     build: .
     volumes:
-      - .:/workspace
-      - node_modules_workspace:/workspace/node_modules
-      - node_modules_backend:/workspace/backend/node_modules
-      - node_modules_frontend:/workspace/frontend/node_modules
+      - .:/app
+      - node_modules_app:/app/node_modules
+      - node_modules_backend:/app/backend/node_modules
+      - node_modules_frontend:/app/frontend/node_modules
     restart: always
     tty: true
 
@@ -40,6 +40,6 @@ services:
     command: bash -c 'if [ ! -f ".env" ]; then cp ".env.sample" ".env"; fi && npm run dev -- --host'
 
 volumes:
-  node_modules_workspace:
+  node_modules_app:
   node_modules_backend:
   node_modules_frontend:
