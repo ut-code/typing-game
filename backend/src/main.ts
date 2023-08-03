@@ -22,7 +22,8 @@ app.post("/questions", async (request, response) => {
     },
   })
   // questionsに問題が配列の形で入っている
-  const questions = records.map((data) => data.question)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const questions = records.map((data: any) => data.question)
   // JSON形式でscript.jsに送信
   response.json(questions)
 })
