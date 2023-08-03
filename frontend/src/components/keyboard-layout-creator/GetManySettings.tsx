@@ -31,7 +31,7 @@ export default function GetManySettings<T extends string | number>({
       onChange={(e) => {
         setItems(
           // @ts-ignore
-          items.map((item, j) => (i !== j ? item : type === "string" ? e.target.value : e.target.valueAsNumber))
+          items.map((item, j) => (i !== j ? item : type === "string" ? e.target.value : e.target.valueAsNumber)),
         )
       }}
     />

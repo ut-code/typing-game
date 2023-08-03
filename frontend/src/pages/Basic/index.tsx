@@ -47,7 +47,7 @@ export default function Basic() {
     problemSolved: number,
     correctInputCount: number,
     incorrectInputCount: number,
-    questionsLength: number
+    questionsLength: number,
   ) {
     const score = calculateScore(time, problemSolved, correctInputCount, incorrectInputCount, questionsLength)
     const kps = calculateKps(time, correctInputCount)

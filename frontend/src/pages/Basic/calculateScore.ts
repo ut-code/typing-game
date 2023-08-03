@@ -12,7 +12,7 @@ const calculateScore = (
   problemSolved: number,
   correctInputCount: number,
   incorrectInputCount: number,
-  questionsLength: number
+  questionsLength: number,
 ) => {
   const progressRate = problemSolved / questionsLength
   const difficulty = 0

@@ -33,13 +33,13 @@ export default function Functional(): JSX.Element {
   const [keys, setKeys] = useState<string[][]>([
     keyCodes.map(
       (
-        keyCode // @ts-ignore
-      ) => functionalLayoutType[defaultFunctionalLayoutType].content[keyCode][0]
+        keyCode, // @ts-ignore
+      ) => functionalLayoutType[defaultFunctionalLayoutType].content[keyCode][0],
     ),
     keyCodes.map(
       (
-        keyCode // @ts-ignore
-      ) => functionalLayoutType[defaultFunctionalLayoutType].content[keyCode][1]
+        keyCode, // @ts-ignore
+      ) => functionalLayoutType[defaultFunctionalLayoutType].content[keyCode][1],
     ),
   ])
   const [fileName, setFileName] = useState<string>("")

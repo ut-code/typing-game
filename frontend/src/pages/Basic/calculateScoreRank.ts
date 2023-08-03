@@ -3,7 +3,7 @@ const calculateScoreRank = (
   correctInputCount: number,
   incorrectInputCount: number,
   kps: number,
-  questionsLength: number
+  questionsLength: number,
 ) => {
   if (incorrectInputCount === 0 && kps >= 5 && problemSolved === questionsLength) return "SS"
   else if (
