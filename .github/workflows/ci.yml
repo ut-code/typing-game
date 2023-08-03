@@ -44,46 +44,23 @@ jobs:
         run: docker compose exec devtools npx prettier --check .
         shell: bash
 
-  type-check-backend:
+  type-check:
     name: Type Check Backend
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: latest
-          cache: npm
+      - name: Build Docker Images
+        run: docker compose build
+        shell: bash
 
-      - name: Install Node Packages
-        run: cd backend && npm ci
+      - name: Start Docker Compose
+        run: docker compose up devtools -d
         shell: bash
 
       - name: Type Check
-        run: cd backend && npm run type-check
-        shell: bash
-
-  type-check-frontend:
-    name: Type Check Frontend
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: latest
-          cache: npm
-
-      - name: Install Node Packages
-        run: cd frontend && npm ci
-        shell: bash
-
-      - name: Type Check
-        run: cd frontend && npm run type-check
+        run: docker compose exec devtools npm run type-check
         shell: bash
 
   build-backend:
