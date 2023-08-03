@@ -7,7 +7,7 @@ export function keyup(
   functional: string,
   functionalLayoutType: object,
   shift: boolean,
-  setShift: (value: boolean) => void
+  setShift: (value: boolean) => void,
 ): void {
   // @ts-ignore
   const key = functionalLayoutType[functional].content[code][!shift ? 0 : 1]
@@ -23,7 +23,7 @@ export function convert(
   content: string,
   isCustom: boolean,
   shift: boolean,
-  setShift: (value: boolean) => void
+  setShift: (value: boolean) => void,
 ): string {
   // @ts-ignore
   const keys = functionalLayoutType[functional].content[e.code]

@@ -25,7 +25,7 @@ function physicalKeyToObject(
   rows: number[],
   columns: number[],
   widths: number[],
-  styles: string[]
+  styles: string[],
 ): object {
   const version = "1.0"
   const object = {}
@@ -57,19 +57,19 @@ export default function Physical(): JSX.Element {
   const [height, setHeight] = useState<number>(defaultPhysical.height)
   const [rows, setRows] = useState<number[]>(
     // @ts-ignore
-    keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].row)
+    keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].row),
   )
   const [columns, setColumns] = useState<number[]>(
     // @ts-ignore
-    keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].column)
+    keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].column),
   )
   const [widths, setWidths] = useState<number[]>(
     // @ts-ignore
-    keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].width)
+    keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].width),
   )
   const [styles, setStyles] = useState<string[]>(
     // @ts-ignore
-    keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].style)
+    keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].style),
   )
   const [fileName, setFileName] = useState<string>("")
   return (

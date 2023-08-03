@@ -28,7 +28,7 @@ function keydown(
   functional: string,
   isDefault: boolean,
   shift: boolean,
-  setShift: (value: boolean) => void
+  setShift: (value: boolean) => void,
 ): void {
   const prohibitedKey = [
     "A",
@@ -74,7 +74,7 @@ function keydown(
   if (
     prohibitedKey.includes(
       // @ts-ignore
-      functionalLayoutType[functional].content[e.code][1]
+      functionalLayoutType[functional].content[e.code][1],
     ) || // @ts-ignore
     (functionalLayoutType[functional].content[e.code] === undefined && e.code === "")
   ) {
@@ -83,7 +83,7 @@ function keydown(
 
   setContent(
     // @ts-ignore
-    (content: string) => convert(e, functional, functionalLayoutType, content, isDefault, shift, setShift)
+    (content: string) => convert(e, functional, functionalLayoutType, content, isDefault, shift, setShift),
   )
   setKeyColors(
     keyCodes.map((tmp, i) =>
@@ -91,8 +91,8 @@ function keydown(
       (isDefault && // @ts-ignore
         functionalLayoutType[functional].content[tmp][0].toLowerCase()) === e.key.toLowerCase()
         ? "orange"
-        : keyColors[i]
-    )
+        : keyColors[i],
+    ),
   )
   setTimeout(() => {
     setKeyColors(
@@ -101,8 +101,8 @@ function keydown(
         (isDefault && // @ts-ignore
           functionalLayoutType[functional].content[tmp][0].toLowerCase()) === e.key.toLowerCase()
           ? "rgba(0,0,0,0)"
-          : keyColors[i]
-      )
+          : keyColors[i],
+      ),
     )
   }, 100)
 }
@@ -185,7 +185,7 @@ export default function App({
                         | "azerty"
                         | "qwertz"
                         | "custom"
-                    ].functionalLayoutType
+                    ].functionalLayoutType,
                   )
                   // @ts-ignore
                   setPhysical(layoutType[e.target.value].physicalLayoutType)

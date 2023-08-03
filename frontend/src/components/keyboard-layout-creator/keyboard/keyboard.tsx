@@ -101,7 +101,7 @@ export default function Keyboard({
     functional: string,
     isCustom: boolean,
     shift: boolean,
-    setShift: (value: boolean) => void
+    setShift: (value: boolean) => void,
   ) => void
   content?: string
   setContent?: (value: string) => void
@@ -131,7 +131,7 @@ export default function Keyboard({
                 id={keyCode}
                 className={`key ${fontSize(
                   // @ts-ignore
-                  functionalLayoutType[functionalLayout].content[keyCode][!shift ? 0 : 1]
+                  functionalLayoutType[functionalLayout].content[keyCode][!shift ? 0 : 1],
                 )}`}
                 onClick={() =>
                   // @ts-ignore
@@ -146,7 +146,7 @@ export default function Keyboard({
                     isCustom,
                     shift,
                     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                    setShift!
+                    setShift!,
                   )
                 }
                 style={{
@@ -156,7 +156,7 @@ export default function Keyboard({
                   top: `${
                     sumHeight(
                       // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].row
+                      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].row,
                     ) * magnification
                   }vw`,
                   // @ts-ignore
@@ -164,7 +164,7 @@ export default function Keyboard({
                     sumWidth(
                       // @ts-ignore
                       physicalLayoutType[physicalLayout].content.keyCodes[keyCode].row, // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].column
+                      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].column,
                     ) * magnification
                   }vw`,
                   width: `${
