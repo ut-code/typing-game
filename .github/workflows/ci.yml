@@ -45,7 +45,7 @@ jobs:
         shell: bash
 
   type-check:
-    name: Type Check Backend
+    name: Type Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
