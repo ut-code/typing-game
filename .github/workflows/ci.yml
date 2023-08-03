@@ -56,7 +56,7 @@ jobs:
         shell: bash
 
       - name: Start Docker Compose
-        run: docker compose up devtools -d
+        run: docker compose up -d
         shell: bash
 
       - name: Type Check
