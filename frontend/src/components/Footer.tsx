@@ -1,5 +1,5 @@
-import React from "react"
-import "./css/global.css"
+import React from "react";
+import "./css/global.css";
 
 export default function Footer() {
   return (
@@ -7,5 +7,5 @@ export default function Footer() {
       <hr></hr>
       <p>© Copyright {new Date().getFullYear()} ut.code();</p>
     </footer>
-  )
+  );
 }

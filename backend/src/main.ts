@@ -1,15 +1,15 @@
-import express from "express"
-import cors from "cors"
-import { PrismaClient } from "@prisma/client"
+import express from "express";
+import cors from "cors";
+import { PrismaClient } from "@prisma/client";
 
-const client = new PrismaClient()
-const app = express()
+const client = new PrismaClient();
+const app = express();
 
 // eslint-disable-next-line
-app.use(cors({ origin: process.env["WEB_ORIGIN"] }))
+app.use(cors({ origin: process.env["WEB_ORIGIN"] }));
 
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // データベースから問題をとってくる
 app.post("/questions", async (request, response) => {
@@ -20,64 +20,64 @@ app.post("/questions", async (request, response) => {
     orderBy: {
       id: "asc",
     },
-  })
+  });
   // questionsに問題が配列の形で入っている
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const questions = records.map((data: any) => data.question)
+  const questions = records.map((data: any) => data.question);
   // JSON形式でscript.jsに送信
-  response.json(questions)
-})
+  response.json(questions);
+});
 
 // データベースからランキングをとってくる
 async function getRanking() {
   const records = await client.ranking.findMany({
     orderBy: [{ score: "desc" }, { record_id: "desc" }],
-  })
-  return records
+  });
+  return records;
 }
 
 async function getRankingKf73() {
   const records = await client.ranking_kf73.findMany({
     orderBy: [{ score: "desc" }, { record_id: "desc" }],
-  })
-  return records
+  });
+  return records;
 }
 
 async function getRankingMf96() {
   const records = await client.ranking_mf96.findMany({
     orderBy: [{ score: "desc" }, { record_id: "desc" }],
-  })
-  return records
+  });
+  return records;
 }
 
 // submit時のデータベースとのやり取り
 app.post("/submitScore", async (request, response) => {
-  const qnumber: number = request.body.qnumber || 0
-  const username: string = request.body.username || "Not working"
-  const score: number = request.body.score || 0
+  const qnumber: number = request.body.qnumber || 0;
+  const username: string = request.body.username || "Not working";
+  const score: number = request.body.score || 0;
   await client.ranking.create({
     data: { problem: qnumber, username: username, score: score },
-  })
-  response.json()
-})
+  });
+  response.json();
+});
 
 // /result表示用にrankingをデータベースから取ってくる
 app.post("/fetchRanking", async (request, response) => {
-  const records = await getRanking()
+  const records = await getRanking();
   // JSON形式でscript.jsに送信
-  response.json(records)
-})
+  response.json(records);
+});
 
 app.post("/fetchRankingKf73", async (request, response) => {
-  const records = await getRankingKf73()
+  const records = await getRankingKf73();
   // JSON形式でscript.jsに送信
-  response.json(records)
-})
+  response.json(records);
+});
 
 app.post("/fetchRankingMf96", async (request, response) => {
-  const records = await getRankingMf96()
+  const records = await getRankingMf96();
   // JSON形式でscript.jsに送信
-  response.json(records)
-})
+  response.json(records);
+});
 
-app.listen(3000)
+app.listen(3000);

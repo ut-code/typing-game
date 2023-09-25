@@ -1,40 +1,42 @@
-import React, { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // CSS関連
-import "./style.css"
-import "../components/css/global.css"
-import "bootstrap/dist/css/bootstrap.min.css"
-import { Button, Form, Accordion } from "react-bootstrap"
+import "./style.css";
+import "../components/css/global.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button, Form, Accordion } from "react-bootstrap";
 
 // コンポーネント
-import Header from "../components/Header"
-import Footer from "../components/Footer"
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function Home() {
-  const [userName, setUserName] = useState<string>(localStorage.getItem("username") || "")
-  const [qnumber, setQnumber] = useState<string>("0: 関東地方")
+  const [userName, setUserName] = useState<string>(
+    localStorage.getItem("username") || "",
+  );
+  const [qnumber, setQnumber] = useState<string>("0: 関東地方");
   // useNavigate を Navigate に変化させる呪文
-  const Navigate = useNavigate()
+  const Navigate = useNavigate();
 
   // ユーザーの入力情報を受け取る関数
   const postStorage = () => {
-    localStorage.setItem("username", userName || "Guest")
-    const idx = qnumber.indexOf(":")
-    localStorage.setItem("questionNumber", qnumber.slice(0, idx))
+    localStorage.setItem("username", userName || "Guest");
+    const idx = qnumber.indexOf(":");
+    localStorage.setItem("questionNumber", qnumber.slice(0, idx));
     // fetchAPI後に別ページへ遷移
-    Navigate("/basic")
-  }
+    Navigate("/basic");
+  };
 
   // localStorageをリセットする
-  let unmounted = false
+  let unmounted = false;
   useEffect(() => {
-    if (unmounted) return
-    unmounted = true
+    if (unmounted) return;
+    unmounted = true;
     Object.keys(localStorage).forEach((key) => {
-      if (key !== "username") localStorage.removeItem(key)
-    })
-  }, [])
+      if (key !== "username") localStorage.removeItem(key);
+    });
+  }, []);
 
   return (
     <>
@@ -50,7 +52,7 @@ export default function Home() {
               placeholder="Guest"
               value={userName}
               onChange={(e) => {
-                setUserName(e.target.value)
+                setUserName(e.target.value);
               }}
               maxLength={20}
             />
@@ -63,7 +65,7 @@ export default function Home() {
             <Form.Select
               value={qnumber}
               onChange={(e) => {
-                setQnumber(e.target.value)
+                setQnumber(e.target.value);
               }}
             >
               <option>0: 関東地方</option>
@@ -99,5 +101,5 @@ export default function Home() {
 
       <Footer />
     </>
-  )
+  );
 }

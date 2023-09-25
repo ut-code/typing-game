@@ -1,12 +1,14 @@
-import React, { Link } from "react-router-dom"
-import howToUse from "./how_to_use.mp4"
-import "./style.css"
+import React, { Link } from "react-router-dom";
+import howToUse from "./how_to_use.mp4";
+import "./style.css";
 export default function Home(): JSX.Element {
   return (
     <>
       <main>
         <h2>Keyboard Layout Creator</h2>
-        <p>駒場祭のタイピングゲームのキーボード配列を作成するためのプログラムです。</p>
+        <p>
+          駒場祭のタイピングゲームのキーボード配列を作成するためのプログラムです。
+        </p>
         <p>
           論理配列と物理配列をそれぞれ自分で作成して、
           <Link to="/">駒場祭のタイピングゲーム</Link>
@@ -24,5 +26,5 @@ export default function Home(): JSX.Element {
         <Link to="/keyboard-layout-creator/physical">物理配列</Link>
       </nav>
     </>
-  )
+  );
 }

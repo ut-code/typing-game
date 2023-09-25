@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 /**
  * ファイル名を入力させるinputタグ
  */
@@ -6,8 +6,8 @@ export default function GetFileName({
   fileName,
   setFileName,
 }: {
-  fileName: string
-  setFileName: (value: string) => void
+  fileName: string;
+  setFileName: (value: string) => void;
 }): JSX.Element {
   return (
     <input
@@ -15,8 +15,8 @@ export default function GetFileName({
       placeholder="ファイル名を入力してください。"
       value={fileName}
       onChange={(e) => {
-        setFileName(e.target.value)
+        setFileName(e.target.value);
       }}
     />
-  )
+  );
 }

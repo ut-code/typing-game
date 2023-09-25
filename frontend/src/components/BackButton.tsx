@@ -1,10 +1,10 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React from "react";
+import { Link } from "react-router-dom";
 
-import "bootstrap/dist/css/bootstrap.min.css"
-import { Button } from "react-bootstrap"
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button } from "react-bootstrap";
 
-import "./css/global.css"
+import "./css/global.css";
 
 export default function BackButton() {
   return (
@@ -13,5 +13,5 @@ export default function BackButton() {
         Back
       </Button>
     </Link>
-  )
+  );
 }
