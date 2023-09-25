@@ -1,8 +1,8 @@
-import React from "react"
-import "bootstrap/dist/css/bootstrap.min.css"
-import { Image } from "react-bootstrap"
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Image } from "react-bootstrap";
 
-import logo from "/logo.png"
+import logo from "/logo.png";
 
 export default function Header() {
   return (
@@ -10,5 +10,5 @@ export default function Header() {
       {/* <b>ut.code(); タイピングゲーム</b> */}
       <Image src={logo} alt={"タイピングゲーム by ut.code();"} />
     </header>
-  )
+  );
 }

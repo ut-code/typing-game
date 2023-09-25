@@ -10,10 +10,10 @@ export function keyup(
   setShift: (value: boolean) => void,
 ): void {
   // @ts-ignore
-  const key = functionalLayoutType[functional].content[code][!shift ? 0 : 1]
+  const key = functionalLayoutType[functional].content[code][!shift ? 0 : 1];
   switch (key) {
     case "Shift":
-      setShift(false)
+      setShift(false);
   }
 }
 export function convert(
@@ -26,30 +26,30 @@ export function convert(
   setShift: (value: boolean) => void,
 ): string {
   // @ts-ignore
-  const keys = functionalLayoutType[functional].content[e.code]
-  let ans = content
+  const keys = functionalLayoutType[functional].content[e.code];
+  let ans = content;
   if (keys === undefined) {
-    ans += ""
+    ans += "";
   } else {
-    const key = keys[!shift ? 0 : 1]
+    const key = keys[!shift ? 0 : 1];
     if (key.length === 1) {
-      ans += key
+      ans += key;
     } else {
       switch (key) {
         case "Space":
-          ans += " "
-          break
+          ans += " ";
+          break;
         case "Shift":
-          setShift(true)
-          break
+          setShift(true);
+          break;
         case "Back Space":
-          ans += "" // ans = content.slice(0, -1);
-          break
+          ans += ""; // ans = content.slice(0, -1);
+          break;
         default:
-          ans += ""
-          break
+          ans += "";
+          break;
       }
     }
   }
-  return isCustom ? ans : content + (e.key.length === 1 ? e.key : "")
+  return isCustom ? ans : content + (e.key.length === 1 ? e.key : "");
 }

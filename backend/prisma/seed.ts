@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-type QuestionSet = { questionSetNumber: number; questions: string[] }
+type QuestionSet = { questionSetNumber: number; questions: string[] };
 const questionSets: QuestionSet[] = [
   { questionSetNumber: 0, questions: ["kanagawa", "kanagawa"] },
   {
@@ -28,9 +28,31 @@ const questionSets: QuestionSet[] = [
   },
   {
     questionSetNumber: 2,
-    questions: ["miso", "ramen", "sashimi", "sukiyaki", "sushi", "tempura", "teriyaki", "tofu", "yakitori"],
+    questions: [
+      "miso",
+      "ramen",
+      "sashimi",
+      "sukiyaki",
+      "sushi",
+      "tempura",
+      "teriyaki",
+      "tofu",
+      "yakitori",
+    ],
   },
-  { questionSetNumber: 3, questions: ["earth", "jupiter", "mars", "mercury", "neptune", "saturn", "uranus", "venus"] },
+  {
+    questionSetNumber: 3,
+    questions: [
+      "earth",
+      "jupiter",
+      "mars",
+      "mercury",
+      "neptune",
+      "saturn",
+      "uranus",
+      "venus",
+    ],
+  },
   {
     questionSetNumber: 4,
     questions: [
@@ -117,9 +139,9 @@ const questionSets: QuestionSet[] = [
       "What are the Sustainable Development Goals?",
     ],
   },
-]
+];
 
-type TypingResult = { questionNumber: number; userName: string; score: number }
+type TypingResult = { questionNumber: number; userName: string; score: number };
 
 const typingResults: TypingResult[] = [
   { questionNumber: 0, userName: "Alice", score: 200000 },
@@ -140,7 +162,7 @@ const typingResults: TypingResult[] = [
   { questionNumber: 2, userName: "朝倉義景", score: 30000 },
   { questionNumber: 2, userName: "毛利元就", score: 50000 },
   { questionNumber: 2, userName: "島津義久", score: 50000 },
-]
+];
 
 async function main() {
   // Seed question sets
@@ -148,8 +170,8 @@ async function main() {
     for (const question of questionSet.questions) {
       const createdQuestion = await prisma.questions.create({
         data: { qnumber: questionSet.questionSetNumber, question: question },
-      })
-      console.log(createdQuestion)
+      });
+      console.log(createdQuestion);
     }
   }
 
@@ -161,46 +183,46 @@ async function main() {
         username: typingResult.userName,
         score: typingResult.score,
       },
-    })
-    console.log(createdTypingResult)
+    });
+    console.log(createdTypingResult);
   }
 
   // Seed ranking for KF73
   for (let i = 3; i < 6; i += 1) {
-    const typingResult = typingResults[i]
+    const typingResult = typingResults[i];
     const createdTypingResult = await prisma.ranking_kf73.create({
       data: {
         problem: typingResult.questionNumber,
         username: typingResult.userName,
         score: typingResult.score,
       },
-    })
-    console.log(createdTypingResult)
+    });
+    console.log(createdTypingResult);
   }
 
   // Seed ranking for MF96
   for (let i = 6; i < 16; i += 1) {
-    const typingResult = typingResults[i]
+    const typingResult = typingResults[i];
     const createdTypingResult = await prisma.ranking_mf96.create({
       data: {
         problem: typingResult.questionNumber,
         username: typingResult.userName,
         score: typingResult.score,
       },
-    })
-    console.log(createdTypingResult)
+    });
+    console.log(createdTypingResult);
   }
 }
 
 main()
   .then(async () => {
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   })
 
   .catch(async (e) => {
-    console.error(e)
+    console.error(e);
 
-    await prisma.$disconnect()
+    await prisma.$disconnect();
 
-    process.exit(1)
-  })
+    process.exit(1);
+  });

@@ -1,22 +1,22 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
-import React, { useState } from "react"
-import { Link } from "react-router-dom"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 // import keyCodes from "./../../../../keyboard/src/components/data/keyCodes";
-import keyCodes from "../../../components/keyboard-layout-creator/keyboard/data/keyCodes.json"
+import keyCodes from "../../../components/keyboard-layout-creator/keyboard/data/keyCodes.json";
 import {
   physicalLayoutType,
   defaultFunctionalLayoutType,
   defaultPhysicalLayoutType,
-} from "../../../components/keyboard-layout-creator/keyboard/data/keyboardSettings"
-import Keyboard from "../../../components/keyboard-layout-creator/keyboard/keyboard"
-import ReadJSONFile from "../../../components/keyboard-layout-creator/ReadJSONFile"
-import GetManySettings from "../../../components/keyboard-layout-creator/GetManySettings"
-import GetFileName from "../../../components/keyboard-layout-creator/GetFileName"
-import makeJSONFile from "../../../utils/makeJSONFile"
-import ConfirmButton from "../../../components/keyboard-layout-creator/ConfirmButton"
-import "./style.css"
-import "./../keyboard.css"
+} from "../../../components/keyboard-layout-creator/keyboard/data/keyboardSettings";
+import Keyboard from "../../../components/keyboard-layout-creator/keyboard/keyboard";
+import ReadJSONFile from "../../../components/keyboard-layout-creator/ReadJSONFile";
+import GetManySettings from "../../../components/keyboard-layout-creator/GetManySettings";
+import GetFileName from "../../../components/keyboard-layout-creator/GetFileName";
+import makeJSONFile from "../../../utils/makeJSONFile";
+import ConfirmButton from "../../../components/keyboard-layout-creator/ConfirmButton";
+import "./style.css";
+import "./../keyboard.css";
 
 function physicalKeyToObject(
   marginRow: number,
@@ -27,15 +27,15 @@ function physicalKeyToObject(
   widths: number[],
   styles: string[],
 ): object {
-  const version = "1.0"
-  const object = {}
+  const version = "1.0";
+  const object = {};
   Object.assign(object, {
     version,
     marginRow,
     marginColumn,
     height,
     keyCodes: {},
-  })
+  });
   for (let i = 0; i < keyCodes.length; i++) {
     // @ts-ignore
     Object.assign(object.keyCodes, {
@@ -45,39 +45,49 @@ function physicalKeyToObject(
         width: widths[i],
         style: styles[i],
       },
-    })
+    });
   }
-  return object
+  return object;
 }
 
 export default function Physical(): JSX.Element {
-  const defaultPhysical = physicalLayoutType[defaultPhysicalLayoutType].content
-  const [marginRow, setMarginRow] = useState<number>(defaultPhysical.marginRow)
-  const [marginColumn, setMarginColumn] = useState<number>(defaultPhysical.marginColumn)
-  const [height, setHeight] = useState<number>(defaultPhysical.height)
+  const defaultPhysical = physicalLayoutType[defaultPhysicalLayoutType].content;
+  const [marginRow, setMarginRow] = useState<number>(defaultPhysical.marginRow);
+  const [marginColumn, setMarginColumn] = useState<number>(
+    defaultPhysical.marginColumn,
+  );
+  const [height, setHeight] = useState<number>(defaultPhysical.height);
   const [rows, setRows] = useState<number[]>(
     // @ts-ignore
     keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].row),
-  )
+  );
   const [columns, setColumns] = useState<number[]>(
     // @ts-ignore
     keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].column),
-  )
+  );
   const [widths, setWidths] = useState<number[]>(
     // @ts-ignore
     keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].width),
-  )
+  );
   const [styles, setStyles] = useState<string[]>(
     // @ts-ignore
     keyCodes.map((keyCode) => defaultPhysical.keyCodes[keyCode].style),
-  )
-  const [fileName, setFileName] = useState<string>("")
+  );
+  const [fileName, setFileName] = useState<string>("");
   return (
     <>
       <Keyboard
         functional={defaultFunctionalLayoutType}
         physical="custom"
-        physicalKeyLayout={physicalKeyToObject(marginRow, marginColumn, height, rows, columns, widths, styles)}
+        physicalKeyLayout={physicalKeyToObject(
+          marginRow,
+          marginColumn,
+          height,
+          rows,
+          columns,
+          widths,
+          styles,
+        )}
         isCustom={false}
         shift={false}
       ></Keyboard>
@@ -89,19 +99,19 @@ export default function Physical(): JSX.Element {
       <ReadJSONFile
         f={(x: object) => {
           // @ts-ignore
-          setMarginRow(x.marginRow)
+          setMarginRow(x.marginRow);
           // @ts-ignore
-          setMarginColumn(x.marginColumn)
+          setMarginColumn(x.marginColumn);
           // @ts-ignore
-          setHeight(x.height)
+          setHeight(x.height);
           // @ts-ignore
-          setRows(keyCodes.map((keyCode) => x.keyCodes[keyCode].row))
+          setRows(keyCodes.map((keyCode) => x.keyCodes[keyCode].row));
           // @ts-ignore
-          setColumns(keyCodes.map((keyCode) => x.keyCodes[keyCode].column))
+          setColumns(keyCodes.map((keyCode) => x.keyCodes[keyCode].column));
           // @ts-ignore
-          setWidths(keyCodes.map((keyCode) => x.keyCodes[keyCode].width))
+          setWidths(keyCodes.map((keyCode) => x.keyCodes[keyCode].width));
           // @ts-ignore
-          setStyles(keyCodes.map((keyCode) => x.keyCodes[keyCode].style))
+          setStyles(keyCodes.map((keyCode) => x.keyCodes[keyCode].style));
         }}
       ></ReadJSONFile>
 
@@ -124,7 +134,7 @@ export default function Physical(): JSX.Element {
                 type="number"
                 value={marginRow}
                 onChange={(e) => {
-                  setMarginRow(e.target.valueAsNumber)
+                  setMarginRow(e.target.valueAsNumber);
                 }}
               />
             </td>
@@ -136,7 +146,7 @@ export default function Physical(): JSX.Element {
                 type="number"
                 value={marginColumn}
                 onChange={(e) => {
-                  setMarginColumn(e.target.valueAsNumber)
+                  setMarginColumn(e.target.valueAsNumber);
                 }}
               />
             </td>
@@ -148,7 +158,7 @@ export default function Physical(): JSX.Element {
                 type="number"
                 value={height}
                 onChange={(e) => {
-                  setHeight(e.target.valueAsNumber)
+                  setHeight(e.target.valueAsNumber);
                 }}
               />
             </td>
@@ -220,12 +230,23 @@ export default function Physical(): JSX.Element {
       <GetFileName fileName={fileName} setFileName={setFileName}></GetFileName>
       <ConfirmButton
         f={() => {
-          makeJSONFile(physicalKeyToObject(marginRow, marginColumn, height, rows, columns, widths, styles), fileName)
+          makeJSONFile(
+            physicalKeyToObject(
+              marginRow,
+              marginColumn,
+              height,
+              rows,
+              columns,
+              widths,
+              styles,
+            ),
+            fileName,
+          );
         }}
       ></ConfirmButton>
       <nav>
         <Link to="/keyboard-layout-creator">Homeへ戻る</Link>
       </nav>
     </>
-  )
+  );
 }

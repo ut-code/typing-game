@@ -1,115 +1,121 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 
 // CSS関連
-import "./style.css"
-import "../../components/css/global.css"
-import "bootstrap/dist/css/bootstrap.min.css"
-import { Table, Stack, ListGroup, Accordion, Tab, Tabs } from "react-bootstrap"
+import "./style.css";
+import "../../components/css/global.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Table, Stack, ListGroup, Accordion, Tab, Tabs } from "react-bootstrap";
 
 // コンポーネント
-import Header from "../../components/Header"
-import Footer from "../../components/Footer"
-import BackButton from "../../components/BackButton"
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import BackButton from "../../components/BackButton";
 
 export default function Result() {
-  const [listItems, setListItems] = useState([{ record_id: 1, problem: 1, username: "sample", score: -100 }])
-  const [listItemsKf73, setListItemsKf73] = useState([{ record_id: 1, problem: 1, username: "sample", score: -100 }])
-  const [listItemsMf96, setListItemsMf96] = useState([{ record_id: 1, problem: 1, username: "sample", score: -100 }])
-  const [userName, setUserName] = useState<string>("")
-  const [userRank, setUserRank] = useState<number>(0)
-  const [userRankSame, setUserRankSame] = useState<number>(0)
-  const [, setUserTime] = useState<number>(0)
-  const [userScore, setUserScore] = useState<number>(0)
-  const [userKpm, setUserKpm] = useState<number>(0)
-  const [userCorrect, setUserCorrect] = useState<number>(0)
-  const [userMiss, setUserMiss] = useState<number>(0)
-  const [userScoreRank, setUserScoreRank] = useState<string>("")
+  const [listItems, setListItems] = useState([
+    { record_id: 1, problem: 1, username: "sample", score: -100 },
+  ]);
+  const [listItemsKf73, setListItemsKf73] = useState([
+    { record_id: 1, problem: 1, username: "sample", score: -100 },
+  ]);
+  const [listItemsMf96, setListItemsMf96] = useState([
+    { record_id: 1, problem: 1, username: "sample", score: -100 },
+  ]);
+  const [userName, setUserName] = useState<string>("");
+  const [userRank, setUserRank] = useState<number>(0);
+  const [userRankSame, setUserRankSame] = useState<number>(0);
+  const [, setUserTime] = useState<number>(0);
+  const [userScore, setUserScore] = useState<number>(0);
+  const [userKpm, setUserKpm] = useState<number>(0);
+  const [userCorrect, setUserCorrect] = useState<number>(0);
+  const [userMiss, setUserMiss] = useState<number>(0);
+  const [userScoreRank, setUserScoreRank] = useState<string>("");
 
-  let unmounted = false
+  let unmounted = false;
   useEffect(() => {
-    if (unmounted) return
-    unmounted = true
+    if (unmounted) return;
+    unmounted = true;
 
     async function tmp() {
-      const qnumber = Number(localStorage.getItem("questionNumber"))
-      const username = localStorage.getItem("username") || "Guest"
-      const time = Number(localStorage.getItem("time"))
-      const score = Number(localStorage.getItem("score"))
-      const kpm = Number(localStorage.getItem("kpm"))
-      const correct = Number(localStorage.getItem("correctInputCount"))
-      const miss = Number(localStorage.getItem("incorrectInputCount"))
-      const scorerank = localStorage.getItem("scoreRank") || "?"
-      setUserName(username)
-      setUserTime(time)
-      setUserScore(score)
-      setUserKpm(kpm)
-      setUserCorrect(correct)
-      setUserMiss(miss)
-      setUserScoreRank(scorerank)
+      const qnumber = Number(localStorage.getItem("questionNumber"));
+      const username = localStorage.getItem("username") || "Guest";
+      const time = Number(localStorage.getItem("time"));
+      const score = Number(localStorage.getItem("score"));
+      const kpm = Number(localStorage.getItem("kpm"));
+      const correct = Number(localStorage.getItem("correctInputCount"));
+      const miss = Number(localStorage.getItem("incorrectInputCount"));
+      const scorerank = localStorage.getItem("scoreRank") || "?";
+      setUserName(username);
+      setUserTime(time);
+      setUserScore(score);
+      setUserKpm(kpm);
+      setUserCorrect(correct);
+      setUserMiss(miss);
+      setUserScoreRank(scorerank);
 
-      let cnt = 1
+      let cnt = 1;
       for (const listItem of listItemsMf96) {
         if (score === listItem.score) {
-          setUserRank(cnt)
-          break
+          setUserRank(cnt);
+          break;
         }
-        cnt++
+        cnt++;
       }
 
-      cnt = 1
+      cnt = 1;
       for (const listItem of listItemsMf96) {
         if (qnumber === listItem.problem) {
           if (score === listItem.score) {
-            setUserRankSame(cnt)
-            break
+            setUserRankSame(cnt);
+            break;
           }
-          cnt++
+          cnt++;
         }
       }
     }
-    tmp()
-  }, [listItemsMf96])
+    tmp();
+  }, [listItemsMf96]);
 
   // RankingをfetchAPIしてくる
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRanking`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
       })
         .then((response) => response.json())
         .then((data) => {
-          setListItems(data)
-        })
-    })()
-  }, [])
+          setListItems(data);
+        });
+    })();
+  }, []);
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRankingKf73`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
       })
         .then((response) => response.json())
         .then((data) => {
-          setListItemsKf73(data)
-        })
-    })()
-  }, [])
+          setListItemsKf73(data);
+        });
+    })();
+  }, []);
 
   // RankingをfetchAPIしてくる
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRankingMf96`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
       })
         .then((response) => response.json())
         .then((data) => {
-          setListItemsMf96(data)
-        })
-    })()
-  }, [])
+          setListItemsMf96(data);
+        });
+    })();
+  }, []);
 
   return (
     <>
@@ -121,11 +127,21 @@ export default function Result() {
           <Stack direction="horizontal" gap={3}>
             <div className="stats">
               <ListGroup variant="flush">
-                <ListGroup.Item className="title">{userName}さんの結果</ListGroup.Item>
-                <ListGroup.Item className="normal-text">順位 {userRank} 位</ListGroup.Item>
-                <ListGroup.Item className="normal-text">同問題順位 {userRankSame} 位</ListGroup.Item>
-                <ListGroup.Item className="normal-text">スコア {userScore} 点</ListGroup.Item>
-                <ListGroup.Item className="normal-text">総合ランク {userScoreRank}</ListGroup.Item>
+                <ListGroup.Item className="title">
+                  {userName}さんの結果
+                </ListGroup.Item>
+                <ListGroup.Item className="normal-text">
+                  順位 {userRank} 位
+                </ListGroup.Item>
+                <ListGroup.Item className="normal-text">
+                  同問題順位 {userRankSame} 位
+                </ListGroup.Item>
+                <ListGroup.Item className="normal-text">
+                  スコア {userScore} 点
+                </ListGroup.Item>
+                <ListGroup.Item className="normal-text">
+                  総合ランク {userScoreRank}
+                </ListGroup.Item>
               </ListGroup>
               <ListGroup horizontal>
                 <ListGroup.Item className="small-text">
@@ -214,7 +230,8 @@ export default function Result() {
               <Accordion.Body>
                 SS: 平均タイプ数 5.00 回/秒以上 かつ ミスタイプ率 0% かつ 完答
                 <br></br>
-                S: 平均タイプ数 5.00 回/秒以上 かつ ミスタイプ率 10%未満 かつ 完答
+                S: 平均タイプ数 5.00 回/秒以上 かつ ミスタイプ率 10%未満 かつ
+                完答
                 <br></br>
                 A: 平均タイプ数 4.00 回/秒以上 かつ ミスタイプ率 20%未満
                 <br></br>
@@ -232,5 +249,5 @@ export default function Result() {
       </Stack>
       <Footer />
     </>
-  )
+  );
 }

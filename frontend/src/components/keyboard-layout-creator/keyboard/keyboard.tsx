@@ -3,19 +3,19 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
-import React from "react" // ,{useRef}
-import keyCodes from "./data/keyCodes.json"
-import "./keyboard.css"
-import useWindowDimensions from "../../../hooks/useWindowDimensions"
+import React from "react"; // ,{useRef}
+import keyCodes from "./data/keyCodes.json";
+import "./keyboard.css";
+import useWindowDimensions from "../../../hooks/useWindowDimensions";
 import {
   functionalLayoutType,
   physicalLayoutType,
   defaultFunctionalLayoutType,
   defaultPhysicalLayoutType,
-} from "./data/keyboardSettings"
+} from "./data/keyboardSettings";
 
-let functionalLayout = defaultFunctionalLayoutType
-let physicalLayout = defaultPhysicalLayoutType
+let functionalLayout = defaultFunctionalLayoutType;
+let physicalLayout = defaultPhysicalLayoutType;
 
 /**
  * `row` 行の `column` 列までの幅の合計を計算します。
@@ -25,25 +25,28 @@ let physicalLayout = defaultPhysicalLayoutType
  */
 function sumWidth(row: number, column: number): number {
   // @ts-ignore
-  let sum = physicalLayoutType[physicalLayout].content.marginColumn
-  let j = 0
+  let sum = physicalLayoutType[physicalLayout].content.marginColumn;
+  let j = 0;
   for (const keyCode of keyCodes) {
     if (
       // @ts-ignore
-      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].row === row &&
+      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].row ===
+        row &&
       // @ts-ignore
-      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].column < column
+      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].column <
+        column
     ) {
       sum += // @ts-ignore
         physicalLayoutType[physicalLayout].content.keyCodes[keyCode].width + // @ts-ignore
-        (physicalLayoutType[physicalLayout].content.keyCodes[keyCode].width === 0
+        (physicalLayoutType[physicalLayout].content.keyCodes[keyCode].width ===
+        0
           ? 0 // @ts-ignore
-          : physicalLayoutType[physicalLayout].content.marginColumn)
-      j++
+          : physicalLayoutType[physicalLayout].content.marginColumn);
+      j++;
     }
-    if (j >= column) break
+    if (j >= column) break;
   }
-  return sum
+  return sum;
 }
 
 /**
@@ -58,20 +61,20 @@ function sumHeight(row: number): number {
     (physicalLayoutType[physicalLayout].content.height + // @ts-ignore
       physicalLayoutType[physicalLayout].content.marginRow) *
       (row - 1)
-  )
+  );
 }
 
 function fontSize(keyName: string): string {
-  let cnt = 0
+  let cnt = 0;
   for (let i = 0; i < keyName.length; i++) {
-    if (keyName.charCodeAt(i) < 256) cnt++
-    else cnt += 2
+    if (keyName.charCodeAt(i) < 256) cnt++;
+    else cnt += 2;
   }
-  if (cnt === 1) return "one"
-  else if (cnt <= 3) return "three"
-  else if (cnt <= 4) return "four"
-  else if (cnt <= 6) return "six"
-  else return "inf"
+  if (cnt === 1) return "one";
+  else if (cnt <= 3) return "three";
+  else if (cnt <= 4) return "four";
+  else if (cnt <= 6) return "six";
+  else return "inf";
 }
 
 export default function Keyboard({
@@ -88,10 +91,10 @@ export default function Keyboard({
   shift,
   setShift,
 }: {
-  functional: string
-  physical: string
-  keyColors?: string[]
-  setKeyColors?: (value: string[]) => void
+  functional: string;
+  physical: string;
+  keyColors?: string[];
+  setKeyColors?: (value: string[]) => void;
   keydown?: (
     keyColors: string[],
     setKeyColors: (value: string[]) => void,
@@ -102,36 +105,39 @@ export default function Keyboard({
     isCustom: boolean,
     shift: boolean,
     setShift: (value: boolean) => void,
-  ) => void
-  content?: string
-  setContent?: (value: string) => void
-  keyLayout?: object
-  physicalKeyLayout?: object
-  isCustom: boolean
-  shift: boolean
-  setShift?: (value: boolean) => void
+  ) => void;
+  content?: string;
+  setContent?: (value: string) => void;
+  keyLayout?: object;
+  physicalKeyLayout?: object;
+  isCustom: boolean;
+  shift: boolean;
+  setShift?: (value: boolean) => void;
 }): JSX.Element {
-  const { width } = useWindowDimensions()
-  const magnification = 5.8 * (width < 850 ? 1 : 850 / width)
+  const { width } = useWindowDimensions();
+  const magnification = 5.8 * (width < 850 ? 1 : 850 / width);
 
-  functionalLayout = functional
-  physicalLayout = physical
+  functionalLayout = functional;
+  physicalLayout = physical;
   // @ts-ignore
-  functionalLayoutType.custom.content = keyLayout
+  functionalLayoutType.custom.content = keyLayout;
   // @ts-ignore
-  physicalLayoutType.custom.content = physicalKeyLayout
+  physicalLayoutType.custom.content = physicalKeyLayout;
   return (
     <>
       <div id="keyboard">
         {keyCodes.map((keyCode, i) => (
           <React.Fragment key={keyCode}>
             {/* @ts-ignore */}
-            {physicalLayoutType[physicalLayout].content.keyCodes[keyCode].width !== 0 && (
+            {physicalLayoutType[physicalLayout].content.keyCodes[keyCode]
+              .width !== 0 && (
               <div
                 id={keyCode}
                 className={`key ${fontSize(
                   // @ts-ignore
-                  functionalLayoutType[functionalLayout].content[keyCode][!shift ? 0 : 1],
+                  functionalLayoutType[functionalLayout].content[keyCode][
+                    !shift ? 0 : 1
+                  ],
                 )}`}
                 onClick={() =>
                   // @ts-ignore
@@ -156,24 +162,32 @@ export default function Keyboard({
                   top: `${
                     sumHeight(
                       // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].row,
+                      physicalLayoutType[physicalLayout].content.keyCodes[
+                        keyCode
+                      ].row,
                     ) * magnification
                   }vw`,
                   // @ts-ignore
                   left: `${
                     sumWidth(
                       // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].row, // @ts-ignore
-                      physicalLayoutType[physicalLayout].content.keyCodes[keyCode].column,
+                      physicalLayoutType[physicalLayout].content.keyCodes[
+                        keyCode
+                      ].row, // @ts-ignore
+                      physicalLayoutType[physicalLayout].content.keyCodes[
+                        keyCode
+                      ].column,
                     ) * magnification
                   }vw`,
                   width: `${
                     // @ts-ignore
-                    physicalLayoutType[physicalLayout].content.keyCodes[keyCode].width * magnification
+                    physicalLayoutType[physicalLayout].content.keyCodes[keyCode]
+                      .width * magnification
                   }vw`,
                   height: `${
                     // @ts-ignore
-                    physicalLayoutType[physicalLayout].content.height * magnification
+                    physicalLayoutType[physicalLayout].content.height *
+                    magnification
                   }vw`,
                 }}
                 // ref={dom=>{
@@ -192,7 +206,9 @@ export default function Keyboard({
               >
                 {
                   // @ts-ignore
-                  functionalLayoutType[functionalLayout].content[keyCode][!shift ? 0 : 1]
+                  functionalLayoutType[functionalLayout].content[keyCode][
+                    !shift ? 0 : 1
+                  ]
                 }
               </div>
             )}
@@ -200,5 +216,5 @@ export default function Keyboard({
         ))}
       </div>
     </>
-  )
+  );
 }

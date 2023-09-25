@@ -1,14 +1,14 @@
-import jis_qwerty from "./jis_qwerty.json"
-import mac_jis_qwerty from "./mac_jis_qwerty.json"
-import mac_us_qwerty from "./mac_us_qwerty.json"
-import dvorak from "./dvorak.json"
-import azerty from "./azerty.json"
-import qwertz from "./qwertz.json"
-import us_default from "./us_default.json"
-import jis109 from "./jis109.json"
-import dvorak_jis from "./dvorak_jis.json"
-import azerty_jis from "./azerty_jis.json"
-import qwertz_jis from "./qwertz_jis.json"
+import jis_qwerty from "./jis_qwerty.json";
+import mac_jis_qwerty from "./mac_jis_qwerty.json";
+import mac_us_qwerty from "./mac_us_qwerty.json";
+import dvorak from "./dvorak.json";
+import azerty from "./azerty.json";
+import qwertz from "./qwertz.json";
+import us_default from "./us_default.json";
+import jis109 from "./jis109.json";
+import dvorak_jis from "./dvorak_jis.json";
+import azerty_jis from "./azerty_jis.json";
+import qwertz_jis from "./qwertz_jis.json";
 
 export const functionalLayoutType = {
   jis_qwerty: { content: jis_qwerty },
@@ -18,7 +18,7 @@ export const functionalLayoutType = {
   azerty: { content: azerty },
   qwertz: { content: qwertz },
   custom: { content: jis_qwerty },
-}
+};
 export const physicalLayoutType = {
   us_default: { content: us_default },
   jis109: { content: jis109 },
@@ -26,7 +26,7 @@ export const physicalLayoutType = {
   azerty_jis: { content: azerty_jis },
   qwertz_jis: { content: qwertz_jis },
   custom: { content: jis109 },
-}
+};
 
 export const layoutType = {
   jis_qwerty: {
@@ -71,10 +71,10 @@ export const layoutType = {
     functionalLayoutType: "custom",
     physicalLayoutType: "custom",
   },
-}
+};
 
-export const defaultFunctionalLayoutType = "jis_qwerty"
+export const defaultFunctionalLayoutType = "jis_qwerty";
 
-export const defaultPhysicalLayoutType = "jis109"
+export const defaultPhysicalLayoutType = "jis109";
 
-export const defaultlayoutType = "jis_qwerty"
+export const defaultlayoutType = "jis_qwerty";

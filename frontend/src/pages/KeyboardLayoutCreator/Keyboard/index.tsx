@@ -3,21 +3,24 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
-import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import Keyboard from "../../../components/keyboard-layout-creator/keyboard/keyboard"
-import { keyup, convert } from "../../../components/keyboard-layout-creator/keyboard/convert"
-import keyCodes from "../../../components/keyboard-layout-creator/keyboard/data/keyCodes.json"
-import romantable from "./romantable.json"
-import ReadJSONFile from "../../../components/keyboard-layout-creator/ReadJSONFile"
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Keyboard from "../../../components/keyboard-layout-creator/keyboard/keyboard";
+import {
+  keyup,
+  convert,
+} from "../../../components/keyboard-layout-creator/keyboard/convert";
+import keyCodes from "../../../components/keyboard-layout-creator/keyboard/data/keyCodes.json";
+import romantable from "./romantable.json";
+import ReadJSONFile from "../../../components/keyboard-layout-creator/ReadJSONFile";
 import {
   layoutType,
   functionalLayoutType,
   physicalLayoutType,
   defaultFunctionalLayoutType,
   defaultPhysicalLayoutType,
-} from "../../../components/keyboard-layout-creator/keyboard/data/keyboardSettings"
-import "./style.css"
+} from "../../../components/keyboard-layout-creator/keyboard/data/keyboardSettings";
+import "./style.css";
 
 function keydown(
   keyColors: string[],
@@ -70,86 +73,112 @@ function keydown(
     "Enter",
     "Space",
     "/",
-  ]
+  ];
   if (
     prohibitedKey.includes(
       // @ts-ignore
       functionalLayoutType[functional].content[e.code][1],
     ) || // @ts-ignore
-    (functionalLayoutType[functional].content[e.code] === undefined && e.code === "")
+    (functionalLayoutType[functional].content[e.code] === undefined &&
+      e.code === "")
   ) {
-    e.preventDefault()
+    e.preventDefault();
   }
 
   setContent(
     // @ts-ignore
-    (content: string) => convert(e, functional, functionalLayoutType, content, isDefault, shift, setShift),
-  )
+    (content: string) =>
+      convert(
+        e,
+        functional,
+        functionalLayoutType,
+        content,
+        isDefault,
+        shift,
+        setShift,
+      ),
+  );
   setKeyColors(
     keyCodes.map((tmp, i) =>
       (!isDefault && tmp === e.code) ||
       (isDefault && // @ts-ignore
-        functionalLayoutType[functional].content[tmp][0].toLowerCase()) === e.key.toLowerCase()
+        functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
+        e.key.toLowerCase()
         ? "orange"
         : keyColors[i],
     ),
-  )
+  );
   setTimeout(() => {
     setKeyColors(
       keyCodes.map((tmp, i) =>
         (!isDefault && tmp === e.code) ||
         (isDefault && // @ts-ignore
-          functionalLayoutType[functional].content[tmp][0].toLowerCase()) === e.key.toLowerCase()
+          functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
+          e.key.toLowerCase()
           ? "rgba(0,0,0,0)"
           : keyColors[i],
       ),
-    )
-  }, 100)
+    );
+  }, 100);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function toJapanese(content: string): string {
-  let ans = ""
-  let tmp = ""
+  let ans = "";
+  let tmp = "";
   for (let i = 0; i < content.length; i++) {
-    tmp = tmp + content[i][0].toLowerCase()
-    const hoge = romantable.findIndex((element) => element[0] === tmp)
+    tmp = tmp + content[i][0].toLowerCase();
+    const hoge = romantable.findIndex((element) => element[0] === tmp);
     if (hoge !== -1) {
-      ans += romantable[hoge][1]
-      tmp = ""
+      ans += romantable[hoge][1];
+      tmp = "";
     }
   }
-  return ans
+  return ans;
 }
 
 export default function App({
   content = "",
   setContent = () => {},
 }: {
-  content?: string
-  setContent?: (value: string) => void
+  content?: string;
+  setContent?: (value: string) => void;
 }): JSX.Element {
-  const [isCustom, setIsCustom] = useState<boolean>(false)
-  const [layout, setLayout] = useState<string>()
-  const [functional, setFunctional] = useState<string>(defaultFunctionalLayoutType)
-  const [physical, setPhysical] = useState<string>(defaultPhysicalLayoutType)
-  const [keyColors, setKeyColors] = useState<string[]>(keyCodes.map(() => "rgba(0,0,0,0)"))
-  const [shift, setShift] = useState<boolean>(false)
+  const [isCustom, setIsCustom] = useState<boolean>(false);
+  const [layout, setLayout] = useState<string>();
+  const [functional, setFunctional] = useState<string>(
+    defaultFunctionalLayoutType,
+  );
+  const [physical, setPhysical] = useState<string>(defaultPhysicalLayoutType);
+  const [keyColors, setKeyColors] = useState<string[]>(
+    keyCodes.map(() => "rgba(0,0,0,0)"),
+  );
+  const [shift, setShift] = useState<boolean>(false);
   useEffect(() => {
     function tmp(e: KeyboardEvent): void {
-      keydown(keyColors, setKeyColors, e, content, setContent, functional, isCustom, shift, setShift)
+      keydown(
+        keyColors,
+        setKeyColors,
+        e,
+        content,
+        setContent,
+        functional,
+        isCustom,
+        shift,
+        setShift,
+      );
     }
     function temp(e: KeyboardEvent): void {
-      keyup(e.code, functional, functionalLayoutType, shift, setShift)
+      keyup(e.code, functional, functionalLayoutType, shift, setShift);
     }
-    window.addEventListener("keydown", tmp)
-    window.addEventListener("keyup", temp)
+    window.addEventListener("keydown", tmp);
+    window.addEventListener("keyup", temp);
     return () => {
-      window.removeEventListener("keydown", tmp)
-      window.removeEventListener("keyup", temp)
-    }
-  }, [functional, isCustom, shift])
-  setContent(content)
+      window.removeEventListener("keydown", tmp);
+      window.removeEventListener("keyup", temp);
+    };
+  }, [functional, isCustom, shift]);
+  setContent(content);
   return (
     <>
       <div id="wrapper">
@@ -161,7 +190,7 @@ export default function App({
               type="checkbox"
               checked={isCustom}
               onChange={(e) => {
-                setIsCustom(e.target.checked)
+                setIsCustom(e.target.checked);
               }}
             />
             <label>キーボードをカスタマイズする</label>
@@ -173,7 +202,7 @@ export default function App({
               <select
                 value={layout}
                 onChange={(e) => {
-                  setLayout(e.target.value)
+                  setLayout(e.target.value);
                   // @ts-ignore
                   setFunctional(
                     layoutType[
@@ -186,9 +215,9 @@ export default function App({
                         | "qwertz"
                         | "custom"
                     ].functionalLayoutType,
-                  )
+                  );
                   // @ts-ignore
-                  setPhysical(layoutType[e.target.value].physicalLayoutType)
+                  setPhysical(layoutType[e.target.value].physicalLayoutType);
                 }}
               >
                 {Object.keys(layoutType).map((key, i) => (
@@ -211,7 +240,7 @@ export default function App({
               <ReadJSONFile
                 f={(x) => {
                   // @ts-ignore
-                  functionalLayoutType.custom.content = x
+                  functionalLayoutType.custom.content = x;
                 }}
               ></ReadJSONFile>
               <br />
@@ -220,7 +249,7 @@ export default function App({
               <ReadJSONFile
                 f={(x) => {
                   // @ts-ignore
-                  physicalLayoutType.custom.content = x
+                  physicalLayoutType.custom.content = x;
                 }}
               ></ReadJSONFile>
             </>
@@ -242,5 +271,5 @@ export default function App({
         ></Keyboard>
       </div>
     </>
-  )
+  );
 }
