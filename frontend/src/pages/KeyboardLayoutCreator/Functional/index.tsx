@@ -32,15 +32,13 @@ export default function Functional(): JSX.Element {
   const [shift, setShift] = useState<boolean>(false);
   const [keys, setKeys] = useState<string[][]>([
     keyCodes.map(
-      (
-        keyCode, // @ts-ignore
-      ) =>
+      (keyCode) =>
+        // @ts-ignore
         functionalLayoutType[defaultFunctionalLayoutType].content[keyCode][0],
     ),
     keyCodes.map(
-      (
-        keyCode, // @ts-ignore
-      ) =>
+      (keyCode) =>
+        // @ts-ignore
         functionalLayoutType[defaultFunctionalLayoutType].content[keyCode][1],
     ),
   ]);
