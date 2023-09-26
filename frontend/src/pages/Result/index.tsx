@@ -14,12 +14,6 @@ export default function Result() {
   const [listItems, setListItems] = useState([
     { record_id: 1, problem: 1, username: "sample", score: -100 },
   ]);
-  const [listItemsKf73, setListItemsKf73] = useState([
-    { record_id: 1, problem: 1, username: "sample", score: -100 },
-  ]);
-  const [listItemsMf96, setListItemsMf96] = useState([
-    { record_id: 1, problem: 1, username: "sample", score: -100 },
-  ]);
   const [userName, setUserName] = useState<string>("");
   const [userRank, setUserRank] = useState<number>(0);
   const [userRankSame, setUserRankSame] = useState<number>(0);
@@ -50,7 +44,7 @@ export default function Result() {
       setUserScoreRank(scorerank);
 
       let cnt = 1;
-      for (const listItem of listItemsMf96) {
+      for (const listItem of listItems) {
         if (score === listItem.score) {
           setUserRank(cnt);
           break;
@@ -59,7 +53,7 @@ export default function Result() {
       }
 
       cnt = 1;
-      for (const listItem of listItemsMf96) {
+      for (const listItem of listItems) {
         if (qnumber === listItem.problem) {
           if (score === listItem.score) {
             setUserRankSame(cnt);
@@ -70,7 +64,7 @@ export default function Result() {
       }
     }
     tmp();
-  }, [listItemsMf96]);
+  }, [listItems]);
 
   // RankingをfetchAPIしてくる
   useEffect(() => {
@@ -82,33 +76,6 @@ export default function Result() {
         .then((response) => response.json())
         .then((data) => {
           setListItems(data);
-        });
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRankingKf73`, {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setListItemsKf73(data);
-        });
-    })();
-  }, []);
-
-  // RankingをfetchAPIしてくる
-  useEffect(() => {
-    (async () => {
-      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/fetchRankingMf96`, {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setListItemsMf96(data);
         });
     })();
   }, []);
@@ -157,12 +124,6 @@ export default function Result() {
               <Tabs defaultActiveKey="overall" justify>
                 <Tab eventKey="overall" title="全体のランキング">
                   <RankingTable listItems={listItems} />
-                </Tab>
-                <Tab eventKey="kf73" title="第73回駒場祭">
-                  <RankingTable listItems={listItemsKf73} />
-                </Tab>
-                <Tab eventKey="mf96" title="第96回五月祭">
-                  <RankingTable listItems={listItemsMf96} />
                 </Tab>
               </Tabs>
             </div>
