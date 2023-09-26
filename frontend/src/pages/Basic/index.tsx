@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ProgressBar, Stack, Spinner } from "react-bootstrap";
 
 // 関数
-import shuffle from "./shuffle";
+import shuffle from "../../utils/shuffle";
 import calculateScore from "./calculateScore";
 import calculateKps from "./calculateKps";
 import calculateScoreRank from "./calculateScoreRank";
