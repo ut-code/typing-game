@@ -7,6 +7,8 @@ import KeyboardLayoutCreatorHome from "./pages/KeyboardLayoutCreator";
 import KeyboardLayoutCreatorPhysical from "./pages/KeyboardLayoutCreator/Physical";
 import KeyboardLayoutCreatorFunctional from "./pages/KeyboardLayoutCreator/Functional";
 import Keyboard from "./pages/KeyboardLayoutCreator/Keyboard";
+import "./components/css/global.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 export default function App() {
   return (
     <>
