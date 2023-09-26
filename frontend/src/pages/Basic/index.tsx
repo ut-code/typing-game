@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 // CSS関連
 import "./style.css";
-import "../../components/css/global.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { ProgressBar, Stack, Spinner } from "react-bootstrap";
 
 // 関数
