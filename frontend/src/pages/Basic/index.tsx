@@ -9,9 +9,9 @@ import { ProgressBar, Stack, Spinner } from "react-bootstrap";
 
 // 関数
 import shuffle from "../../utils/shuffle";
-import calculateScore from "../../utils/calculateScore";
-import calculateKps from "../../utils/calculateKps";
-import calculateScoreRank from "../../utils/calculateScoreRank";
+import calculateScore from "../../utils/score/calculateScore";
+import calculateKps from "../../utils/score/calculateKps";
+import calculateScoreRank from "../../utils/score/calculateScoreRank";
 // コンポーネント
 import Keyboard from "../KeyboardLayoutCreator/Keyboard";
 import BackButton from "../../components/BackButton";
