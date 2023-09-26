@@ -1,0 +1,16 @@
+.statisticsProgress {
+  margin: 0 0 0 auto; /* 右寄せ */
+}
+.progressNumber {
+  margin: 1em 0;
+
+  font-size: 30px;
+  text-align: right;
+}
+.progressBar {
+  margin: 0 auto 0 0; /* 左寄せ */
+
+  width: 20vw;
+  border: 0.1em solid var(--Gray);
+  border-radius: 5px;
+}

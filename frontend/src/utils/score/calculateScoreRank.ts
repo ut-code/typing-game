@@ -1,20 +1,27 @@
-const calculateScoreRank = (
+type ScoreRank = "SS" | "S" | "A" | "B" | "C" | "D" | "E";
+
+/**
+ * Calculate score rank.
+ * @param problemSolved number of problems solved
+ * @param questionCount number of questions
+ * @param correctInputCount number of correct inputs
+ * @param incorrectInputCount number of incorrect inputs
+ * @param kps key strokes per second
+ * @returns score rank
+ */
+export default function calculateScoreRank(
   problemSolved: number,
+  questionCount: number,
   correctInputCount: number,
   incorrectInputCount: number,
   kps: number,
-  questionsLength: number,
-) => {
-  if (
-    incorrectInputCount === 0 &&
-    kps >= 5 &&
-    problemSolved === questionsLength
-  )
+): ScoreRank {
+  if (incorrectInputCount === 0 && kps >= 5 && problemSolved === questionCount)
     return "SS";
   else if (
     correctInputCount / (correctInputCount + incorrectInputCount + 1) > 0.9 &&
     kps >= 5 &&
-    problemSolved === questionsLength
+    problemSolved === questionCount
   )
     return "S";
   else if (
@@ -38,6 +45,4 @@ const calculateScoreRank = (
   )
     return "C";
   else return "D";
-};
-
-export default calculateScoreRank;
+}

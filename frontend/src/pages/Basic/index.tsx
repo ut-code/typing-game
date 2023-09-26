@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "./styles.module.css";
 
 // CSS関連
-import "./style.css";
-import { ProgressBar, Stack, Spinner } from "react-bootstrap";
+import { Stack } from "react-bootstrap";
 
 // 関数
-import shuffle from "./shuffle";
-import calculateScore from "./calculateScore";
-import calculateKps from "./calculateKps";
-import calculateScoreRank from "./calculateScoreRank";
+import shuffle from "../../utils/shuffle";
+import calculateScore from "../../utils/score/calculateScore";
+import calculateKps from "../../utils/score/calculateKps";
+import calculateScoreRank from "../../utils/score/calculateScoreRank";
 // コンポーネント
 import Keyboard from "../KeyboardLayoutCreator/Keyboard";
 import BackButton from "../../components/BackButton";
+import TypingStatistics from "../../components/TypingStatistics/TypingStatictics";
+import TypingProgressBar from "../../components/TypingProgressBar/TypingProgressBar";
+import QuestionDisplay from "../../components/QuestionDisplay/QuestionDisplay";
 
 export default function Basic() {
   // キー入力
@@ -30,7 +33,7 @@ export default function Basic() {
   const [time, setTime] = useState(0); // 現在の時間
   const [timeLimit] = useState(120); // 制限時間
   // 開始・終了判定
-  const [isSpinning, setIsSpinning] = useState<boolean>(true); // スピナーが回っているか
+  const [isLoading, setIsLoading] = useState<boolean>(true); // スピナーが回っているか
   const [isStarted, setIsStarted] = useState<boolean>(false); // 始まったか
   const [isFinished, setIsFinished] = useState<boolean>(false); // 終わったか
 
@@ -51,17 +54,17 @@ export default function Basic() {
     const score = calculateScore(
       time,
       problemSolved,
+      questionsLength,
       correctInputCount,
       incorrectInputCount,
-      questionsLength,
     );
     const kps = calculateKps(time, correctInputCount);
     const scoreRank = calculateScoreRank(
       problemSolved,
+      questionsLength,
       correctInputCount,
       incorrectInputCount,
       kps,
-      questionsLength,
     );
 
     // submit処理
@@ -158,7 +161,7 @@ export default function Basic() {
 
   // 問題が格納されるまでスピナーは回る
   useEffect(() => {
-    if (questions.length > 1) setIsSpinning(false);
+    if (questions.length > 1) setIsLoading(false);
   }, [questions]);
 
   // キー入力のメイン処理
@@ -215,60 +218,25 @@ export default function Basic() {
     <>
       <BackButton />
 
-      <Stack direction="horizontal" className="stat-section">
-        <table className="stat-table">
-          <tbody>
-            <tr>
-              <th>正しいタイプ数：</th>
-              <td>{correctInputCount}回</td>
-            </tr>
-            <tr>
-              <th>ミスタイプ数：</th>
-              <td>{incorrectInputCount}回</td>
-            </tr>
-            <tr>
-              <th>経過時間：</th>
-              <td>{time}秒</td>
-            </tr>
-            <tr>
-              <th>残り時間：</th>
-              <td>{timeLimit - time}秒</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div className="stat-progress">
-          {/* 何問目/全問題数 */}
-          <div className="progress-number">
-            {problemSolved + 1 + "/" + questions.length + "問"}
-          </div>
-          <div className="progress-bar">
-            <ProgressBar
-              variant="success"
-              animated
-              now={Math.round((problemSolved / questions.length) * 100)}
-              label={`${Math.round((problemSolved / questions.length) * 100)}%`}
-            />
-          </div>
-        </div>
+      <Stack direction="horizontal" className={styles.statisticsSection}>
+        <TypingStatistics
+          time={time}
+          timeLeft={timeLimit - time}
+          correctInputCount={correctInputCount}
+          incorrectInputCount={incorrectInputCount}
+        />
+        <TypingProgressBar
+          questions={questions}
+          problemSolved={problemSolved}
+        />
       </Stack>
-
-      <div className="question-box">
-        {isSpinning ? (
-          <Spinner animation="border" role="status" className="spinner" />
-        ) : (
-          <div>
-            <span className="answered-text">
-              {isStarted ? questions[problemSolved].slice(0, currentIndex) : ""}
-            </span>
-            <span className="question-text">
-              {isStarted
-                ? questions[problemSolved].slice(currentIndex)
-                : "[Space]を押して開始"}
-            </span>
-          </div>
-        )}
-      </div>
+      <QuestionDisplay
+        isLoading={isLoading}
+        isStarted={isStarted}
+        questions={questions}
+        problemSolved={problemSolved}
+        currentIndex={currentIndex}
+      />
       <Keyboard content={content} setContent={setContent} />
     </>
   );

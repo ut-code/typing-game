@@ -1,0 +1,11 @@
+.statisticsTable {
+  font-size: 20px;
+}
+.statisticsTableHeader {
+  text-align: right;
+  font-weight: bolder;
+}
+.statisticsTableData {
+  width: 4em;
+  text-align: right; /* デフォルトだとleftなので必須 */
+}

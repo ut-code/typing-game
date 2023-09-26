@@ -1,0 +1,5 @@
+/* 画面上部の統計情報 */
+.statisticsSection {
+  /* layout */
+  margin: 0 0 1em 0; /* 下だけ */
+}
