@@ -3,23 +3,6 @@
   /* layout */
   margin: 0 0 1em 0; /* 下だけ */
 }
-/* 左の表 */
-.stat-table {
-  /* text */
-  font-size: 20px;
-}
-.stat-table th {
-  /* text */
-  text-align: right;
-  font-weight: bolder;
-}
-.stat-table td {
-  /* box */
-  width: 4em;
-
-  /* text */
-  text-align: right; /* デフォルトだとleftなので必須 */
-}
 
 .stat-progress {
   /* layout */

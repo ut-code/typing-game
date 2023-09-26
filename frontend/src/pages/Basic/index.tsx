@@ -15,6 +15,7 @@ import calculateScoreRank from "../../utils/score/calculateScoreRank";
 // コンポーネント
 import Keyboard from "../KeyboardLayoutCreator/Keyboard";
 import BackButton from "../../components/BackButton";
+import TypingStatistics from "../../components/TypingStatistics/TypingStatictics";
 
 export default function Basic() {
   // キー入力
@@ -218,26 +219,12 @@ export default function Basic() {
       <BackButton />
 
       <Stack direction="horizontal" className="stat-section">
-        <table className="stat-table">
-          <tbody>
-            <tr>
-              <th>正しいタイプ数：</th>
-              <td>{correctInputCount}回</td>
-            </tr>
-            <tr>
-              <th>ミスタイプ数：</th>
-              <td>{incorrectInputCount}回</td>
-            </tr>
-            <tr>
-              <th>経過時間：</th>
-              <td>{time}秒</td>
-            </tr>
-            <tr>
-              <th>残り時間：</th>
-              <td>{timeLimit - time}秒</td>
-            </tr>
-          </tbody>
-        </table>
+        <TypingStatistics
+          time={time}
+          timeLeft={timeLimit - time}
+          correctInputCount={correctInputCount}
+          incorrectInputCount={incorrectInputCount}
+        />
 
         <div className="stat-progress">
           {/* 何問目/全問題数 */}
