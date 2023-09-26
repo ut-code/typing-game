@@ -1,10 +1,5 @@
 /* 画面上部の統計情報 */
-.stat-section {
+.statisticsSection {
   /* layout */
   margin: 0 0 1em 0; /* 下だけ */
-}
-
-/* キーボード関連 */
-#content {
-  display: none;
 }

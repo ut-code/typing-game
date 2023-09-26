@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "./styles.module.css";
 
 // CSS関連
-import "./style.css";
 import { Stack } from "react-bootstrap";
 
 // 関数
@@ -218,7 +218,7 @@ export default function Basic() {
     <>
       <BackButton />
 
-      <Stack direction="horizontal" className="stat-section">
+      <Stack direction="horizontal" className={styles.statisticsSection}>
         <TypingStatistics
           time={time}
           timeLeft={timeLimit - time}
