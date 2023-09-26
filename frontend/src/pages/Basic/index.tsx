@@ -11,7 +11,7 @@ import { ProgressBar, Stack, Spinner } from "react-bootstrap";
 import shuffle from "../../utils/shuffle";
 import calculateScore from "../../utils/calculateScore";
 import calculateKps from "./calculateKps";
-import calculateScoreRank from "./calculateScoreRank";
+import calculateScoreRank from "../../utils/calculateScoreRank";
 // コンポーネント
 import Keyboard from "../KeyboardLayoutCreator/Keyboard";
 import BackButton from "../../components/BackButton";
@@ -60,10 +60,10 @@ export default function Basic() {
     const kps = calculateKps(time, correctInputCount);
     const scoreRank = calculateScoreRank(
       problemSolved,
+      questionsLength,
       correctInputCount,
       incorrectInputCount,
       kps,
-      questionsLength,
     );
 
     // submit処理

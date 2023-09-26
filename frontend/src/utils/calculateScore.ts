@@ -1,5 +1,5 @@
 /**
- * Calculate score
+ * Calculate score.
  * @param time time spent
  * @param problemSolved number of problems solved
  * @param questionCount number of questions
