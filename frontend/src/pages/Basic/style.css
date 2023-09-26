@@ -4,28 +4,6 @@
   margin: 0 0 1em 0; /* 下だけ */
 }
 
-.stat-progress {
-  /* layout */
-  margin: 0 0 0 auto; /* 右寄せ */
-}
-.progress-number {
-  /* layout */
-  margin: 1em 0;
-
-  /* text */
-  font-size: 30px;
-  text-align: right;
-}
-.progress-bar {
-  /* layout */
-  margin: 0 auto 0 0; /* 左寄せ */
-
-  /* box */
-  width: 20vw;
-  border: 0.1em solid var(--Gray);
-  border-radius: 5px;
-}
-
 /* 白枠内 */
 .question-box {
   /* layout */

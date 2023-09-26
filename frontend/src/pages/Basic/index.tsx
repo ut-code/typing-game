@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 // CSS関連
 import "./style.css";
-import { ProgressBar, Stack, Spinner } from "react-bootstrap";
+import { Stack, Spinner } from "react-bootstrap";
 
 // 関数
 import shuffle from "../../utils/shuffle";
@@ -14,6 +14,7 @@ import calculateScoreRank from "../../utils/score/calculateScoreRank";
 import Keyboard from "../KeyboardLayoutCreator/Keyboard";
 import BackButton from "../../components/BackButton";
 import TypingStatistics from "../../components/TypingStatistics/TypingStatictics";
+import TypingProgressBar from "../../components/TypingProgressBar/TypingProgressBar";
 
 export default function Basic() {
   // キー入力
@@ -223,21 +224,10 @@ export default function Basic() {
           correctInputCount={correctInputCount}
           incorrectInputCount={incorrectInputCount}
         />
-
-        <div className="stat-progress">
-          {/* 何問目/全問題数 */}
-          <div className="progress-number">
-            {problemSolved + 1 + "/" + questions.length + "問"}
-          </div>
-          <div className="progress-bar">
-            <ProgressBar
-              variant="success"
-              animated
-              now={Math.round((problemSolved / questions.length) * 100)}
-              label={`${Math.round((problemSolved / questions.length) * 100)}%`}
-            />
-          </div>
-        </div>
+        <TypingProgressBar
+          questions={questions}
+          problemSolved={problemSolved}
+        />
       </Stack>
 
       <div className="question-box">
