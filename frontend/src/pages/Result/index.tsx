@@ -140,16 +140,16 @@ export default function Result() {
               </ListGroup>
               <ListGroup horizontal>
                 <ListGroup.Item className={styles.smallText}>
-                  正しいタイプ数<br></br>
-                  {userCorrect} 回
+                  <div>正しいタイプ数</div>
+                  <div>{userCorrect} 回</div>
                 </ListGroup.Item>
                 <ListGroup.Item className={styles.smallText}>
-                  ミスタイプ数<br></br>
-                  {userMiss} 回
+                  <div>ミスタイプ数</div>
+                  <div>{userMiss} 回</div>
                 </ListGroup.Item>
                 <ListGroup.Item className={styles.smallText}>
-                  平均タイプ数<br></br>
-                  {userKpm} 回/秒
+                  <div>平均タイプ数</div>
+                  <div>{userKpm} 回/秒</div>
                 </ListGroup.Item>
               </ListGroup>
             </div>
