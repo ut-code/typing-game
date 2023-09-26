@@ -186,32 +186,6 @@ async function main() {
     });
     console.log(createdTypingResult);
   }
-
-  // Seed ranking for KF73
-  for (let i = 3; i < 6; i += 1) {
-    const typingResult = typingResults[i];
-    const createdTypingResult = await prisma.ranking_kf73.create({
-      data: {
-        problem: typingResult.questionNumber,
-        username: typingResult.userName,
-        score: typingResult.score,
-      },
-    });
-    console.log(createdTypingResult);
-  }
-
-  // Seed ranking for MF96
-  for (let i = 6; i < 16; i += 1) {
-    const typingResult = typingResults[i];
-    const createdTypingResult = await prisma.ranking_mf96.create({
-      data: {
-        problem: typingResult.questionNumber,
-        username: typingResult.userName,
-        score: typingResult.score,
-      },
-    });
-    console.log(createdTypingResult);
-  }
 }
 
 main()
