@@ -4,12 +4,13 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import "../../components/css/global.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Table, Stack, ListGroup, Accordion, Tab, Tabs } from "react-bootstrap";
+import { Stack, ListGroup, Accordion, Tab, Tabs } from "react-bootstrap";
 
 // コンポーネント
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import BackButton from "../../components/BackButton";
+import RankingTable from "./components/rankingTable";
 
 export default function Result() {
   const [listItems, setListItems] = useState([
@@ -161,69 +162,17 @@ export default function Result() {
             <div className="ranking-board">
               <Tabs defaultActiveKey="overall" justify>
                 <Tab eventKey="overall" title="全体のランキング">
-                  <Table striped bordered>
-                    <thead>
-                      <tr>
-                        <th>順位</th>
-                        <th>ユーザ</th>
-                        <th>得点</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {listItems.map((listItem, i) => (
-                        <tr key={listItem.record_id}>
-                          <td>{i + 1}</td>
-                          <td>{listItem.username}</td>
-                          <td>{listItem.score}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
+                  <RankingTable listItems={listItems} />
                 </Tab>
                 <Tab eventKey="kf73" title="第73回駒場祭">
-                  <Table striped bordered>
-                    <thead>
-                      <tr>
-                        <th>順位</th>
-                        <th>ユーザ</th>
-                        <th>得点</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {listItemsKf73.map((listItemKf73, i) => (
-                        <tr key={listItemKf73.record_id}>
-                          <td>{i + 1}</td>
-                          <td>{listItemKf73.username}</td>
-                          <td>{listItemKf73.score}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
+                  <RankingTable listItems={listItemsKf73} />
                 </Tab>
                 <Tab eventKey="mf96" title="第96回五月祭">
-                  <Table striped bordered>
-                    <thead>
-                      <tr>
-                        <th>順位</th>
-                        <th>ユーザ</th>
-                        <th>得点</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {listItemsMf96.map((listItemMf96, i) => (
-                        <tr key={listItemMf96.record_id}>
-                          <td>{i + 1}</td>
-                          <td>{listItemMf96.username}</td>
-                          <td>{listItemMf96.score}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
+                  <RankingTable listItems={listItemsMf96} />
                 </Tab>
               </Tabs>
             </div>
           </Stack>
-
           <Accordion defaultActiveKey="1">
             <Accordion.Item eventKey="0">
               <Accordion.Header>総合ランクの基準</Accordion.Header>
