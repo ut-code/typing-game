@@ -1,3 +1,5 @@
+import calculateTypingSpeed from "./calculateTypingSpeed";
+
 /**
  * Calculate score.
  * @param time time spent
@@ -17,7 +19,7 @@ export default function calculateScore(
   const progressRate = problemSolved / questionCount;
   const inputCount = correctInputCount + incorrectInputCount;
   const correctRate = correctInputCount ** 2 / (inputCount + 1); // 問題文字数多いと有利！
-  const typingSpeed = time === 0 ? 99.99 : correctInputCount / time;
+  const typingSpeed = calculateTypingSpeed(time, correctInputCount);
 
   // 重みをつけて算出
   const progressWeight = 1000;

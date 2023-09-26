@@ -1,3 +1,5 @@
+import calculateTypingSpeed from "./calculateTypingSpeed";
+
 /**
  * Calculates the typing speed in KPS (Keystrokes per second)
  * @param time time spent
@@ -8,6 +10,6 @@ export default function calculateKps(
   time: number,
   correctInputCount: number,
 ): number {
-  const typingSpeed = time === 0 ? 99.99 : correctInputCount / time;
+  const typingSpeed = calculateTypingSpeed(time, correctInputCount);
   return parseFloat(typingSpeed.toFixed(2));
 }
