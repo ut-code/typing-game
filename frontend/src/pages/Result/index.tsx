@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import styles from "./styles.module.css";
 
 // CSS関連
+import styles from "./styles.module.css";
 import { Stack, ListGroup, Accordion, Tab, Tabs } from "react-bootstrap";
 
 // コンポーネント
@@ -120,7 +120,7 @@ export default function Result() {
         <div className={styles.resultElements}>
           <BackButton />
           <Stack direction="horizontal" gap={3}>
-            <div className={styles.Stats}>
+            <div className={styles.stats}>
               <ListGroup variant="flush">
                 <ListGroup.Item className={styles.title}>
                   {userName}さんの結果
