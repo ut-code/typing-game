@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 
 // CSS関連
 import "./style.css";
-import "../../components/css/global.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import { Stack, ListGroup, Accordion, Tab, Tabs } from "react-bootstrap";
 
 // コンポーネント
