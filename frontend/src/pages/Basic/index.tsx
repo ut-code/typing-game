@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 // CSS関連
 import "./style.css";
-import { Stack, Spinner } from "react-bootstrap";
+import { Stack } from "react-bootstrap";
 
 // 関数
 import shuffle from "../../utils/shuffle";
@@ -15,6 +15,7 @@ import Keyboard from "../KeyboardLayoutCreator/Keyboard";
 import BackButton from "../../components/BackButton";
 import TypingStatistics from "../../components/TypingStatistics/TypingStatictics";
 import TypingProgressBar from "../../components/TypingProgressBar/TypingProgressBar";
+import QuestionDisplay from "../../components/QuestionDisplay/QuestionDisplay";
 
 export default function Basic() {
   // キー入力
@@ -32,7 +33,7 @@ export default function Basic() {
   const [time, setTime] = useState(0); // 現在の時間
   const [timeLimit] = useState(120); // 制限時間
   // 開始・終了判定
-  const [isSpinning, setIsSpinning] = useState<boolean>(true); // スピナーが回っているか
+  const [isLoading, setIsLoading] = useState<boolean>(true); // スピナーが回っているか
   const [isStarted, setIsStarted] = useState<boolean>(false); // 始まったか
   const [isFinished, setIsFinished] = useState<boolean>(false); // 終わったか
 
@@ -160,7 +161,7 @@ export default function Basic() {
 
   // 問題が格納されるまでスピナーは回る
   useEffect(() => {
-    if (questions.length > 1) setIsSpinning(false);
+    if (questions.length > 1) setIsLoading(false);
   }, [questions]);
 
   // キー入力のメイン処理
@@ -229,23 +230,13 @@ export default function Basic() {
           problemSolved={problemSolved}
         />
       </Stack>
-
-      <div className="question-box">
-        {isSpinning ? (
-          <Spinner animation="border" role="status" className="spinner" />
-        ) : (
-          <div>
-            <span className="answered-text">
-              {isStarted ? questions[problemSolved].slice(0, currentIndex) : ""}
-            </span>
-            <span className="question-text">
-              {isStarted
-                ? questions[problemSolved].slice(currentIndex)
-                : "[Space]を押して開始"}
-            </span>
-          </div>
-        )}
-      </div>
+      <QuestionDisplay
+        isLoading={isLoading}
+        isStarted={isStarted}
+        questions={questions}
+        problemSolved={problemSolved}
+        currentIndex={currentIndex}
+      />
       <Keyboard content={content} setContent={setContent} />
     </>
   );
