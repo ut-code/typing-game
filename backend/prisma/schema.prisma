@@ -23,17 +23,3 @@ model ranking {
   username  String @default("test")
   score     Int
 }
-
-model ranking_kf73 {
-  record_id Int    @id @default(autoincrement())
-  problem   Int    @default(1)
-  username  String @default("test")
-  score     Int
-}
-
-model ranking_mf96 {
-  record_id Int    @id @default(autoincrement())
-  problem   Int    @default(1)
-  username  String @default("test")
-  score     Int
-}

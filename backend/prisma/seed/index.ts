@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import seedTypingResult from "./seed/typingResult";
-import seedQuestionSet from "./seed/questionSet";
+import seedTypingResult from "./typingResult";
+import seedQuestionSet from "./questionSet";
 
 const prisma = new PrismaClient();
 
