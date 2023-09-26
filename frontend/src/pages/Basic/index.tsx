@@ -9,7 +9,7 @@ import { ProgressBar, Stack, Spinner } from "react-bootstrap";
 
 // 関数
 import shuffle from "../../utils/shuffle";
-import calculateScore from "./calculateScore";
+import calculateScore from "../../utils/calculateScore";
 import calculateKps from "./calculateKps";
 import calculateScoreRank from "./calculateScoreRank";
 // コンポーネント
@@ -53,9 +53,9 @@ export default function Basic() {
     const score = calculateScore(
       time,
       problemSolved,
+      questionsLength,
       correctInputCount,
       incorrectInputCount,
-      questionsLength,
     );
     const kps = calculateKps(time, correctInputCount);
     const scoreRank = calculateScoreRank(
