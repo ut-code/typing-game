@@ -10,30 +10,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// 問題
-model questions {
-  id       Int    @id @default(autoincrement())
-  qnumber  Int    @default(0)
-  question String
-}
-
 model ranking {
   record_id Int    @id @default(autoincrement())
-  problem   Int    @default(1)
-  username  String @default("test")
-  score     Int
-}
-
-model ranking_kf73 {
-  record_id Int    @id @default(autoincrement())
-  problem   Int    @default(1)
-  username  String @default("test")
-  score     Int
-}
-
-model ranking_mf96 {
-  record_id Int    @id @default(autoincrement())
-  problem   Int    @default(1)
+  problem   String @default("0b6d3308-5670-41fc-bb3e-590a4d34d754")
   username  String @default("test")
   score     Int
 }

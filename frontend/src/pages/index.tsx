@@ -8,20 +8,22 @@ import { Button, Form, Accordion } from "react-bootstrap";
 // コンポーネント
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import typingGameQuestionSets from "../data/questionSet";
 
 export default function Home() {
   const [userName, setUserName] = useState<string>(
     localStorage.getItem("username") || "",
   );
-  const [qnumber, setQnumber] = useState<string>("0: 関東地方");
+  const [questionSetId, setQuestionSetId] = useState<string>(
+    typingGameQuestionSets[0].id,
+  );
   // useNavigate を Navigate に変化させる呪文
   const Navigate = useNavigate();
 
   // ユーザーの入力情報を受け取る関数
   const postStorage = () => {
     localStorage.setItem("username", userName || "Guest");
-    const idx = qnumber.indexOf(":");
-    localStorage.setItem("questionNumber", qnumber.slice(0, idx));
+    localStorage.setItem("questionSetId", questionSetId);
     // fetchAPI後に別ページへ遷移
     Navigate("/basic");
   };
@@ -61,20 +63,13 @@ export default function Home() {
               <b>問題番号</b>
             </Form.Label>
             <Form.Select
-              value={qnumber}
+              value={questionSetId}
               onChange={(e) => {
-                setQnumber(e.target.value);
+                setQuestionSetId(e.target.value);
               }}
             >
-              <option>0: 関東地方</option>
-              <option>1: 東京23区</option>
-              <option>2: 日本食</option>
-              <option>3: 惑星名</option>
-              <option>4: プログラミング言語</option>
-              <option>5: 長い英単語集</option>
-              <option>6: アクセス数の多いサイト</option>
-              <option>7: SDGs</option>
-              <option>8: MDGs</option>
+              <option value={0}>Basic</option>
+              <option value={1}>Fruits</option>
             </Form.Select>
           </Form.Group>
 

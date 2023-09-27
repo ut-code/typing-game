@@ -16,16 +16,17 @@ import BackButton from "../../components/BackButton";
 import TypingStatistics from "../../components/TypingStatistics/TypingStatictics";
 import TypingProgressBar from "../../components/TypingProgressBar/TypingProgressBar";
 import QuestionDisplay from "../../components/QuestionDisplay/QuestionDisplay";
+import typingGameQuestionSets from "../../data/questionSet";
 
 export default function Basic() {
   // キー入力
   const [content, setContent] = useState<string>("");
   const [previousContent, setPreviousContent] = useState(content);
   // 問題
-  const questionNumber: number =
-    Number(localStorage.getItem("questionNumber")) || 0;
+  const questionSetId: string =
+    localStorage.getItem("questionSetId") || typingGameQuestionSets[0].id;
   const [problemSolved, setProblemSolved] = useState<number>(0); // 何問目か
-  const [questions, setQuestions] = useState<string[]>(["sample"]);
+  const [questions, setQuestions] = useState<string[]>([]);
   const [correctInputCount, setCorrectInputCount] = useState<number>(0); // 正答文字数
   const [incorrectInputCount, setIncorrectInputCount] = useState<number>(0); // ミスタイプ数
   const [currentIndex, setCurrentIndex] = useState<number>(0); // 何文字目か
@@ -33,7 +34,7 @@ export default function Basic() {
   const [time, setTime] = useState(0); // 現在の時間
   const [timeLimit] = useState(120); // 制限時間
   // 開始・終了判定
-  const [isLoading, setIsLoading] = useState<boolean>(true); // スピナーが回っているか
+  const isLoading = questions.length <= 1; // スピナーが回っているか
   const [isStarted, setIsStarted] = useState<boolean>(false); // 始まったか
   const [isFinished, setIsFinished] = useState<boolean>(false); // 終わったか
 
@@ -69,7 +70,7 @@ export default function Basic() {
 
     // submit処理
     const json = JSON.stringify({
-      qnumber: questionNumber,
+      questionSetId: questionSetId,
       username: localStorage.getItem("username") || "Guest",
       score: score,
     });
@@ -90,6 +91,21 @@ export default function Basic() {
     // 画面遷移
     Navigate("/result");
   }
+
+  useEffect(() => {
+    setQuestions(
+      shuffle(
+        typingGameQuestionSets
+          .find(
+            (typingGameQuestionSet) =>
+              typingGameQuestionSet.id === questionSetId,
+          )
+          ?.questions.map(
+            (typingGameQuestion) => typingGameQuestion.question,
+          ) || [],
+      ),
+    );
+  }, [questionSetId]);
 
   // キーを押したら開始
   useEffect(() => {
@@ -137,32 +153,6 @@ export default function Basic() {
     incorrectInputCount,
     questions,
   ]);
-
-  // 問題を questions に格納
-  useEffect(() => {
-    (async () => {
-      const json = JSON.stringify({
-        qnumber: questionNumber,
-      });
-      const response = await fetch(
-        `${import.meta.env.VITE_API_ENDPOINT}/questions`,
-        {
-          method: "post",
-          headers: { "Content-Type": "application/json" },
-          body: json,
-        },
-      );
-      const data: string[] = JSON.parse(await response.text());
-      if (questionNumber <= 5)
-        setQuestions(shuffle(data)); // 順番が無関係な問題のみシャッフル
-      else setQuestions(data);
-    })();
-  }, []);
-
-  // 問題が格納されるまでスピナーは回る
-  useEffect(() => {
-    if (questions.length > 1) setIsLoading(false);
-  }, [questions]);
 
   // キー入力のメイン処理
   useEffect(() => {
