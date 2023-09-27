@@ -1,5 +1,5 @@
 /* 全体 */
-.result-elements {
+.resultElements {
   margin: auto;
 }
 
@@ -10,7 +10,7 @@
   width: 500px;
   height: 450px;
 }
-.list-group-item {
+.listGroupItem {
   /* box */
   display: flex;
   justify-content: center;
@@ -24,11 +24,11 @@
   font-weight: bold;
   font-size: 20px;
 }
-.normal-text {
+.normalText {
   /* box */
   height: 80px;
 }
-.small-text {
+.smallText {
   /* box */
   height: 80px;
   width: 500px;
@@ -39,7 +39,7 @@
 }
 
 /* ランキング */
-.ranking-board {
+.rankingBoard {
   /* box */
   width: 500px;
   height: 450px;
