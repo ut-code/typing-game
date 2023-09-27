@@ -65,7 +65,7 @@ export default function Home() {
             <Form.Select
               value={questionSetId}
               onChange={(e) => {
-                setQuestionSetId(Number(e.target.value));
+                setQuestionSetId(e.target.value);
               }}
             >
               <option value={0}>Basic</option>
