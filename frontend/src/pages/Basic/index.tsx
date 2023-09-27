@@ -34,7 +34,7 @@ export default function Basic() {
   const [time, setTime] = useState(0); // 現在の時間
   const [timeLimit] = useState(120); // 制限時間
   // 開始・終了判定
-  const [isLoading, setIsLoading] = useState<boolean>(true); // スピナーが回っているか
+  const isLoading = questions.length <= 1; // スピナーが回っているか
   const [isStarted, setIsStarted] = useState<boolean>(false); // 始まったか
   const [isFinished, setIsFinished] = useState<boolean>(false); // 終わったか
 
@@ -153,11 +153,6 @@ export default function Basic() {
     incorrectInputCount,
     questions,
   ]);
-
-  // 問題が格納されるまでスピナーは回る
-  useEffect(() => {
-    if (questions.length > 1) setIsLoading(false);
-  }, [questions]);
 
   // キー入力のメイン処理
   useEffect(() => {
