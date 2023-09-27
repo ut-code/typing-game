@@ -1,11 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 import seedTypingResult from "./typingResult";
-import seedQuestionSet from "./questionSet";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  await seedQuestionSet(prisma);
   await seedTypingResult(prisma);
 }
 
