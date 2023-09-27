@@ -11,23 +11,6 @@ app.use(cors({ origin: process.env["WEB_ORIGIN"] }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// データベースから問題をとってくる
-app.post("/questions", async (request, response) => {
-  const records = await client.questions.findMany({
-    where: {
-      qnumber: request.body.qnumber,
-    },
-    orderBy: {
-      id: "asc",
-    },
-  });
-  // questionsに問題が配列の形で入っている
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const questions = records.map((data: any) => data.question);
-  // JSON形式でscript.jsに送信
-  response.json(questions);
-});
-
 // データベースからランキングをとってくる
 async function getRanking() {
   const records = await client.ranking.findMany({
@@ -38,11 +21,11 @@ async function getRanking() {
 
 // submit時のデータベースとのやり取り
 app.post("/submitScore", async (request, response) => {
-  const qnumber: number = request.body.qnumber || 0;
+  const questionSetId: string = request.body.questionSetId;
   const username: string = request.body.username || "Not working";
   const score: number = request.body.score || 0;
   await client.ranking.create({
-    data: { problem: qnumber, username: username, score: score },
+    data: { problem: questionSetId, username: username, score: score },
   });
   response.json();
 });
