@@ -21,7 +21,7 @@ export default function QuestionDisplay({
         <Spinner animation="border" role="status" className="spinner" />
       ) : (
         <div>
-          <span className={styles.answerdText}>
+          <span className={styles.answeredText}>
             {isStarted ? questions[problemSolved].slice(0, currentIndex) : ""}
           </span>
           <span className={styles.questionText}>
