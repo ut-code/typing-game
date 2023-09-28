@@ -10,9 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model ranking {
-  record_id Int    @id @default(autoincrement())
-  problem   String @default("0b6d3308-5670-41fc-bb3e-590a4d34d754")
-  username  String @default("test")
-  score     Int
+model TypingSession {
+  id             String          @id @default(uuid())
+  startTime      DateTime
+  endTime        DateTime
+  playerName     String
+  questionSetId  String
+  typingAttempts TypingAttempt[]
+}
+
+model TypingAttempt {
+  id               String        @id @default(uuid())
+  inputCharacters  String
+  targetCharacters String
+  typingSessionId  String
+  typingSession    TypingSession @relation(fields: [typingSessionId], references: [id])
 }

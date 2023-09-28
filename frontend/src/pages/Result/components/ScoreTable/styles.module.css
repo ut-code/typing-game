@@ -1,0 +1,25 @@
+/* XXXさんの結果 */
+.statistics {
+  /* box */
+  border: 1px solid var(--LightGray);
+  width: 500px;
+  height: 450px;
+}
+.title {
+  /* text */
+  font-weight: bold;
+  font-size: 20px;
+}
+.normalText {
+  /* box */
+  height: 80px;
+}
+.smallText {
+  /* box */
+  height: 80px;
+  width: 500px;
+
+  /* text */
+  font-size: 18px;
+  text-align: center;
+}

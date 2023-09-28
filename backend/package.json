@@ -1,13 +1,13 @@
 {
   "name": "backend",
-  "main": "main.ts",
+  "main": "src/app.ts",
   "scripts": {
-    "dev": "ts-node src/main.ts",
+    "dev": "ts-node src/app.ts",
     "build": "tsc",
-    "start": "node dist/main.js",
+    "start": "node dist/app.js",
     "type-check": "tsc --noEmit",
     "db-push": "prisma db push",
-    "seed:develop": "ts-node prisma/seed.ts"
+    "seed:develop": "ts-node prisma/seed/index.ts"
   },
   "repository": {
     "type": "git",

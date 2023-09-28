@@ -3,41 +3,6 @@
   margin: auto;
 }
 
-/* XXXさんの結果 */
-.stats {
-  /* box */
-  border: 1px solid var(--LightGray);
-  width: 500px;
-  height: 450px;
-}
-.listGroupItem {
-  /* box */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* text */
-  font-size: 26px;
-}
-.title {
-  /* text */
-  font-weight: bold;
-  font-size: 20px;
-}
-.normalText {
-  /* box */
-  height: 80px;
-}
-.smallText {
-  /* box */
-  height: 80px;
-  width: 500px;
-
-  /* text */
-  font-size: 18px;
-  text-align: center;
-}
-
 /* ランキング */
 .rankingBoard {
   /* box */
@@ -46,17 +11,4 @@
   overflow: auto;
   background: var(--White);
   border: 1px solid var(--LightGray);
-}
-.table td,
-.table th {
-  text-align: center;
-}
-
-/* 総合ランクの基準 */
-.accordion {
-  /* layout */
-  margin: 1em 0;
-
-  /* box */
-  width: 100%;
 }
