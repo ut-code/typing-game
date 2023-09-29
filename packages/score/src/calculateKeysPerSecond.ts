@@ -1,4 +1,4 @@
-import { TypingAttempt } from "@prisma/client";
+import TypingAttempt from "types/src/TypingAttempt";
 
 export default function calculateKeysPerSecond(
   typingAttempts: TypingAttempt[],

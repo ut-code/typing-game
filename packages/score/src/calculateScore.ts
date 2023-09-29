@@ -1,4 +1,4 @@
-import { TypingAttempt } from "@prisma/client";
+import TypingAttempt from "types/src/TypingAttempt";
 import calculateCorrectTypingCount from "./calculateCorrectTypingCount";
 import calculateMissTypingCount from "./calculateMissTypingCount";
 

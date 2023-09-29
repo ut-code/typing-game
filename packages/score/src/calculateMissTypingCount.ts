@@ -1,4 +1,4 @@
-import { TypingAttempt } from "@prisma/client";
+import TypingAttempt from "types/src/TypingAttempt";
 
 function calculateMissTypingCountFromTypingAttempt(
   inputCharacters: string,

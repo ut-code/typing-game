@@ -1,11 +1,11 @@
 import { TypingSession } from "@prisma/client";
 import { fetchTypingSessionFromDb } from "../models/typingSessionModel";
 import { generateRankingLogic } from "./rankingService";
-import calculateGrade from "../utils/calculateGrade";
-import calculateScore from "../utils/calculateScore";
-import calculateCorrectTypingCount from "../utils/calculateCorrectTypingCount";
-import calculateMissTypingCount from "../utils/calculateMissTypingCount";
-import calculateKeysPerSecond from "../utils/calculateKeysPerSecond";
+import calculateGrade from "score/src/calculateGrade";
+import calculateScore from "score/src/calculateScore";
+import calculateCorrectTypingCount from "score/src/calculateCorrectTypingCount";
+import calculateMissTypingCount from "score/src/calculateMissTypingCount";
+import calculateKeysPerSecond from "score/src/calculateKeysPerSecond";
 import RankingEntry from "types/src/RankingEntry";
 import Score from "types/src/Score";
 
