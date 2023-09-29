@@ -79,7 +79,7 @@ jobs:
         shell: bash
 
       - name: Build
-        run: docker compose exec backend npm run build
+        run: docker compose exec backend bash -c "npx prisma generate && npm run build"
         shell: bash
 
   build-frontend:
