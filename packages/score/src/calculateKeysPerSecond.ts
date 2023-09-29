@@ -1,4 +1,4 @@
-import TypingAttempt from "types/src/TypingAttempt";
+import { TypingAttempt } from "types";
 
 export default function calculateKeysPerSecond(
   typingAttempts: TypingAttempt[],

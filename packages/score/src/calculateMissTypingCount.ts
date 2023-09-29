@@ -1,4 +1,4 @@
-import TypingAttempt from "types/src/TypingAttempt";
+import { TypingAttempt } from "types";
 
 function calculateMissTypingCountFromTypingAttempt(
   inputCharacters: string,

@@ -1,4 +1,4 @@
-import TypingAttempt from "types/src/TypingAttempt";
+import { TypingAttempt } from "types";
 import calculateCorrectTypingCount from "./calculateCorrectTypingCount";
 import calculateMissTypingCount from "./calculateMissTypingCount";
 
