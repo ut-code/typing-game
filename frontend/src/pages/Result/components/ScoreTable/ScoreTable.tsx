@@ -1,5 +1,5 @@
 import React from "react";
-import Score from "../../../../types/Score";
+import Score from "types/src/Score";
 import styles from "./styles.module.css";
 import { ListGroup } from "react-bootstrap";
 

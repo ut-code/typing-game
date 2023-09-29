@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getScoreApi } from "../../services/api/scoreApi";
-import Score from "../../types/Score";
+import Score from "types/src/Score";
 
 export function useScore(typingSessionId: string) {
   const [score, setScore] = useState<Score>();

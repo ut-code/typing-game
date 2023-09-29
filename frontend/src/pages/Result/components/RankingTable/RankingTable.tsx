@@ -1,6 +1,6 @@
 import React from "react";
 import { Table } from "react-bootstrap";
-import RankingEntry from "../../../../types/RankingEntry";
+import RankingEntry from "types/src/RankingEntry";
 
 export default function RankingTable({ ranking }: { ranking: RankingEntry[] }) {
   return (

@@ -6,8 +6,8 @@ import calculateScore from "../utils/calculateScore";
 import calculateCorrectTypingCount from "../utils/calculateCorrectTypingCount";
 import calculateMissTypingCount from "../utils/calculateMissTypingCount";
 import calculateKeysPerSecond from "../utils/calculateKeysPerSecond";
-import RankingEntry from "../types/RankingEntry";
-import Score from "../types/Score";
+import RankingEntry from "types/src/RankingEntry";
+import Score from "types/src/Score";
 
 function getOverAllRank(typingSession: TypingSession, ranking: RankingEntry[]) {
   return (

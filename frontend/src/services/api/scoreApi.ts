@@ -1,5 +1,5 @@
 import { API_BASE_URL } from "../../config/apiConfig";
-import Score from "../../types/Score";
+import Score from "types/src/Score";
 
 export async function getScoreApi(typingSessionId: string): Promise<Score> {
   const response = await fetch(`${API_BASE_URL}/score/${typingSessionId}`);

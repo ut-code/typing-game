@@ -15,7 +15,7 @@ import TypingProgressBar from "../../components/TypingProgressBar/TypingProgress
 import QuestionDisplay from "../../components/QuestionDisplay/QuestionDisplay";
 import typingGameQuestionSets from "../../data/questionSet";
 import { useTypingSession } from "../../hooks/apiHooks/useTypingSession";
-import TypingAttempt from "../../types/TypingAttempt";
+import TypingAttempt from "../../../../packages/types/src/TypingAttempt";
 
 export default function Basic() {
   const [startTime, setStartTime] = useState<Date>();

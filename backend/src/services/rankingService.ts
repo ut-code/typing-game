@@ -1,5 +1,5 @@
 import { fetchAllTypingSessionsFromDb } from "../models/typingSessionModel";
-import RankingEntry from "../types/RankingEntry";
+import RankingEntry from "types/src/RankingEntry";
 import calculateScore from "../utils/calculateScore";
 
 export async function generateRankingLogic(): Promise<RankingEntry[]> {

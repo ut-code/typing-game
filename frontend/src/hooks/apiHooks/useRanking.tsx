@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getRankingApi } from "../../services/api/rankingApi";
-import RankingEntry from "../../types/RankingEntry";
+import RankingEntry from "types/src/RankingEntry";
 
 export function useRanking() {
   const [ranking, setRanking] = useState<RankingEntry[]>([]);
