@@ -26,6 +26,7 @@ services:
       - node_modules_backend:/app/backend/node_modules
       - node_modules_types:/app/packages/types/node_modules
       - node_modules_score:/app/packages/score/node_modules
+      - node_modules_typing_game_question_sets:/app/packages/typing-game-question-sets/node_modules
     ports:
       - 3000:3000
     command: bash -c 'cd backend && if [ ! -f ".env" ]; then cp ".env.sample" ".env"; fi && npm run db-push && npm run dev'
@@ -42,6 +43,7 @@ services:
       - node_modules_frontend:/app/frontend/node_modules
       - node_modules_types:/app/packages/types/node_modules
       - node_modules_score:/app/packages/score/node_modules
+      - node_modules_typing_game_question_sets:/app/packages/typing-game-question-sets/node_modules
     ports:
       - 5173:5173
     command: bash -c 'cd frontend && if [ ! -f ".env" ]; then cp ".env.sample" ".env"; fi && npm run dev -- --host'
@@ -52,3 +54,4 @@ volumes:
   node_modules_frontend:
   node_modules_types:
   node_modules_score:
+  node_modules_typing_game_question_sets:
