@@ -25,6 +25,7 @@ services:
     command: bash -c 'if [ ! -f ".env" ]; then cp ".env.sample" ".env"; fi && npm run db-push && npm run dev'
     depends_on:
       - database
+    restart: on-failure
 
   frontend:
     build: ./frontend
