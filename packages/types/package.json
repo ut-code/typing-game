@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "src/index.d.ts",
   "types": "src/index.d.ts",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc"
+  },
   "license": "MIT",
   "devDependencies": {
     "typescript": "^5.2.2"
