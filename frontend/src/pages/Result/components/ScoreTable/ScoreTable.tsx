@@ -1,5 +1,5 @@
 import React from "react";
-import { Score } from "typing-game-api-types";
+import { Score } from "@typing-game/api-types";
 import styles from "./styles.module.css";
 import { ListGroup } from "react-bootstrap";
 

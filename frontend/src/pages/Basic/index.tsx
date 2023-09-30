@@ -13,9 +13,9 @@ import BackButton from "../../components/BackButton";
 import TypingStatistics from "../../components/TypingStatistics/TypingStatictics";
 import TypingProgressBar from "../../components/TypingProgressBar/TypingProgressBar";
 import QuestionDisplay from "../../components/QuestionDisplay/QuestionDisplay";
-import typingGameQuestionSets from "typing-game-question-sets";
+import typingGameQuestionSets from "@typing-game/question-sets";
 import { useTypingSession } from "../../hooks/apiHooks/useTypingSession";
-import { TypingAttempt } from "types";
+import { TypingAttempt } from "@typing-game/types";
 
 export default function Basic() {
   const [startTime, setStartTime] = useState<Date>();

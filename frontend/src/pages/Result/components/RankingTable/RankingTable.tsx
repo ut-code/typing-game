@@ -1,6 +1,6 @@
 import React from "react";
 import { Table } from "react-bootstrap";
-import { RankingEntry } from "typing-game-api-types";
+import { RankingEntry } from "@typing-game/api-types";
 
 export default function RankingTable({ ranking }: { ranking: RankingEntry[] }) {
   return (
