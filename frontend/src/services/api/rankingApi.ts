@@ -1,8 +1,8 @@
 import { API_BASE_URL } from "../../config/apiConfig";
-import { RankingEntry } from "@typing-game/api-types";
+import { GetRankingResponse } from "@typing-game/api-types";
 
-export async function getRankingApi(): Promise<RankingEntry[]> {
+export async function getRankingApi(): Promise<GetRankingResponse> {
   const response = await fetch(`${API_BASE_URL}/ranking`);
   const data = await response.json();
-  return data as RankingEntry[];
+  return data as GetRankingResponse;
 }

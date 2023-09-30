@@ -6,8 +6,14 @@ import { calculateScore } from "@typing-game/score";
 import { calculateCorrectTypingCount } from "@typing-game/score";
 import { calculateMissTypingCount } from "@typing-game/score";
 import { calculateKeysPerSecond } from "@typing-game/score";
-import { RankingEntry } from "@typing-game/api-types";
-import { Score } from "@typing-game/api-types";
+import { GetPerformanceSummaryResponse } from "@typing-game/api-types";
+
+interface RankingEntry {
+  questionSetId: string;
+  playerName: string;
+  score: number;
+  playedAt: Date;
+}
 
 function getOverAllRank(typingSession: TypingSession, ranking: RankingEntry[]) {
   return (
@@ -31,7 +37,9 @@ function getRankInQuestionSet(
   );
 }
 
-export async function getScore(typingSessionId: string): Promise<Score> {
+export async function getPerformanceSummary(
+  typingSessionId: string,
+): Promise<GetPerformanceSummaryResponse> {
   const typingSession = await fetchTypingSessionFromDb(typingSessionId);
   const ranking = await generateRankingLogic();
   if (typingSession === null) {

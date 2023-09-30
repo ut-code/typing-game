@@ -14,7 +14,7 @@ import TypingStatistics from "../../components/TypingStatistics/TypingStatictics
 import TypingProgressBar from "../../components/TypingProgressBar/TypingProgressBar";
 import QuestionDisplay from "../../components/QuestionDisplay/QuestionDisplay";
 import typingGameQuestionSets from "@typing-game/question-sets";
-import { useTypingSession } from "../../hooks/apiHooks/useTypingSession";
+import useCreateTypingSessionMutation from "../../hooks/apiHooks/typingSession/useTypingSessionMutation";
 import { TypingAttempt } from "@typing-game/types";
 
 export default function Basic() {
@@ -36,9 +36,10 @@ export default function Basic() {
   // 開始・終了判定
   const isLoading = questions.length <= 1; // スピナーが回っているか
   const [isFinished, setIsFinished] = useState<boolean>(false); // 終わったか
-  const { addTypingSession, error } = useTypingSession();
-  if (error) {
-    console.error(error);
+  const { createTypingSession, createTypingSessionError } =
+    useCreateTypingSessionMutation();
+  if (createTypingSessionError) {
+    console.error(createTypingSessionError);
   }
   const [inputTyping, setInputTyping] = useState<string>("");
   const [typingAttempts, setTypingAttempts] = useState<TypingAttempt[]>([]);
@@ -101,7 +102,7 @@ export default function Basic() {
 
   async function save() {
     setIsFinished(true);
-    const typingSession = await addTypingSession({
+    const typingSession = await createTypingSession({
       variables: {
         startTime: startTime as Date,
         endTime: new Date(),

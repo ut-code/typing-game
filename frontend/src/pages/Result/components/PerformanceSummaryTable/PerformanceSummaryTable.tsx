@@ -1,9 +1,13 @@
 import React from "react";
-import { Score } from "@typing-game/api-types";
+import { GetPerformanceSummaryResponse } from "@typing-game/api-types";
 import styles from "./styles.module.css";
 import { ListGroup } from "react-bootstrap";
 
-export default function ScoreTable({ score }: { score: Score }) {
+export default function PerformanceSummaryTable({
+  performanceSummary: score,
+}: {
+  performanceSummary: GetPerformanceSummaryResponse;
+}) {
   return (
     <div className={styles.statistics}>
       <ListGroup variant="flush">
