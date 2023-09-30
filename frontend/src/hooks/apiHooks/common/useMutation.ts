@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function getUseMutation<Variables, Data>(
+export default function useMutation<Variables, Data>(
   mutateApi: ({ variables }: { variables: Variables }) => Promise<Data>,
 ) {
   const [loading, setLoading] = useState(false);

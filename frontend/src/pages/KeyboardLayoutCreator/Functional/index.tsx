@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 // import keyCodes from "./../../../../keyboard/src/components/data/keyCodes";
 import keyCodes from "../../../components/keyboard-layout-creator/keyboard/data/keyCodes.json";

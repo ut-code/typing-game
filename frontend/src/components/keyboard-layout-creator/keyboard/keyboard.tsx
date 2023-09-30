@@ -81,9 +81,11 @@ export default function Keyboard({
   functional,
   physical,
   keyColors = [],
+  // @ts-ignore
   setKeyColors = (value: string[]) => {},
   keydown = () => {},
   content = "",
+  // @ts-ignore
   setContent = (value: string) => {},
   keyLayout = functionalLayoutType[defaultFunctionalLayoutType].content,
   physicalKeyLayout,

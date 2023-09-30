@@ -1,4 +1,3 @@
-import React from "react";
 import { Table } from "react-bootstrap";
 import { GetRankingResponse } from "@typing-game/api-types";
 

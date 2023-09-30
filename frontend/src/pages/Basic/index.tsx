@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
@@ -45,7 +45,10 @@ export default function Basic() {
   const [typingAttempts, setTypingAttempts] = useState<TypingAttempt[]>([]);
 
   // 正解音
-  const correctSE: HTMLAudioElement = new Audio("/correctSE.mp3");
+  const correctSE: HTMLAudioElement = useMemo(
+    () => new Audio("/correctSE.mp3"),
+    [],
+  );
 
   // 画面遷移用
   const Navigate = useNavigate();
@@ -64,7 +67,7 @@ export default function Basic() {
     return () => {
       window.removeEventListener("keydown", start);
     };
-  }, []);
+  }, [startTime]);
 
   // タイマーを開始
   useEffect(() => {
@@ -78,12 +81,26 @@ export default function Basic() {
     };
   }, [startTime, setTime]);
 
+  const save = useCallback(async () => {
+    setIsFinished(true);
+    const typingSession = await createTypingSession({
+      variables: {
+        startTime: startTime as Date,
+        endTime: new Date(),
+        playerName: localStorage.getItem("playerName") || "名無し",
+        questionSetId: questionSetId,
+        typingAttempts: typingAttempts,
+      },
+    });
+    Navigate(`/result/${typingSession?.id}`);
+  }, [Navigate, createTypingSession, questionSetId, startTime, typingAttempts]);
+
   // タイマーが変更されるたびに終了判定
   useEffect(() => {
     if (timeLimit - time <= 0 && !isFinished) {
       save();
     }
-  }, [timeLimit, time, isFinished]);
+  }, [timeLimit, time, isFinished, save]);
 
   useEffect(() => {
     setQuestions(
@@ -99,20 +116,6 @@ export default function Basic() {
       ),
     );
   }, [questionSetId]);
-
-  async function save() {
-    setIsFinished(true);
-    const typingSession = await createTypingSession({
-      variables: {
-        startTime: startTime as Date,
-        endTime: new Date(),
-        playerName: localStorage.getItem("playerName") || "名無し",
-        questionSetId: questionSetId,
-        typingAttempts: typingAttempts,
-      },
-    });
-    Navigate(`/result/${typingSession?.id}`);
-  }
 
   // キー入力のメイン処理
   useEffect(() => {
@@ -155,7 +158,17 @@ export default function Basic() {
       }
     }
     main();
-  }, [content, questions, problemNumber, currentIndex, isFinished]);
+  }, [
+    content,
+    questions,
+    problemNumber,
+    currentIndex,
+    isFinished,
+    previousContent,
+    correctSE,
+    save,
+    inputTyping,
+  ]);
 
   return (
     <>

@@ -1,4 +1,3 @@
-import React from "react";
 /**
  * ユーザーから受け取った JSON ファイルを引数で指定した関数で処理します。
  * @param f JSON ファイルを処理する関数
