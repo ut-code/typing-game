@@ -13,7 +13,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@prisma/client": "^5.1.0",
+    "@prisma/client": "^5.3.1",
     "@typing-game/api-types": "file:../packages/api-types",
     "@typing-game/score": "file:../packages/score",
     "@typing-game/types": "file:../packages/types",
