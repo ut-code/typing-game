@@ -1,6 +1,7 @@
 {
   "name": "typing-game",
-  "description": "駒場祭のタイピングゲーム",
+  "version": "0.1.0",
+  "type": "module",
   "scripts": {
     "prepare": "husky install",
     "lint": "eslint .",
@@ -11,16 +12,7 @@
     "type-check:frontend": "cd frontend && npm run type-check",
     "type-check:backend": "cd backend && npm run type-check"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ut-code/typing-game.git"
-  },
-  "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ut-code/typing-game/issues"
-  },
-  "homepage": "https://github.com/ut-code/typing-game#readme",
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
   },

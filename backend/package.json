@@ -1,5 +1,7 @@
 {
   "name": "backend",
+  "version": "0.1.0",
+  "type": "module",
   "main": "src/app.ts",
   "scripts": {
     "dev": "ts-node-dev src/app.ts",
@@ -9,16 +11,7 @@
     "db-push": "prisma db push",
     "seed:develop": "ts-node prisma/seed/index.ts"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ut-code/typing-game.git"
-  },
-  "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ut-code/typing-game/issues"
-  },
-  "homepage": "https://github.com/ut-code/typing-game#readme",
   "dependencies": {
     "@prisma/client": "^5.1.0",
     "@typing-game/api-types": "file:../packages/api-types",
