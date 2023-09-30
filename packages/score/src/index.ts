@@ -1,8 +1,8 @@
-import calculateCorrectTypingCount from "./calculateCorrectTypingCount";
-import calculateMissTypingCount from "./calculateMissTypingCount";
-import calculateKeysPerSecond from "./calculateKeysPerSecond";
-import calculateScore from "./calculateScore";
-import calculateGrade from "./calculateGrade";
+import calculateCorrectTypingCount from "./calculateCorrectTypingCount.js";
+import calculateMissTypingCount from "./calculateMissTypingCount.js";
+import calculateKeysPerSecond from "./calculateKeysPerSecond.js";
+import calculateScore from "./calculateScore.js";
+import calculateGrade from "./calculateGrade.js";
 
 export {
   calculateCorrectTypingCount,

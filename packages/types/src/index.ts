@@ -1,6 +1,6 @@
-import RankingEntry from "./RankingEntry";
-import Score from "./Score";
-import TypingSession from "./TypingSession";
-import TypingAttempt from "./TypingAttempt";
+import RankingEntry from "./RankingEntry.js";
+import Score from "./Score.js";
+import TypingSession from "./TypingSession.js";
+import TypingAttempt from "./TypingAttempt.js";
 
 export { RankingEntry, Score, TypingSession, TypingAttempt };
