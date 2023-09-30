@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { getRankingApi } from "../../../services/api/rankingApi";
 import useQuery from "../common/useQuery";
 
@@ -7,7 +8,10 @@ export default function useRankingQuery() {
     loading: loadingRanking,
     error: rankingError,
     refetch: refetchRanking,
-  } = useQuery({}, getRankingApi);
+  } = useQuery(
+    useMemo(() => {}, []),
+    getRankingApi,
+  );
   return {
     ranking,
     loadingRanking,

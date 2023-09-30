@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { getPerformanceSummaryApi } from "../../../services/api/performanceSummaryApi";
 import useQuery from "../common/useQuery";
 
@@ -7,7 +8,15 @@ export default function usePerformanceSummaryQuery(typingSessionId: string) {
     loading: loadingPerformanceSummary,
     error: performanceSummaryError,
     refetch: refetchPerformanceSummary,
-  } = useQuery({ typingSessionId }, getPerformanceSummaryApi);
+  } = useQuery(
+    useMemo(
+      () => ({
+        typingSessionId,
+      }),
+      [typingSessionId],
+    ),
+    getPerformanceSummaryApi,
+  );
   return {
     performanceSummary,
     loadingPerformanceSummary,
