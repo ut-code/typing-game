@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // CSS関連
@@ -32,6 +32,7 @@ export default function Home() {
   let unmounted = false;
   useEffect(() => {
     if (unmounted) return;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     unmounted = true;
     Object.keys(localStorage).forEach((key) => {
       if (key !== "username") localStorage.removeItem(key);

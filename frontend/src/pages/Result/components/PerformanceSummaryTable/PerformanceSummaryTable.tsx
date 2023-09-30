@@ -1,4 +1,3 @@
-import React from "react";
 import { GetPerformanceSummaryResponse } from "@typing-game/api-types";
 import styles from "./styles.module.css";
 import { ListGroup } from "react-bootstrap";

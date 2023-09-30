@@ -1,4 +1,3 @@
-import React from "react";
 import { ProgressBar } from "react-bootstrap";
 import styles from "./styles.module.css";
 

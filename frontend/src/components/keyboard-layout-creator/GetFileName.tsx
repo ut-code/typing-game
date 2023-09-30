@@ -1,4 +1,3 @@
-import React from "react";
 /**
  * ファイル名を入力させるinputタグ
  */

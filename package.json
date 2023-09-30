@@ -1,38 +1,35 @@
 {
   "name": "typing-game",
-  "description": "駒場祭のタイピングゲーム",
+  "version": "0.1.0",
+  "type": "module",
   "scripts": {
     "prepare": "husky install",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "npx prettier --write .",
-    "fix": "npm run lint:fix && npm run format",
-    "type-check": "npm run type-check:frontend && npm run type-check:backend",
+    "build": "npm run build:frontend && npm run build:backend && npm run build:packages",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "build:packages": "cd packages/api-types && npm run build && cd ../question-sets && npm run build && cd ../score && npm run build && cd ../types && npm run build",
+    "type-check": "npm run type-check:frontend && npm run type-check:backend && npm run type-check:packages",
     "type-check:frontend": "cd frontend && npm run type-check",
-    "type-check:backend": "cd backend && npm run type-check"
+    "type-check:backend": "cd backend && npm run type-check",
+    "type-check:packages": "cd packages/api-types && npm run type-check && cd ../question-sets && npm run type-check && cd ../score && npm run type-check && cd ../types && npm run type-check"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ut-code/typing-game.git"
-  },
-  "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ut-code/typing-game/issues"
-  },
-  "homepage": "https://github.com/ut-code/typing-game#readme",
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
-    "eslint": "^8.46.0",
-    "eslint-config-prettier": "^8.9.0",
-    "eslint-config-standard-with-typescript": "^37.0.0",
-    "eslint-plugin-react": "^7.33.1",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard-with-typescript": "^39.1.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.3",
-    "prettier": "^3.0.0"
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3"
   }
 }

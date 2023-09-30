@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Keyboard from "../../../components/keyboard-layout-creator/keyboard/keyboard";
 import {
@@ -26,6 +26,7 @@ function keydown(
   keyColors: string[],
   setKeyColors: (value: string[]) => void,
   e: KeyboardEvent,
+  // @ts-ignore
   content: string,
   setContent: (value: string) => void,
   functional: string,
@@ -122,6 +123,7 @@ function keydown(
   }, 100);
 }
 
+// @ts-ignore
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function toJapanese(content: string): string {
   let ans = "";
@@ -177,7 +179,7 @@ export default function App({
       window.removeEventListener("keydown", tmp);
       window.removeEventListener("keyup", temp);
     };
-  }, [functional, isCustom, shift]);
+  }, [content, functional, isCustom, keyColors, setContent, shift]);
   setContent(content);
   return (
     <>

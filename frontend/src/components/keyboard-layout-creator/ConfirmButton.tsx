@@ -1,4 +1,3 @@
-import React from "react";
 /**
  * 確定ボタンのコンポーネントです。
  * @param f `onClick` 用の関数

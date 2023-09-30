@@ -1,5 +1,3 @@
-import React from "react";
-
 // CSS関連
 import styles from "./styles.module.css";
 import { Stack, Accordion, Tab, Tabs } from "react-bootstrap";
