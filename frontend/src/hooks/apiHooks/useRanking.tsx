@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getRankingApi } from "../../services/api/rankingApi";
-import { RankingEntry } from "types";
+import { RankingEntry } from "@typing-game/api-types";
 
 export function useRanking() {
   const [ranking, setRanking] = useState<RankingEntry[]>([]);

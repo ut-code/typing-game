@@ -1,13 +1,13 @@
 import { TypingSession } from "@prisma/client";
 import { fetchTypingSessionFromDb } from "../models/typingSessionModel";
 import { generateRankingLogic } from "./rankingService";
-import { calculateGrade } from "score";
-import { calculateScore } from "score";
-import { calculateCorrectTypingCount } from "score";
-import { calculateMissTypingCount } from "score";
-import { calculateKeysPerSecond } from "score";
-import { RankingEntry } from "types";
-import { Score } from "types";
+import { calculateGrade } from "@typing-game/score";
+import { calculateScore } from "@typing-game/score";
+import { calculateCorrectTypingCount } from "@typing-game/score";
+import { calculateMissTypingCount } from "@typing-game/score";
+import { calculateKeysPerSecond } from "@typing-game/score";
+import { RankingEntry } from "@typing-game/api-types";
+import { Score } from "@typing-game/api-types";
 
 function getOverAllRank(typingSession: TypingSession, ranking: RankingEntry[]) {
   return (

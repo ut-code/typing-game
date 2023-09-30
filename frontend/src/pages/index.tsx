@@ -8,7 +8,7 @@ import { Button, Form, Accordion } from "react-bootstrap";
 // コンポーネント
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import typingGameQuestionSets from "typing-game-question-sets";
+import typingGameQuestionSets from "@typing-game/question-sets";
 
 export default function Home() {
   const [userName, setUserName] = useState<string>(

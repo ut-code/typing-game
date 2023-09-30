@@ -1,6 +1,6 @@
 {
-  "name": "types",
-  "version": "1.0.0",
+  "name": "@typing-game/types",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",

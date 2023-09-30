@@ -1,5 +1,5 @@
 {
-  "name": "@typing-game/score",
+  "name": "@typing-game/api-types",
   "version": "0.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,8 +10,5 @@
   "license": "MIT",
   "devDependencies": {
     "typescript": "^5.2.2"
-  },
-  "dependencies": {
-    "types": "file:../types"
   }
 }
