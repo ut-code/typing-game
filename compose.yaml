@@ -6,14 +6,14 @@ services:
       - node_modules_app:/app/node_modules
       - node_modules_backend:/app/backend/node_modules
       - node_modules_frontend:/app/frontend/node_modules
-      - node_modules_types:/app/packages/types/node_modules
-      - node_modules_score:/app/packages/score/node_modules
-      - node_modules_question_sets:/app/packages/question-sets/node_modules
       - node_modules_api_types:/app/packages/api-types/node_modules
-      - dist_types:/app/packages/types/dist
-      - dist_score:/app/packages/score/dist
-      - dist_question_sets:/app/packages/question-sets/dist
+      - node_modules_question_sets:/app/packages/question-sets/node_modules
+      - node_modules_score:/app/packages/score/node_modules
+      - node_modules_types:/app/packages/types/node_modules
       - dist_api_types:/app/packages/api-types/dist
+      - dist_question_sets:/app/packages/question-sets/dist
+      - dist_score:/app/packages/score/dist
+      - dist_types:/app/packages/types/dist
     tty: true
 
   database:
@@ -30,14 +30,14 @@ services:
     volumes:
       - .:/app
       - node_modules_backend:/app/backend/node_modules
-      - node_modules_types:/app/packages/types/node_modules
-      - node_modules_score:/app/packages/score/node_modules
-      - node_modules_question_sets:/app/packages/question-sets/node_modules
       - node_modules_api_types:/app/packages/api-types/node_modules
-      - dist_types:/app/packages/types/dist
-      - dist_score:/app/packages/score/dist
-      - dist_question_sets:/app/packages/question-sets/dist
+      - node_modules_question_sets:/app/packages/question-sets/node_modules
+      - node_modules_score:/app/packages/score/node_modules
+      - node_modules_types:/app/packages/types/node_modules
       - dist_api_types:/app/packages/api-types/dist
+      - dist_question_sets:/app/packages/question-sets/dist
+      - dist_score:/app/packages/score/dist
+      - dist_types:/app/packages/types/dist
     ports:
       - 3000:3000
     command: bash -c 'cd backend && if [ ! -f ".env" ]; then cp ".env.sample" ".env"; fi && npm run db-push && npm run dev'
@@ -52,14 +52,14 @@ services:
     volumes:
       - .:/app
       - node_modules_frontend:/app/frontend/node_modules
-      - node_modules_types:/app/packages/types/node_modules
-      - node_modules_score:/app/packages/score/node_modules
-      - node_modules_question_sets:/app/packages/question-sets/node_modules
       - node_modules_api_types:/app/packages/api-types/node_modules
-      - dist_types:/app/packages/types/dist
-      - dist_score:/app/packages/score/dist
-      - dist_question_sets:/app/packages/question-sets/dist
+      - node_modules_question_sets:/app/packages/question-sets/node_modules
+      - node_modules_score:/app/packages/score/node_modules
+      - node_modules_types:/app/packages/types/node_modules
       - dist_api_types:/app/packages/api-types/dist
+      - dist_question_sets:/app/packages/question-sets/dist
+      - dist_score:/app/packages/score/dist
+      - dist_types:/app/packages/types/dist
     ports:
       - 5173:5173
     command: bash -c 'cd frontend && if [ ! -f ".env" ]; then cp ".env.sample" ".env"; fi && npm run dev -- --host'
