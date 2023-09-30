@@ -1,3 +1,3 @@
-import typingGameQuestionSets from "./questionSets.js";
+import typingGameQuestionSets from "./typingGameQuestionSets.js";
 
 export default typingGameQuestionSets;
