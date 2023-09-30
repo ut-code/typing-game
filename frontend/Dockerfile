@@ -1,5 +1,10 @@
 FROM node:18
-WORKDIR /frontend
-COPY package.json .
-COPY package-lock.json .
-RUN npm ci
+WORKDIR /app
+COPY packages/types/ packages/types/
+RUN cd packages/types && npm ci && npm run build
+COPY packages/score/ packages/score/
+RUN cd packages/score && npm ci && npm run build
+COPY packages/typing-game-question-sets/ packages/typing-game-question-sets/
+RUN cd packages/typing-game-question-sets && npm ci && npm run build
+COPY frontend/package*.json frontend/
+RUN cd frontend && npm ci

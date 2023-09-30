@@ -7,25 +7,25 @@ import { Stack } from "react-bootstrap";
 
 // 関数
 import shuffle from "../../utils/shuffle";
-import calculateScore from "../../utils/score/calculateScore";
-import calculateKps from "../../utils/score/calculateKps";
-import calculateScoreRank from "../../utils/score/calculateScoreRank";
 // コンポーネント
 import Keyboard from "../KeyboardLayoutCreator/Keyboard";
 import BackButton from "../../components/BackButton";
 import TypingStatistics from "../../components/TypingStatistics/TypingStatictics";
 import TypingProgressBar from "../../components/TypingProgressBar/TypingProgressBar";
 import QuestionDisplay from "../../components/QuestionDisplay/QuestionDisplay";
-import typingGameQuestionSets from "../../data/questionSet";
+import typingGameQuestionSets from "typing-game-question-sets";
+import { useTypingSession } from "../../hooks/apiHooks/useTypingSession";
+import TypingAttempt from "../../../../packages/types/src/TypingAttempt";
 
 export default function Basic() {
+  const [startTime, setStartTime] = useState<Date>();
   // キー入力
   const [content, setContent] = useState<string>("");
   const [previousContent, setPreviousContent] = useState(content);
   // 問題
   const questionSetId: string =
     localStorage.getItem("questionSetId") || typingGameQuestionSets[0].id;
-  const [problemSolved, setProblemSolved] = useState<number>(0); // 何問目か
+  const [problemNumber, setProblemNumber] = useState<number>(0); // 何問目か
   const [questions, setQuestions] = useState<string[]>([]);
   const [correctInputCount, setCorrectInputCount] = useState<number>(0); // 正答文字数
   const [incorrectInputCount, setIncorrectInputCount] = useState<number>(0); // ミスタイプ数
@@ -35,8 +35,13 @@ export default function Basic() {
   const [timeLimit] = useState(120); // 制限時間
   // 開始・終了判定
   const isLoading = questions.length <= 1; // スピナーが回っているか
-  const [isStarted, setIsStarted] = useState<boolean>(false); // 始まったか
   const [isFinished, setIsFinished] = useState<boolean>(false); // 終わったか
+  const { addTypingSession, error } = useTypingSession();
+  if (error) {
+    console.error(error);
+  }
+  const [inputTyping, setInputTyping] = useState<string>("");
+  const [typingAttempts, setTypingAttempts] = useState<TypingAttempt[]>([]);
 
   // 正解音
   const correctSE: HTMLAudioElement = new Audio("/correctSE.mp3");
@@ -44,53 +49,40 @@ export default function Basic() {
   // 画面遷移用
   const Navigate = useNavigate();
 
-  // 終了時の処理
-  async function saveResults(
-    time: number,
-    problemSolved: number,
-    correctInputCount: number,
-    incorrectInputCount: number,
-    questionsLength: number,
-  ) {
-    const score = calculateScore(
-      time,
-      problemSolved,
-      questionsLength,
-      correctInputCount,
-      incorrectInputCount,
-    );
-    const kps = calculateKps(time, correctInputCount);
-    const scoreRank = calculateScoreRank(
-      problemSolved,
-      questionsLength,
-      correctInputCount,
-      incorrectInputCount,
-      kps,
-    );
+  // キーを押したら開始
+  useEffect(() => {
+    function start() {
+      if (startTime === undefined) {
+        setStartTime(new Date());
+      }
+    }
 
-    // submit処理
-    const json = JSON.stringify({
-      questionSetId: questionSetId,
-      username: localStorage.getItem("username") || "Guest",
-      score: score,
-    });
-    await fetch(`${import.meta.env.VITE_API_ENDPOINT}/submitScore`, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: json,
-    });
+    // 開始キーを押したら開始
+    window.addEventListener("keydown", start);
 
-    // ローカルストレージに保存
-    localStorage.setItem("time", time.toString());
-    localStorage.setItem("score", score.toString());
-    localStorage.setItem("kpm", kps.toString());
-    localStorage.setItem("correctInputCount", correctInputCount.toString());
-    localStorage.setItem("incorrectInputCount", incorrectInputCount.toString());
-    localStorage.setItem("scoreRank", scoreRank);
+    return () => {
+      window.removeEventListener("keydown", start);
+    };
+  }, []);
 
-    // 画面遷移
-    Navigate("/result");
-  }
+  // タイマーを開始
+  useEffect(() => {
+    if (startTime === undefined) return;
+    const timerId = setInterval(() => {
+      setTime((previoutValue) => previoutValue + 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(timerId);
+    };
+  }, [startTime, setTime]);
+
+  // タイマーが変更されるたびに終了判定
+  useEffect(() => {
+    if (timeLimit - time <= 0 && !isFinished) {
+      save();
+    }
+  }, [timeLimit, time, isFinished]);
 
   useEffect(() => {
     setQuestions(
@@ -107,52 +99,19 @@ export default function Basic() {
     );
   }, [questionSetId]);
 
-  // キーを押したら開始
-  useEffect(() => {
-    // 開始キーを押したら開始
-    window.addEventListener("keydown", () => {
-      if (!isStarted) setIsStarted(true);
+  async function save() {
+    setIsFinished(true);
+    const typingSession = await addTypingSession({
+      variables: {
+        startTime: startTime as Date,
+        endTime: new Date(),
+        playerName: localStorage.getItem("playerName") || "名無し",
+        questionSetId: questionSetId,
+        typingAttempts: typingAttempts,
+      },
     });
-
-    return () => {
-      window.removeEventListener("keydown", () => {
-        if (!isStarted) setIsStarted(true);
-      });
-    };
-  }, []);
-
-  // isStarted が変更されたらタイマーを開始
-  useEffect(() => {
-    if (!isStarted) return;
-    const timerId = setInterval(() => {
-      setTime((prev) => prev + 1);
-    }, 1000);
-
-    return () => {
-      clearInterval(timerId);
-    };
-  }, [isStarted, setTime]);
-
-  // タイマーが変更されるたびに終了判定
-  useEffect(() => {
-    if (timeLimit - time <= 0 && !isFinished) {
-      setIsFinished(true);
-      saveResults(
-        time,
-        problemSolved,
-        correctInputCount,
-        incorrectInputCount,
-        questions.length,
-      );
-    }
-  }, [
-    timeLimit,
-    time,
-    problemSolved,
-    correctInputCount,
-    incorrectInputCount,
-    questions,
-  ]);
+    Navigate(`/result/${typingSession?.id}`);
+  }
 
   // キー入力のメイン処理
   useEffect(() => {
@@ -161,48 +120,41 @@ export default function Basic() {
       setPreviousContent(content);
       const keyInput = content[content.length - 1]; // 追加された文字すなわち一番最後の文字を取り出す。
 
-      if (keyInput === questions[problemSolved][currentIndex]) {
+      if (keyInput === questions[problemNumber][currentIndex]) {
         // 正答
         setCurrentIndex((prev) => prev + 1);
         setCorrectInputCount((prev) => prev + 1);
       } else if (keyInput.match(/[a-zA-Z]/)) {
         // アルファベットであればミスとする
         // 誤答
+        setInputTyping((previoutValue) => previoutValue + keyInput);
         setIncorrectInputCount((prev) => prev + 1);
       }
 
-      if (currentIndex === questions[problemSolved].length - 1) {
+      if (currentIndex === questions[problemNumber].length - 1) {
         // 正解音が鳴る。最後の問題だけちょっと切れている
         correctSE.pause();
         correctSE.play();
 
-        if (problemSolved === questions.length - 1 && isFinished === false) {
-          // 終了処理
-          setIsFinished(true); // 二重submitを防ぐflag
-          saveResults(
-            time,
-            problemSolved,
-            correctInputCount,
-            incorrectInputCount,
-            questions.length,
-          );
+        if (problemNumber === questions.length - 1 && isFinished === false) {
+          save();
         } else {
           // 次の問題へ
-          setProblemSolved((prev) => prev + 1);
+          setProblemNumber((prev) => prev + 1);
           setCurrentIndex(0);
+          setTypingAttempts((previoutValue) => [
+            ...previoutValue,
+            {
+              inputCharacters: inputTyping,
+              targetCharacters: questions[problemNumber],
+            },
+          ]);
+          setInputTyping("");
         }
       }
     }
     main();
-  }, [
-    content,
-    questions,
-    problemSolved,
-    correctInputCount,
-    incorrectInputCount,
-    currentIndex,
-    isFinished,
-  ]);
+  }, [content, questions, problemNumber, currentIndex, isFinished]);
 
   return (
     <>
@@ -217,14 +169,14 @@ export default function Basic() {
         />
         <TypingProgressBar
           questions={questions}
-          problemSolved={problemSolved}
+          problemSolved={problemNumber}
         />
       </Stack>
       <QuestionDisplay
         isLoading={isLoading}
-        isStarted={isStarted}
+        isStarted={startTime !== undefined}
         questions={questions}
-        problemSolved={problemSolved}
+        problemSolved={problemNumber}
         currentIndex={currentIndex}
       />
       <Keyboard content={content} setContent={setContent} />

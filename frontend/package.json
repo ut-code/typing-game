@@ -25,7 +25,9 @@
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-router-dom": "^6.14.2"
+    "react-router-dom": "^6.14.2",
+    "types": "file:../packages/types",
+    "typing-game-question-sets": "file:../packages/typing-game-question-sets"
   },
   "devDependencies": {
     "@types/node": "^20.4.6",
