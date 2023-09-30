@@ -27,6 +27,6 @@
     "@types/react-helmet": "^6.1.7",
     "@vitejs/plugin-react": "^4.0.4",
     "typescript": "^5.2.2",
-    "vite": "^4.4.8"
+    "vite": "^4.4.9"
   }
 }
