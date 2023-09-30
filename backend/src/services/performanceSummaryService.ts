@@ -1,6 +1,6 @@
 import { TypingSession } from "@prisma/client";
-import { fetchTypingSessionFromDb } from "../models/typingSessionModel";
-import { generateRankingLogic } from "./rankingService";
+import { fetchTypingSessionFromDb } from "../models/typingSessionModel.js";
+import { generateRankingLogic } from "./rankingService.js";
 import { calculateGrade } from "@typing-game/score";
 import { calculateScore } from "@typing-game/score";
 import { calculateCorrectTypingCount } from "@typing-game/score";

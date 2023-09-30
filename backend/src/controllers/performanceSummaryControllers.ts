@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getPerformanceSummary } from "../services/performanceSummaryService";
+import { getPerformanceSummary } from "../services/performanceSummaryService.js";
 import { GetPerformanceSummaryResponse } from "@typing-game/api-types";
 
 export async function getPerformanceSummaryHandler(

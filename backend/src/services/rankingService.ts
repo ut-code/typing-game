@@ -1,4 +1,4 @@
-import { fetchAllTypingSessionsFromDb } from "../models/typingSessionModel";
+import { fetchAllTypingSessionsFromDb } from "../models/typingSessionModel.js";
 import { GetRankingResponse } from "@typing-game/api-types";
 import { calculateScore } from "@typing-game/score";
 

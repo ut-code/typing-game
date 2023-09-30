@@ -1,5 +1,5 @@
 import Router from "express";
-import { postTypingSessionHandler } from "../controllers/typingSessionControllers";
+import { postTypingSessionHandler } from "../controllers/typingSessionControllers.js";
 
 const router = Router();
 

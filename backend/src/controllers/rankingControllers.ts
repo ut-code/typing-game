@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { generateRankingLogic } from "../services/rankingService";
+import { generateRankingLogic } from "../services/rankingService.js";
 import { GetRankingResponse } from "@typing-game/api-types";
 
 export async function getRankingHandler(request: Request, response: Response) {
