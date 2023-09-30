@@ -7,7 +7,6 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "npx prettier --write .",
-    "fix": "npm run lint:fix && npm run format",
     "type-check": "npm run type-check:frontend && npm run type-check:backend",
     "type-check:frontend": "cd frontend && npm run type-check",
     "type-check:backend": "cd backend && npm run type-check"
