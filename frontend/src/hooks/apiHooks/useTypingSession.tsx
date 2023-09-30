@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createTypingSessionApi } from "../../services/api/typingSessionApi";
-import { TypingSession } from "types";
+import { TypingSession } from "typing-game-api-types";
 
 export function useTypingSession() {
   const [loading, setLoading] = useState(false);

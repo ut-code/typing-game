@@ -27,6 +27,7 @@
     "react-helmet": "^6.1.0",
     "react-router-dom": "^6.14.2",
     "types": "file:../packages/types",
+    "typing-game-api-types": "file:../packages/typing-game-api-types",
     "typing-game-question-sets": "file:../packages/typing-game-question-sets"
   },
   "devDependencies": {
