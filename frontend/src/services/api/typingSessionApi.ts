@@ -1,23 +1,19 @@
 import { API_BASE_URL } from "../../config/apiConfig";
+import {
+  PostTypingSessionRequest,
+  PostTypingSessionResponse,
+} from "@typing-game/api-types";
 
-export async function createTypingSessionApi(
-  startTime: Date,
-  endTime: Date,
-  playerName: string,
-  questionSetId: string,
-  typingAttempts: { inputCharacters: string; targetCharacters: string }[],
-) {
+export async function createTypingSessionApi({
+  variables,
+}: {
+  variables: PostTypingSessionRequest;
+}): Promise<PostTypingSessionResponse> {
   const response = await fetch(`${API_BASE_URL}/typing-session`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      startTime,
-      endTime,
-      playerName,
-      questionSetId,
-      typingAttempts,
-    }),
+    body: JSON.stringify(variables),
   });
   const data = await response.json();
-  return data;
+  return data as PostTypingSessionResponse;
 }

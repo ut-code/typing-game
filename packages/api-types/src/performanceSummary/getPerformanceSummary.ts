@@ -1,4 +1,4 @@
-type Score = {
+interface PerformanceSummary {
   playerName: string;
   overAllRank: number;
   rankInQuestionSet: number;
@@ -7,6 +7,6 @@ type Score = {
   correctTypingCount: number;
   missTypingCount: number;
   keysPerSecond: number;
-};
+}
 
-export default Score;
+export type GetPerformanceSummaryResponse = PerformanceSummary;

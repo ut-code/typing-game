@@ -1,5 +1,13 @@
-import RankingEntry from "./RankingEntry.js";
-import Score from "./Score.js";
-import TypingSession from "./TypingSession.js";
+import { GetPerformanceSummaryResponse } from "./performanceSummary/getPerformanceSummary.js";
+import { GetRankingResponse } from "./ranking/getRanking.js";
+import {
+  PostTypingSessionRequest,
+  PostTypingSessionResponse,
+} from "./typingSession/postTypingSession.js";
 
-export { RankingEntry, Score, TypingSession };
+export {
+  GetPerformanceSummaryResponse,
+  GetRankingResponse,
+  PostTypingSessionRequest,
+  PostTypingSessionResponse,
+};

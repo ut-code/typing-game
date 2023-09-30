@@ -8,9 +8,9 @@ import { Stack, Accordion, Tab, Tabs } from "react-bootstrap";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import BackButton from "../../components/BackButton";
-import { usePerformanceSummary } from "../../hooks/apiHooks/usePerformanceSummary";
-import ScoreTable from "./components/ScoreTable/ScoreTable";
-import { useRanking } from "../../hooks/apiHooks/useRanking";
+import usePerformanceSummaryQuery from "../../hooks/apiHooks/performanceSummary/usePerformanceSummaryQuery";
+import PerformanceSummaryTable from "./components/PerformanceSummaryTable/PerformanceSummaryTable";
+import useRankingQuery from "../../hooks/apiHooks/ranking/useRankingQuery";
 import RankingTable from "./components/RankingTable/RankingTable";
 import { useParams } from "react-router-dom";
 
@@ -20,18 +20,14 @@ export default function Result() {
     throw new Error("typingSessionId is undefined");
   }
   const {
-    loading: loadingScore,
-    error: scoreError,
-    score,
-  } = usePerformanceSummary(typingSessionId);
-  if (scoreError) {
-    console.error(scoreError);
+    performanceSummary,
+    loadingPerformanceSummary,
+    performanceSummaryError,
+  } = usePerformanceSummaryQuery(typingSessionId);
+  if (performanceSummaryError) {
+    console.error(performanceSummaryError);
   }
-  const {
-    loading: loadingRanking,
-    error: rankingError,
-    ranking,
-  } = useRanking();
+  const { ranking, loadingRanking, rankingError } = useRankingQuery();
   if (rankingError) {
     console.error(rankingError);
   }
@@ -43,15 +39,17 @@ export default function Result() {
         <div className={styles.resultElements}>
           <BackButton />
           <Stack direction="horizontal" gap={3}>
-            {loadingScore || score === undefined ? (
+            {loadingPerformanceSummary || performanceSummary === undefined ? (
               <div>Loading...</div>
             ) : (
-              <ScoreTable score={score} />
+              <PerformanceSummaryTable
+                performanceSummary={performanceSummary}
+              />
             )}
             <div className={styles.rankingBoard}>
               <Tabs defaultActiveKey="overall" justify>
                 <Tab eventKey="overall" title="全体のランキング">
-                  {loadingRanking ? (
+                  {loadingRanking || ranking === undefined ? (
                     <div>Loading...</div>
                   ) : (
                     <RankingTable ranking={ranking} />

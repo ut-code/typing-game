@@ -1,8 +1,8 @@
 import { fetchAllTypingSessionsFromDb } from "../models/typingSessionModel";
-import { RankingEntry } from "@typing-game/api-types";
+import { GetRankingResponse } from "@typing-game/api-types";
 import { calculateScore } from "@typing-game/score";
 
-export async function generateRankingLogic(): Promise<RankingEntry[]> {
+export async function generateRankingLogic(): Promise<GetRankingResponse> {
   const typingSessions = await fetchAllTypingSessionsFromDb();
   const ranking = typingSessions.map((typingSession) => ({
     playerName: typingSession.playerName,

@@ -1,12 +1,12 @@
 import { API_BASE_URL } from "../../config/apiConfig";
-import { Score } from "@typing-game/api-types";
+import { GetPerformanceSummaryResponse } from "@typing-game/api-types";
 
-export async function getPerformanceSummaryApi(
-  typingSessionId: string,
-): Promise<Score> {
+export async function getPerformanceSummaryApi(variables: {
+  typingSessionId: string;
+}): Promise<GetPerformanceSummaryResponse> {
   const response = await fetch(
-    `${API_BASE_URL}/performance-summary/${typingSessionId}`,
+    `${API_BASE_URL}/performance-summary/${variables.typingSessionId}`,
   );
   const data = await response.json();
-  return data as Score;
+  return data as GetPerformanceSummaryResponse;
 }
