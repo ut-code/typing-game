@@ -1,4 +1,4 @@
-import prisma from "../prismaClient";
+import prisma from "../prismaClient.js";
 
 export async function fetchTypingSessionFromDb(typingSessionId: string) {
   return await prisma.typingSession.findUnique({

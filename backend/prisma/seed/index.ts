@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import seedTypingSession from "./typingSession";
-import seedTypingAttempt from "./typingAttempt";
+import seedTypingSession from "./typingSession.js";
+import seedTypingAttempt from "./typingAttempt.js";
 
 const prisma = new PrismaClient();
 

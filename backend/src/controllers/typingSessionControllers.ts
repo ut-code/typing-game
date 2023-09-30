@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createTypingSessionLogic } from "../services/typingSessionService";
+import { createTypingSessionLogic } from "../services/typingSessionService.js";
 import {
   PostTypingSessionRequest,
   PostTypingSessionResponse,

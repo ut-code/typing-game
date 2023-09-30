@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
-import rankingRouter from "./routes/rankingRouter";
-import typingSessionRouter from "./routes/typingSessionRouter";
-import performanceSummaryRouter from "./routes/performanceSummaryRouter";
+import rankingRouter from "./routes/rankingRouter.js";
+import typingSessionRouter from "./routes/typingSessionRouter.js";
+import performanceSummaryRouter from "./routes/performanceSummaryRouter.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;

@@ -1,5 +1,5 @@
 import Router from "express";
-import { getPerformanceSummaryHandler } from "../controllers/performanceSummaryControllers";
+import { getPerformanceSummaryHandler } from "../controllers/performanceSummaryControllers.js";
 
 const router = Router();
 

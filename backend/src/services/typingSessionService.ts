@@ -1,5 +1,5 @@
-import { saveTypingSessionInDb } from "../models/typingSessionModel";
-import { saveTypingAttemptInDb } from "../models/typingAttemptModel";
+import { saveTypingSessionInDb } from "../models/typingSessionModel.js";
+import { saveTypingAttemptInDb } from "../models/typingAttemptModel.js";
 
 export async function createTypingSessionLogic(
   startTime: Date,
