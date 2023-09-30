@@ -7,6 +7,10 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "npx prettier --write .",
+    "build": "npm run build:frontend && npm run build:backend && npm run build:packages",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "build:packages": "cd packages/api-types && npm run build && cd ../question-sets && npm run build && cd ../score && npm run build && cd ../types && npm run build",
     "type-check": "npm run type-check:frontend && npm run type-check:backend",
     "type-check:frontend": "cd frontend && npm run type-check",
     "type-check:backend": "cd backend && npm run type-check"
