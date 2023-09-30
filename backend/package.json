@@ -4,7 +4,7 @@
   "type": "module",
   "main": "src/app.ts",
   "scripts": {
-    "dev": "ts-node-dev src/app.ts",
+    "dev": "tsc && node dist/src/app.js",
     "build": "tsc",
     "start": "node dist/src/app.js",
     "type-check": "tsc --noEmit",
