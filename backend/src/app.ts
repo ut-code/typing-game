@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import rankingRouter from "./routes/rankingRouter";
 import typingSessionRouter from "./routes/typingSessionRouter";
-import scoreRouter from "./routes/userScoreRouter";
+import scoreRouter from "./routes/scoreRouter";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
