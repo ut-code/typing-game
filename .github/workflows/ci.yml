@@ -63,8 +63,8 @@ jobs:
         run: docker compose exec devtools npm run type-check
         shell: bash
 
-  build-backend:
-    name: Build Backend
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -79,24 +79,5 @@ jobs:
         shell: bash
 
       - name: Build
-        run: docker compose exec backend bash -c "cd backend && npx prisma generate && npm run build"
-        shell: bash
-
-  build-frontend:
-    name: Build Frontend
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Build Docker Images
-        run: docker compose build
-        shell: bash
-
-      - name: Start Docker Compose
-        run: docker compose up -d
-        shell: bash
-
-      - name: Build
-        run: docker compose exec frontend bash -c "cd frontend && npm run build"
+        run: docker compose exec devtools bash -c "cd backend && npx prisma generate && cd .. && npm run build"
         shell: bash
