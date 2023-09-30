@@ -11,9 +11,10 @@
     "build:frontend": "cd frontend && npm run build",
     "build:backend": "cd backend && npm run build",
     "build:packages": "cd packages/api-types && npm run build && cd ../question-sets && npm run build && cd ../score && npm run build && cd ../types && npm run build",
-    "type-check": "npm run type-check:frontend && npm run type-check:backend",
+    "type-check": "npm run type-check:frontend && npm run type-check:backend && npm run type-check:packages",
     "type-check:frontend": "cd frontend && npm run type-check",
-    "type-check:backend": "cd backend && npm run type-check"
+    "type-check:backend": "cd backend && npm run type-check",
+    "type-check:packages": "cd packages/api-types && npm run type-check && cd ../question-sets && npm run type-check && cd ../score && npm run type-check && cd ../types && npm run type-check"
   },
   "license": "MIT",
   "lint-staged": {
