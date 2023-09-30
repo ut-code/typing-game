@@ -31,7 +31,9 @@ function getRankInQuestionSet(
   );
 }
 
-export async function getScore(typingSessionId: string): Promise<Score> {
+export async function getPerformanceSummary(
+  typingSessionId: string,
+): Promise<Score> {
   const typingSession = await fetchTypingSessionFromDb(typingSessionId);
   const ranking = await generateRankingLogic();
   if (typingSession === null) {

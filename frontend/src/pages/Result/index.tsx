@@ -8,7 +8,7 @@ import { Stack, Accordion, Tab, Tabs } from "react-bootstrap";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import BackButton from "../../components/BackButton";
-import { useScore } from "../../hooks/apiHooks/useScore";
+import { usePerformanceSummary } from "../../hooks/apiHooks/usePerformanceSummary";
 import ScoreTable from "./components/ScoreTable/ScoreTable";
 import { useRanking } from "../../hooks/apiHooks/useRanking";
 import RankingTable from "./components/RankingTable/RankingTable";
@@ -23,7 +23,7 @@ export default function Result() {
     loading: loadingScore,
     error: scoreError,
     score,
-  } = useScore(typingSessionId);
+  } = usePerformanceSummary(typingSessionId);
   if (scoreError) {
     console.error(scoreError);
   }
