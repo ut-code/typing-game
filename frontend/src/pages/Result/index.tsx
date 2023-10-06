@@ -6,23 +6,14 @@ import { Stack, Accordion } from "react-bootstrap";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import BackButton from "../../components/BackButton";
-import usePerformanceSummaryQuery from "../../hooks/apiHooks/performanceSummary/usePerformanceSummaryQuery";
-import PerformanceSummaryTable from "./components/PerformanceSummaryTable/PerformanceSummaryTable";
 import { useParams } from "react-router-dom";
 import Ranking from "./components/Ranking/Ranking";
+import PerformanceSummary from "./components/PerformanceSummary/PerformanceSummary";
 
 export default function Result() {
   const { uuid: typingSessionId } = useParams();
   if (typingSessionId === undefined) {
     throw new Error("typingSessionId is undefined");
-  }
-  const {
-    performanceSummary,
-    loadingPerformanceSummary,
-    performanceSummaryError,
-  } = usePerformanceSummaryQuery(typingSessionId);
-  if (performanceSummaryError) {
-    console.error(performanceSummaryError);
   }
 
   return (
@@ -32,13 +23,7 @@ export default function Result() {
         <div className={styles.resultElements}>
           <BackButton />
           <Stack direction="horizontal" gap={3}>
-            {loadingPerformanceSummary || performanceSummary === undefined ? (
-              <div>Loading...</div>
-            ) : (
-              <PerformanceSummaryTable
-                performanceSummary={performanceSummary}
-              />
-            )}
+            <PerformanceSummary typingSessionId={typingSessionId} />
             <Ranking />
           </Stack>
           <Accordion defaultActiveKey="1">
