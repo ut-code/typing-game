@@ -2,13 +2,3 @@
 .resultElements {
   margin: auto;
 }
-
-/* ランキング */
-.rankingBoard {
-  /* box */
-  width: 500px;
-  height: 450px;
-  overflow: auto;
-  background: var(--White);
-  border: 1px solid var(--LightGray);
-}

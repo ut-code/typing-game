@@ -1,6 +1,6 @@
 // CSS関連
 import styles from "./styles.module.css";
-import { Stack, Accordion, Tab, Tabs } from "react-bootstrap";
+import { Stack, Accordion } from "react-bootstrap";
 
 // コンポーネント
 import Header from "../../components/Header";
@@ -8,9 +8,8 @@ import Footer from "../../components/Footer";
 import BackButton from "../../components/BackButton";
 import usePerformanceSummaryQuery from "../../hooks/apiHooks/performanceSummary/usePerformanceSummaryQuery";
 import PerformanceSummaryTable from "./components/PerformanceSummaryTable/PerformanceSummaryTable";
-import useRankingQuery from "../../hooks/apiHooks/ranking/useRankingQuery";
-import RankingTable from "./components/RankingTable/RankingTable";
 import { useParams } from "react-router-dom";
+import Ranking from "./components/Ranking/Ranking";
 
 export default function Result() {
   const { uuid: typingSessionId } = useParams();
@@ -24,10 +23,6 @@ export default function Result() {
   } = usePerformanceSummaryQuery(typingSessionId);
   if (performanceSummaryError) {
     console.error(performanceSummaryError);
-  }
-  const { ranking, loadingRanking, rankingError } = useRankingQuery();
-  if (rankingError) {
-    console.error(rankingError);
   }
 
   return (
@@ -44,17 +39,7 @@ export default function Result() {
                 performanceSummary={performanceSummary}
               />
             )}
-            <div className={styles.rankingBoard}>
-              <Tabs defaultActiveKey="overall" justify>
-                <Tab eventKey="overall" title="全体のランキング">
-                  {loadingRanking || ranking === undefined ? (
-                    <div>Loading...</div>
-                  ) : (
-                    <RankingTable ranking={ranking} />
-                  )}
-                </Tab>
-              </Tabs>
-            </div>
+            <Ranking />
           </Stack>
           <Accordion defaultActiveKey="1">
             <Accordion.Item eventKey="0">
