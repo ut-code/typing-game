@@ -1,5 +1,5 @@
 import { Tab, Tabs } from "react-bootstrap";
-import RankingTable from "../RankingTable/RankingTable";
+import RankingTable from "../RankingTable";
 import useRankingQuery from "../../../../hooks/apiHooks/ranking/useRankingQuery";
 import styles from "./styles.module.css";
 

@@ -1,11 +1,11 @@
-import usePerformanceSummaryQuery from "../../../../hooks/apiHooks/performanceSummary/usePerformanceSummaryQuery";
-import PerformanceSummaryTable from "../PerformanceSummaryTable/PerformanceSummaryTable";
+import usePerformanceSummaryQuery from "../../../hooks/apiHooks/performanceSummary/usePerformanceSummaryQuery";
+import PerformanceSummaryTable from "./PerformanceSummaryTable/PerformanceSummaryTable";
 
 export default function PerformanceSummary({
   typingSessionId,
 }: {
   typingSessionId: string;
-}) {
+}): JSX.Element {
   const {
     performanceSummary,
     loadingPerformanceSummary,

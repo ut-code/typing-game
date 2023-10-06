@@ -1,6 +1,6 @@
 import { Accordion } from "react-bootstrap";
 
-export default function RankingCriteria() {
+export default function RankingCriteria(): JSX.Element {
   return (
     <Accordion defaultActiveKey="1">
       <Accordion.Item eventKey="0">
