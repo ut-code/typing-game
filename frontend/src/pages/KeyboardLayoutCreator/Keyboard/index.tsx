@@ -18,6 +18,7 @@ import {
   defaultPhysicalLayoutType,
 } from "../../../components/keyboard-layout-creator/keyboard/data/keyboardSettings";
 import "./style.css";
+import { preventedKeys } from "../../../utils/constants";
 
 function keydown(
   keyColors: string[],
@@ -31,49 +32,8 @@ function keydown(
   shift: boolean,
   setShift: (value: boolean) => void,
 ): void {
-  const prohibitedKey = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "0",
-    "Enter",
-    "Space",
-    "/",
-  ];
   if (
-    prohibitedKey.includes(
+    preventedKeys.includes(
       // @ts-ignore
       functionalLayoutType[functional].content[e.code][1],
     ) || // @ts-ignore
@@ -120,49 +80,8 @@ function keyup(
   shift: boolean,
   setShift: (value: boolean) => void,
 ): void {
-  const prohibitedKey = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "0",
-    "Enter",
-    "Space",
-    "/",
-  ];
   if (
-    prohibitedKey.includes(
+    preventedKeys.includes(
       // @ts-ignore
       functionalLayoutType[functional].content[e.code][1],
     ) || // @ts-ignore
