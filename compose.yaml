@@ -22,6 +22,8 @@ services:
       - POSTGRES_PASSWORD=mysecretpassword
     volumes:
       - ./database/data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
 
   backend:
     build:
@@ -40,6 +42,8 @@ services:
       - dist_types:/app/packages/types/dist
     ports:
       - 3000:3000
+    environment:
+      - DATABASE_URL=postgresql://postgres:mysecretpassword@database:5432/postgres
     command: bash -c 'cd backend && if [ ! -f ".env" ]; then cp ".env.sample" ".env"; fi && npm run db-push && npm run dev'
     depends_on:
       - database
