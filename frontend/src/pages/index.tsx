@@ -11,6 +11,7 @@ import Footer from "../components/Footer";
 import typingGameQuestionSets from "@typing-game/question-sets";
 import HowToPlay from "../features/game-setup/components/HowToPlay";
 import UserNameInput from "../features/game-setup/components/UserNameInput";
+import QuestionSetInput from "../features/game-setup/components/QuestionSetInput";
 
 export default function Home() {
   const [userName, setUserName] = useState<string>(
@@ -48,21 +49,10 @@ export default function Home() {
       <div className="elements">
         <Form>
           <UserNameInput userName={userName} setUserName={setUserName} />
-          <Form.Group className="mb-3" controlId="qnumber">
-            <Form.Label>
-              <b>問題番号</b>
-            </Form.Label>
-            <Form.Select
-              value={questionSetId}
-              onChange={(e) => {
-                setQuestionSetId(e.target.value);
-              }}
-            >
-              <option value={0}>Basic</option>
-              <option value={1}>Fruits</option>
-            </Form.Select>
-          </Form.Group>
-
+          <QuestionSetInput
+            questionSetId={questionSetId}
+            setQuestionSetId={setQuestionSetId}
+          />
           <Button variant="secondary" id="play-button" onClick={postStorage}>
             Play
           </Button>
