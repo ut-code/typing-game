@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { getPerformanceSummaryApi } from "../../../services/api/performanceSummaryApi";
-import useQuery from "../common/useQuery";
+import { getPerformanceSummaryService } from "../services/performanceSummaryServices";
+import useQuery from "./common/useQuery";
 
 export default function usePerformanceSummaryQuery(typingSessionId: string) {
   const {
@@ -15,7 +15,7 @@ export default function usePerformanceSummaryQuery(typingSessionId: string) {
       }),
       [typingSessionId],
     ),
-    getPerformanceSummaryApi,
+    getPerformanceSummaryService,
   );
   return {
     performanceSummary,

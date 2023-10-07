@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { getRankingApi } from "../../../services/api/rankingApi";
-import useQuery from "../common/useQuery";
+import { getRankingService } from "../services/rankingServices";
+import useQuery from "./common/useQuery";
 
 export default function useRankingQuery() {
   const {
@@ -10,7 +10,7 @@ export default function useRankingQuery() {
     refetch: refetchRanking,
   } = useQuery(
     useMemo(() => {}, []),
-    getRankingApi,
+    getRankingService,
   );
   return {
     ranking,

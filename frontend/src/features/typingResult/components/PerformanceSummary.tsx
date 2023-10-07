@@ -1,4 +1,4 @@
-import usePerformanceSummaryQuery from "../../../hooks/apiHooks/performanceSummary/usePerformanceSummaryQuery";
+import usePerformanceSummaryQuery from "../../../api/hooks/performanceSummaryHooks";
 import PerformanceSummaryTable from "./PerformanceSummaryTable/PerformanceSummaryTable";
 
 export default function PerformanceSummary({

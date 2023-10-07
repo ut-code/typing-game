@@ -1,7 +1,7 @@
 import { API_BASE_URL } from "../../config/apiConfig";
 import { GetPerformanceSummaryResponse } from "@typing-game/api-types";
 
-export async function getPerformanceSummaryApi(variables: {
+export async function getPerformanceSummaryService(variables: {
   typingSessionId: string;
 }): Promise<GetPerformanceSummaryResponse> {
   const response = await fetch(

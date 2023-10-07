@@ -4,7 +4,7 @@ import {
   PostTypingSessionResponse,
 } from "@typing-game/api-types";
 
-export async function createTypingSessionApi({
+export async function createTypingSessionService({
   variables,
 }: {
   variables: PostTypingSessionRequest;
