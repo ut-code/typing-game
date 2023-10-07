@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 // CSS関連
 import "./style.css";
-import { Button, Form, Accordion } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 // コンポーネント
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import typingGameQuestionSets from "@typing-game/question-sets";
+import HowToPlay from "../features/game-setup/components/HowToPlay";
 
 export default function Home() {
   const [userName, setUserName] = useState<string>(
@@ -78,19 +79,7 @@ export default function Home() {
             Play
           </Button>
         </Form>
-
-        <Accordion defaultActiveKey="0" alwaysOpen id="how-to-play">
-          <Accordion.Item eventKey="0">
-            <Accordion.Header>遊び方</Accordion.Header>
-            <Accordion.Body>
-              ユーザーネームと問題番号を決めたら、Playボタンを押します。
-              <br></br>
-              スペースキーを押すと問題が表示され、ゲームがスタートします。
-              <br></br>
-              速く正確なタイピングで、制限時間内に高得点を目指して頑張りましょう！
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
+        <HowToPlay />
       </div>
 
       <Footer />
