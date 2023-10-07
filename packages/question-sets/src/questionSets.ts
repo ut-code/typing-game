@@ -14,7 +14,7 @@ const typingGameQuestionSets: TypingGameQuestionSet[] = [
     title: "Basic",
     questions: [
       {
-        question: "Hello",
+        question: "Hello World",
       },
       {
         question: "World",
