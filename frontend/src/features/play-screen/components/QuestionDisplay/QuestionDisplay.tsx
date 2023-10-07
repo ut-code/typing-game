@@ -25,8 +25,9 @@ export default function QuestionDisplay({
         <div>
           {isStarted ? (
             <>
-              <span className={styles.answeredText}> {newtypedText} </span>
-              <span className={styles.questionText}> {untypedText} </span>
+              <span className={styles.answeredText}>{newtypedText}</span>
+              <span className={styles.caretstyle}>|</span>
+              <span className={styles.questionText}>{untypedText}</span>
             </>
           ) : (
             "[Space]を押して開始"

@@ -26,7 +26,7 @@ export default function PlayScreen(): JSX.Element {
   const questionSetId: string =
     localStorage.getItem("questionSetId") || typingGameQuestionSets[0].id;
   const [problemNumber, setProblemNumber] = useState<number>(0); // 何問目か
-  const [questions, setQuestions] = useState<string[]>([]);
+  const [questions, setQuestions] = useState<string[]>(["sample"]);
   const [correctInputCount, setCorrectInputCount] = useState<number>(0); // 正答文字数
   const [incorrectInputCount, setIncorrectInputCount] = useState<number>(0); // ミスタイプ数
   const [currentIndex, setCurrentIndex] = useState<number>(0); // 何文字目か
