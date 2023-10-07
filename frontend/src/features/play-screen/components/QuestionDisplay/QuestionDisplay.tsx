@@ -14,20 +14,24 @@ export default function QuestionDisplay({
   problemSolved: number;
   currentIndex: number;
 }) {
+  const typedText = questions[problemSolved].slice(0, currentIndex);
+  const untypedText = questions[problemSolved].slice(currentIndex);
+  const newtypedText = typedText.replace(/ /g, "_");
   return (
     <div className={styles.questionDisplay}>
       {isLoading ? (
         <Spinner animation="border" role="status" className="spinner" />
       ) : (
         <div>
-          <span className={styles.answeredText}>
-            {isStarted ? questions[problemSolved].slice(0, currentIndex) : ""}
-          </span>
-          <span className={styles.questionText}>
-            {isStarted
-              ? questions[problemSolved].slice(currentIndex)
-              : "[Space]を押して開始"}
-          </span>
+          {isStarted ? (
+            <>
+              <span className={styles.answeredText}>{newtypedText}</span>
+              <span className={styles.caretstyle}>|</span>
+              <span className={styles.questionText}>{untypedText}</span>
+            </>
+          ) : (
+            "[Space]を押して開始"
+          )}
         </div>
       )}
     </div>
