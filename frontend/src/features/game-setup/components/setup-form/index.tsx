@@ -20,7 +20,7 @@ export default function SetupForm(): JSX.Element {
     localStorage.setItem("username", userName || "Guest");
     localStorage.setItem("questionSetId", questionSetId);
     // fetchAPI後に別ページへ遷移
-    Navigate("/basic");
+    Navigate("/play");
   };
 
   // localStorageをリセットする
