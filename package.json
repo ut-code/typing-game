@@ -14,7 +14,15 @@
     "type-check": "npm run build:packages && npm run type-check:packages && npm run type-check:frontend && npm run type-check:backend",
     "type-check:packages": "cd packages/api-types && npm run type-check && cd ../question-sets && npm run type-check && cd ../score && npm run type-check && cd ../types && npm run type-check",
     "type-check:frontend": "cd frontend && npm run type-check",
-    "type-check:backend": "cd backend && npm run type-check"
+    "type-check:backend": "cd backend && npm run type-check",
+    "setup": "npm run setup:ci && npm run setup:env && npm run build:packages",
+    "setup:ci": "npm ci && npm run frontend:ci && npm run backend:ci && npm run packages:ci",
+    "frontend:ci": "cd frontend && npm ci",
+    "backend:ci": "cd backend && npm ci",
+    "packages:ci": "cd packages/api-types && npm ci && cd ../question-sets && npm ci && cd ../score && npm ci && cd ../types && npm ci",
+    "setup:env": "npm run frontend:env && npm run backend:env",
+    "frontend:env": "cd frontend && if [ ! -f \".env\" ]; then cp \".env.sample\" \".env\"; fi",
+    "backend:env": "cd backend && if [ ! -f \".env\" ]; then cp \".env.sample\" \".env\"; fi"
   },
   "license": "MIT",
   "lint-staged": {
