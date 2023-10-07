@@ -6,10 +6,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Keyboard from "../../../components/keyboard-layout-creator/keyboard/keyboard";
-import {
-  keyup,
-  convert,
-} from "../../../components/keyboard-layout-creator/keyboard/convert";
+import { convert } from "../../../components/keyboard-layout-creator/keyboard/convert";
 import keyCodes from "../../../components/keyboard-layout-creator/keyboard/data/keyCodes.json";
 import romantable from "./romantable.json";
 import ReadJSONFile from "../../../components/keyboard-layout-creator/ReadJSONFile";
@@ -109,18 +106,95 @@ function keydown(
         : keyColors[i],
     ),
   );
-  setTimeout(() => {
-    setKeyColors(
-      keyCodes.map((tmp, i) =>
-        (!isDefault && tmp === e.code) ||
-        (isDefault && // @ts-ignore
-          functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
-          e.key.toLowerCase()
-          ? "rgba(0,0,0,0)"
-          : keyColors[i],
+}
+
+function keyup(
+  keyColors: string[],
+  setKeyColors: (value: string[]) => void,
+  e: KeyboardEvent,
+  // @ts-ignore
+  content: string,
+  setContent: (value: string) => void,
+  functional: string,
+  isDefault: boolean,
+  shift: boolean,
+  setShift: (value: boolean) => void,
+): void {
+  const prohibitedKey = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "0",
+    "Enter",
+    "Space",
+    "/",
+  ];
+  if (
+    prohibitedKey.includes(
+      // @ts-ignore
+      functionalLayoutType[functional].content[e.code][1],
+    ) || // @ts-ignore
+    (functionalLayoutType[functional].content[e.code] === undefined &&
+      e.code === "")
+  ) {
+    e.preventDefault();
+  }
+
+  setContent(
+    // @ts-ignore
+    (content: string) =>
+      convert(
+        e,
+        functional,
+        functionalLayoutType,
+        content,
+        isDefault,
+        shift,
+        setShift,
       ),
-    );
-  }, 100);
+  );
+  setKeyColors(
+    keyCodes.map((tmp, i) =>
+      (!isDefault && tmp === e.code) ||
+      (isDefault && // @ts-ignore
+        functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
+        e.key.toLowerCase()
+        ? "rgba(0,0,0,0)"
+        : keyColors[i],
+    ),
+  );
 }
 
 // @ts-ignore
@@ -171,7 +245,17 @@ export default function App({
       );
     }
     function temp(e: KeyboardEvent): void {
-      keyup(e.code, functional, functionalLayoutType, shift, setShift);
+      keyup(
+        keyColors,
+        setKeyColors,
+        e,
+        content,
+        setContent,
+        functional,
+        isCustom,
+        shift,
+        setShift,
+      );
     }
     window.addEventListener("keydown", tmp);
     window.addEventListener("keyup", temp);

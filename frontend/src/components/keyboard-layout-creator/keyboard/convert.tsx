@@ -2,20 +2,6 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 
-export function keyup(
-  code: string,
-  functional: string,
-  functionalLayoutType: object,
-  shift: boolean,
-  setShift: (value: boolean) => void,
-): void {
-  // @ts-ignore
-  const key = functionalLayoutType[functional].content[code][!shift ? 0 : 1];
-  switch (key) {
-    case "Shift":
-      setShift(false);
-  }
-}
 export function convert(
   e: KeyboardEvent,
   functional: string,
