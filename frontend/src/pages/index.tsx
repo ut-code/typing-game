@@ -10,6 +10,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import typingGameQuestionSets from "@typing-game/question-sets";
 import HowToPlay from "../features/game-setup/components/HowToPlay";
+import UserNameInput from "../features/game-setup/components/UserNameInput";
 
 export default function Home() {
   const [userName, setUserName] = useState<string>(
@@ -46,20 +47,7 @@ export default function Home() {
 
       <div className="elements">
         <Form>
-          <Form.Group className="mb-3" controlId="username">
-            <Form.Label>
-              <b>ユーザーネーム（20文字まで）</b>
-            </Form.Label>
-            <Form.Control
-              placeholder="Guest"
-              value={userName}
-              onChange={(e) => {
-                setUserName(e.target.value);
-              }}
-              maxLength={20}
-            />
-          </Form.Group>
-
+          <UserNameInput userName={userName} setUserName={setUserName} />
           <Form.Group className="mb-3" controlId="qnumber">
             <Form.Label>
               <b>問題番号</b>
