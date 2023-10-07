@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Image } from "react-bootstrap";
 
 import logo from "/logo.png";

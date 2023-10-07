@@ -1,6 +1,6 @@
 import { Tab, Tabs } from "react-bootstrap";
 import RankingTable from "../RankingTable";
-import useRankingQuery from "../../../../hooks/apiHooks/ranking/useRankingQuery";
+import useRankingQuery from "../../../../api/hooks/rankingHooks";
 import styles from "./styles.module.css";
 
 export default function Ranking() {

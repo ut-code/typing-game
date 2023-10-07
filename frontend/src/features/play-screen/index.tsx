@@ -9,12 +9,12 @@ import { Stack } from "react-bootstrap";
 import shuffle from "../../utils/shuffle";
 // コンポーネント
 import Keyboard from "../../pages/KeyboardLayoutCreator/Keyboard";
-import BackButton from "../../components/BackButton";
+import BackButton from "../../components/common/BackButton";
 import TypingStatistics from "./components/TypingStatistics/TypingStatictics";
 import TypingProgressBar from "./components/TypingProgressBar/TypingProgressBar";
 import QuestionDisplay from "./components/QuestionDisplay/QuestionDisplay";
 import typingGameQuestionSets from "@typing-game/question-sets";
-import useCreateTypingSessionMutation from "../../hooks/apiHooks/typingSession/useTypingSessionMutation";
+import useCreateTypingSessionMutation from "../../api/hooks/typingSessionHooks";
 import { TypingAttempt } from "@typing-game/types";
 
 export default function PlayScreen(): JSX.Element {

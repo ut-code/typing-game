@@ -1,12 +1,12 @@
-import { createTypingSessionApi } from "../../../services/api/typingSessionApi";
-import useMutation from "../common/useMutation";
+import { createTypingSessionService } from "../services/typingSessionServices";
+import useMutation from "./common/useMutation";
 
 export default function useCreateTypingSessionMutation() {
   const {
     mutate: createTypingSession,
     loading: loadingCreateTypingSession,
     error: createTypingSessionError,
-  } = useMutation(createTypingSessionApi);
+  } = useMutation(createTypingSessionService);
   return {
     createTypingSession,
     loadingCreateTypingSession,
