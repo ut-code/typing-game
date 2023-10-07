@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages";
-import Basic from "./pages/Basic";
+import Play from "./pages/play";
 import Result from "./pages/Result";
 import KeyboardLayoutCreatorHome from "./pages/KeyboardLayoutCreator";
 import KeyboardLayoutCreatorPhysical from "./pages/KeyboardLayoutCreator/Physical";
@@ -13,7 +13,7 @@ export default function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/basic" element={<Basic />}></Route>
+        <Route path="/play" element={<Play />}></Route>
         <Route path="/result/:uuid" element={<Result />}></Route>
         <Route
           path="/keyboard-layout-creator"
