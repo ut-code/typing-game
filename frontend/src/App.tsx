@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages";
 import Play from "./pages/play";
-import Result from "./pages/Result";
+import Result from "./pages/result";
 import KeyboardLayoutCreatorHome from "./pages/KeyboardLayoutCreator";
 import KeyboardLayoutCreatorPhysical from "./pages/KeyboardLayoutCreator/Physical";
 import KeyboardLayoutCreatorFunctional from "./pages/KeyboardLayoutCreator/Functional";
