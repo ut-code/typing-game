@@ -4,11 +4,17 @@ import mac_us_qwerty from "./mac_us_qwerty.json";
 import dvorak from "./dvorak.json";
 import azerty from "./azerty.json";
 import qwertz from "./qwertz.json";
+
 import us_default from "./us_default.json";
 import jis109 from "./jis109.json";
 import dvorak_jis from "./dvorak_jis.json";
 import azerty_jis from "./azerty_jis.json";
 import qwertz_jis from "./qwertz_jis.json";
+
+import {
+  KeyboardLayout,
+  PhysicalKeyboardLayout,
+} from "../../../../../../types/keyboardLayout";
 
 export const functionalLayoutType = {
   jis_qwerty: { content: jis_qwerty },
@@ -28,7 +34,17 @@ export const physicalLayoutType = {
   custom: { content: jis109 },
 };
 
-export const layoutType = {
+/**
+ * キーの機能的配置と物理的配置の対応を定義？
+ */
+export const layoutType: {
+  [key in KeyboardLayout]: {
+    name: string;
+    id: string;
+    functionalLayoutType: KeyboardLayout;
+    physicalLayoutType: PhysicalKeyboardLayout;
+  };
+} = {
   jis_qwerty: {
     name: "JIS QWERTY",
     id: "jis_qwerty",

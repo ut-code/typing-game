@@ -4,14 +4,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Keyboard from "../../../components/keyboard-layout-creator/keyboard/keyboard";
 import { convert } from "../../../components/keyboard-layout-creator/keyboard/convert";
 import keyCodes from "../../../components/keyboard-layout-creator/keyboard/data/keyCodes.json";
 import romantable from "./romantable.json";
-import ReadJSONFile from "../../../components/keyboard-layout-creator/ReadJSONFile";
 import {
-  layoutType,
   functionalLayoutType,
   physicalLayoutType,
   defaultFunctionalLayoutType,
@@ -19,6 +16,11 @@ import {
 } from "../../../components/keyboard-layout-creator/keyboard/data/keyboardSettings";
 import "./style.css";
 import { preventedKeys } from "../../../utils/constants";
+import KeyboardSettings from "../../../features/play-screen/components/KeyboardSettings";
+import {
+  KeyboardLayout,
+  PhysicalKeyboardLayout,
+} from "../../../../../types/keyboardLayout.ts";
 
 function keydown(
   keyColors: string[],
@@ -140,17 +142,20 @@ export default function App({
   setContent?: (value: string) => void;
 }): JSX.Element {
   const [isCustom, setIsCustom] = useState<boolean>(false);
-  const [layout, setLayout] = useState<string>();
-  const [functional, setFunctional] = useState<string>(
+  const [keyboardLayout, setKeyboardLayout] =
+    useState<KeyboardLayout>("jis_qwerty");
+  const [functional, setFunctional] = useState<KeyboardLayout>(
     defaultFunctionalLayoutType,
   );
-  const [physical, setPhysical] = useState<string>(defaultPhysicalLayoutType);
+  const [physical, setPhysical] = useState<PhysicalKeyboardLayout>(
+    defaultPhysicalLayoutType,
+  );
   const [keyColors, setKeyColors] = useState<string[]>(
-    keyCodes.map(() => "rgba(0,0,0,0)"),
+    new Array(keyCodes.length).fill("rgba(0,0,0,0)"),
   );
   const [shift, setShift] = useState<boolean>(false);
   useEffect(() => {
-    function tmp(e: KeyboardEvent): void {
+    function onKeydown(e: KeyboardEvent): void {
       keydown(
         keyColors,
         setKeyColors,
@@ -163,7 +168,7 @@ export default function App({
         setShift,
       );
     }
-    function temp(e: KeyboardEvent): void {
+    function onKeyup(e: KeyboardEvent): void {
       keyup(
         keyColors,
         setKeyColors,
@@ -176,90 +181,27 @@ export default function App({
         setShift,
       );
     }
-    window.addEventListener("keydown", tmp);
-    window.addEventListener("keyup", temp);
+    window.addEventListener("keydown", onKeydown);
+    window.addEventListener("keyup", onKeyup);
     return () => {
-      window.removeEventListener("keydown", tmp);
-      window.removeEventListener("keyup", temp);
+      window.removeEventListener("keydown", onKeydown);
+      window.removeEventListener("keyup", onKeyup);
     };
   }, [content, functional, isCustom, keyColors, setContent, shift]);
   setContent(content);
   return (
     <>
       <div id="wrapper">
-        <div id="settings">
-          {/* {content} */}
-          {/* <div>{toJapanese(content)}</div> */}
-          <div>
-            <input
-              type="checkbox"
-              checked={isCustom}
-              onChange={(e) => {
-                setIsCustom(e.target.checked);
-              }}
-            />
-            <label>キーボードをカスタマイズする</label>
-          </div>
-          {isCustom && (
-            <>
-              次のボタンで使いたいキーボード配列を選んでください。Dvorakなどを選択してみると違いがよく分かるはずです。
-              <br />
-              <select
-                value={layout}
-                onChange={(e) => {
-                  setLayout(e.target.value);
-                  // @ts-ignore
-                  setFunctional(
-                    layoutType[
-                      e.target.value as
-                        | "jis_qwerty"
-                        | "mac_jis_qwerty"
-                        | "mac_us_qwerty"
-                        | "dvorak"
-                        | "azerty"
-                        | "qwertz"
-                        | "custom"
-                    ].functionalLayoutType,
-                  );
-                  // @ts-ignore
-                  setPhysical(layoutType[e.target.value].physicalLayoutType);
-                }}
-              >
-                {Object.keys(layoutType).map((key, i) => (
-                  // @ts-ignore
-                  <option key={i} value={layoutType[key].id}>
-                    {/* @ts-ignore */}
-                    {layoutType[key].name}
-                  </option>
-                ))}
-              </select>
-              <br />
-              <br />
-              <br />
-              キーボード配列を自分で作りたい人は、
-              <Link to="/keyboard-layout-creator">このリンク</Link>
-              に飛んでキーボード配列を作ってから、下記のボタンで選択してください。
-              <br />
-              <br />
-              <span>自作の論理配列を選択</span>
-              <ReadJSONFile
-                f={(x) => {
-                  // @ts-ignore
-                  functionalLayoutType.custom.content = x;
-                }}
-              ></ReadJSONFile>
-              <br />
-              <br />
-              <span>自作の物理配列を選択</span>
-              <ReadJSONFile
-                f={(x) => {
-                  // @ts-ignore
-                  physicalLayoutType.custom.content = x;
-                }}
-              ></ReadJSONFile>
-            </>
-          )}
-        </div>
+        <KeyboardSettings
+          isCustom={isCustom}
+          setIsCustom={setIsCustom}
+          keyboardLayout={keyboardLayout!}
+          setKeyboardLayout={setKeyboardLayout}
+          functional={functional}
+          setFunctional={setFunctional}
+          physical={physical}
+          setPhysical={setPhysical}
+        />
         <Keyboard
           functional={functional}
           physical={physical}
@@ -273,7 +215,7 @@ export default function App({
           isCustom={isCustom}
           shift={shift}
           setShift={setShift}
-        ></Keyboard>
+        />
       </div>
     </>
   );

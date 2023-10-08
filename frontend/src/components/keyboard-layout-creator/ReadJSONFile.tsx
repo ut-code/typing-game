@@ -1,3 +1,8 @@
+import {
+  FunctionalLayoutJSON,
+  PhysicalLayoutJSON,
+} from "../../../../types/keyboardLayout";
+
 /**
  * ユーザーから受け取った JSON ファイルを引数で指定した関数で処理します。
  * @param f JSON ファイルを処理する関数
@@ -6,7 +11,7 @@
 export default function ReadJSONFile({
   f,
 }: {
-  f: (x: object) => void;
+  f: ((x: FunctionalLayoutJSON) => void) | ((x: PhysicalLayoutJSON) => void);
 }): JSX.Element {
   return (
     <input
