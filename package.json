@@ -30,7 +30,17 @@
     "ci:types": "cd packages/types && npm ci",
     "setup:env": "npm run frontend:env && npm run backend:env",
     "frontend:env": "cd frontend && if [ ! -f \".env\" ]; then cp \".env.sample\" \".env\"; fi",
-    "backend:env": "cd backend && if [ ! -f \".env\" ]; then cp \".env.sample\" \".env\"; fi"
+    "backend:env": "cd backend && if [ ! -f \".env\" ]; then cp \".env.sample\" \".env\"; fi",
+    "dev:api-types": "cd packages/api-types && npm run dev",
+    "dev:question-sets": "cd packages/question-sets && npm run dev",
+    "dev:score": "cd packages/score && npm run dev",
+    "dev:types": "cd packages/types && npm run dev",
+    "dev:packages": "npm-run-all --parallel dev:api-types dev:question-sets dev:score dev:types",
+    "watch:backend": "cd backend && npm run dev",
+    "dev:backend": "npm-run-all --parallel dev:packages watch:backend",
+    "watch:frontend": "cd frontend && npm run dev",
+    "dev:frontend": "npm-run-all --parallel dev:packages watch:frontend",
+    "dev": "npm-run-all --parallel dev:backend dev:frontend"
   },
   "license": "MIT",
   "lint-staged": {
