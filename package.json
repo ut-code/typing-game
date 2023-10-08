@@ -38,7 +38,7 @@
     "dev:packages": "npm-run-all --parallel dev:api-types dev:question-sets dev:score dev:types",
     "watch:backend": "cd backend && npm run dev",
     "dev:backend": "npm-run-all --parallel dev:packages watch:backend",
-    "watch:frontend": "cd frontend && npm run dev",
+    "watch:frontend": "cd frontend && npm run dev -- --host",
     "dev:frontend": "npm-run-all --parallel dev:packages watch:frontend",
     "dev": "npm-run-all --parallel dev:backend dev:frontend"
   },

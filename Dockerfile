@@ -1,6 +1,9 @@
 FROM node:18
 WORKDIR /app
 COPY package*.json .
-COPY packages/ packages/
-RUN npm run ci:packages && npm run build:packages
+COPY packages/api-types/package*.json packages/api-types/
+COPY packages/question-sets/package*.json packages/question-sets/
+COPY packages/score/package*.json packages/score/
+COPY packages/types/package*.json packages/types/
+RUN npm run ci:packages
 RUN npm ci
