@@ -53,7 +53,7 @@
 
 - `docker compose up`を実行してください。そうすると、Docker コンテナが起動して、開発環境が構築されます。
 
-- 初回は、`docker compose exec backend npm run seed:develop`を実行してください。そうすると、初期データがデータベースに挿入されます。
+- 初回は、`docker compose exec backend bash -c "cd backend && npm run seed:develop"`を実行してください。そうすると、初期データがデータベースに挿入されます。
 
 - [http://localhost:5173/](http://localhost:5173/)でアプリケーションにアクセスできます。
 

@@ -9,7 +9,7 @@
     "start": "node dist/src/app.js",
     "type-check": "tsc --noEmit",
     "db-push": "prisma db push",
-    "seed:develop": "ts-node prisma/seed/index.ts"
+    "seed:develop": "tsc && node dist/prisma/seed/index.js"
   },
   "license": "MIT",
   "dependencies": {
