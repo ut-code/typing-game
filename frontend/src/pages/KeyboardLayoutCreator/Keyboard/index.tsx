@@ -76,11 +76,8 @@ function keyup(
   e: KeyboardEvent,
   // @ts-ignore
   content: string,
-  setContent: (value: string) => void,
   functional: string,
   isDefault: boolean,
-  shift: boolean,
-  setShift: (value: boolean) => void,
 ): void {
   if (
     preventedKeys.includes(
@@ -93,19 +90,6 @@ function keyup(
     e.preventDefault();
   }
 
-  setContent(
-    // @ts-ignore
-    (content: string) =>
-      convert(
-        e,
-        functional,
-        functionalLayoutType,
-        content,
-        isDefault,
-        shift,
-        setShift,
-      ),
-  );
   setKeyColors(
     keyCodes.map((tmp, i) =>
       (!isDefault && tmp === e.code) ||
@@ -169,17 +153,7 @@ export default function App({
       );
     }
     function onKeyup(e: KeyboardEvent): void {
-      keyup(
-        keyColors,
-        setKeyColors,
-        e,
-        content,
-        setContent,
-        functional,
-        isCustom,
-        shift,
-        setShift,
-      );
+      keyup(keyColors, setKeyColors, e, content, functional, isCustom);
     }
     window.addEventListener("keydown", onKeydown);
     window.addEventListener("keyup", onKeyup);
