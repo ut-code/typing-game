@@ -1,5 +1,5 @@
-import usePerformanceSummaryQuery from "../../api/hooks/performanceSummaryHooks";
-import PerformanceSummaryTable from "./PerformanceSummaryTable/PerformanceSummaryTable";
+import usePerformanceSummaryQuery from "../../../api/hooks/performanceSummaryHooks";
+import PerformanceSummaryTable from "../PerformanceSummaryTable";
 
 export default function PerformanceSummary({
   typingSessionId,

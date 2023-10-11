@@ -4,7 +4,7 @@ import { Stack } from "react-bootstrap";
 import Header from "../../components/common/Header";
 import Footer from "../../components/common/Footer";
 import BackButton from "../../components/common/BackButton";
-import Ranking from "../../features/result/Ranking/Ranking";
+import Ranking from "../../features/result/Ranking";
 import PerformanceSummary from "../../features/result/PerformanceSummary";
 import RankingCriteria from "../../features/result/RankingCriteria";
 

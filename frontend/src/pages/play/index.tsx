@@ -10,9 +10,9 @@ import shuffle from "../../utils/shuffle";
 // コンポーネント
 import Keyboard from "../keyboardLayoutCreator/keyboard";
 import BackButton from "../../components/common/BackButton";
-import TypingStatistics from "../../features/play/TypingStatistics/TypingStatistics";
-import TypingProgressBar from "../../features/play/TypingProgressBar/TypingProgressBar";
-import QuestionDisplay from "../../features/play/QuestionDisplay/QuestionDisplay";
+import TypingStatistics from "../../features/play/TypingStatistics";
+import TypingProgressBar from "../../features/play/TypingProgressBar";
+import QuestionDisplay from "../../features/play/QuestionDisplay";
 import typingGameQuestionSets from "@typing-game/question-sets";
 import useCreateTypingSessionMutation from "../../api/hooks/typingSessionHooks";
 import { TypingAttempt } from "@typing-game/types";
