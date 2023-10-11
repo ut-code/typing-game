@@ -8,7 +8,7 @@ import { Stack } from "react-bootstrap";
 // 関数
 import shuffle from "../../utils/shuffle";
 // コンポーネント
-import Keyboard from "../../pages/KeyboardLayoutCreator/Keyboard";
+import Keyboard from "../../pages/keyboardLayoutCreator/keyboard";
 import BackButton from "../../components/common/BackButton";
 import TypingStatistics from "./components/TypingStatistics/TypingStatictics";
 import TypingProgressBar from "./components/TypingProgressBar/TypingProgressBar";

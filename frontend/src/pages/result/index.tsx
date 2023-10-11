@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import TypingResult from "../../features/typing-result";
+import TypingResult from "../../features/result";
 
 export default function Result() {
   const { uuid: typingSessionId } = useParams();

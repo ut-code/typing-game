@@ -15,8 +15,8 @@ import {
   defaultPhysicalLayoutType,
 } from "../../../components/keyboard/data/keyboardSettings.tsx";
 import "./style.css";
-import { preventedKeys } from "../../../utils/constants";
-import KeyboardSettings from "../../../features/play-screen/components/KeyboardSettings";
+import { preventedKeys } from "../../../utils/constants.ts";
+import KeyboardSettings from "../../../features/play/components/KeyboardSettings/index.tsx";
 import {
   KeyboardLayout,
   PhysicalKeyboardLayout,

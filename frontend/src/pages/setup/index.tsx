@@ -1,4 +1,4 @@
-import GameSetup from "../features/game-setup";
+import GameSetup from "../../features/setup";
 
 export default function Home() {
   return <GameSetup />;

@@ -1,11 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages";
+import Home from "./pages/setup";
 import Play from "./pages/play";
 import Result from "./pages/result";
-import KeyboardLayoutCreatorHome from "./pages/KeyboardLayoutCreator";
-import KeyboardLayoutCreatorPhysical from "./pages/KeyboardLayoutCreator/Physical";
-import KeyboardLayoutCreatorFunctional from "./pages/KeyboardLayoutCreator/Functional";
-import Keyboard from "./pages/KeyboardLayoutCreator/Keyboard";
+import KeyboardLayoutCreatorHome from "./pages/keyboardLayoutCreator";
+import KeyboardLayoutCreatorPhysical from "./pages/keyboardLayoutCreator/physical";
+import KeyboardLayoutCreatorFunctional from "./pages/keyboardLayoutCreator/functional";
+import Keyboard from "./pages/keyboardLayoutCreator/keyboard";
 import "./components/css/global.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 export default function App() {
