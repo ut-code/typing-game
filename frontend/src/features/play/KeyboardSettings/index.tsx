@@ -3,15 +3,15 @@ import {
   functionalLayoutType,
   layoutType,
   physicalLayoutType,
-} from "../../../../components/keyboard/data/keyboardSettings";
-import ReadJSONFile from "../../../keyboardLayoutCreator/ReadJSONFile";
+} from "../../../components/keyboard/data/keyboardSettings";
+import ReadJSONFile from "../../keyboardLayoutCreator/ReadJSONFile";
 import {
   FunctionalLayoutJSON,
   KeyboardLayout,
   PhysicalKeyboardLayout,
   PhysicalLayoutJSON,
-} from "../../../../../../types/keyboardLayout";
-import { getKeys } from "../../../../../../utils/getKeys";
+} from "../../../../../types/keyboardLayout";
+import { getKeys } from "../../../../../utils/getKeys";
 
 type KeyboardSettingsProps = {
   isCustom: boolean;

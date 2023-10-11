@@ -16,7 +16,7 @@ import {
 } from "../../../components/keyboard/data/keyboardSettings.tsx";
 import "./style.css";
 import { preventedKeys } from "../../../utils/constants.ts";
-import KeyboardSettings from "../../../features/play/components/KeyboardSettings/index.tsx";
+import KeyboardSettings from "../../../features/play/KeyboardSettings/index.tsx";
 import {
   KeyboardLayout,
   PhysicalKeyboardLayout,
