@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import howToUse from "/how_to_use.mp4";
 import "./style.css";
-export default function Home(): JSX.Element {
+export default function KeyboardLayoutCreator(): JSX.Element {
   return (
     <>
       <main>

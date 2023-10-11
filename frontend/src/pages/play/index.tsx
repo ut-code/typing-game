@@ -8,7 +8,7 @@ import { Stack } from "react-bootstrap";
 // 関数
 import shuffle from "../../utils/shuffle";
 // コンポーネント
-import Keyboard from "../keyboardLayoutCreator/keyboard";
+import Keyboard from "../../components/Keyboard";
 import BackButton from "../../components/common/BackButton";
 import TypingStatistics from "../../features/play/TypingStatistics";
 import TypingProgressBar from "../../features/play/TypingProgressBar";
@@ -17,7 +17,7 @@ import typingGameQuestionSets from "@typing-game/question-sets";
 import useCreateTypingSessionMutation from "../../api/hooks/typingSessionHooks";
 import { TypingAttempt } from "@typing-game/types";
 
-export default function PlayScreen(): JSX.Element {
+export default function Play(): JSX.Element {
   const [startTime, setStartTime] = useState<Date>();
   // キー入力
   const [content, setContent] = useState<string>("");

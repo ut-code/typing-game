@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 // import keyCodes from "./../../../../keyboard/src/components/data/keyCodes";
-import keyCodes from "../../../components/keyboard/data/keyCodes.json";
+import keyCodes from "../../../components/Keyboard/data/keyCodes.json";
 import {
   physicalLayoutType,
   defaultFunctionalLayoutType,
   defaultPhysicalLayoutType,
-} from "../../../components/keyboard/data/keyboardSettings";
-import Keyboard from "../../../components/keyboard/keyboard";
+} from "../../../components/Keyboard/data/keyboardSettings";
+import KeyboardCore from "../../../components/Keyboard/components/KeyboardCore";
 import ReadJSONFile from "../../../features/keyboardLayoutCreator/ReadJSONFile";
 import GetManySettings from "../../../features/keyboardLayoutCreator/GetManySettings";
 import GetFileName from "../../../features/keyboardLayoutCreator/GetFileName";
@@ -76,7 +76,7 @@ export default function Physical(): JSX.Element {
   const [fileName, setFileName] = useState<string>("");
   return (
     <>
-      <Keyboard
+      <KeyboardCore
         functional={defaultFunctionalLayoutType}
         physical="custom"
         physicalKeyLayout={physicalKeyToObject(
@@ -90,7 +90,7 @@ export default function Physical(): JSX.Element {
         )}
         isCustom={false}
         shift={false}
-      ></Keyboard>
+      ></KeyboardCore>
       <div className="box"></div>
 
       <div className="content">

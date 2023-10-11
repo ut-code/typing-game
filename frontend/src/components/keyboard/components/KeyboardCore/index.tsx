@@ -4,15 +4,15 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import React from "react"; // ,{useRef}
-import keyCodes from "./data/keyCodes.json";
+import keyCodes from "../../data/keyCodes.json";
 import "./keyboard.css";
-import useWindowDimensions from "../../hooks/useWindowDimensions";
+import useWindowDimensions from "../../../../hooks/useWindowDimensions";
 import {
   functionalLayoutType,
   physicalLayoutType,
   defaultFunctionalLayoutType,
   defaultPhysicalLayoutType,
-} from "./data/keyboardSettings";
+} from "../../data/keyboardSettings";
 
 let functionalLayout = defaultFunctionalLayoutType;
 let physicalLayout = defaultPhysicalLayoutType;

@@ -4,23 +4,23 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import { useState, useEffect } from "react";
-import Keyboard from "../../../components/keyboard/keyboard.tsx";
-import { convert } from "../../../components/keyboard/convert.tsx";
-import keyCodes from "../../../components/keyboard/data/keyCodes.json";
-import romantable from "./romantable.json";
+import KeyboardCore from "./components/KeyboardCore";
+import { convert } from "./components/KeyboardCore/convert.tsx";
+import keyCodes from "./data/keyCodes.json";
+import romanTable from "./data/romanTable.json";
 import {
   functionalLayoutType,
   physicalLayoutType,
   defaultFunctionalLayoutType,
   defaultPhysicalLayoutType,
-} from "../../../components/keyboard/data/keyboardSettings.tsx";
+} from "./data/keyboardSettings.tsx";
 import "./style.css";
-import { preventedKeys } from "../../../utils/constants.ts";
-import KeyboardSettings from "../../../features/play/KeyboardSettings/index.tsx";
+import { preventedKeys } from "../../utils/constants.ts";
+import KeyboardSettings from "./components/KeyboardSettings/index.tsx";
 import {
   KeyboardLayout,
   PhysicalKeyboardLayout,
-} from "../../../../../types/keyboardLayout.ts";
+} from "../../../../types/keyboardLayout.ts";
 
 function keydown(
   keyColors: string[],
@@ -109,16 +109,16 @@ function toJapanese(content: string): string {
   let tmp = "";
   for (let i = 0; i < content.length; i++) {
     tmp = tmp + content[i][0].toLowerCase();
-    const hoge = romantable.findIndex((element) => element[0] === tmp);
+    const hoge = romanTable.findIndex((element) => element[0] === tmp);
     if (hoge !== -1) {
-      ans += romantable[hoge][1];
+      ans += romanTable[hoge][1];
       tmp = "";
     }
   }
   return ans;
 }
 
-export default function App({
+export default function Keyboard({
   content = "",
   setContent = () => {},
 }: {
@@ -164,33 +164,31 @@ export default function App({
   }, [content, functional, isCustom, keyColors, setContent, shift]);
   setContent(content);
   return (
-    <>
-      <div id="wrapper">
-        <KeyboardSettings
-          isCustom={isCustom}
-          setIsCustom={setIsCustom}
-          keyboardLayout={keyboardLayout!}
-          setKeyboardLayout={setKeyboardLayout}
-          functional={functional}
-          setFunctional={setFunctional}
-          physical={physical}
-          setPhysical={setPhysical}
-        />
-        <Keyboard
-          functional={functional}
-          physical={physical}
-          keyColors={keyColors}
-          setKeyColors={setKeyColors}
-          keydown={keydown}
-          content={content}
-          setContent={setContent}
-          keyLayout={functionalLayoutType.custom.content}
-          physicalKeyLayout={physicalLayoutType.custom.content}
-          isCustom={isCustom}
-          shift={shift}
-          setShift={setShift}
-        />
-      </div>
-    </>
+    <div id="wrapper">
+      <KeyboardSettings
+        isCustom={isCustom}
+        setIsCustom={setIsCustom}
+        keyboardLayout={keyboardLayout!}
+        setKeyboardLayout={setKeyboardLayout}
+        functional={functional}
+        setFunctional={setFunctional}
+        physical={physical}
+        setPhysical={setPhysical}
+      />
+      <KeyboardCore
+        functional={functional}
+        physical={physical}
+        keyColors={keyColors}
+        setKeyColors={setKeyColors}
+        keydown={keydown}
+        content={content}
+        setContent={setContent}
+        keyLayout={functionalLayoutType.custom.content}
+        physicalKeyLayout={physicalLayoutType.custom.content}
+        isCustom={isCustom}
+        shift={shift}
+        setShift={setShift}
+      />
+    </div>
   );
 }
