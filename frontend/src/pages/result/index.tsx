@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { Stack } from "react-bootstrap";
 
-import Header from "../../components/common/Header";
-import Footer from "../../components/common/Footer";
-import BackButton from "../../components/common/BackButton";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import BackButton from "../../components/BackButton";
 import Ranking from "../../features/result/Ranking";
 import PerformanceSummary from "../../features/result/PerformanceSummary";
 import RankingCriteria from "../../features/result/RankingCriteria";

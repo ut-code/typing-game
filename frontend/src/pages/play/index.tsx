@@ -9,7 +9,7 @@ import { Stack } from "react-bootstrap";
 import shuffle from "../../utils/shuffle";
 // コンポーネント
 import Keyboard from "../../components/Keyboard";
-import BackButton from "../../components/common/BackButton";
+import BackButton from "../../components/BackButton";
 import TypingStatistics from "../../features/play/TypingStatistics";
 import TypingProgressBar from "../../features/play/TypingProgressBar";
 import QuestionDisplay from "../../features/play/QuestionDisplay";
