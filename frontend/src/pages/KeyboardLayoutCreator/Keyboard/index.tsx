@@ -4,16 +4,16 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import { useState, useEffect } from "react";
-import Keyboard from "../../../components/keyboard-layout-creator/keyboard/keyboard";
-import { convert } from "../../../components/keyboard-layout-creator/keyboard/convert";
-import keyCodes from "../../../components/keyboard-layout-creator/keyboard/data/keyCodes.json";
+import Keyboard from "../../../components/keyboard/keyboard.tsx";
+import { convert } from "../../../components/keyboard/convert.tsx";
+import keyCodes from "../../../components/keyboard/data/keyCodes.json";
 import romantable from "./romantable.json";
 import {
   functionalLayoutType,
   physicalLayoutType,
   defaultFunctionalLayoutType,
   defaultPhysicalLayoutType,
-} from "../../../components/keyboard-layout-creator/keyboard/data/keyboardSettings";
+} from "../../../components/keyboard/data/keyboardSettings.tsx";
 import "./style.css";
 import { preventedKeys } from "../../../utils/constants";
 import KeyboardSettings from "../../../features/play-screen/components/KeyboardSettings";

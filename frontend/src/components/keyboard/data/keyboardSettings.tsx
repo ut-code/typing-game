@@ -14,7 +14,7 @@ import qwertz_jis from "./qwertz_jis.json";
 import {
   KeyboardLayout,
   PhysicalKeyboardLayout,
-} from "../../../../../../types/keyboardLayout";
+} from "../../../../../types/keyboardLayout";
 
 export const functionalLayoutType = {
   jis_qwerty: { content: jis_qwerty },

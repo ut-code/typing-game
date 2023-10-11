@@ -3,7 +3,7 @@ import {
   functionalLayoutType,
   layoutType,
   physicalLayoutType,
-} from "../../../../components/keyboard-layout-creator/keyboard/data/keyboardSettings";
+} from "../../../../components/keyboard/data/keyboardSettings";
 import ReadJSONFile from "../../../../components/keyboard-layout-creator/ReadJSONFile";
 import {
   FunctionalLayoutJSON,

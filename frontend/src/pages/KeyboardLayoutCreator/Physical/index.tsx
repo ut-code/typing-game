@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 // import keyCodes from "./../../../../keyboard/src/components/data/keyCodes";
-import keyCodes from "../../../components/keyboard-layout-creator/keyboard/data/keyCodes.json";
+import keyCodes from "../../../components/keyboard/data/keyCodes.json";
 import {
   physicalLayoutType,
   defaultFunctionalLayoutType,
   defaultPhysicalLayoutType,
-} from "../../../components/keyboard-layout-creator/keyboard/data/keyboardSettings";
-import Keyboard from "../../../components/keyboard-layout-creator/keyboard/keyboard";
+} from "../../../components/keyboard/data/keyboardSettings";
+import Keyboard from "../../../components/keyboard/keyboard";
 import ReadJSONFile from "../../../components/keyboard-layout-creator/ReadJSONFile";
 import GetManySettings from "../../../components/keyboard-layout-creator/GetManySettings";
 import GetFileName from "../../../components/keyboard-layout-creator/GetFileName";

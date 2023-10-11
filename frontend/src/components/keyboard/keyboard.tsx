@@ -6,7 +6,7 @@
 import React from "react"; // ,{useRef}
 import keyCodes from "./data/keyCodes.json";
 import "./keyboard.css";
-import useWindowDimensions from "../../../hooks/useWindowDimensions";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 import {
   functionalLayoutType,
   physicalLayoutType,
