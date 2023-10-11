@@ -22,7 +22,7 @@ jobs:
         shell: bash
 
       - name: Run ESLint
-        run: docker compose exec devtools npx eslint --max-warnings 0 .
+        run: docker compose exec devtools npm run lint:check
         shell: bash
 
   prettier:
@@ -41,7 +41,7 @@ jobs:
         shell: bash
 
       - name: Run Prettier
-        run: docker compose exec devtools npx prettier --check .
+        run: docker compose exec devtools npm run format:check
         shell: bash
 
   type-check:
