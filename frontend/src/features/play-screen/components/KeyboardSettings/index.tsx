@@ -4,7 +4,7 @@ import {
   layoutType,
   physicalLayoutType,
 } from "../../../../components/keyboard/data/keyboardSettings";
-import ReadJSONFile from "../../../../components/keyboard-layout-creator/ReadJSONFile";
+import ReadJSONFile from "../../../keyboard-layout-creator/ReadJSONFile";
 import {
   FunctionalLayoutJSON,
   KeyboardLayout,
