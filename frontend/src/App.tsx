@@ -1,36 +1,33 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages";
+import Setup from "./pages/setup";
 import Play from "./pages/play";
 import Result from "./pages/result";
-import KeyboardLayoutCreatorHome from "./pages/KeyboardLayoutCreator";
-import KeyboardLayoutCreatorPhysical from "./pages/KeyboardLayoutCreator/Physical";
-import KeyboardLayoutCreatorFunctional from "./pages/KeyboardLayoutCreator/Functional";
-import Keyboard from "./pages/KeyboardLayoutCreator/Keyboard";
+import KeyboardLayoutCreator from "./pages/keyboardLayoutCreator";
+import Physical from "./pages/keyboardLayoutCreator/physical";
+import Functional from "./pages/keyboardLayoutCreator/functional";
+import Test from "./pages/keyboardLayoutCreator/test";
 import "./components/css/global.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 export default function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<Setup />}></Route>
         <Route path="/play" element={<Play />}></Route>
         <Route path="/result/:uuid" element={<Result />}></Route>
         <Route
           path="/keyboard-layout-creator"
-          element={<KeyboardLayoutCreatorHome />}
+          element={<KeyboardLayoutCreator />}
         ></Route>
         <Route
           path="/keyboard-layout-creator/physical"
-          element={<KeyboardLayoutCreatorPhysical />}
+          element={<Physical />}
         ></Route>
         <Route
           path="/keyboard-layout-creator/functional"
-          element={<KeyboardLayoutCreatorFunctional />}
+          element={<Functional />}
         ></Route>
-        <Route
-          path="/keyboard-layout-creator/test"
-          element={<Keyboard />}
-        ></Route>
+        <Route path="/keyboard-layout-creator/test" element={<Test />}></Route>
       </Routes>
     </>
   );
