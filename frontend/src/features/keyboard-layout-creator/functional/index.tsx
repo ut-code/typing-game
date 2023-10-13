@@ -10,10 +10,10 @@ import {
   defaultPhysicalLayoutType,
 } from "../../../components/Keyboard/data/keyboardSettings";
 import KeyboardCore from "../../../components/Keyboard/components/KeyboardCore";
-import ReadJSONFile from "../../../features/keyboardLayoutCreator/ReadJSONFile";
-import GetManySettings from "../../../features/keyboardLayoutCreator/GetManySettings";
-import GetFileName from "../../../features/keyboardLayoutCreator/GetFileName";
-import ConfirmButton from "../../../features/keyboardLayoutCreator/ConfirmButton";
+import ReadJSONFile from "../ReadJSONFile";
+import GetManySettings from "../GetManySettings";
+import GetFileName from "../GetFileName";
+import ConfirmButton from "../ConfirmButton";
 import makeJSONFile from "../../../utils/makeJSONFile";
 import "./style.css";
 import "./../keyboard.css";
