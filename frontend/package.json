@@ -12,7 +12,6 @@
   "dependencies": {
     "@typing-game/api-types": "file:../packages/api-types",
     "@typing-game/question-sets": "file:../packages/question-sets",
-    "@typing-game/types": "file:../packages/types",
     "bootstrap": "^5.3.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.0",

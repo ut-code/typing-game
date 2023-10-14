@@ -15,7 +15,11 @@ import TypingProgressBar from "./components/typing-progress-bar";
 import QuestionDisplay from "./components/question-display";
 import typingGameQuestionSets from "@typing-game/question-sets";
 import useCreateTypingSessionMutation from "../../api/hooks/typingSessionHooks";
-import { TypingAttempt } from "@typing-game/types";
+
+type TypingAttempt = {
+  inputCharacters: string;
+  targetCharacters: string;
+};
 
 export default function PlayScreen(): JSX.Element {
   const [startTime, setStartTime] = useState<Date>();

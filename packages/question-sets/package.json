@@ -12,5 +12,8 @@
   "license": "MIT",
   "devDependencies": {
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@typing-game/core": "file:../typing-core"
   }
 }

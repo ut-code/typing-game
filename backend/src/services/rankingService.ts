@@ -1,17 +1,8 @@
-import { fetchAllTypingSessionsFromDb } from "../models/typingSessionModel.js";
-import { GetRankingResponse } from "@typing-game/api-types";
-import { calculateScore } from "@typing-game/score";
+import { Ranking } from "../../../packages/typing-core/dist/index.js";
+import { getAllTypingSessionLogic } from "./typingSessionService.js";
 
-export async function generateRankingLogic(): Promise<GetRankingResponse> {
-  const typingSessions = await fetchAllTypingSessionsFromDb();
-  const ranking = typingSessions.map((typingSession) => ({
-    playerName: typingSession.playerName,
-    questionSetId: typingSession.questionSetId,
-    score: calculateScore(typingSession.typingAttempts),
-    playedAt: typingSession.endTime,
-  }));
-  const sortedRanking = ranking.sort((a, b) => {
-    return b.score - a.score;
-  });
-  return sortedRanking;
+export async function generateRankingLogic(): Promise<Ranking> {
+  const typingSessions = await getAllTypingSessionLogic();
+  const ranking = Ranking.generate(typingSessions);
+  return ranking;
 }
