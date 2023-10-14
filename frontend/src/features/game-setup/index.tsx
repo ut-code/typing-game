@@ -1,10 +1,10 @@
 import "./style.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import SetupForm from "../../features/setup/SetupForm";
-import HowToPlay from "../../features/setup/HowToPlay";
+import SetupForm from "./components/setup-form";
+import HowToPlay from "./components/how-to-play";
 
-export default function Setup() {
+export default function GameSetup() {
   return (
     <>
       <Header />
