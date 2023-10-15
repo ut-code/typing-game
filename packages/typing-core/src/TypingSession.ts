@@ -1,6 +1,6 @@
-import Player from "./Player";
-import TypingAttempt from "./TypingAttempt";
-import TypingQuestionSet from "./TypingQuestionSet";
+import Player from "./Player.js";
+import TypingAttempt from "./TypingAttempt.js";
+import TypingQuestionSet from "./TypingQuestionSet.js";
 
 function calculateCorrectTypingCount(typingAttempts: TypingAttempt[]): number {
   return typingAttempts.reduce((correctTypingCount, typingAttempt) => {

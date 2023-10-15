@@ -1,4 +1,4 @@
-import TypingSession from "./TypingSession";
+import TypingSession from "./TypingSession.js";
 
 function calculateKeysPerSecond(typingSession: TypingSession) {
   const typingAttempts = typingSession.typingAttempts;

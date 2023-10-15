@@ -1,4 +1,4 @@
-import TypingQuestion from "./TypingQuestion";
+import TypingQuestion from "./TypingQuestion.js";
 
 export default class TypingQuestionSet {
   readonly id: string;

@@ -1,4 +1,4 @@
-import { Ranking } from "../../../packages/typing-core/dist/index.js";
+import { Ranking } from "@typing/core";
 import { getAllTypingSessionLogic } from "./typingSessionService.js";
 
 export async function generateRankingLogic(): Promise<Ranking> {

@@ -1,11 +1,11 @@
-import Player from "./Player";
-import TypingScore from "./TypingScore";
-import TypingGrade from "./TypingGrade";
-import KeysPerSecond from "./KeysPerSecond";
-import TypingSession from "./TypingSession";
-import Ranking from "./Ranking";
-import OverAllRank from "./OverAllRank";
-import RankInQuestionSet from "./RankInQuestionSet";
+import Player from "./Player.js";
+import TypingScore from "./TypingScore.js";
+import TypingGrade from "./TypingGrade.js";
+import KeysPerSecond from "./KeysPerSecond.js";
+import TypingSession from "./TypingSession.js";
+import Ranking from "./Ranking.js";
+import OverAllRank from "./OverAllRank.js";
+import RankInQuestionSet from "./RankInQuestionSet.js";
 
 export default class PerformanceSummary {
   readonly player: Player;

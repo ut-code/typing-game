@@ -17,9 +17,14 @@ export async function saveTypingSessionInDb(
   startTime: Date,
   endTime: Date,
   playerName: string,
-  questionSetId: string,
+  typingQuestionSetId: string,
 ) {
   return await prisma.typingSession.create({
-    data: { startTime, endTime, playerName, questionSetId },
+    data: {
+      startTime,
+      endTime,
+      playerName,
+      typingQuestionSetId,
+    },
   });
 }

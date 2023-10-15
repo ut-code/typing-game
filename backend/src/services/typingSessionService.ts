@@ -11,6 +11,9 @@ export async function getTypingSessionLogic(
   typingSessionId: string,
 ): Promise<TypingSession> {
   const typingSession = await fetchTypingSessionFromDb(typingSessionId);
+  if (!typingSession) {
+    throw new Error("Typing session not found");
+  }
   return TypingSessionSerializer.fromObject(typingSession);
 }
 
