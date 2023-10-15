@@ -4,6 +4,7 @@ import {
   PostTypingSessionRequest,
   PostTypingSessionResponse,
 } from "@typing-game/api-types";
+import { TypingSessionSerializer } from "@typing-game/api-serializers";
 
 export async function postTypingSessionHandler(
   request: Request,
@@ -12,12 +13,14 @@ export async function postTypingSessionHandler(
   const { startTime, endTime, playerName, questionSetId, typingAttempts } =
     request.body as PostTypingSessionRequest;
   const typingSession: PostTypingSessionResponse =
-    await createTypingSessionLogic(
-      startTime,
-      endTime,
-      playerName,
-      questionSetId,
-      typingAttempts,
+    TypingSessionSerializer.toObject(
+      await createTypingSessionLogic(
+        startTime,
+        endTime,
+        playerName,
+        questionSetId,
+        typingAttempts,
+      ),
     );
   response.json(typingSession);
 }

@@ -1,5 +1,25 @@
-import { saveTypingSessionInDb } from "../models/typingSessionModel.js";
+import {
+  saveTypingSessionInDb,
+  fetchTypingSessionFromDb,
+  fetchAllTypingSessionsFromDb,
+} from "../models/typingSessionModel.js";
 import { saveTypingAttemptInDb } from "../models/typingAttemptModel.js";
+import { TypingSessionSerializer } from "@typing-game/api-serializers";
+import { TypingSession } from "../../../packages/typing-core/dist/index.js";
+
+export async function getTypingSessionLogic(
+  typingSessionId: string,
+): Promise<TypingSession> {
+  const typingSession = await fetchTypingSessionFromDb(typingSessionId);
+  return TypingSessionSerializer.fromObject(typingSession);
+}
+
+export async function getAllTypingSessionLogic(): Promise<TypingSession[]> {
+  const typingSessions = await fetchAllTypingSessionsFromDb();
+  return typingSessions.map((typingSession) =>
+    TypingSessionSerializer.fromObject(typingSession),
+  );
+}
 
 export async function createTypingSessionLogic(
   startTime: Date,
@@ -7,7 +27,7 @@ export async function createTypingSessionLogic(
   playerName: string,
   questionSetId: string,
   typingAttempts: { inputCharacters: string; targetCharacters: string }[],
-) {
+): Promise<TypingSession> {
   const newTypingSession = await saveTypingSessionInDb(
     startTime,
     endTime,
@@ -23,5 +43,5 @@ export async function createTypingSessionLogic(
       );
     }),
   );
-  return newTypingSession;
+  return TypingSessionSerializer.fromObject(newTypingSession);
 }
