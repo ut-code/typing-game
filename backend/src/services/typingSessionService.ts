@@ -43,5 +43,5 @@ export async function createTypingSessionLogic(
       );
     }),
   );
-  return TypingSessionSerializer.fromObject(newTypingSession);
+  return await getTypingSessionLogic(newTypingSession.id);
 }

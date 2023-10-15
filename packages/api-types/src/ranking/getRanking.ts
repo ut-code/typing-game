@@ -1,8 +1,8 @@
-interface RankingEntry {
-  questionSetId: string;
+type Ranking = {
   playerName: string;
-  score: number;
+  typingQuestionSetId: string;
+  typingScore: number;
   playedAt: Date;
-}
+}[];
 
-export type GetRankingResponse = RankingEntry[];
+export type GetRankingResponse = Ranking;

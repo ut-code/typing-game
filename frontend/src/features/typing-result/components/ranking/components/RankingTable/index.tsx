@@ -1,11 +1,7 @@
 import { Table } from "react-bootstrap";
-import { GetRankingResponse } from "@typing/api-types";
+import { Ranking } from "@typing/core";
 
-export default function RankingTable({
-  ranking,
-}: {
-  ranking: GetRankingResponse;
-}) {
+export default function RankingTable({ ranking }: { ranking: Ranking }) {
   return (
     <Table striped bordered>
       <thead>
@@ -19,8 +15,8 @@ export default function RankingTable({
         {ranking.map((ranking, i) => (
           <tr key={i}>
             <td>{i + 1}</td>
-            <td>{ranking.playerName}</td>
-            <td>{ranking.score}</td>
+            <td>{ranking.player.name}</td>
+            <td>{ranking.typingScore.score}</td>
           </tr>
         ))}
       </tbody>
