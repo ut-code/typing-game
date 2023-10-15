@@ -2,8 +2,8 @@ interface PerformanceSummary {
   playerName: string;
   overAllRank: number;
   rankInQuestionSet: number;
-  score: number;
-  grade: string;
+  typingScore: number;
+  typingGrade: string;
   correctTypingCount: number;
   missTypingCount: number;
   keysPerSecond: number;

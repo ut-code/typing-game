@@ -27,7 +27,7 @@ export default function PlayScreen(): JSX.Element {
   const [content, setContent] = useState<string>("");
   const [previousContent, setPreviousContent] = useState(content);
   // 問題
-  const questionSetId: string =
+  const typingQuestionSetId: string =
     localStorage.getItem("questionSetId") || typingGameQuestionSets[0].id;
   const [problemNumber, setProblemNumber] = useState<number>(0); // 何問目か
   const [questions, setQuestions] = useState<string[]>(["sample"]);
@@ -92,12 +92,18 @@ export default function PlayScreen(): JSX.Element {
         startTime: startTime as Date,
         endTime: new Date(),
         playerName: localStorage.getItem("playerName") || "名無し",
-        questionSetId: questionSetId,
+        typingQuestionSetId: typingQuestionSetId,
         typingAttempts: typingAttempts,
       },
     });
     Navigate(`/result/${typingSession?.id}`);
-  }, [Navigate, createTypingSession, questionSetId, startTime, typingAttempts]);
+  }, [
+    Navigate,
+    createTypingSession,
+    typingQuestionSetId,
+    startTime,
+    typingAttempts,
+  ]);
 
   // タイマーが変更されるたびに終了判定
   useEffect(() => {
@@ -112,14 +118,14 @@ export default function PlayScreen(): JSX.Element {
         typingGameQuestionSets
           .find(
             (typingGameQuestionSet) =>
-              typingGameQuestionSet.id === questionSetId,
+              typingGameQuestionSet.id === typingQuestionSetId,
           )
           ?.questions.map(
             (typingGameQuestion) => typingGameQuestion.question,
           ) || [],
       ),
     );
-  }, [questionSetId]);
+  }, [typingQuestionSetId]);
 
   // キー入力のメイン処理
   useEffect(() => {

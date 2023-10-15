@@ -1,20 +1,23 @@
-interface TypingAttempt {
-  inputCharacters: string;
-  targetCharacters: string;
-}
-
 export interface PostTypingSessionRequest {
-  questionSetId: string;
-  playerName: string;
   startTime: Date;
   endTime: Date;
-  typingAttempts: TypingAttempt[];
+  playerName: string;
+  typingQuestionSetId: string;
+  typingAttempts: {
+    inputCharacters: string;
+    targetCharacters: string;
+  }[];
 }
 
 export interface PostTypingSessionResponse {
   id: string;
-  questionSetId: string;
-  playerName: string;
   startTime: Date;
   endTime: Date;
+  playerName: string;
+  typingQuestionSetId: string;
+  typingAttempts: {
+    id: string;
+    inputCharacters: string;
+    targetCharacters: string;
+  }[];
 }

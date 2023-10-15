@@ -1,43 +1,43 @@
-import { GetPerformanceSummaryResponse } from "@typing/api-types";
+import { PerformanceSummary } from "@typing/core";
 import styles from "./styles.module.css";
 import { ListGroup } from "react-bootstrap";
 
 export default function PerformanceSummaryTable({
-  performanceSummary: score,
+  performanceSummary,
 }: {
-  performanceSummary: GetPerformanceSummaryResponse;
+  performanceSummary: PerformanceSummary;
 }) {
   return (
     <div className={styles.statistics}>
       <ListGroup variant="flush">
         <ListGroup.Item className={styles.title}>
-          {score.playerName}さんの結果
+          {performanceSummary.player.name}さんの結果
         </ListGroup.Item>
         <ListGroup.Item className={styles.normalText}>
-          順位 {score.overAllRank} 位
+          順位 {performanceSummary.overAllRank.rank} 位
         </ListGroup.Item>
         <ListGroup.Item className={styles.normalText}>
-          同問題順位 {score.rankInQuestionSet} 位
+          同問題順位 {performanceSummary.rankInQuestionSet.rank} 位
         </ListGroup.Item>
         <ListGroup.Item className={styles.normalText}>
-          スコア {score.score} 点
+          スコア {performanceSummary.typingScore.score} 点
         </ListGroup.Item>
         <ListGroup.Item className={styles.normalText}>
-          総合ランク {score.grade}
+          総合ランク {performanceSummary.typingGrade.grade}
         </ListGroup.Item>
       </ListGroup>
       <ListGroup horizontal>
         <ListGroup.Item className={styles.smallText}>
           <div>正しいタイプ数</div>
-          <div>{score.correctTypingCount} 回</div>
+          <div>{performanceSummary.correctTypingCount} 回</div>
         </ListGroup.Item>
         <ListGroup.Item className={styles.smallText}>
           <div>ミスタイプ数</div>
-          <div>{score.missTypingCount} 回</div>
+          <div>{performanceSummary.missTypingCount} 回</div>
         </ListGroup.Item>
         <ListGroup.Item className={styles.smallText}>
           <div>平均タイプ数</div>
-          <div>{score.keysPerSecond} 回/秒</div>
+          <div>{performanceSummary.keysPerSecond.keysPerSecond} 回/秒</div>
         </ListGroup.Item>
       </ListGroup>
     </div>

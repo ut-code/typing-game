@@ -10,15 +10,20 @@ export async function postTypingSessionHandler(
   request: Request,
   response: Response,
 ) {
-  const { startTime, endTime, playerName, questionSetId, typingAttempts } =
-    request.body as PostTypingSessionRequest;
+  const {
+    startTime,
+    endTime,
+    playerName,
+    typingQuestionSetId,
+    typingAttempts,
+  } = request.body as PostTypingSessionRequest;
   const typingSession: PostTypingSessionResponse =
     TypingSessionSerializer.toObject(
       await createTypingSessionLogic(
         startTime,
         endTime,
         playerName,
-        questionSetId,
+        typingQuestionSetId,
         typingAttempts,
       ),
     );
