@@ -30,9 +30,11 @@ export default class Ranking extends Array<RankingEntry> {
       playedAt: Date;
     }[],
   ) {
-    const sortedRanking = ranking.sort((a, b) => {
-      return b.typingScore.score - a.typingScore.score;
-    });
+    const sortedRanking = Array.isArray(ranking)
+      ? ranking.sort((a, b) => {
+          return b.typingScore.score - a.typingScore.score;
+        })
+      : [];
     super(
       ...sortedRanking.map(
         (rankingEntry) =>
