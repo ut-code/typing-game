@@ -1,5 +1,5 @@
-import { TypingSession, Player, TypingAttempt } from "@typing-game/core";
-import typingQuestionSets from "@typing-game/question-sets";
+import { TypingSession, Player, TypingAttempt } from "@typing/core";
+import typingQuestionSets from "@typing/question-sets";
 
 export default class TypingSessionSerializer {
   static fromObject(typingSession: {

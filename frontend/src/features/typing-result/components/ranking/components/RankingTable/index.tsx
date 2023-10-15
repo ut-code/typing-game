@@ -1,5 +1,5 @@
 import { Table } from "react-bootstrap";
-import { GetRankingResponse } from "@typing-game/api-types";
+import { GetRankingResponse } from "@typing/api-types";
 
 export default function RankingTable({
   ranking,

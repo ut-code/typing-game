@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
-import typingGameQuestionSets from "@typing-game/question-sets";
+import typingGameQuestionSets from "@typing/question-sets";
 import UserNameInput from "./components/UserNameInput";
 import QuestionSetInput from "./components/QuestionSetInput";
 

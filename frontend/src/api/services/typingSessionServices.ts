@@ -2,7 +2,7 @@ import { API_BASE_URL } from "../../config/apiConfig";
 import {
   PostTypingSessionRequest,
   PostTypingSessionResponse,
-} from "@typing-game/api-types";
+} from "@typing/api-types";
 
 export async function createTypingSessionService({
   variables,

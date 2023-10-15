@@ -1,5 +1,5 @@
 import { API_BASE_URL } from "../../config/apiConfig";
-import { GetPerformanceSummaryResponse } from "@typing-game/api-types";
+import { GetPerformanceSummaryResponse } from "@typing/api-types";
 
 export async function getPerformanceSummaryService(variables: {
   typingSessionId: string;

@@ -1,5 +1,5 @@
-import { Ranking, Player, TypingScore } from "@typing-game/core";
-import typingQuestionSets from "@typing-game/question-sets";
+import { Ranking, Player, TypingScore } from "@typing/core";
+import typingQuestionSets from "@typing/question-sets";
 
 export default class RankingSerializer {
   static fromObject(

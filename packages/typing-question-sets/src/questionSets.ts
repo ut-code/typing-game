@@ -1,14 +1,14 @@
-type TypingGameQuestion = {
+type TypingQuestion = {
   question: string;
 };
 
-type TypingGameQuestionSet = {
+type TypingQuestionSet = {
   id: string;
   title: string;
-  questions: TypingGameQuestion[];
+  questions: TypingQuestion[];
 };
 
-const typingGameQuestionSets: TypingGameQuestionSet[] = [
+const typingQuestionSets: TypingQuestionSet[] = [
   {
     id: "0b6d3308-5670-41fc-bb3e-590a4d34d754",
     title: "Basic",
@@ -41,4 +41,4 @@ const typingGameQuestionSets: TypingGameQuestionSet[] = [
   },
 ];
 
-export default typingGameQuestionSets;
+export default typingQuestionSets;

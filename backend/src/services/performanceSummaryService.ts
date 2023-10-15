@@ -1,6 +1,6 @@
-import { GetPerformanceSummaryResponse } from "@typing-game/api-types";
+import { GetPerformanceSummaryResponse } from "@typing/api-types";
 import { getTypingSessionLogic } from "./typingSessionService.js";
-import { PerformanceSummary } from "@typing-game/core";
+import { PerformanceSummary } from "@typing/core";
 import { generateRankingLogic } from "./rankingService.js";
 
 export async function generatePerformanceSummaryLogic(
