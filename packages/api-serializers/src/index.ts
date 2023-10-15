@@ -1,6 +1,6 @@
-import PerformanceSummarySerializer from "./PerformanceSummarySerializer";
-import RankingSerializer from "./RankingSerializer";
-import TypingSessionSerializer from "./TypingSessionSerializer";
+import PerformanceSummarySerializer from "./PerformanceSummarySerializer.js";
+import RankingSerializer from "./RankingSerializer.js";
+import TypingSessionSerializer from "./TypingSessionSerializer.js";
 
 export {
   PerformanceSummarySerializer,

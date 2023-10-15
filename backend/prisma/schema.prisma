@@ -11,12 +11,12 @@ datasource db {
 }
 
 model TypingSession {
-  id             String          @id @default(uuid())
-  startTime      DateTime
-  endTime        DateTime
-  playerName     String
-  questionSetId  String
-  typingAttempts TypingAttempt[]
+  id                  String          @id @default(uuid())
+  startTime           DateTime
+  endTime             DateTime
+  playerName          String
+  typingQuestionSetId String
+  typingAttempts      TypingAttempt[]
 }
 
 model TypingAttempt {

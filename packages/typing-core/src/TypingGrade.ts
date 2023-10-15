@@ -1,4 +1,4 @@
-import TypingScore from "./TypingScore";
+import TypingScore from "./TypingScore.js";
 
 type TypingGradeType = "S" | "A" | "B" | "C" | "D" | "E";
 

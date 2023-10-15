@@ -1,15 +1,15 @@
-import KeysPerSecond from "./KeysPerSecond";
-import OverAllRank from "./OverAllRank";
-import PerformanceSummary from "./PerformanceSummary";
-import Player from "./Player";
-import Ranking from "./Ranking";
-import RankInQuestionSet from "./RankInQuestionSet";
-import TypingAttempt from "./TypingAttempt";
-import TypingGrade from "./TypingGrade";
-import TypingQuestion from "./TypingQuestion";
-import TypingQuestionSet from "./TypingQuestionSet";
-import TypingScore from "./TypingScore";
-import TypingSession from "./TypingSession";
+import KeysPerSecond from "./KeysPerSecond.js";
+import OverAllRank from "./OverAllRank.js";
+import PerformanceSummary from "./PerformanceSummary.js";
+import Player from "./Player.js";
+import Ranking from "./Ranking.js";
+import RankInQuestionSet from "./RankInQuestionSet.js";
+import TypingAttempt from "./TypingAttempt.js";
+import TypingGrade from "./TypingGrade.js";
+import TypingQuestion from "./TypingQuestion.js";
+import TypingQuestionSet from "./TypingQuestionSet.js";
+import TypingScore from "./TypingScore.js";
+import TypingSession from "./TypingSession.js";
 
 export {
   KeysPerSecond,

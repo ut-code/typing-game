@@ -1,7 +1,7 @@
-import TypingQuestionSet from "./TypingQuestionSet";
-import TypingSession from "./TypingSession";
-import Player from "./Player";
-import TypingScore from "./TypingScore";
+import TypingQuestionSet from "./TypingQuestionSet.js";
+import TypingSession from "./TypingSession.js";
+import Player from "./Player.js";
+import TypingScore from "./TypingScore.js";
 
 class RankingEntry {
   readonly player: Player;

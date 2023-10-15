@@ -1,5 +1,5 @@
-import TypingSession from "./TypingSession";
-import Ranking from "./Ranking";
+import TypingSession from "./TypingSession.js";
+import Ranking from "./Ranking.js";
 
 function calculateRankInQuestionSet(
   typingSession: TypingSession,
