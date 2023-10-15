@@ -8,7 +8,7 @@ services:
       - node_modules_frontend:/app/frontend/node_modules
       - node_modules_api_serializers:/app/packages/api-serializers/node_modules
       - node_modules_api_types:/app/packages/api-types/node_modules
-      - node_modules_question_sets:/app/packages/question-sets/node_modules
+      - node_modules_typing_question_sets:/app/packages/typing-question-sets/node_modules
       - node_modules_typing_core:/app/packages/typing-core/node_modules
     tty: true
 
@@ -30,7 +30,7 @@ services:
       - node_modules_backend:/app/backend/node_modules
       - node_modules_api_serializers:/app/packages/api-serializers/node_modules
       - node_modules_api_types:/app/packages/api-types/node_modules
-      - node_modules_question_sets:/app/packages/question-sets/node_modules
+      - node_modules_typing_question_sets:/app/packages/typing-question-sets/node_modules
       - node_modules_typing_core:/app/packages/typing-core/node_modules
     ports:
       - 3000:3000
@@ -50,7 +50,7 @@ services:
       - node_modules_frontend:/app/frontend/node_modules
       - node_modules_api_serializers:/app/packages/api-serializers/node_modules
       - node_modules_api_types:/app/packages/api-types/node_modules
-      - node_modules_question_sets:/app/packages/question-sets/node_modules
+      - node_modules_typing_question_sets:/app/packages/typing-question-sets/node_modules
       - node_modules_typing_core:/app/packages/typing-core/node_modules
     ports:
       - 5173:5173
@@ -62,5 +62,5 @@ volumes:
   node_modules_frontend:
   node_modules_api_serializers:
   node_modules_api_types:
-  node_modules_question_sets:
+  node_modules_typing_question_sets:
   node_modules_typing_core:

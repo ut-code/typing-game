@@ -6,7 +6,7 @@ import {
   OverAllRank,
   RankInQuestionSet,
   KeysPerSecond,
-} from "@typing-game/core";
+} from "@typing/core";
 
 export default class PerformanceSummarySerializer {
   static fromObject(object: {

@@ -1,4 +1,4 @@
-import { TypingQuestionSet, TypingQuestion } from "@typing-game/core";
+import { TypingQuestionSet, TypingQuestion } from "@typing/core";
 import typingQuestionSets from "./questionSets.js";
 
 export default typingQuestionSets.map(

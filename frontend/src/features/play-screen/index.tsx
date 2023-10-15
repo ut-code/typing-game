@@ -13,7 +13,7 @@ import BackButton from "../../components/BackButton";
 import TypingStatistics from "./components/typing-statistics";
 import TypingProgressBar from "./components/typing-progress-bar";
 import QuestionDisplay from "./components/question-display";
-import typingGameQuestionSets from "@typing-game/question-sets";
+import typingGameQuestionSets from "@typing/question-sets";
 import useCreateTypingSessionMutation from "../../api/hooks/typingSessionHooks";
 
 type TypingAttempt = {

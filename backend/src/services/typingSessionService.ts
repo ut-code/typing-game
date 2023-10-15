@@ -4,7 +4,7 @@ import {
   fetchAllTypingSessionsFromDb,
 } from "../models/typingSessionModel.js";
 import { saveTypingAttemptInDb } from "../models/typingAttemptModel.js";
-import { TypingSessionSerializer } from "@typing-game/api-serializers";
+import { TypingSessionSerializer } from "@typing/api-serializers";
 import { TypingSession } from "../../../packages/typing-core/dist/index.js";
 
 export async function getTypingSessionLogic(

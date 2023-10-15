@@ -3,8 +3,8 @@ import { createTypingSessionLogic } from "../services/typingSessionService.js";
 import {
   PostTypingSessionRequest,
   PostTypingSessionResponse,
-} from "@typing-game/api-types";
-import { TypingSessionSerializer } from "@typing-game/api-serializers";
+} from "@typing/api-types";
+import { TypingSessionSerializer } from "@typing/api-serializers";
 
 export async function postTypingSessionHandler(
   request: Request,
