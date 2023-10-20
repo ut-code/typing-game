@@ -25,7 +25,7 @@
     "type-check:frontend": "cd frontend && npm run type-check",
     "type-check:backend": "cd backend && npm run type-check",
     "type-check": "npm run build:packages && npm run type-check:packages && npm run type-check:frontend && npm run type-check:backend",
-    "setup": "npm run setup:ci && npm run setup:env && npm run build:packages",
+    "setup": "npm run setup:ci && npm run setup:env && npm run build:packages && docker compose build",
     "setup:ci": "npm ci && npm run ci:packages && npm run ci:frontend && npm run ci:backend",
     "ci:api-serializers": "cd packages/api-serializers && npm ci",
     "ci:api-types": "cd packages/api-types && npm ci",
@@ -46,7 +46,8 @@
     "dev:frontend": "npm-run-all --parallel dev:packages watch:frontend",
     "watch:backend": "cd backend && npm run dev",
     "dev:backend": "npm-run-all --parallel dev:packages watch:backend",
-    "dev": "npm-run-all --parallel dev:backend dev:frontend"
+    "dev:database": "docker compose up database",
+    "dev": "npm-run-all --parallel dev:backend dev:frontend dev:database"
   },
   "license": "MIT",
   "lint-staged": {
