@@ -21,7 +21,26 @@
 
 ## 開発
 
-### Visual Studio Code での開発
+### Dev Containersを用いない開発
+
+#### 要件
+
+- [npm](https://github.com/npm/cli)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+#### 環境構築
+
+- このリポジトリをクローンしてから、プロジェクトのルートディレクトリに移動してください。
+
+- `npm run setup`を実行してください。初期設定が行われます。
+
+- `npm run dev`を実行してください。そうすると、開発環境が起動します。
+
+- 初回は、`cd backend`をしてから、`npm run db-push`をして、`npm run seed:develop`を実行してください。そうすると、データベースにテーブルが作成され、初期データが挿入されます。
+
+- [http://localhost:5173/](http://localhost:5173/)でアプリケーションにアクセスできます。
+
+### Dev Containersでの開発
 
 #### 要件
 
@@ -39,7 +58,7 @@
 
 - [http://localhost:5173/](http://localhost:5173/)でアプリケーションにアクセスできます。
 
-### その他の開発環境での開発
+<!-- ### その他の開発環境での開発
 
 #### 要件
 
@@ -55,7 +74,7 @@
 
 - 初回は、`docker compose exec backend bash -c "cd backend && npm run seed:develop"`を実行してください。そうすると、初期データがデータベースに挿入されます。
 
-- [http://localhost:5173/](http://localhost:5173/)でアプリケーションにアクセスできます。
+- [http://localhost:5173/](http://localhost:5173/)でアプリケーションにアクセスできます。 -->
 
 ### コミット前
 
