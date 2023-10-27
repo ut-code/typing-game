@@ -36,6 +36,8 @@
 
 - `npm run dev`を実行してください。そうすると、開発環境が起動します。
 
+- `backend/.env` に `backend/.env.sample` の内容をコピーしてください。
+
 - 初回は、`cd backend`をしてから、`npm run db-push`をして、`npm run seed:develop`を実行してください。そうすると、データベースにテーブルが作成され、初期データが挿入されます。
 
 - [http://localhost:5173/](http://localhost:5173/)でアプリケーションにアクセスできます。
