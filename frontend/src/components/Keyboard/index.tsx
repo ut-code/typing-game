@@ -78,6 +78,7 @@ function keyup(
   // @ts-ignore
   content: string,
   functional: string,
+  // @ts-ignore
   isDefault: boolean,
 ): void {
   if (
@@ -157,6 +158,7 @@ export default function Keyboard({
       );
     }
     function onKeyup(e: KeyboardEvent): void {
+      // @ts-ignore
       keyup(keyColors, setKeyColors, e, content, functional, isCustom);
     }
     window.addEventListener("keydown", onKeydown);
