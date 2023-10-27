@@ -59,13 +59,14 @@ function keydown(
       ),
   );
   setKeyColors(
-    keyCodes.map((tmp, i) =>
-      (!isDefault && tmp === e.code) ||
-      (isDefault && // @ts-ignore
-        functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
-        e.key.toLowerCase()
-        ? "orange"
-        : keyColors[i],
+    keyCodes.map(
+      (keyCode, i) => (keyCode === e.code ? "orange" : keyColors[i]),
+      // (!isDefault && keyCode === e.code) ||
+      // (isDefault && // @ts-ignore
+      //   functionalLayoutType[functional].content[keyCode][0].toLowerCase()) ===
+      //   e.key.toLowerCase()
+      //   ? "orange"
+      //   : keyColors[i],
     ),
   );
 }
@@ -91,14 +92,17 @@ function keyup(
   }
 
   setKeyColors(
-    keyCodes.map((tmp, i) =>
-      (!isDefault && tmp === e.code) ||
-      (isDefault && // @ts-ignore
-        functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
-        e.key.toLowerCase()
-        ? "rgba(0,0,0,0)"
-        : keyColors[i],
+    keyCodes.map((keyCode, i) =>
+      keyCode === e.code ? "rgba(0,0,0,0)" : keyColors[i],
     ),
+    // keyCodes.map((tmp, i) =>
+    //   (!isDefault && tmp === e.code) ||
+    //   (isDefault && // @ts-ignore
+    //     functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
+    //     e.key.toLowerCase()
+    //     ? "rgba(0,0,0,0)"
+    //     : keyColors[i],
+    // ),
   );
 }
 
