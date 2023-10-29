@@ -4,4 +4,8 @@ export default class TypingQuestion {
   constructor(question: string) {
     this.question = question;
   }
+
+  equals(other: TypingQuestion): boolean {
+    return this.question === other.question;
+  }
 }

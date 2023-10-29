@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "prepare": "husky install",
+    "test": "cd packages/typing-core && npm run test",
     "format": "npx prettier --write .",
     "format:check": "npx prettier --check .",
     "lint": "eslint .",

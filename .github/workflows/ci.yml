@@ -81,3 +81,22 @@ jobs:
       - name: Build
         run: docker compose exec devtools bash -c "cd backend && npx prisma generate && cd .. && npm run build"
         shell: bash
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Build Docker Images
+        run: docker compose build
+        shell: bash
+
+      - name: Start Docker Compose
+        run: docker compose up -d
+        shell: bash
+
+      - name: Test
+        run: docker compose exec devtools npm test
+        shell: bash

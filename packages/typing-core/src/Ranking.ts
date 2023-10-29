@@ -3,7 +3,7 @@ import TypingSession from "./TypingSession.js";
 import Player from "./Player.js";
 import TypingScore from "./TypingScore.js";
 
-class RankingEntry {
+export class RankingEntry {
   readonly player: Player;
   readonly typingQuestionSet: TypingQuestionSet;
   readonly typingScore: TypingScore;
