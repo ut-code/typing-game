@@ -7,7 +7,7 @@ function calculateKeysPerSecond(typingSession: TypingSession) {
     1000;
   const totalInputCharacters = typingAttempts.reduce(
     (totalTypingCount, typingAttempt) => {
-      return totalTypingCount + typingAttempt.inputCharacters.length;
+      return totalTypingCount + typingAttempt.targetCharacters.length;
     },
     0,
   );

@@ -93,16 +93,26 @@ export default function PlayScreen(): JSX.Element {
         endTime: new Date(),
         playerName: localStorage.getItem("playerName") || "名無し",
         typingQuestionSetId: typingQuestionSetId,
-        typingAttempts: typingAttempts,
+        typingAttempts: [
+          ...typingAttempts,
+          {
+            targetCharacters: questions[problemNumber],
+            inputCharacters: inputTyping + content[content.length - 1],
+          },
+        ],
       },
     });
     Navigate(`/result/${typingSession?.id}`);
   }, [
-    Navigate,
-    createTypingSession,
-    typingQuestionSetId,
-    startTime,
     typingAttempts,
+    inputTyping,
+    content,
+    questions,
+    problemNumber,
+    createTypingSession,
+    startTime,
+    typingQuestionSetId,
+    Navigate,
   ]);
 
   // タイマーが変更されるたびに終了判定
@@ -133,6 +143,7 @@ export default function PlayScreen(): JSX.Element {
       if (content === previousContent) return;
       setPreviousContent(content);
       const keyInput = content[content.length - 1]; // 追加された文字すなわち一番最後の文字を取り出す。
+      setInputTyping((previoutValue) => previoutValue + keyInput);
 
       if (keyInput === questions[problemNumber][currentIndex]) {
         // 正答
@@ -152,7 +163,7 @@ export default function PlayScreen(): JSX.Element {
             setTypingAttempts((previoutValue) => [
               ...previoutValue,
               {
-                inputCharacters: inputTyping,
+                inputCharacters: inputTyping + keyInput,
                 targetCharacters: questions[problemNumber],
               },
             ]);
@@ -162,7 +173,6 @@ export default function PlayScreen(): JSX.Element {
       } else if (keyInput.match(/[a-zA-Z]/)) {
         // アルファベットであればミスとする
         // 誤答
-        setInputTyping((previoutValue) => previoutValue + keyInput);
         setIncorrectInputCount((prev) => prev + 1);
       }
     }
