@@ -132,9 +132,13 @@ function toJapanese(content: string): string {
 export default function Keyboard({
   content = "",
   setContent = () => {},
+  keyColors = [],
+  setKeyColors = () => {},
 }: {
   content?: string;
   setContent?: (value: string) => void;
+  keyColors?: string[];
+  setKeyColors?: (value: string[]) => void;
 }): JSX.Element {
   const [isCustom, setIsCustom] = useState<boolean>(false);
   const [keyboardLayout, setKeyboardLayout] =
@@ -144,9 +148,6 @@ export default function Keyboard({
   );
   const [physical, setPhysical] = useState<PhysicalKeyboardLayout>(
     defaultPhysicalLayoutType,
-  );
-  const [keyColors, setKeyColors] = useState<string[]>(
-    new Array(keyCodes.length).fill("rgba(0,0,0,0)"),
   );
   const [shift, setShift] = useState<boolean>(false);
   useEffect(() => {
