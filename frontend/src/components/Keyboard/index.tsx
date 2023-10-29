@@ -59,13 +59,14 @@ function keydown(
       ),
   );
   setKeyColors(
-    keyCodes.map((tmp, i) =>
-      (!isDefault && tmp === e.code) ||
-      (isDefault && // @ts-ignore
-        functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
-        e.key.toLowerCase()
-        ? "orange"
-        : keyColors[i],
+    keyCodes.map(
+      (keyCode, i) => (keyCode === e.code ? "orange" : keyColors[i]),
+      // (!isDefault && keyCode === e.code) ||
+      // (isDefault && // @ts-ignore
+      //   functionalLayoutType[functional].content[keyCode][0].toLowerCase()) ===
+      //   e.key.toLowerCase()
+      //   ? "orange"
+      //   : keyColors[i],
     ),
   );
 }
@@ -77,6 +78,7 @@ function keyup(
   // @ts-ignore
   content: string,
   functional: string,
+  // @ts-ignore
   isDefault: boolean,
 ): void {
   if (
@@ -91,14 +93,17 @@ function keyup(
   }
 
   setKeyColors(
-    keyCodes.map((tmp, i) =>
-      (!isDefault && tmp === e.code) ||
-      (isDefault && // @ts-ignore
-        functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
-        e.key.toLowerCase()
-        ? "rgba(0,0,0,0)"
-        : keyColors[i],
+    keyCodes.map((keyCode, i) =>
+      keyCode === e.code ? "rgba(0,0,0,0)" : keyColors[i],
     ),
+    // keyCodes.map((tmp, i) =>
+    //   (!isDefault && tmp === e.code) ||
+    //   (isDefault && // @ts-ignore
+    //     functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
+    //     e.key.toLowerCase()
+    //     ? "rgba(0,0,0,0)"
+    //     : keyColors[i],
+    // ),
   );
 }
 
@@ -153,6 +158,7 @@ export default function Keyboard({
       );
     }
     function onKeyup(e: KeyboardEvent): void {
+      // @ts-ignore
       keyup(keyColors, setKeyColors, e, content, functional, isCustom);
     }
     window.addEventListener("keydown", onKeydown);
