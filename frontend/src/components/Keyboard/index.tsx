@@ -62,8 +62,9 @@ function keydown(
     keyCodes.map((tmp, i) =>
       (!isCustom && tmp === e.code) ||
       (isCustom && // @ts-ignore
-        functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
-        e.key.toLowerCase()
+        functionalLayoutType[functional].content[tmp][0].toLowerCase() ===
+          // @ts-ignore
+          functionalLayoutType[functional].content[e.code][0].toLowerCase())
         ? "orange"
         : keyColors[i],
     ),
@@ -104,7 +105,8 @@ function keyup(
       (!isCustom && tmp === e.code) ||
       (isCustom && // @ts-ignore
         functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
-        e.key.toLowerCase()
+        // @ts-ignore
+        functionalLayoutType[functional].content[e.code][0].toLowerCase()
         ? "rgba(0,0,0,0)"
         : keyColors[i],
     ),
