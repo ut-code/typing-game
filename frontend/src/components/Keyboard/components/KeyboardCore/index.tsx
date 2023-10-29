@@ -141,22 +141,6 @@ export default function Keyboard({
                     !shift ? 0 : 1
                   ],
                 )}`}
-                onClick={() =>
-                  // @ts-ignore
-                  keydown(
-                    // @ts-ignore
-                    keyColors,
-                    setKeyColors,
-                    new KeyboardEvent("keydown", { code: keyCode }),
-                    content,
-                    setContent,
-                    functional,
-                    isCustom,
-                    shift,
-                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                    setShift!,
-                  )
-                }
                 style={{
                   position: "absolute",
                   // @ts-ignore
