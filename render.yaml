@@ -2,9 +2,8 @@ services:
   - type: web
     name: typing-game
     env: static
-    rootDir: frontend
-    buildCommand: npm ci && npm run build
-    staticPublishPath: dist
+    buildCommand: npm run ci:packages && npm run build:packages && cd frontend && npm ci && npm run build
+    staticPublishPath: frontend/dist
     pullRequestPreviewsEnabled: true
     domains:
       - typing.utcode.net
@@ -18,15 +17,14 @@ services:
         destination: /
     envVars:
       - key: VITE_API_ENDPOINT
-        value: https://api.typing.utcode.net
+        value: https://api.typing.utcode.net/api
   - type: web
     name: typing-game-backend
     env: node
     region: singapore
     plan: free
-    rootDir: backend
-    buildCommand: npm ci && npm run build
-    startCommand: npm run start
+    buildCommand: npm run ci:packages && npm run build:packages && cd backend && npm ci && npm run build
+    startCommand: cd backend && npm run start
     domains:
       - api.typing.utcode.net
     envVars:
