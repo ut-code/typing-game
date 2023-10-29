@@ -182,7 +182,15 @@ export default function Keyboard({
       window.removeEventListener("keydown", onKeydown);
       window.removeEventListener("keyup", onKeyup);
     };
-  }, [content, functional, isCustom, keyColors, setContent, shift]);
+  }, [
+    content,
+    functional,
+    isCustom,
+    keyColors,
+    setContent,
+    setKeyColors,
+    shift,
+  ]);
   setContent(content);
   return (
     <div id="wrapper">
