@@ -138,33 +138,32 @@ export default function PlayScreen(): JSX.Element {
         // 正答
         setCurrentIndex((prev) => prev + 1);
         setCorrectInputCount((prev) => prev + 1);
+        if (currentIndex === questions[problemNumber].length - 1) {
+          // 正解音が鳴る。最後の問題だけちょっと切れている
+          correctSE.pause();
+          correctSE.play();
+
+          if (problemNumber === questions.length - 1 && isFinished === false) {
+            save();
+          } else {
+            // 次の問題へ
+            setProblemNumber((prev) => prev + 1);
+            setCurrentIndex(0);
+            setTypingAttempts((previoutValue) => [
+              ...previoutValue,
+              {
+                inputCharacters: inputTyping,
+                targetCharacters: questions[problemNumber],
+              },
+            ]);
+            setInputTyping("");
+          }
+        }
       } else if (keyInput.match(/[a-zA-Z]/)) {
         // アルファベットであればミスとする
         // 誤答
         setInputTyping((previoutValue) => previoutValue + keyInput);
         setIncorrectInputCount((prev) => prev + 1);
-      }
-
-      if (currentIndex === questions[problemNumber].length - 1) {
-        // 正解音が鳴る。最後の問題だけちょっと切れている
-        correctSE.pause();
-        correctSE.play();
-
-        if (problemNumber === questions.length - 1 && isFinished === false) {
-          save();
-        } else {
-          // 次の問題へ
-          setProblemNumber((prev) => prev + 1);
-          setCurrentIndex(0);
-          setTypingAttempts((previoutValue) => [
-            ...previoutValue,
-            {
-              inputCharacters: inputTyping,
-              targetCharacters: questions[problemNumber],
-            },
-          ]);
-          setInputTyping("");
-        }
       }
     }
     main();
