@@ -18,8 +18,8 @@ export default function QuestionSetInput({
           setQuestionSetId(e.target.value);
         }}
       >
-        <option value={0}>Basic</option>
-        <option value={1}>Fruits</option>
+        <option value={"0b6d3308-5670-41fc-bb3e-590a4d34d754"}>Basic</option>
+        <option value={"51710ca4-7b81-4e17-9389-384dbf6d75dc"}>Fruits</option>
       </Form.Select>
     </Form.Group>
   );
