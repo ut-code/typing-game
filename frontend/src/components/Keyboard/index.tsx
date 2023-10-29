@@ -30,7 +30,7 @@ function keydown(
   content: string,
   setContent: (value: string) => void,
   functional: string,
-  isDefault: boolean,
+  isCustom: boolean,
   shift: boolean,
   setShift: (value: boolean) => void,
 ): void {
@@ -53,15 +53,15 @@ function keydown(
         functional,
         functionalLayoutType,
         content,
-        isDefault,
+        isCustom,
         shift,
         setShift,
       ),
   );
   setKeyColors(
     keyCodes.map((tmp, i) =>
-      (!isDefault && tmp === e.code) ||
-      (isDefault && // @ts-ignore
+      (!isCustom && tmp === e.code) ||
+      (isCustom && // @ts-ignore
         functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
         e.key.toLowerCase()
         ? "orange"
@@ -77,7 +77,7 @@ function keyup(
   // @ts-ignore
   content: string,
   functional: string,
-  isDefault: boolean,
+  isCustom: boolean,
   shift: boolean,
   setShift: (value: boolean) => void,
 ): void {
@@ -101,8 +101,8 @@ function keyup(
 
   setKeyColors(
     keyCodes.map((tmp, i) =>
-      (!isDefault && tmp === e.code) ||
-      (isDefault && // @ts-ignore
+      (!isCustom && tmp === e.code) ||
+      (isCustom && // @ts-ignore
         functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
         e.key.toLowerCase()
         ? "rgba(0,0,0,0)"
