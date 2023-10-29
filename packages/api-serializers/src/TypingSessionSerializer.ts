@@ -27,8 +27,8 @@ export default class TypingSessionSerializer {
         (typingAttempt) =>
           new TypingAttempt(
             typingAttempt.id,
-            typingAttempt.inputCharacters,
             typingAttempt.targetCharacters,
+            typingAttempt.inputCharacters,
           ),
       ),
     );
