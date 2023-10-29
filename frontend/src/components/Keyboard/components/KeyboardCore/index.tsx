@@ -83,38 +83,20 @@ export default function Keyboard({
   keyColors = [],
   // @ts-ignore
   setKeyColors = (value: string[]) => {},
-  keydown = () => {},
-  content = "",
   // @ts-ignore
   setContent = (value: string) => {},
   keyLayout = functionalLayoutType[defaultFunctionalLayoutType].content,
   physicalKeyLayout,
-  isCustom,
   shift,
-  setShift,
 }: {
   functional: string;
   physical: string;
   keyColors?: string[];
   setKeyColors?: (value: string[]) => void;
-  keydown?: (
-    keyColors: string[],
-    setKeyColors: (value: string[]) => void,
-    e: KeyboardEvent,
-    content: string,
-    setContent: (value: string) => void,
-    functional: string,
-    isCustom: boolean,
-    shift: boolean,
-    setShift: (value: boolean) => void,
-  ) => void;
-  content?: string;
   setContent?: (value: string) => void;
   keyLayout?: object;
   physicalKeyLayout?: object;
-  isCustom: boolean;
   shift: boolean;
-  setShift?: (value: boolean) => void;
 }): JSX.Element {
   const { width } = useWindowDimensions();
   const magnification = 5.8 * (width < 850 ? 1 : 850 / width);
