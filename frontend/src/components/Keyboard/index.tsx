@@ -180,14 +180,10 @@ export default function Keyboard({
         physical={physical}
         keyColors={keyColors}
         setKeyColors={setKeyColors}
-        keydown={keydown}
-        content={content}
         setContent={setContent}
         keyLayout={functionalLayoutType.custom.content}
         physicalKeyLayout={physicalLayoutType.custom.content}
-        isCustom={isCustom}
         shift={shift}
-        setShift={setShift}
       />
     </div>
   );

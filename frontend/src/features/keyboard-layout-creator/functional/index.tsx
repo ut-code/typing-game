@@ -61,7 +61,6 @@ export default function Functional(): JSX.Element {
         functional="custom"
         physical={defaultPhysicalLayoutType}
         keyLayout={keyToObject(keys)}
-        isCustom={false}
         shift={shift}
       ></KeyboardCore>
       <div className="box"></div>
