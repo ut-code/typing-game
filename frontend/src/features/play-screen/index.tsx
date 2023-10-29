@@ -15,6 +15,7 @@ import TypingProgressBar from "./components/typing-progress-bar";
 import QuestionDisplay from "./components/question-display";
 import typingGameQuestionSets from "@typing/question-sets";
 import useCreateTypingSessionMutation from "../../api/hooks/typingSessionHooks";
+import keyCodes from "../../components/Keyboard/data/keyCodes.json";
 
 type TypingAttempt = {
   inputCharacters: string;
@@ -47,7 +48,9 @@ export default function PlayScreen(): JSX.Element {
   }
   const [inputTyping, setInputTyping] = useState<string>("");
   const [typingAttempts, setTypingAttempts] = useState<TypingAttempt[]>([]);
-
+  const [keyColors, setKeyColors] = useState<string[]>(
+    new Array(keyCodes.length).fill("rgba(0,0,0,0)"),
+  );
   // 正解音
   const correctSE: HTMLAudioElement = useMemo(
     () => new Audio("/correctSE.mp3"),
@@ -212,7 +215,12 @@ export default function PlayScreen(): JSX.Element {
         problemSolved={problemNumber}
         currentIndex={currentIndex}
       />
-      <Keyboard content={content} setContent={setContent} />
+      <Keyboard
+        content={content}
+        setContent={setContent}
+        keyColors={keyColors}
+        setKeyColors={setKeyColors}
+      />
     </>
   );
 }
