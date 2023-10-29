@@ -5,7 +5,7 @@
   "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest --run",
     "build": "tsc",
     "dev": "tsc --watch",
     "type-check": "tsc --noEmit"
