@@ -1,5 +1,6 @@
 type TypingQuestion = {
   question: string;
+  spelling: string;
 };
 
 type TypingQuestionSet = {
@@ -15,9 +16,41 @@ const typingQuestionSets: TypingQuestionSet[] = [
     questions: [
       {
         question: "Hello World",
+        spelling: "Hello World",
       },
       {
         question: "World",
+        spelling: "World",
+      },
+      {
+        question: "世界",
+        spelling: "sekai",
+      },
+      {
+        question: "ABC",
+        spelling: "abc",
+      },
+    ],
+  },
+  {
+    id: "9d6156fe-d4c1-4c38-8152-f313cf64020d",
+    title: "都道府県",
+    questions: [
+      {
+        question: "東京都",
+        spelling: "toukyouto",
+      },
+      {
+        question: "大阪府",
+        spelling: "oosakahu",
+      },
+      {
+        question: "福岡県",
+        spelling: "hukuokakenn",
+      },
+      {
+        question: "北海道",
+        spelling: "hokkaidou",
       },
     ],
   },
@@ -27,15 +60,19 @@ const typingQuestionSets: TypingQuestionSet[] = [
     questions: [
       {
         question: "Apple",
+        spelling: "Apple",
       },
       {
         question: "Banana",
+        spelling: "Banana",
       },
       {
         question: "Cherry",
+        spelling: "Cherry",
       },
       {
         question: "Durian",
+        spelling: "Durian",
       },
     ],
   },

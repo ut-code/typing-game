@@ -30,7 +30,12 @@ export default function PlayScreen(): JSX.Element {
   const typingQuestionSetId: string =
     localStorage.getItem("questionSetId") || typingGameQuestionSets[0].id;
   const [problemNumber, setProblemNumber] = useState<number>(0); // 何問目か
-  const [questions, setQuestions] = useState<string[]>(["sample"]);
+  const [questionsets, setQuestions] = useState<string[][]>([
+    ["sample"],
+    ["sample"],
+  ]);
+  const questions = questionsets.map((questions) => questions[0]);
+  const spellings = questionsets.map((spellings) => spellings[1]);
   const [correctInputCount, setCorrectInputCount] = useState<number>(0); // 正答文字数
   const [incorrectInputCount, setIncorrectInputCount] = useState<number>(0); // ミスタイプ数
   const [currentIndex, setCurrentIndex] = useState<number>(0); // 何文字目か
@@ -38,7 +43,7 @@ export default function PlayScreen(): JSX.Element {
   const [time, setTime] = useState(0); // 現在の時間
   const [timeLimit] = useState(120); // 制限時間
   // 開始・終了判定
-  const isLoading = questions.length <= 1; // スピナーが回っているか
+  const isLoading = spellings.length <= 1; // スピナーが回っているか
   const [isFinished, setIsFinished] = useState<boolean>(false); // 終わったか
   const { createTypingSession, createTypingSessionError } =
     useCreateTypingSessionMutation();
@@ -120,9 +125,10 @@ export default function PlayScreen(): JSX.Element {
             (typingGameQuestionSet) =>
               typingGameQuestionSet.id === typingQuestionSetId,
           )
-          ?.questions.map(
-            (typingGameQuestion) => typingGameQuestion.question,
-          ) || [],
+          ?.questions.map((typingGameQuestion) => [
+            typingGameQuestion.question,
+            typingGameQuestion.spelling,
+          ]) || [],
       ),
     );
   }, [typingQuestionSetId]);
@@ -134,7 +140,7 @@ export default function PlayScreen(): JSX.Element {
       setPreviousContent(content);
       const keyInput = content[content.length - 1]; // 追加された文字すなわち一番最後の文字を取り出す。
 
-      if (keyInput === questions[problemNumber][currentIndex]) {
+      if (keyInput === spellings[problemNumber][currentIndex]) {
         // 正答
         setCurrentIndex((prev) => prev + 1);
         setCorrectInputCount((prev) => prev + 1);
@@ -145,12 +151,12 @@ export default function PlayScreen(): JSX.Element {
         setIncorrectInputCount((prev) => prev + 1);
       }
 
-      if (currentIndex === questions[problemNumber].length - 1) {
+      if (currentIndex === spellings[problemNumber].length - 1) {
         // 正解音が鳴る。最後の問題だけちょっと切れている
         correctSE.pause();
         correctSE.play();
 
-        if (problemNumber === questions.length - 1 && isFinished === false) {
+        if (problemNumber === spellings.length - 1 && isFinished === false) {
           save();
         } else {
           // 次の問題へ
@@ -160,7 +166,7 @@ export default function PlayScreen(): JSX.Element {
             ...previoutValue,
             {
               inputCharacters: inputTyping,
-              targetCharacters: questions[problemNumber],
+              targetCharacters: spellings[problemNumber],
             },
           ]);
           setInputTyping("");
@@ -191,10 +197,7 @@ export default function PlayScreen(): JSX.Element {
           correctInputCount={correctInputCount}
           incorrectInputCount={incorrectInputCount}
         />
-        <TypingProgressBar
-          questions={questions}
-          problemSolved={problemNumber}
-        />
+        <TypingProgressBar spelling={spellings} problemSolved={problemNumber} />
       </Stack>
       <QuestionDisplay
         isLoading={isLoading}
@@ -202,6 +205,7 @@ export default function PlayScreen(): JSX.Element {
         questions={questions}
         problemSolved={problemNumber}
         currentIndex={currentIndex}
+        spelling={spellings} //　ここを直す
       />
       <Keyboard content={content} setContent={setContent} />
     </>

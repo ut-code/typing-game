@@ -7,16 +7,24 @@ export default function QuestionDisplay({
   questions,
   problemSolved,
   currentIndex,
+  spelling,
 }: {
   isLoading: boolean;
   isStarted: boolean;
   questions: string[];
   problemSolved: number;
   currentIndex: number;
+  spelling: string[];
 }) {
-  const typedText = questions[problemSolved].slice(0, currentIndex);
-  const untypedText = questions[problemSolved].slice(currentIndex);
+  const typedText = spelling[problemSolved]
+    ? spelling[problemSolved].slice(0, currentIndex)
+    : "";
+  const untypedText = spelling[problemSolved]
+    ? spelling[problemSolved].slice(currentIndex)
+    : "";
   const newtypedText = typedText.replace(/ /g, "_");
+  const DisplayText = questions[problemSolved];
+
   return (
     <div className={styles.questionDisplay}>
       {isLoading ? (
@@ -24,11 +32,20 @@ export default function QuestionDisplay({
       ) : (
         <div>
           {isStarted ? (
-            <>
-              <span className={styles.answeredText}>{newtypedText}</span>
-              <span className={styles.caretstyle}>|</span>
-              <span className={styles.questionText}>{untypedText}</span>
-            </>
+            questions[problemSolved] == spelling[problemSolved] ? (
+              <>
+                <span className={styles.answeredText}>{newtypedText}</span>
+                <span className={styles.caretstyle}>|</span>
+                <span className={styles.spellingText}>{untypedText}</span>
+              </>
+            ) : (
+              <>
+                <div className={styles.questionText}>{DisplayText}</div>
+                <span className={styles.answeredText}>{newtypedText}</span>
+                <span className={styles.caretstyle}>|</span>
+                <span className={styles.spellingText}>{untypedText}</span>
+              </>
+            )
           ) : (
             "[Space]を押して開始"
           )}

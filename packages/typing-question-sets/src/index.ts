@@ -7,7 +7,8 @@ export default typingQuestionSets.map(
       typingQuestionSet.id,
       typingQuestionSet.title,
       typingQuestionSet.questions.map(
-        (typingQuestion) => new TypingQuestion(typingQuestion.question),
+        (typingQuestion) =>
+          new TypingQuestion(typingQuestion.question, typingQuestion.spelling),
       ),
     ),
 );
