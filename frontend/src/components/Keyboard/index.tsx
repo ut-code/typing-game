@@ -6,7 +6,6 @@
 import { useState, useEffect } from "react";
 import KeyboardCore from "./components/KeyboardCore";
 import { convert } from "./components/KeyboardCore/convert.tsx";
-import keyCodes from "./data/keyCodes.json";
 import romanTable from "./data/romanTable.json";
 import {
   functionalLayoutType,
@@ -23,8 +22,6 @@ import {
 } from "../../../../types/keyboardLayout.ts";
 
 function keydown(
-  keyColors: string[],
-  setKeyColors: (value: string[]) => void,
   e: KeyboardEvent,
   // @ts-ignore
   content: string,
@@ -58,27 +55,13 @@ function keydown(
         setShift,
       ),
   );
-  setKeyColors(
-    keyCodes.map((tmp, i) =>
-      (!isCustom && tmp === e.code) ||
-      (isCustom && // @ts-ignore
-        functionalLayoutType[functional].content[tmp][0].toLowerCase() ===
-          // @ts-ignore
-          functionalLayoutType[functional].content[e.code][0].toLowerCase())
-        ? "orange"
-        : keyColors[i],
-    ),
-  );
 }
 
 function keyup(
-  keyColors: string[],
-  setKeyColors: (value: string[]) => void,
   e: KeyboardEvent,
   // @ts-ignore
   content: string,
   functional: string,
-  isCustom: boolean,
   shift: boolean,
   setShift: (value: boolean) => void,
 ): void {
@@ -99,18 +82,6 @@ function keyup(
   ) {
     setShift(false);
   }
-
-  setKeyColors(
-    keyCodes.map((tmp, i) =>
-      (!isCustom && tmp === e.code) ||
-      (isCustom && // @ts-ignore
-        functionalLayoutType[functional].content[tmp][0].toLowerCase()) ===
-        // @ts-ignore
-        functionalLayoutType[functional].content[e.code][0].toLowerCase()
-        ? "rgba(0,0,0,0)"
-        : keyColors[i],
-    ),
-  );
 }
 
 // @ts-ignore
@@ -134,47 +105,29 @@ export default function Keyboard({
   setContent = () => {},
   keyColors = [],
   setKeyColors = () => {},
+  functional = defaultFunctionalLayoutType,
+  setFunctional = () => {},
 }: {
   content?: string;
   setContent?: (value: string) => void;
   keyColors?: string[];
   setKeyColors?: (value: string[]) => void;
+  functional?: KeyboardLayout;
+  setFunctional?: (value: KeyboardLayout) => void;
 }): JSX.Element {
   const [isCustom, setIsCustom] = useState<boolean>(false);
   const [keyboardLayout, setKeyboardLayout] =
     useState<KeyboardLayout>("jis_qwerty");
-  const [functional, setFunctional] = useState<KeyboardLayout>(
-    defaultFunctionalLayoutType,
-  );
   const [physical, setPhysical] = useState<PhysicalKeyboardLayout>(
     defaultPhysicalLayoutType,
   );
   const [shift, setShift] = useState<boolean>(false);
   useEffect(() => {
     function onKeydown(e: KeyboardEvent): void {
-      keydown(
-        keyColors,
-        setKeyColors,
-        e,
-        content,
-        setContent,
-        functional,
-        isCustom,
-        shift,
-        setShift,
-      );
+      keydown(e, content, setContent, functional, isCustom, shift, setShift);
     }
     function onKeyup(e: KeyboardEvent): void {
-      keyup(
-        keyColors,
-        setKeyColors,
-        e,
-        content,
-        functional,
-        isCustom,
-        shift,
-        setShift,
-      );
+      keyup(e, content, functional, shift, setShift);
     }
     window.addEventListener("keydown", onKeydown);
     window.addEventListener("keyup", onKeyup);
