@@ -16,6 +16,11 @@ import QuestionDisplay from "./components/question-display";
 import typingGameQuestionSets from "@typing/question-sets";
 import useCreateTypingSessionMutation from "../../api/hooks/typingSessionHooks";
 import keyCodes from "../../components/Keyboard/data/keyCodes.json";
+import {
+  functionalLayoutType,
+  defaultFunctionalLayoutType,
+} from "../../components/Keyboard/data/keyboardSettings";
+import { KeyboardLayout } from "../../../../types/keyboardLayout";
 
 type TypingAttempt = {
   inputCharacters: string;
@@ -51,6 +56,9 @@ export default function PlayScreen(): JSX.Element {
   const [typingAttempts, setTypingAttempts] = useState<TypingAttempt[]>([]);
   const [keyColors, setKeyColors] = useState<string[]>(
     new Array(keyCodes.length).fill("rgba(0,0,0,0)"),
+  );
+  const [functional, setFunctional] = useState<KeyboardLayout>(
+    defaultFunctionalLayoutType,
   );
   // 正解音
   const correctSE: HTMLAudioElement = useMemo(
@@ -183,6 +191,44 @@ export default function PlayScreen(): JSX.Element {
         }
       }
     }
+    if (isStarted && !isFinished) {
+      setKeyColors(
+        keyCodes.map((KeyCode) => {
+          if (
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            functionalLayoutType[functional].content[KeyCode][0] ===
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            questions[problemNumber][currentIndex].toLowerCase()
+          )
+            return "orange";
+          if (
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            questions[problemNumber][currentIndex] !==
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              questions[problemNumber][currentIndex].toLowerCase() &&
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            functionalLayoutType[functional].content[KeyCode][0] === "Shift"
+          )
+            return "orange";
+          if (
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            questions[problemNumber][currentIndex] === " " &&
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            functionalLayoutType[functional].content[KeyCode][0] === "Space"
+          )
+            return "orange";
+          return "rgba(0,0,0,0)";
+        }),
+      );
+    }
+
     main();
   }, [
     content,
@@ -195,6 +241,7 @@ export default function PlayScreen(): JSX.Element {
     correctSE,
     save,
     inputTyping,
+    functional,
   ]);
 
   return (
@@ -225,6 +272,8 @@ export default function PlayScreen(): JSX.Element {
         setContent={setContent}
         keyColors={keyColors}
         setKeyColors={setKeyColors}
+        functional={functional}
+        setFunctional={setFunctional}
       />
     </>
   );
