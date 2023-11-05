@@ -40,6 +40,7 @@ export default function PlayScreen(): JSX.Element {
   const [timeLimit] = useState(120); // 制限時間
   // 開始・終了判定
   const isLoading = questions.length <= 1; // スピナーが回っているか
+  const [isStarted, setIsStarted] = useState<boolean>(false); // 始まったか
   const [isFinished, setIsFinished] = useState<boolean>(false); // 終わったか
   const { createTypingSession, createTypingSessionError } =
     useCreateTypingSessionMutation();
@@ -65,6 +66,7 @@ export default function PlayScreen(): JSX.Element {
     function start(e: KeyboardEvent) {
       if (startTime === undefined && e.code === "Space") {
         setStartTime(new Date());
+        setIsStarted(true);
       }
     }
 
@@ -176,7 +178,9 @@ export default function PlayScreen(): JSX.Element {
       } else if (keyInput.match(/[a-zA-Z]/)) {
         // アルファベットであればミスとする
         // 誤答
-        setIncorrectInputCount((prev) => prev + 1);
+        if (isStarted) {
+          setIncorrectInputCount((prev) => prev + 1);
+        }
       }
     }
     main();
@@ -185,6 +189,7 @@ export default function PlayScreen(): JSX.Element {
     questions,
     problemNumber,
     currentIndex,
+    isStarted,
     isFinished,
     previousContent,
     correctSE,
