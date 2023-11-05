@@ -17,7 +17,7 @@ export type PhysicalKeyboardLayout =
 
 export interface FunctionalLayoutJSON {
   version: string;
-  Esc: [string, string];
+  Escape: [string, string];
   F1: [string, string];
   F2: [string, string];
   F3: [string, string];
