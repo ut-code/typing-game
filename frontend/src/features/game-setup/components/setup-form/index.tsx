@@ -23,6 +23,12 @@ export default function SetupForm(): JSX.Element {
     Navigate("/play");
   };
 
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      postStorage();
+    }
+  });
+
   // localStorageをリセットする
   let unmounted = false;
   useEffect(() => {
