@@ -62,8 +62,8 @@ export default function PlayScreen(): JSX.Element {
 
   // キーを押したら開始
   useEffect(() => {
-    function start() {
-      if (startTime === undefined) {
+    function start(e: KeyboardEvent) {
+      if (startTime === undefined && e.code === "Space") {
         setStartTime(new Date());
       }
     }
