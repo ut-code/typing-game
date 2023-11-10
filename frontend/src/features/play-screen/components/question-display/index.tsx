@@ -25,7 +25,7 @@ export default function QuestionDisplay({
     ? spellingLists[problemSolved][0].slice(currentIndex) // TODO: 0を変数にする
     : "";
   const newtypedText = typedText.replace(/ /g, "_");
-  const DisplayText = words[problemSolved];
+  const displayText = words[problemSolved];
 
   return (
     <div className={styles.questionDisplay}>
@@ -42,7 +42,7 @@ export default function QuestionDisplay({
               </>
             ) : (
               <>
-                <div className={styles.questionText}>{DisplayText}</div>
+                <div className={styles.questionText}>{displayText}</div>
                 <span className={styles.answeredText}>{newtypedText}</span>
                 <span className={styles.caretstyle}>|</span>
                 <span className={styles.spellingText}>{untypedText}</span>
