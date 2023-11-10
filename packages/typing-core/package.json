@@ -5,12 +5,14 @@
   "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
+    "test": "vitest --run",
     "build": "tsc",
     "dev": "tsc --watch",
     "type-check": "tsc --noEmit"
   },
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
   }
 }

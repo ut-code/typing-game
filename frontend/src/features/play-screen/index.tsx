@@ -16,6 +16,12 @@ import TypingProgressBar from "./components/typing-progress-bar";
 import QuestionDisplay from "./components/question-display";
 import typingTaskCollections from "@typing/question-sets";
 import useCreateTypingSessionMutation from "../../api/hooks/typingSessionHooks";
+import keyCodes from "../../components/Keyboard/data/keyCodes.json";
+import {
+  functionalLayoutType,
+  defaultFunctionalLayoutType,
+} from "../../components/Keyboard/data/keyboardSettings";
+import { KeyboardLayout } from "../../../../types/keyboardLayout";
 
 import { TypingTask } from "@typing/core";
 
@@ -48,6 +54,7 @@ export default function PlayScreen(): JSX.Element {
   const [timeLimit] = useState(120); // 制限時間
   // 開始・終了判定
   const isLoading = spellingLists.length <= 1; // スピナーが回っているか
+  const [isStarted, setIsStarted] = useState<boolean>(false); // 始まったか
   const [isFinished, setIsFinished] = useState<boolean>(false); // 終わったか
   const { createTypingSession, createTypingSessionError } =
     useCreateTypingSessionMutation();
@@ -56,7 +63,12 @@ export default function PlayScreen(): JSX.Element {
   }
   const [inputTyping, setInputTyping] = useState<string>("");
   const [typingAttempts, setTypingAttempts] = useState<TypingAttempt[]>([]);
-
+  const [keyColors, setKeyColors] = useState<string[]>(
+    new Array(keyCodes.length).fill("rgba(0,0,0,0)"),
+  );
+  const [functional, setFunctional] = useState<KeyboardLayout>(
+    defaultFunctionalLayoutType,
+  );
   // 正解音
   const correctSE: HTMLAudioElement = useMemo(
     () => new Audio("/correctSE.mp3"),
@@ -68,9 +80,10 @@ export default function PlayScreen(): JSX.Element {
 
   // キーを押したら開始
   useEffect(() => {
-    function start() {
-      if (startTime === undefined) {
+    function start(e: KeyboardEvent) {
+      if (startTime === undefined && e.code === "Space") {
         setStartTime(new Date());
+        setIsStarted(true);
       }
     }
 
@@ -102,16 +115,26 @@ export default function PlayScreen(): JSX.Element {
         endTime: new Date(),
         playerName: localStorage.getItem("playerName") || "名無し",
         typingQuestionSetId: typingTaskCollectionId,
-        typingAttempts: typingAttempts,
+        typingAttempts: [
+          ...typingAttempts,
+          {
+            targetCharacters: spellingLists[problemNumber][0],
+            inputCharacters: inputTyping + content[content.length - 1],
+          },
+        ],
       },
     });
     Navigate(`/result/${typingSession?.id}`);
   }, [
-    Navigate,
-    createTypingSession,
     typingTaskCollectionId,
-    startTime,
     typingAttempts,
+    inputTyping,
+    content,
+    problemNumber,
+    createTypingSession,
+    startTime,
+    Navigate,
+    spellingLists,
   ]);
 
   // タイマーが変更されるたびに終了判定
@@ -140,6 +163,8 @@ export default function PlayScreen(): JSX.Element {
       if (content === previousContent) return;
       setPreviousContent(content);
       const keyInput = content[content.length - 1]; // 追加された文字すなわち一番最後の文字を取り出す。
+      setInputTyping((previousValue) => previousValue + keyInput);
+
       if (keyInput === spellingLists[problemNumber][0][currentIndex]) {
         // TODO: 0を変数にする
         // 正答
@@ -148,8 +173,9 @@ export default function PlayScreen(): JSX.Element {
       } else if (keyInput.match(/[a-zA-Z]/)) {
         // アルファベットであればミスとする
         // 誤答
-        setInputTyping((previousValue) => previousValue + keyInput);
-        setIncorrectInputCount((prev) => prev + 1);
+        if (isStarted) {
+          setIncorrectInputCount((prev) => prev + 1);
+        }
       }
 
       if (currentIndex === spellingLists[problemNumber][0].length - 1) {
@@ -178,18 +204,58 @@ export default function PlayScreen(): JSX.Element {
         }
       }
     }
+    if (isStarted && !isFinished) {
+      setKeyColors(
+        keyCodes.map((KeyCode) => {
+          if (
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            functionalLayoutType[functional].content[KeyCode][0] ===
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            spellingLists[problemNumber][0][currentIndex].toLowerCase()
+          )
+            return "orange";
+          if (
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            spellingLists[problemNumber][0][currentIndex] !==
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              spellingLists[problemNumber][0][currentIndex].toLowerCase() &&
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            functionalLayoutType[functional].content[KeyCode][0] === "Shift"
+          )
+            return "orange";
+          if (
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            spellingLists[problemNumber][0][currentIndex] === " " &&
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            functionalLayoutType[functional].content[KeyCode][0] === "Space"
+          )
+            return "orange";
+          return "rgba(0,0,0,0)";
+        }),
+      );
+    }
+
     main();
   }, [
     content,
     words,
     problemNumber,
     currentIndex,
+    isStarted,
     isFinished,
     previousContent,
     correctSE,
     save,
     inputTyping,
     spellingLists,
+    functional,
   ]);
 
   return (
@@ -216,7 +282,14 @@ export default function PlayScreen(): JSX.Element {
         currentIndex={currentIndex}
         spellingLists={spellingLists}
       />
-      <Keyboard content={content} setContent={setContent} />
+      <Keyboard
+        content={content}
+        setContent={setContent}
+        keyColors={keyColors}
+        setKeyColors={setKeyColors}
+        functional={functional}
+        setFunctional={setFunctional}
+      />
     </>
   );
 }

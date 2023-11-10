@@ -49,26 +49,26 @@ function calculateMissTypingCount(
 
 export default class TypingAttempt {
   readonly id: string;
-  readonly inputCharacters: string;
   readonly targetCharacters: string;
+  readonly inputCharacters: string;
 
-  constructor(id: string, inputCharacters: string, targetCharacters: string) {
+  constructor(id: string, targetCharacters: string, inputCharacters: string) {
     this.id = id;
-    this.inputCharacters = inputCharacters;
     this.targetCharacters = targetCharacters;
+    this.inputCharacters = inputCharacters;
   }
 
   getCorrectTypingCount(): number {
     return calculateCorrectTypingCount(
-      this.inputCharacters,
       this.targetCharacters,
+      this.inputCharacters,
     );
   }
 
   getMissTypingCount(): number {
     return calculateMissTypingCount(
-      this.inputCharacters,
       this.targetCharacters,
+      this.inputCharacters,
     );
   }
 }
