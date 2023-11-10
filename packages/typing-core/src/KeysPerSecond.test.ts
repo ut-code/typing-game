@@ -3,7 +3,7 @@ import KeysPerSecond from "./KeysPerSecond.js";
 import TypingSession from "./TypingSession.js";
 import TypingAttempt from "./TypingAttempt.js";
 import Player from "./Player.js";
-import TypingQuestionSet from "./TypingQuestionSet.js";
+import TypingTaskCollection from "./TypingTaskCollection.js";
 
 describe("KeysPerSecond", () => {
   describe("calculate", () => {
@@ -14,7 +14,7 @@ describe("KeysPerSecond", () => {
           new Date("2023-01-01T01:23:45"),
           new Date("2023-01-01T01:23:46"),
           new Player("Alice"),
-          new TypingQuestionSet("id", "title", []),
+          new TypingTaskCollection("id", "title", []),
           [
             new TypingAttempt("id", "Apple", "Apple"),
             new TypingAttempt("id", "Apple", "Aapple"),
@@ -30,7 +30,7 @@ describe("KeysPerSecond", () => {
           new Date("2023-01-01T01:23:45"),
           new Date("2023-01-01T01:23:47"),
           new Player("Alice"),
-          new TypingQuestionSet("id", "title", []),
+          new TypingTaskCollection("id", "title", []),
           [
             new TypingAttempt("id", "Apple", "Apple"),
             new TypingAttempt("id", "Apple", "Aapple"),

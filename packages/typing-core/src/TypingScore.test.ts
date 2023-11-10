@@ -2,9 +2,9 @@ import { describe, expect, test } from "vitest";
 import TypingScore from "./TypingScore.js";
 import TypingSession from "./TypingSession.js";
 import Player from "./Player.js";
-import TypingQuestionSet from "./TypingQuestionSet.js";
+import TypingTaskCollection from "./TypingTaskCollection.js";
 import TypingAttempt from "./TypingAttempt.js";
-import TypingQuestion from "./TypingQuestion.js";
+import TypingTask from "./TypingTask.js";
 
 describe("TypingScore", () => {
   describe("calculate", () => {
@@ -15,7 +15,9 @@ describe("TypingScore", () => {
           new Date("2023-01-01T01:23:45"),
           new Date("2023-01-01T01:23:46"),
           new Player("Alice"),
-          new TypingQuestionSet("id", "title", [new TypingQuestion("Apple")]),
+          new TypingTaskCollection("id", "title", [
+            new TypingTask("Apple", ["Apple"]),
+          ]),
           [
             new TypingAttempt("id", "Apple", "Apple"),
             new TypingAttempt("id", "Apple", "Apple"),
@@ -31,7 +33,9 @@ describe("TypingScore", () => {
           new Date("2023-01-01T01:23:45"),
           new Date("2023-01-01T01:23:46"),
           new Player("Alice"),
-          new TypingQuestionSet("id", "title", [new TypingQuestion("Apple")]),
+          new TypingTaskCollection("id", "title", [
+            new TypingTask("Apple", ["Apple"]),
+          ]),
           [
             new TypingAttempt("id", "Apple", "Apple"),
             new TypingAttempt("id", "Apple", "Aapple"),
