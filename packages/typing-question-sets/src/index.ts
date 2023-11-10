@@ -1,14 +1,16 @@
-import { TypingQuestionSet, TypingQuestion } from "@typing/core";
-import typingQuestionSets from "./questionSets.js";
+import { TypingTaskCollection, TypingTask } from "@typing/core";
+import TYPING_TASK_COLLECTIONS from "./typingTaskCollections.js";
 
-export default typingQuestionSets.map(
-  (typingQuestionSet) =>
-    new TypingQuestionSet(
-      typingQuestionSet.id,
-      typingQuestionSet.title,
-      typingQuestionSet.questions.map(
-        (typingQuestion) =>
-          new TypingQuestion(typingQuestion.question, typingQuestion.spelling),
+const typingTaskCollections = TYPING_TASK_COLLECTIONS.map(
+  (TYPING_TASK_COLLECTION) =>
+    new TypingTaskCollection(
+      TYPING_TASK_COLLECTION.id,
+      TYPING_TASK_COLLECTION.title,
+      TYPING_TASK_COLLECTION.typingTasks.map(
+        (typingTask) =>
+          new TypingTask(typingTask.word, typingTask.spellingList),
       ),
     ),
 );
+
+export default typingTaskCollections;

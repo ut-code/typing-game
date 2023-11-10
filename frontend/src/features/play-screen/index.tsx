@@ -1,3 +1,4 @@
+// TODO: spellingLists の二重化に伴う修正
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
@@ -13,8 +14,10 @@ import BackButton from "../../components/BackButton";
 import TypingStatistics from "./components/typing-statistics";
 import TypingProgressBar from "./components/typing-progress-bar";
 import QuestionDisplay from "./components/question-display";
-import typingGameQuestionSets from "@typing/question-sets";
+import typingTaskCollections from "@typing/question-sets";
 import useCreateTypingSessionMutation from "../../api/hooks/typingSessionHooks";
+
+import { TypingTask } from "@typing/core";
 
 type TypingAttempt = {
   inputCharacters: string;
@@ -27,15 +30,16 @@ export default function PlayScreen(): JSX.Element {
   const [content, setContent] = useState<string>("");
   const [previousContent, setPreviousContent] = useState(content);
   // 問題
-  const typingQuestionSetId: string =
-    localStorage.getItem("questionSetId") || typingGameQuestionSets[0].id;
+  const typingTaskCollectionId: string =
+    localStorage.getItem("questionSetId") || typingTaskCollections[0].id; // TODO: localStorageのKey名を修正
   const [problemNumber, setProblemNumber] = useState<number>(0); // 何問目か
-  const [questionsets, setQuestions] = useState<string[][]>([
-    ["sample"],
-    ["sample"],
-  ]);
-  const questions = questionsets.map((questions) => questions[0]);
-  const spellings = questionsets.map((spellings) => spellings[1]);
+  const [typingTasks, setTypingTasks] = useState<TypingTask[]>(
+    typingTaskCollections[0].typingTasks,
+  ); // 単語とそのスペル
+  const words = typingTasks.map((typingTask) => typingTask.word); // 出題される単語
+  const spellingLists = typingTasks.map(
+    (typingTask) => typingTask.spellingList,
+  ); // 出題される単語のスペル
   const [correctInputCount, setCorrectInputCount] = useState<number>(0); // 正答文字数
   const [incorrectInputCount, setIncorrectInputCount] = useState<number>(0); // ミスタイプ数
   const [currentIndex, setCurrentIndex] = useState<number>(0); // 何文字目か
@@ -43,7 +47,7 @@ export default function PlayScreen(): JSX.Element {
   const [time, setTime] = useState(0); // 現在の時間
   const [timeLimit] = useState(120); // 制限時間
   // 開始・終了判定
-  const isLoading = spellings.length <= 1; // スピナーが回っているか
+  const isLoading = spellingLists.length <= 1; // スピナーが回っているか
   const [isFinished, setIsFinished] = useState<boolean>(false); // 終わったか
   const { createTypingSession, createTypingSessionError } =
     useCreateTypingSessionMutation();
@@ -82,7 +86,7 @@ export default function PlayScreen(): JSX.Element {
   useEffect(() => {
     if (startTime === undefined) return;
     const timerId = setInterval(() => {
-      setTime((previoutValue) => previoutValue + 1);
+      setTime((previousValue) => previousValue + 1);
     }, 1000);
 
     return () => {
@@ -97,7 +101,7 @@ export default function PlayScreen(): JSX.Element {
         startTime: startTime as Date,
         endTime: new Date(),
         playerName: localStorage.getItem("playerName") || "名無し",
-        typingQuestionSetId: typingQuestionSetId,
+        typingQuestionSetId: typingTaskCollectionId,
         typingAttempts: typingAttempts,
       },
     });
@@ -105,7 +109,7 @@ export default function PlayScreen(): JSX.Element {
   }, [
     Navigate,
     createTypingSession,
-    typingQuestionSetId,
+    typingTaskCollectionId,
     startTime,
     typingAttempts,
   ]);
@@ -118,20 +122,17 @@ export default function PlayScreen(): JSX.Element {
   }, [timeLimit, time, isFinished, save]);
 
   useEffect(() => {
-    setQuestions(
+    setTypingTasks(
       shuffle(
-        typingGameQuestionSets
-          .find(
-            (typingGameQuestionSet) =>
-              typingGameQuestionSet.id === typingQuestionSetId,
-          )
-          ?.questions.map((typingGameQuestion) => [
-            typingGameQuestion.question,
-            typingGameQuestion.spelling,
-          ]) || [],
+        // 問題順をシャッフル
+        typingTaskCollections.find(
+          // 選択された問題群を探す
+          (typingTaskCollection) =>
+            typingTaskCollection.id === typingTaskCollectionId,
+        )?.typingTasks ?? typingTaskCollections[0].typingTasks,
       ),
     );
-  }, [typingQuestionSetId]);
+  }, [typingTaskCollectionId]);
 
   // キー入力のメイン処理
   useEffect(() => {
@@ -139,34 +140,38 @@ export default function PlayScreen(): JSX.Element {
       if (content === previousContent) return;
       setPreviousContent(content);
       const keyInput = content[content.length - 1]; // 追加された文字すなわち一番最後の文字を取り出す。
-
-      if (keyInput === spellings[problemNumber][currentIndex]) {
+      if (keyInput === spellingLists[problemNumber][0][currentIndex]) {
+        // TODO: 0を変数にする
         // 正答
         setCurrentIndex((prev) => prev + 1);
         setCorrectInputCount((prev) => prev + 1);
       } else if (keyInput.match(/[a-zA-Z]/)) {
         // アルファベットであればミスとする
         // 誤答
-        setInputTyping((previoutValue) => previoutValue + keyInput);
+        setInputTyping((previousValue) => previousValue + keyInput);
         setIncorrectInputCount((prev) => prev + 1);
       }
 
-      if (currentIndex === spellings[problemNumber].length - 1) {
+      if (currentIndex === spellingLists[problemNumber][0].length - 1) {
+        // TODO: 0を変数にする
         // 正解音が鳴る。最後の問題だけちょっと切れている
         correctSE.pause();
         correctSE.play();
 
-        if (problemNumber === spellings.length - 1 && isFinished === false) {
+        if (
+          problemNumber === spellingLists.length - 1 &&
+          isFinished === false
+        ) {
           save();
         } else {
           // 次の問題へ
           setProblemNumber((prev) => prev + 1);
           setCurrentIndex(0);
-          setTypingAttempts((previoutValue) => [
-            ...previoutValue,
+          setTypingAttempts((previousValue) => [
+            ...previousValue,
             {
               inputCharacters: inputTyping,
-              targetCharacters: spellings[problemNumber],
+              targetCharacters: spellingLists[problemNumber][0], // TODO: 0を変数にする
             },
           ]);
           setInputTyping("");
@@ -176,7 +181,7 @@ export default function PlayScreen(): JSX.Element {
     main();
   }, [
     content,
-    questions,
+    words,
     problemNumber,
     currentIndex,
     isFinished,
@@ -184,6 +189,7 @@ export default function PlayScreen(): JSX.Element {
     correctSE,
     save,
     inputTyping,
+    spellingLists,
   ]);
 
   return (
@@ -197,15 +203,18 @@ export default function PlayScreen(): JSX.Element {
           correctInputCount={correctInputCount}
           incorrectInputCount={incorrectInputCount}
         />
-        <TypingProgressBar spelling={spellings} problemSolved={problemNumber} />
+        <TypingProgressBar
+          spellingLists={spellingLists}
+          problemSolved={problemNumber}
+        />
       </Stack>
-      <QuestionDisplay
+      <QuestionDisplay // TODO: 中身を直す
         isLoading={isLoading}
         isStarted={startTime !== undefined}
-        questions={questions}
+        words={words}
         problemSolved={problemNumber}
         currentIndex={currentIndex}
-        spelling={spellings} //　ここを直す
+        spellingLists={spellingLists}
       />
       <Keyboard content={content} setContent={setContent} />
     </>

@@ -1,29 +1,31 @@
+// TODO: spellingLists 二重化の対応
+// TODO: spellingLists[problemSolved][0] （一旦0番目を使用するとしている）をすべて修正
 import { Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
 
 export default function QuestionDisplay({
   isLoading,
   isStarted,
-  questions,
+  words,
   problemSolved,
   currentIndex,
-  spelling,
+  spellingLists,
 }: {
   isLoading: boolean;
   isStarted: boolean;
-  questions: string[];
+  words: string[];
   problemSolved: number;
   currentIndex: number;
-  spelling: string[];
+  spellingLists: string[][];
 }) {
-  const typedText = spelling[problemSolved]
-    ? spelling[problemSolved].slice(0, currentIndex)
+  const typedText = spellingLists[problemSolved][0] // TODO: 0を変数にする
+    ? spellingLists[problemSolved][0].slice(0, currentIndex) // TODO: 0を変数にする
     : "";
-  const untypedText = spelling[problemSolved]
-    ? spelling[problemSolved].slice(currentIndex)
+  const untypedText = spellingLists[problemSolved][0] // TODO: 0を変数にする
+    ? spellingLists[problemSolved][0].slice(currentIndex) // TODO: 0を変数にする
     : "";
   const newtypedText = typedText.replace(/ /g, "_");
-  const DisplayText = questions[problemSolved];
+  const DisplayText = words[problemSolved];
 
   return (
     <div className={styles.questionDisplay}>
@@ -32,7 +34,7 @@ export default function QuestionDisplay({
       ) : (
         <div>
           {isStarted ? (
-            questions[problemSolved] == spelling[problemSolved] ? (
+            words[problemSolved] == spellingLists[problemSolved][0] ? ( // TODO: 0を変数にする
               <>
                 <span className={styles.answeredText}>{newtypedText}</span>
                 <span className={styles.caretstyle}>|</span>

@@ -1,16 +1,16 @@
-import TypingQuestionSet from "./TypingQuestionSet.js";
+import TypingTaskCollection from "./TypingTaskCollection.js";
 import TypingSession from "./TypingSession.js";
 import Player from "./Player.js";
 import TypingScore from "./TypingScore.js";
 
 class RankingEntry {
   readonly player: Player;
-  readonly typingQuestionSet: TypingQuestionSet;
+  readonly typingQuestionSet: TypingTaskCollection;
   readonly typingScore: TypingScore;
   readonly playedAt: Date;
   constructor(
     player: Player,
-    typingQuestionSet: TypingQuestionSet,
+    typingQuestionSet: TypingTaskCollection,
     typingScore: TypingScore,
     playedAt: Date,
   ) {
@@ -25,7 +25,7 @@ export default class Ranking extends Array<RankingEntry> {
   constructor(
     ranking: {
       player: Player;
-      typingQuestionSet: TypingQuestionSet;
+      typingQuestionSet: TypingTaskCollection;
       typingScore: TypingScore;
       playedAt: Date;
     }[],
