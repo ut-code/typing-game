@@ -6,6 +6,7 @@ import Ranking from "./Ranking.js";
 import RankInQuestionSet from "./RankInQuestionSet.js";
 import TypingAttempt from "./TypingAttempt.js";
 import TypingGrade from "./TypingGrade.js";
+import TypingOriginTask from "./TypingOriginTask.js";
 import TypingTask from "./TypingTask.js";
 import TypingTaskCollection from "./TypingTaskCollection.js";
 import TypingScore from "./TypingScore.js";
@@ -20,6 +21,7 @@ export {
   RankInQuestionSet,
   TypingAttempt,
   TypingGrade,
+  TypingOriginTask,
   TypingTask,
   TypingTaskCollection,
   TypingScore,
