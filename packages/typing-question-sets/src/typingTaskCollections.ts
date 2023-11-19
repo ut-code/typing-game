@@ -106,7 +106,7 @@ const TYPING_TASK_COLLECTIONS: {
       { word: "岡山県", kana: "おかやまけん", spellingList: ["okayamaken"] },
       { word: "広島県", kana: "ひろしまけん", spellingList: ["hiroshimaken"] },
       { word: "山口県", kana: "やまぐちけん", spellingList: ["yamaguchiken"] },
-      { word: "徳島県", kana: "とやまけん", spellingList: ["tokushimaken"] },
+      { word: "徳島県", kana: "とくしまけん", spellingList: ["tokushimaken"] },
       { word: "香川県", kana: "かがわけん", spellingList: ["kagawaken"] },
       { word: "愛媛県", kana: "えひめけん", spellingList: ["ehimeken"] },
       { word: "高知県", kana: "こうちけん", spellingList: ["kouchiken"] },
