@@ -157,11 +157,11 @@ export default function PlayScreen(): JSX.Element {
       setPreviousContent(content);
       const keyInput = content[content.length - 1]; // 追加された文字すなわち一番最後の文字を取り出す。
       setInputTyping((previoutValue) => previoutValue + keyInput);
-
       if (keyInput === questions[problemNumber][currentIndex]) {
         // 正答
         setCurrentIndex((prev) => prev + 1);
         setCorrectInputCount((prev) => prev + 1);
+        console.log(currentIndex);
         if (currentIndex === questions[problemNumber].length - 1) {
           // 正解音が鳴る。最後の問題だけちょっと切れている
           correctSE.pause();
@@ -191,9 +191,11 @@ export default function PlayScreen(): JSX.Element {
         }
       }
     }
+
     if (isStarted && !isFinished) {
       setKeyColors(
-        keyCodes.map((KeyCode) => {
+        keyCodes.map((KeyCode, i) => {
+          if (keyColors[i] === "red") return "red";
           if (
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
@@ -230,6 +232,8 @@ export default function PlayScreen(): JSX.Element {
     }
 
     main();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     content,
     questions,
