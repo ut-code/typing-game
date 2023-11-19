@@ -167,7 +167,7 @@ export default function PlayScreen(): JSX.Element {
       setInputTyping((previousValue) => previousValue + keyInput);
 
       //スペルの候補一つずつに対して判定
-      let TempSpellingLists: string[] = [];
+      const TempSpellingLists: string[] = [];
       let correctflag = 0;
       let endflag = 0;
       let missflag = 0;
