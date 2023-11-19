@@ -203,6 +203,7 @@ export default function PlayScreen(): JSX.Element {
           missflag++;
         }
       }
+
       if (missflag === spellingLists[problemNumber].length) {
         setIncorrectInputCount((prev) => prev + 1);
       }
@@ -248,7 +249,8 @@ export default function PlayScreen(): JSX.Element {
       const displayAlphabet = spellingLists[problemNumber][0][currentIndex];
       if (isStarted && !isFinished && displayAlphabet != "") {
         setKeyColors(
-          keyCodes.map((KeyCode) => {
+          keyCodes.map((KeyCode, i) => {
+            if (keyColors[i] === "red") return "red";
             if (
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
@@ -279,13 +281,15 @@ export default function PlayScreen(): JSX.Element {
               functionalLayoutType[functional].content[KeyCode][0] === "Space"
             )
               return "orange";
-            return "rgba(0,0,0,0)";
+            return keyColors[i];
           }),
         );
       }
     }
 
     main();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     content,
     words,
