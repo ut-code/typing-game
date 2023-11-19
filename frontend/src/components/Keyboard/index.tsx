@@ -20,7 +20,6 @@ import {
   KeyboardLayout,
   PhysicalKeyboardLayout,
 } from "../../../../types/keyboardLayout.ts";
-import keyCodes from "./data/keyCodes.json";
 
 function keydown(
   e: KeyboardEvent,
@@ -31,8 +30,6 @@ function keydown(
   isCustom: boolean,
   shift: boolean,
   setShift: (value: boolean) => void,
-  keyColors: string[],
-  setKeyColors: (value: string[]) => void,
 ): void {
   if (
     preventedKeys.includes(
@@ -44,18 +41,6 @@ function keydown(
   ) {
     e.preventDefault();
   }
-  setKeyColors(
-    keyCodes.map((keyCode, i) =>
-      keyColors[i] !== "orange" && // @ts-ignore
-      functionalLayoutType[functional].content[keyCode][0].toLowerCase() ===
-        // @ts-ignore
-        functionalLayoutType[functional].content[e.code][0].toLowerCase() &&
-      // @ts-ignore
-      functionalLayoutType[functional].content[keyCode][0].length === 1
-        ? "red"
-        : keyColors[i],
-    ),
-  );
 
   setContent(
     // @ts-ignore
@@ -79,8 +64,6 @@ function keyup(
   functional: string,
   shift: boolean,
   setShift: (value: boolean) => void,
-  keyColors: string[],
-  setKeyColors: (value: string[]) => void,
 ): void {
   if (
     preventedKeys.includes(
@@ -99,17 +82,6 @@ function keyup(
   ) {
     setShift(false);
   }
-
-  setKeyColors(
-    keyCodes.map((keyCode, i) =>
-      keyColors[i] === "red" && // @ts-ignore
-      functionalLayoutType[functional].content[keyCode][0].toLowerCase() ===
-        // @ts-ignore
-        functionalLayoutType[functional].content[e.code][0].toLowerCase()
-        ? "rgba(0,0,0,0)"
-        : keyColors[i],
-    ),
-  );
 }
 
 // @ts-ignore
@@ -152,20 +124,10 @@ export default function Keyboard({
   const [shift, setShift] = useState<boolean>(false);
   useEffect(() => {
     function onKeydown(e: KeyboardEvent): void {
-      keydown(
-        e,
-        content,
-        setContent,
-        functional,
-        isCustom,
-        shift,
-        setShift,
-        keyColors,
-        setKeyColors,
-      );
+      keydown(e, content, setContent, functional, isCustom, shift, setShift);
     }
     function onKeyup(e: KeyboardEvent): void {
-      keyup(e, content, functional, shift, setShift, keyColors, setKeyColors);
+      keyup(e, content, functional, shift, setShift);
     }
     window.addEventListener("keydown", onKeydown);
     window.addEventListener("keyup", onKeyup);
