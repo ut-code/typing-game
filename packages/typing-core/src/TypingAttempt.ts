@@ -37,8 +37,10 @@ function calculateMissTypingCount(
       inputCharacters[inputCharactersIndex] ===
         targetCharacters[targetCharactersIndex]
     ) {
+      // 正解、次の文字へ
       inputCharactersIndex += 1;
     } else {
+      // 間違い、ミスタイピングカウントを増やす
       missTypingCount += 1;
     }
   }

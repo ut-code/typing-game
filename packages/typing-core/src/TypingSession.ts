@@ -1,6 +1,6 @@
 import Player from "./Player.js";
 import TypingAttempt from "./TypingAttempt.js";
-import TypingQuestionSet from "./TypingQuestionSet.js";
+import TypingTaskCollection from "./TypingTaskCollection.js";
 
 function calculateCorrectTypingCount(typingAttempts: TypingAttempt[]): number {
   return typingAttempts.reduce((correctTypingCount, typingAttempt) => {
@@ -19,7 +19,7 @@ export default class TypingSession {
   readonly startTime: Date;
   readonly endTime: Date;
   readonly player: Player;
-  readonly typingQuestionSet: TypingQuestionSet;
+  readonly typingQuestionSet: TypingTaskCollection;
   readonly typingAttempts: TypingAttempt[];
 
   constructor(
@@ -27,7 +27,7 @@ export default class TypingSession {
     startTime: Date,
     endTime: Date,
     player: Player,
-    questionSet: TypingQuestionSet,
+    questionSet: TypingTaskCollection,
     typingAttempts: TypingAttempt[],
   ) {
     this.id = id;

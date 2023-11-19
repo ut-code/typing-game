@@ -1,18 +1,18 @@
 import { describe, expect, test } from "vitest";
-import TypingQuestionSet from "./TypingQuestionSet.js";
+import TypingTaskCollection from "./TypingTaskCollection.js";
 
-describe("TypingQuestionSet", () => {
+describe("TypingTaskCollection", () => {
   describe("equals", () => {
     test("when id is same", () => {
-      const questionSet = new TypingQuestionSet("id", "title", []);
-      expect(questionSet.equals(new TypingQuestionSet("id", "title", []))).toBe(
-        true,
-      );
+      const questionSet = new TypingTaskCollection("id", "title", []);
+      expect(
+        questionSet.equals(new TypingTaskCollection("id", "title", [])),
+      ).toBe(true);
     });
     test("when id is different", () => {
-      const questionSet = new TypingQuestionSet("id", "title", []);
+      const questionSet = new TypingTaskCollection("id", "title", []);
       expect(
-        questionSet.equals(new TypingQuestionSet("id2", "title", [])),
+        questionSet.equals(new TypingTaskCollection("id2", "title", [])),
       ).toBe(false);
     });
   });

@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import TypingSession from "./TypingSession.js";
 import Player from "./Player.js";
-import TypingQuestionSet from "./TypingQuestionSet.js";
+import TypingTaskCollection from "./TypingTaskCollection.js";
 import TypingAttempt from "./TypingAttempt.js";
 
 describe("TypingSession", () => {
@@ -12,7 +12,7 @@ describe("TypingSession", () => {
         new Date("2023-01-01T01:23:45"),
         new Date("2023-01-01T01:23:46"),
         new Player("Alice"),
-        new TypingQuestionSet("id", "title", []),
+        new TypingTaskCollection("id", "title", []),
         [],
       );
       expect(session.getCorrectTypingCount()).toBe(0);
@@ -23,7 +23,7 @@ describe("TypingSession", () => {
         new Date("2023-01-01T01:23:45"),
         new Date("2023-01-01T01:23:46"),
         new Player("Alice"),
-        new TypingQuestionSet("id", "title", []),
+        new TypingTaskCollection("id", "title", []),
         [new TypingAttempt("id", "Apple", "Apple")],
       );
       expect(session.getCorrectTypingCount()).toBe(5);
@@ -34,7 +34,7 @@ describe("TypingSession", () => {
         new Date("2023-01-01T01:23:45"),
         new Date("2023-01-01T01:23:46"),
         new Player("Alice"),
-        new TypingQuestionSet("id", "title", []),
+        new TypingTaskCollection("id", "title", []),
         [
           new TypingAttempt("id", "Apple", "Apple"),
           new TypingAttempt("id", "Apple", "Aapple"),
@@ -50,7 +50,7 @@ describe("TypingSession", () => {
         new Date("2023-01-01T01:23:45"),
         new Date("2023-01-01T01:23:46"),
         new Player("Alice"),
-        new TypingQuestionSet("id", "title", []),
+        new TypingTaskCollection("id", "title", []),
         [],
       );
       expect(session.getMissTypingCount()).toBe(0);
@@ -61,7 +61,7 @@ describe("TypingSession", () => {
         new Date("2023-01-01T01:23:45"),
         new Date("2023-01-01T01:23:46"),
         new Player("Alice"),
-        new TypingQuestionSet("id", "title", []),
+        new TypingTaskCollection("id", "title", []),
         [new TypingAttempt("id", "Apple", "Apple")],
       );
       expect(session.getMissTypingCount()).toBe(0);
@@ -72,7 +72,7 @@ describe("TypingSession", () => {
         new Date("2023-01-01T01:23:45"),
         new Date("2023-01-01T01:23:46"),
         new Player("Alice"),
-        new TypingQuestionSet("id", "title", []),
+        new TypingTaskCollection("id", "title", []),
         [
           new TypingAttempt("id", "Apple", "Apple"),
           new TypingAttempt("id", "Apple", "Aapple"),
