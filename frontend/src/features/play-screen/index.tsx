@@ -106,10 +106,8 @@ export default function PlayScreen(): JSX.Element {
       clearInterval(timerId);
     };
   }, [startTime, setTime]);
-  // inputtypingはなにか、inputCharactersがおかしい
   const save = useCallback(async () => {
     setIsFinished(true);
-    console.log("ここまで到達");
     const typingSession = await createTypingSession({
       variables: {
         startTime: startTime as Date,
@@ -125,7 +123,6 @@ export default function PlayScreen(): JSX.Element {
         ],
       },
     });
-    console.log("ここまで到達してない");
     Navigate(`/result/${typingSession?.id}`);
   }, [
     typingTaskCollectionId,
