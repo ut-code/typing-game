@@ -193,7 +193,8 @@ export default function PlayScreen(): JSX.Element {
     }
     if (isStarted && !isFinished) {
       setKeyColors(
-        keyCodes.map((KeyCode) => {
+        keyCodes.map((KeyCode, i) => {
+          if (keyColors[i] === "red") return "red";
           if (
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
@@ -242,6 +243,7 @@ export default function PlayScreen(): JSX.Element {
     save,
     inputTyping,
     functional,
+    keyColors,
   ]);
 
   return (
