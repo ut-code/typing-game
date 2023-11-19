@@ -153,7 +153,7 @@ const TYPING_TASK_COLLECTIONS: {
   },
 
   {
-    id: "51710ca4-7b81-4e17-9389-384dbf6d75dc",
+    id: "huracu37504hruu0Uhrmdghk102r2arksrco",
     title: "Ameica",
     typingTasks: [
       { word: "Hawaii", kana: "ハワイ", spellingList: ["Hawaii"] },
