@@ -281,7 +281,7 @@ export default function PlayScreen(): JSX.Element {
               functionalLayoutType[functional].content[KeyCode][0] === "Space"
             )
               return "orange";
-            return keyColors[i];
+            return "rgba(0,0,0,0)";
           }),
         );
       }
