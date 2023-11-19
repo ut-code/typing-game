@@ -18,6 +18,9 @@
   color: rgb(208, 205, 214);
   margin: 0;
 }
+.answeredText {
+  color: rgb(143, 143, 143);
+}
 .spellingText {
   color: rgb(50, 50, 50);
 }

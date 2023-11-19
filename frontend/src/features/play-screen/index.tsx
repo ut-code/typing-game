@@ -43,8 +43,8 @@ export default function PlayScreen(): JSX.Element {
     typingTaskCollections[0].typingTasks,
   ); // 単語とそのスペル
   const words = typingTasks.map((typingTask) => typingTask.word); // 出題される単語
-  const spellingLists = typingTasks.map(
-    (typingTask) => typingTask.spellingList,
+  const [spellingLists, setSpelligLists] = useState<string[][]>(
+    typingTasks.map((typingTask) => typingTask.spellingList),
   ); // 出題される単語のスペル
   const [correctInputCount, setCorrectInputCount] = useState<number>(0); // 正答文字数
   const [incorrectInputCount, setIncorrectInputCount] = useState<number>(0); // ミスタイプ数
@@ -106,9 +106,10 @@ export default function PlayScreen(): JSX.Element {
       clearInterval(timerId);
     };
   }, [startTime, setTime]);
-
+  // inputtypingはなにか、inputCharactersがおかしい
   const save = useCallback(async () => {
     setIsFinished(true);
+    console.log("ここまで到達");
     const typingSession = await createTypingSession({
       variables: {
         startTime: startTime as Date,
@@ -124,6 +125,7 @@ export default function PlayScreen(): JSX.Element {
         ],
       },
     });
+    console.log("ここまで到達してない");
     Navigate(`/result/${typingSession?.id}`);
   }, [
     typingTaskCollectionId,
@@ -145,15 +147,17 @@ export default function PlayScreen(): JSX.Element {
   }, [timeLimit, time, isFinished, save]);
 
   useEffect(() => {
-    setTypingTasks(
-      shuffle(
-        // 問題順をシャッフル
-        typingTaskCollections.find(
-          // 選択された問題群を探す
-          (typingTaskCollection) =>
-            typingTaskCollection.id === typingTaskCollectionId,
-        )?.typingTasks ?? typingTaskCollections[0].typingTasks,
-      ),
+    const newTypingTasks = shuffle(
+      // 問題順をシャッフル
+      typingTaskCollections.find(
+        // 選択された問題群を探す
+        (typingTaskCollection) =>
+          typingTaskCollection.id === typingTaskCollectionId,
+      )?.typingTasks ?? typingTaskCollections[0].typingTasks,
+    );
+    setTypingTasks(newTypingTasks);
+    setSpelligLists(
+      newTypingTasks.map((typingTask) => typingTask.spellingList),
     );
   }, [typingTaskCollectionId]);
 
@@ -165,26 +169,66 @@ export default function PlayScreen(): JSX.Element {
       const keyInput = content[content.length - 1]; // 追加された文字すなわち一番最後の文字を取り出す。
       setInputTyping((previousValue) => previousValue + keyInput);
 
-      if (keyInput === spellingLists[problemNumber][0][currentIndex]) {
-        // TODO: 0を変数にする
-        // 正答
-        setCurrentIndex((prev) => prev + 1);
-        setCorrectInputCount((prev) => prev + 1);
-      } else if (keyInput.match(/[a-zA-Z]/)) {
-        // アルファベットであればミスとする
-        // 誤答
-        if (isStarted) {
-          setIncorrectInputCount((prev) => prev + 1);
+      //スペルの候補一つずつに対して判定
+      let TempSpellingLists: string[] = [];
+      let correctflag = 0;
+      let endflag = 0;
+      let missflag = 0;
+      let continueingflag = 0;
+      for (
+        let candidateNumber = 0;
+        candidateNumber < spellingLists[problemNumber].length;
+        candidateNumber++
+      ) {
+        if (
+          keyInput ===
+          spellingLists[problemNumber][candidateNumber][currentIndex]
+        ) {
+          // 正答
+          correctflag = 1;
+
+          if (
+            currentIndex ===
+            spellingLists[problemNumber][candidateNumber].length - 1
+          ) {
+            // 正答かつ問題終わり
+            endflag = 1;
+            break; //判定終了
+          } else {
+            // 正答だが続くとき
+            continueingflag = 1;
+            TempSpellingLists.push(
+              spellingLists[problemNumber][candidateNumber],
+            );
+          }
+        } else if (keyInput.match(/[a-zA-Z]/) && isStarted) {
+          // 誤答
+          missflag++;
         }
       }
+      if (missflag === spellingLists[problemNumber].length) {
+        setIncorrectInputCount((prev) => prev + 1);
+      }
+      if (continueingflag === 1) {
+        setSpelligLists((prev) => {
+          const newSpellingLists = [...prev];
+          newSpellingLists[problemNumber] = TempSpellingLists;
 
-      if (currentIndex === spellingLists[problemNumber][0].length - 1) {
-        // TODO: 0を変数にする
+          return newSpellingLists;
+        });
+      }
+
+      if (correctflag === 1) {
+        setCurrentIndex((prev) => prev + 1);
+        setCorrectInputCount((prev) => prev + 1);
+      }
+
+      if (endflag === 1) {
         // 正解音が鳴る。最後の問題だけちょっと切れている
         correctSE.pause();
         correctSE.play();
-
         if (
+          // 全問題終了
           problemNumber === spellingLists.length - 1 &&
           isFinished === false
         ) {
@@ -196,50 +240,52 @@ export default function PlayScreen(): JSX.Element {
           setTypingAttempts((previousValue) => [
             ...previousValue,
             {
-              inputCharacters: inputTyping,
+              inputCharacters: inputTyping + keyInput,
               targetCharacters: spellingLists[problemNumber][0], // TODO: 0を変数にする
             },
           ]);
           setInputTyping("");
         }
       }
-    }
-    if (isStarted && !isFinished) {
-      setKeyColors(
-        keyCodes.map((KeyCode) => {
-          if (
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            functionalLayoutType[functional].content[KeyCode][0] ===
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            spellingLists[problemNumber][0][currentIndex].toLowerCase()
-          )
-            return "orange";
-          if (
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            spellingLists[problemNumber][0][currentIndex] !==
+
+      const displayAlphabet = spellingLists[problemNumber][0][currentIndex];
+      if (isStarted && !isFinished && displayAlphabet != "") {
+        setKeyColors(
+          keyCodes.map((KeyCode) => {
+            if (
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
-              spellingLists[problemNumber][0][currentIndex].toLowerCase() &&
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            functionalLayoutType[functional].content[KeyCode][0] === "Shift"
-          )
-            return "orange";
-          if (
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            spellingLists[problemNumber][0][currentIndex] === " " &&
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            functionalLayoutType[functional].content[KeyCode][0] === "Space"
-          )
-            return "orange";
-          return "rgba(0,0,0,0)";
-        }),
-      );
+              functionalLayoutType[functional].content[KeyCode][0] ===
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              displayAlphabet.toLowerCase()
+            )
+              return "orange";
+            if (
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              displayAlphabet !==
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                displayAlphabet.toLowerCase() &&
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              functionalLayoutType[functional].content[KeyCode][0] === "Shift"
+            )
+              return "orange";
+            if (
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              displayAlphabet === " " &&
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              functionalLayoutType[functional].content[KeyCode][0] === "Space"
+            )
+              return "orange";
+            return "rgba(0,0,0,0)";
+          }),
+        );
+      }
     }
 
     main();
@@ -256,6 +302,9 @@ export default function PlayScreen(): JSX.Element {
     inputTyping,
     spellingLists,
     functional,
+    keyCodes,
+    functionalLayoutType,
+    spellingLists,
   ]);
 
   return (
