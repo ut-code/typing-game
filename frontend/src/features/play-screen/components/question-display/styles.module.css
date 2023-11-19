@@ -19,10 +19,10 @@
   margin: 0;
 }
 .answeredText {
-  color: rgb(143, 143, 143);
+  color: rgb(50, 50, 50);
 }
 .spellingText {
-  color: rgb(50, 50, 50);
+  color: rgb(143, 143, 143);
 }
 .questionText {
   color: rgb(50, 50, 50);
