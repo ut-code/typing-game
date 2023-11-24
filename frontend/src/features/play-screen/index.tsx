@@ -51,7 +51,7 @@ export default function PlayScreen(): JSX.Element {
   const [currentIndex, setCurrentIndex] = useState<number>(0); // 何文字目か
   // 時間
   const [time, setTime] = useState(0); // 現在の時間
-  const [timeLimit] = useState(60); // 制限時間
+  const [timeLimit] = useState(30); // 制限時間
   // 開始・終了判定
   const isLoading = spellingLists.length <= 1; // スピナーが回っているか
   const [isStarted, setIsStarted] = useState<boolean>(false); // 始まったか
