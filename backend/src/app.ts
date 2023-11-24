@@ -10,6 +10,9 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (request, response) => {
+  response.send("Connection successful!");
+});
 app.use("/api/ranking", rankingRouter);
 app.use("/api/typing-session", typingSessionRouter);
 app.use("/api/performance-summary", performanceSummaryRouter);
