@@ -17,7 +17,7 @@ export default function SetupForm(): JSX.Element {
 
   // ユーザーの入力情報を受け取る関数
   const postStorage = () => {
-    localStorage.setItem("username", userName || "Guest");
+    localStorage.setItem("playerName", userName || "Guest");
     localStorage.setItem("questionSetId", questionSetId);
     // fetchAPI後に別ページへ遷移
     Navigate("/play");
