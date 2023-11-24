@@ -11,7 +11,7 @@ export default function QuestionSetInput({
   return (
     <Form.Group className="mb-3" controlId="qnumber">
       <Form.Label>
-        <b>問題番号</b>
+        <strong>問題番号</strong>
       </Form.Label>
       <Form.Select
         value={questionSetId}
@@ -19,12 +19,9 @@ export default function QuestionSetInput({
           setQuestionSetId(e.target.value);
         }}
       >
-        {typingTaskCollections.map((typingTaskCollections) => (
-          <option
-            key={typingTaskCollections.id}
-            value={typingTaskCollections.id}
-          >
-            {typingTaskCollections.title}
+        {typingTaskCollections.map((typingTaskCollection) => (
+          <option key={typingTaskCollection.id} value={typingTaskCollection.id}>
+            {typingTaskCollection.title}
           </option>
         ))}
       </Form.Select>
