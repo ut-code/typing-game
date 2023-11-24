@@ -11,7 +11,9 @@ function calculateKeysPerSecond(typingSession: TypingSession) {
     },
     0,
   );
-  return totalInputCharacters / typingDurationInSeconds;
+  return parseFloat(
+    (totalInputCharacters / typingDurationInSeconds).toFixed(2),
+  );
 }
 export default class KeysPerSecond {
   readonly keysPerSecond: number;
