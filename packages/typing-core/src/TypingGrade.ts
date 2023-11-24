@@ -21,39 +21,39 @@ type TypingGradeType =
   | "E-";
 
 function calculateTypingGrade(typingScore: number): TypingGradeType {
-  if (typingScore >= 500) {
+  if (typingScore >= 240) {
     return "S+";
-  } else if (typingScore >= 400) {
+  } else if (typingScore >= 210) {
     return "S";
-  } else if (typingScore >= 300) {
+  } else if (typingScore >= 180) {
     return "S-";
-  } else if (typingScore >= 250) {
+  } else if (typingScore >= 165) {
     return "A+";
-  } else if (typingScore >= 220) {
-    return "A";
-  } else if (typingScore >= 200) {
-    return "A-";
-  } else if (typingScore >= 190) {
-    return "B+";
-  } else if (typingScore >= 170) {
-    return "B";
   } else if (typingScore >= 150) {
-    return "B-";
-  } else if (typingScore >= 140) {
-    return "C+";
+    return "A";
+  } else if (typingScore >= 135) {
+    return "A-";
   } else if (typingScore >= 120) {
-    return "C";
-  } else if (typingScore >= 100) {
-    return "C-";
+    return "B+";
+  } else if (typingScore >= 105) {
+    return "B";
   } else if (typingScore >= 90) {
-    return "D+";
-  } else if (typingScore >= 70) {
-    return "D";
+    return "B-";
+  } else if (typingScore >= 75) {
+    return "C+";
+  } else if (typingScore >= 60) {
+    return "C";
   } else if (typingScore >= 50) {
-    return "D-";
+    return "C-";
+  } else if (typingScore >= 40) {
+    return "D+";
   } else if (typingScore >= 30) {
-    return "E+";
+    return "D";
+  } else if (typingScore >= 20) {
+    return "D-";
   } else if (typingScore >= 10) {
+    return "E+";
+  } else if (typingScore >= 5) {
     return "E";
   } else {
     return "E-";
