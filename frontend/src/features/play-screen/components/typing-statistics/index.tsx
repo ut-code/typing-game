@@ -1,12 +1,12 @@
 import styles from "./styles.module.css";
 
 export default function TypingStatistics({
-  time,
+  timeLimit,
   timeLeft,
   correctInputCount,
   incorrectInputCount,
 }: {
-  time: number;
+  timeLimit: number;
   timeLeft: number;
   correctInputCount: number;
   incorrectInputCount: number;
@@ -26,7 +26,9 @@ export default function TypingStatistics({
         </tr>
         <tr>
           <th className={styles.statisticsTableHeader}>経過時間：</th>
-          <td className={styles.statisticsTableData}>{time}秒</td>
+          <td className={styles.statisticsTableData}>
+            {timeLimit - timeLeft}秒
+          </td>
         </tr>
         <tr>
           <th className={styles.statisticsTableHeader}>残り時間：</th>
