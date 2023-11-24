@@ -12,10 +12,10 @@ const typingTaskCollections = TYPING_TASK_COLLECTIONS.map(
       TYPING_TASK_COLLECTION.typingTasks.map(
         (typingTask) =>
           new TypingTask(
-            typingTask.word,
-            typingTask.word === typingTask.spellingList[0]
-              ? [typingTask.word]
-              : hiraganaToRomas(typingTask.kana),
+            typingTask.question,
+            typingTask.language === "Japanese"
+              ? hiraganaToRomas(typingTask.reading)
+              : [typingTask.question],
           ),
       ),
     ),
