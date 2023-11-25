@@ -1,48 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import typingGameQuestionSets from "@typing/question-sets";
-import UserNameInput from "./components/UserNameInput";
+import PlayerNameInput from "./components/PlayerNameInput";
 import QuestionSetInput from "./components/QuestionSetInput";
 
 export default function SetupForm(): JSX.Element {
-  const [userName, setUserName] = useState<string>(
-    localStorage.getItem("username") || "",
+  const [playerName, setPlayerName] = useState<string>(
+    localStorage.getItem("playerName") || "Guest",
   );
   const [questionSetId, setQuestionSetId] = useState<string>(
     typingGameQuestionSets[0].id,
   );
-  // useNavigate を Navigate に変化させる呪文
+
   const Navigate = useNavigate();
 
   // ユーザーの入力情報を受け取る関数
   const postStorage = () => {
-    localStorage.setItem("playerName", userName || "Guest");
+    localStorage.setItem("playerName", playerName);
     localStorage.setItem("questionSetId", questionSetId);
     // fetchAPI後に別ページへ遷移
     Navigate("/play");
   };
 
-  document.addEventListener("keydown", function (event) {
+  document.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       postStorage();
     }
   });
 
-  // localStorageをリセットする
-  let unmounted = false;
-  useEffect(() => {
-    if (unmounted) return;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    unmounted = true;
-    Object.keys(localStorage).forEach((key) => {
-      if (key !== "username") localStorage.removeItem(key);
-    });
-  }, []);
-
   return (
     <Form>
-      <UserNameInput userName={userName} setUserName={setUserName} />
+      <PlayerNameInput playerName={playerName} setPlayerName={setPlayerName} />
       <QuestionSetInput
         questionSetId={questionSetId}
         setQuestionSetId={setQuestionSetId}
